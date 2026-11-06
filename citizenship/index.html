@@ -1,0 +1,4298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>U.S. Citizenship Test 2025 · ԱՄՆ քաղաքացիության թեստ</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{ --blue:var(--tg-theme-button-color, #2563EB); --blue-dark:#1D4ED8; --ink:var(--tg-theme-text-color, #111827); --muted:var(--tg-theme-hint-color, #6B7280); --bg:var(--tg-theme-secondary-bg-color, #F3F4F6); --card:var(--tg-theme-bg-color, #FFFFFF); --ok:#16A34A; --ok-bg:#DCFCE7; --bad:#DC2626; --bad-bg:#FEE2E2; --line:#E5E7EB; --chip-bg:#EFF6FF; --chip-ink:var(--blue-dark); --warn-bg:#FEF3C7; --warn-line:#FDE68A; --warn-ink:#92400E; --tg-viewport-height:100dvh; }
+  [data-scheme="dark"]{ --blue:#5288F7; --blue-dark:#93C5FD; --ink:#F3F4F6; --muted:#9CA3AF; --bg:#131418; --card:#1E2026; --line:rgba(255,255,255,.16); --ok:#4ADE80; --ok-bg:rgba(22,163,74,.22); --bad:#F87171; --bad-bg:rgba(220,38,38,.22); --chip-bg:rgba(59,130,246,.25); --chip-ink:#BFDBFE; --warn-bg:rgba(245,158,11,.16); --warn-line:rgba(245,158,11,.45); --warn-ink:#FCD34D; }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html, body{ position:fixed; inset:0; width:100%; height:100%; overflow:hidden; overscroll-behavior:none; touch-action:manipulation; }
+  body{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Noto Sans Armenian",sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; }
+  .scroll{ height:var(--tg-viewport-height); overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; touch-action:pan-y; }
+  .wrap{ max-width:680px; margin:0 auto; padding:16px 16px 48px; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 0 16px; }
+  .logo{ font-weight:800; font-size:20px; letter-spacing:.2px; }
+  .logo span{ color:var(--blue); }
+  .logo .logo-hy{ display:block; font-size:13px; font-weight:600; color:var(--muted); letter-spacing:0; }
+  .ver-badge{ display:inline-block; background:var(--chip-bg); color:var(--chip-ink); font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; vertical-align:middle; margin-left:8px; text-transform:uppercase; letter-spacing:.6px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px 20px; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  h1{ font-size:26px; line-height:1.25; margin-bottom:8px; }
+  .h1-hy{ font-size:19px; font-weight:700; color:var(--muted); margin-bottom:8px; }
+  h2{ font-size:21px; line-height:1.3; margin-bottom:8px; }
+  .h2-hy{ font-size:15px; font-weight:600; color:var(--muted); margin-bottom:8px; }
+  .sub{ color:var(--muted); font-size:15px; margin-bottom:20px; }
+  .sub-hy{ margin-top:-12px; }
+  .mode-btn{ display:block; width:100%; text-align:left; border:2px solid var(--line); background:var(--card); border-radius:14px; padding:16px; margin-bottom:12px; cursor:pointer; font-family:inherit; touch-action:manipulation; transition:border-color .15s, transform .1s; }
+  .mode-btn:hover{ border-color:var(--blue); }
+  .mode-btn:active{ transform:scale(.99); }
+  .logo-badge{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:9px; background:var(--blue); color:#fff; font-size:16px; vertical-align:-9px; margin-right:9px; }
+  .mb-ic{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:10px; background:var(--chip-bg); color:var(--blue); font-size:16px; vertical-align:-9px; margin-right:10px; }
+  .mode-btn .t{ font-size:17px; font-weight:700; color:var(--ink); }
+  .mode-btn .t .hy{ display:block; font-size:14px; font-weight:600; color:var(--muted); }
+  .mode-btn .d{ display:block; font-size:14px; color:var(--muted); margin-top:2px; }
+  .note{ font-size:13px; color:var(--muted); margin-top:14px; }
+  .gov-note{ background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn-ink); border-radius:12px; padding:12px 14px; font-size:14px; margin-top:14px; }
+  .gov-note .hy{ display:block; margin-top:8px; }
+  .progress-row{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:8px; }
+  .bar{ height:8px; background:var(--line); border-radius:999px; overflow:hidden; margin-bottom:20px; }
+  .bar i{ display:block; height:100%; background:var(--blue); width:0%; transition:width .3s; }
+  .sect-chip{ display:inline-block; background:var(--chip-bg); color:var(--chip-ink); font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; margin-bottom:12px; }
+  .ca-chip{ display:inline-block; background:var(--warn-bg); color:var(--warn-ink); font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; margin:0 0 12px 6px; }
+  .q-text{ font-size:20px; font-weight:700; line-height:1.4; margin-bottom:4px; }
+  .q-text-hy{ font-size:15px; font-weight:500; color:var(--muted); line-height:1.45; margin-bottom:18px; }
+  .opt{ display:block; width:100%; text-align:left; border:2px solid var(--line); background:var(--card); border-radius:12px; padding:14px 16px; margin-bottom:10px; cursor:pointer; color:var(--ink); font-family:inherit; touch-action:manipulation; }
+  .opt .en{ display:block; font-size:16px; }
+  .opt .hy{ display:block; font-size:14px; color:var(--muted); margin-top:2px; }
+  .opt:hover{ border-color:var(--blue); }
+  .opt.correct{ border-color:var(--ok); background:var(--ok-bg); }
+  .opt.wrong{ border-color:var(--bad); background:var(--bad-bg); }
+  .opt:disabled{ cursor:default; }
+  .why{ border-radius:12px; padding:14px 16px; font-size:14.5px; margin:6px 0 14px; display:none; }
+  .why.show{ display:block; }
+  .why.ok{ background:var(--ok-bg); }
+  .why.bad{ background:var(--bad-bg); }
+  .why .verdict{ font-weight:800; display:block; margin-bottom:4px; }
+  .why.ok .verdict{ color:var(--ok); }
+  .why.bad .verdict{ color:var(--bad); }
+  .why .accepted{ margin-top:6px; }
+  .why .ans-hy{ color:var(--muted); font-size:13.5px; margin-top:2px; }
+  .btn{ display:inline-block; background:var(--blue); color:#fff; border:none; border-radius:12px; padding:13px 26px; font-size:16px; font-weight:700; cursor:pointer; font-family:inherit; touch-action:manipulation; }
+  .btn:hover{ background:var(--blue-dark); }
+  .btn.ghost{ background:var(--card); color:var(--blue); border:2px solid var(--blue); }
+  .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+  .result-big{ font-size:22px; font-weight:800; margin-bottom:6px; }
+  .result-big .hy{ display:block; font-size:17px; font-weight:700; color:var(--muted); }
+  .result-big.pass{ color:var(--ok); }
+  .result-big.fail{ color:var(--bad); }
+  .stats{ font-size:16px; margin-bottom:6px; }
+  .review-item{ border:1px solid var(--line); border-left:4px solid var(--bad); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .review-item .rq{ font-weight:600; margin-bottom:4px; }
+  .review-item .rq-hy{ color:var(--muted); font-size:14px; font-weight:500; margin-bottom:4px; }
+  .review-item .ry{ color:var(--bad); font-size:14px; }
+  .review-item .ry-hy{ color:var(--muted); font-size:13px; }
+  .review-item .rc{ color:var(--ok); font-size:14px; }
+  .review-item .rc-hy{ color:var(--muted); font-size:13px; }
+  footer.disc{ margin-top:22px; font-size:12.5px; color:var(--muted); text-align:center; line-height:1.6; }
+  footer.disc a{ color:var(--blue); }
+  .hidden{ display:none; }
+</style>
+</head>
+<body>
+<div class="scroll" id="scroller">
+<div class="wrap">
+  <header class="top">
+    <div class="logo"><span class="logo-badge"><i class="fa-solid fa-flag-usa"></i></span>Citizenship <span>Test</span><span class="ver-badge">2025</span><span class="logo-hy">ԱՄՆ քաղաքացիության թեստ</span></div>
+  </header>
+
+  <!-- HOME -->
+  <div id="view-home">
+    <div class="card">
+      <h1>U.S. Citizenship Test</h1>
+      <div class="h1-hy">ԱՄՆ քաղաքացիության թեստ</div>
+      <p class="sub">Prepare for your citizenship interview with the official USCIS 2025 civics test. The bank has 128 questions. At the real interview, the officer asks up to 20 questions; you must answer at least 12 correctly to pass. Questions are in English — as at the real test — with an Armenian translation next to each one.</p>
+      <p class="sub sub-hy">Պատրաստվեք քաղաքացիության հարցազրույցին ըստ USCIS-ի 2025 թվականի պաշտոնական թեստի։ Բանկում 128 հարց է։ Իրական հարցազրույցի ժամանակ պաշտոնյան հարցնում է մինչև 20 հարց․ թեստը հաղթահարելու համար պետք է ճիշտ պատասխանել առնվազն 12-ին։</p>
+      <button class="mode-btn" onclick="showSections()">
+        <span class="mb-ic"><i class="fa-solid fa-book-open"></i></span><span class="t">Practice<span class="hy">Պարապմունք</span></span>
+        <span class="d">All 128 questions, by section or all together. After each answer you see whether it is right or wrong, and the full list of accepted answers.</span>
+        <span class="d">Բոլոր 128 հարցերը՝ բաժիններով կամ միասին։ Յուրաքանչյուր պատասխանից հետո տեսնում եք՝ ճիշտ է, թե սխալ, և ընդունվող պատասխանների ամբողջ ցանկը։</span>
+      </button>
+      <button class="mode-btn" onclick="startExam()">
+        <span class="mb-ic"><i class="fa-solid fa-file-pen"></i></span><span class="t">Exam<span class="hy">Քննություն</span></span>
+        <span class="d">Like the real interview: questions in random order, up to 20. The exam ends as soon as you reach 12 correct answers (pass) or 9 wrong answers (fail).</span>
+        <span class="d">Ինչպես իրական հարցազրույցին՝ հարցերը պատահական կարգով, առավելագույնը 20։ Քննությունն ավարտվում է հենց հավաքեք 12 ճիշտ պատասխան (հաղթահարված) կամ 9 սխալ (չհաղթահարված)։</span>
+      </button>
+      <p class="note">Answers that depend on your state (senators, governor, state capital) are given for California and marked with a “California” tag.</p>
+      <p class="note">Նահանգից կախված պատասխանները (սենատորներ, նահանգապետ, մայրաքաղաք) տրված են Կալիֆոռնիայի համար և նշված են «Կալիֆոռնիա» պիտակով։</p>
+      <p class="gov-note">Important note about the governor question. On November 3, 2026, California elected a new governor, Javier Becerra. He takes office on January 4, 2027. Until then, the governor is Gavin Newsom. If your interview is before January 4, 2027, the correct answer is “Gavin Newsom”; from that date on, “Javier Becerra”.<span class="hy">Կարևոր նշում նահանգապետի հարցի մասին։ 2026 թվականի նոյեմբերի 3-ին Կալիֆոռնիայի նոր նահանգապետ է ընտրվել Խավիեր Բեսերան։ Նա պաշտոնը կստանձնի 2027 թվականի հունվարի 4-ին։ Մինչ այդ նահանգապետը Գևին Նյուսոմն է։ Եթե ձեր հարցազրույցը մինչև 2027 թվականի հունվարի 4-ն է, ճիշտ պատասխանը «Գևին Նյուսոմ» է, իսկ այդ օրվանից հետո՝ «Խավիեր Բեսերա»։</span></p>
+    </div>
+  </div>
+
+  <!-- SECTIONS -->
+  <div id="view-sections" class="hidden">
+    <div class="card">
+      <h2>Choose a section</h2>
+      <div class="h2-hy">Ընտրեք բաժինը</div>
+      <p class="sub">Practice one section at a time, or go through all the questions in order.</p>
+      <p class="sub sub-hy">Պարապեք մեկ բաժնով կամ անցեք բոլոր հարցերը հերթով։</p>
+      <div id="section-list"></div>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="goHome()">Back · Վերադառնալ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="view-quiz" class="hidden">
+    <div class="card">
+      <div class="progress-row"><span id="q-counter"></span><span id="q-score"></span></div>
+      <div class="bar"><i id="q-bar"></i></div>
+      <div><span class="sect-chip" id="q-section"></span><span class="ca-chip hidden" id="q-ca">California · Կալիֆոռնիա</span></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-text-hy" id="q-text-hy"></div>
+      <div id="q-options"></div>
+      <div class="why" id="q-why"></div>
+      <div class="btn-row">
+        <button class="btn hidden" id="q-next" onclick="nextQuestion()">Next question · Հաջորդ հարցը</button>
+        <button class="btn ghost" onclick="goHome()">End · Ավարտել</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="view-results" class="hidden">
+    <div class="card">
+      <div class="result-big" id="r-title"></div>
+      <p class="stats" id="r-stats"></p>
+      <p class="sub" id="r-advice"></p>
+      <div id="r-review"></div>
+      <div class="btn-row">
+        <button class="btn" id="r-again" onclick="startExam()">New exam · Նոր քննություն</button>
+        <button class="btn ghost" onclick="goHome()">Home · Գլխավոր էջ</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="disc">
+    This material is for study purposes only, based on the official USCIS questions (Form M-1778, 2025). This is general information, not legal advice. Official source: <a href="https://www.uscis.gov/citizenship/find-study-materials-and-resources/study-for-the-test" target="_blank" rel="noopener">uscis.gov</a><br>
+    Այս նյութը պատրաստված է միայն ուսումնական նպատակներով՝ USCIS-ի պաշտոնական հարցերի հիման վրա (ձև M-1778, 2025)։ Սա տեղեկատվություն է, ոչ իրավաբանական խորհուրդ։ Պաշտոնական աղբյուր՝ <a href="https://www.uscis.gov/citizenship/find-study-materials-and-resources/study-for-the-test" target="_blank" rel="noopener">uscis.gov</a>
+  </footer>
+</div>
+</div>
+<script>
+(function(){
+  var tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+  if (tg){
+    try { tg.ready(); } catch(e){}
+    try { tg.expand(); } catch(e){}
+    if (typeof tg.disableVerticalSwipes === 'function'){ try { tg.disableVerticalSwipes(); } catch(e){} }
+    var setH = function(){
+      var h = (tg.viewportStableHeight || tg.viewportHeight);
+      if (h) document.documentElement.style.setProperty('--tg-viewport-height', h + 'px');
+    };
+    setH();
+    if (typeof tg.onEvent === 'function'){ tg.onEvent('viewportChanged', setH); }
+  }
+  var applyScheme = function(){
+    var s = null;
+    try { s = new URLSearchParams(window.location.search).get('theme'); } catch(e){}
+    if (s !== 'dark' && s !== 'light') s = null;
+    if (!s && tg && tg.colorScheme) s = tg.colorScheme;
+    if (!s && window.matchMedia) s = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (s) document.documentElement.setAttribute('data-scheme', s);
+    if (tg){
+      try { if (tg.setBackgroundColor) tg.setBackgroundColor('secondary_bg_color'); } catch(e){}
+      try { if (tg.setHeaderColor) tg.setHeaderColor('secondary_bg_color'); } catch(e){}
+    }
+  };
+  applyScheme();
+  if (tg && typeof tg.onEvent === 'function'){ tg.onEvent('themeChanged', applyScheme); }
+  if (window.matchMedia){
+    try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyScheme); } catch(e){}
+  }
+  document.addEventListener('gesturestart', function(e){ e.preventDefault(); }, { passive:false });
+  var lastTouch = 0;
+  document.addEventListener('touchend', function(e){
+    var now = Date.now();
+    if (now - lastTouch <= 300){ e.preventDefault(); }
+    lastTouch = now;
+  }, { passive:false });
+  document.addEventListener('dblclick', function(e){ e.preventDefault(); }, { passive:false });
+})();
+</script>
+
+<script type="application/json" id="bank-data">[
+ {
+  "id": 1,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ո՞րն է Միացյալ Նահանգների կառավարման ձևը",
+  "q_en": "What is the form of government of the United States?",
+  "answers_hy": [
+   "Հանրապետություն",
+   "Սահմանադրության վրա հիմնված դաշնային հանրապետություն",
+   "Ներկայացուցչական ժողովրդավարություն"
+  ],
+  "answers_en": [
+   "Republic",
+   "Constitution-based federal republic",
+   "Representative democracy"
+  ],
+  "options_hy": [
+   "Հանրապետություն",
+   "ԱՄՆ Սահմանադրությունը",
+   "Կազմում է կառավարությունը",
+   "Ինքնակառավարում"
+  ],
+  "options_en": [
+   "Republic",
+   "U.S. Constitution",
+   "Forms the government",
+   "Self-government"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 2,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ո՞րն է երկրի գերագույն օրենքը",
+  "q_en": "What is the supreme law of the land?",
+  "answers_hy": [
+   "ԱՄՆ Սահմանադրությունը"
+  ],
+  "answers_en": [
+   "U.S. Constitution"
+  ],
+  "options_hy": [
+   "ԱՄՆ Սահմանադրությունը",
+   "Կազմում է կառավարությունը",
+   "Ինքնակառավարում",
+   "Փոփոխությունների միջոցով"
+  ],
+  "options_en": [
+   "U.S. Constitution",
+   "Forms the government",
+   "Self-government",
+   "Amendments"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 3,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Անվանեք մեկ բան, որ անում է ԱՄՆ Սահմանադրությունը",
+  "q_en": "Name one thing the U.S. Constitution does.",
+  "answers_hy": [
+   "Կազմում է կառավարությունը",
+   "Սահմանում է կառավարության լիազորությունները",
+   "Սահմանում է կառավարության մասերը",
+   "Պաշտպանում է ժողովրդի իրավունքները"
+  ],
+  "answers_en": [
+   "Forms the government",
+   "Defines powers of government",
+   "Defines the parts of government",
+   "Protects the rights of the people"
+  ],
+  "options_hy": [
+   "Ինքնակառավարում",
+   "Փոփոխությունների միջոցով",
+   "Կազմում է կառավարությունը",
+   "Ամերիկացիների հիմնական իրավունքները"
+  ],
+  "options_en": [
+   "Self-government",
+   "Amendments",
+   "Forms the government",
+   "The basic rights of Americans"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 4,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "ԱՄՆ Սահմանադրությունը սկսվում է «Մենք՝ ժողովուրդը» բառերով։ Ի՞նչ է նշանակում «Մենք՝ ժողովուրդը»",
+  "q_en": "The U.S. Constitution starts with the words “We the People.” What does “We the People” mean?",
+  "answers_hy": [
+   "Ինքնակառավարում",
+   "Ժողովրդական ինքնիշխանություն",
+   "Կառավարվողների համաձայնություն",
+   "Ժողովուրդը պետք է ինքն իրեն կառավարի",
+   "Հասարակական պայմանագրի օրինակ"
+  ],
+  "answers_en": [
+   "Self-government",
+   "Popular sovereignty",
+   "Consent of the governed",
+   "People should govern themselves",
+   "Example of social contract"
+  ],
+  "options_hy": [
+   "Փոփոխությունների միջոցով",
+   "Ինքնակառավարում",
+   "Ամերիկացիների հիմնական իրավունքները",
+   "Քսանյոթ (27)"
+  ],
+  "options_en": [
+   "Amendments",
+   "Self-government",
+   "The basic rights of Americans",
+   "Twenty-seven (27)"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 5,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ինչպե՞ս են փոփոխություններ կատարվում ԱՄՆ Սահմանադրության մեջ",
+  "q_en": "How are changes made to the U.S. Constitution?",
+  "answers_hy": [
+   "Փոփոխությունների միջոցով",
+   "Փոփոխությունների ընդունման գործընթացով"
+  ],
+  "answers_en": [
+   "Amendments",
+   "The amendment process"
+  ],
+  "options_hy": [
+   "Ամերիկացիների հիմնական իրավունքները",
+   "Քսանյոթ (27)",
+   "Այն ասում է, որ Ամերիկան ազատ է բրիտանական վերահսկողությունից",
+   "Փոփոխությունների միջոցով"
+  ],
+  "options_en": [
+   "The basic rights of Americans",
+   "Twenty-seven (27)",
+   "It says America is free from British control.",
+   "Amendments"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 6,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ի՞նչ է պաշտպանում Իրավունքների հռչակագիրը",
+  "q_en": "What does the Bill of Rights protect?",
+  "answers_hy": [
+   "Ամերիկացիների հիմնական իրավունքները",
+   "Միացյալ Նահանգներում ապրող մարդկանց հիմնական իրավունքները"
+  ],
+  "answers_en": [
+   "The basic rights of Americans",
+   "The basic rights of people living in the United States"
+  ],
+  "options_hy": [
+   "Ամերիկացիների հիմնական իրավունքները",
+   "Քսանյոթ (27)",
+   "Այն ասում է, որ Ամերիկան ազատ է բրիտանական վերահսկողությունից",
+   "Անկախության հռչակագիրը"
+  ],
+  "options_en": [
+   "The basic rights of Americans",
+   "Twenty-seven (27)",
+   "It says America is free from British control.",
+   "Declaration of Independence"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 7,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Քանի՞ փոփոխություն ունի ԱՄՆ Սահմանադրությունը",
+  "q_en": "How many amendments does the U.S. Constitution have?",
+  "answers_hy": [
+   "Քսանյոթ (27)"
+  ],
+  "answers_en": [
+   "Twenty-seven (27)"
+  ],
+  "options_hy": [
+   "Այն ասում է, որ Ամերիկան ազատ է բրիտանական վերահսկողությունից",
+   "Անկախության հռչակագիրը",
+   "Քսանյոթ (27)",
+   "Հավասարություն, Ազատություն"
+  ],
+  "options_en": [
+   "It says America is free from British control.",
+   "Declaration of Independence",
+   "Twenty-seven (27)",
+   "Equality, Liberty"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 8,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ինչո՞ւ է կարևոր Անկախության հռչակագիրը",
+  "q_en": "Why is the Declaration of Independence important?",
+  "answers_hy": [
+   "Այն ասում է, որ Ամերիկան ազատ է բրիտանական վերահսկողությունից",
+   "Այն ասում է, որ բոլոր մարդիկ ստեղծված են հավասար",
+   "Այն սահմանում է բնածին իրավունքները",
+   "Այն սահմանում է անհատական ազատությունները"
+  ],
+  "answers_en": [
+   "It says America is free from British control.",
+   "It says all people are created equal.",
+   "It identifies inherent rights.",
+   "It identifies individual freedoms."
+  ],
+  "options_hy": [
+   "Անկախության հռչակագիրը",
+   "Հավասարություն, Ազատություն",
+   "Կապիտալիզմ",
+   "Այն ասում է, որ Ամերիկան ազատ է բրիտանական վերահսկողությունից"
+  ],
+  "options_en": [
+   "Declaration of Independence",
+   "Equality, Liberty",
+   "Capitalism",
+   "It says America is free from British control."
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 9,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ո՞ր հիմնադիր փաստաթուղթն է հայտարարել, որ ամերիկյան գաղութներն ազատ են Բրիտանիայից",
+  "q_en": "What founding document said the American colonies were free from Britain?",
+  "answers_hy": [
+   "Անկախության հռչակագիրը"
+  ],
+  "answers_en": [
+   "Declaration of Independence"
+  ],
+  "options_hy": [
+   "Անկախության հռչակագիրը",
+   "Հավասարություն, Ազատություն",
+   "Կապիտալիզմ",
+   "Բոլորը պետք է հետևեն օրենքին"
+  ],
+  "options_en": [
+   "Declaration of Independence",
+   "Equality, Liberty",
+   "Capitalism",
+   "Everyone must follow the law."
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 10,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Անվանեք երկու կարևոր գաղափար Անկախության հռչակագրից և ԱՄՆ Սահմանադրությունից",
+  "q_en": "Name two important ideas from the Declaration of Independence and the U.S. Constitution.",
+  "answers_hy": [
+   "Հավասարություն",
+   "Ազատություն",
+   "Հասարակական պայմանագիր",
+   "Բնական իրավունքներ",
+   "Սահմանափակ կառավարություն",
+   "Ինքնակառավարում"
+  ],
+  "answers_en": [
+   "Equality",
+   "Liberty",
+   "Social contract",
+   "Natural rights",
+   "Limited government",
+   "Self-government"
+  ],
+  "options_hy": [
+   "Հավասարություն, Ազատություն",
+   "Հարկեր, Պատերազմ",
+   "Կապիտալիզմ, Միապետություն",
+   "Ստրկություն, Բռնապետություն"
+  ],
+  "options_en": [
+   "Equality, Liberty",
+   "Taxes, War",
+   "Capitalism, Monarchy",
+   "Slavery, Tyranny"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 11,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "«Կյանք, Ազատություն և Երջանկության հետապնդում» բառերը ո՞ր հիմնադիր փաստաթղթում են",
+  "q_en": "The words “Life, Liberty, and the pursuit of Happiness” are in what founding document?",
+  "answers_hy": [
+   "Անկախության հռչակագիրը"
+  ],
+  "answers_en": [
+   "Declaration of Independence"
+  ],
+  "options_hy": [
+   "Կապիտալիզմ",
+   "Բոլորը պետք է հետևեն օրենքին",
+   "Որպեսզի ոչ մի մաս չդառնա չափից ուժեղ",
+   "Անկախության հռչակագիրը"
+  ],
+  "options_en": [
+   "Capitalism",
+   "Everyone must follow the law.",
+   "So one part does not become too powerful",
+   "Declaration of Independence"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 12,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ո՞րն է Միացյալ Նահանգների տնտեսական համակարգը",
+  "q_en": "What is the economic system of the United States?",
+  "answers_hy": [
+   "Կապիտալիզմ",
+   "Ազատ շուկայական տնտեսություն"
+  ],
+  "answers_en": [
+   "Capitalism",
+   "Free market economy"
+  ],
+  "options_hy": [
+   "Կապիտալիզմ",
+   "Բոլորը պետք է հետևեն օրենքին",
+   "Անկախության հռչակագիրը",
+   "Որպեսզի ոչ մի մաս չդառնա չափից ուժեղ"
+  ],
+  "options_en": [
+   "Capitalism",
+   "Everyone must follow the law.",
+   "Declaration of Independence",
+   "So one part does not become too powerful"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 13,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Ի՞նչ է օրենքի գերակայությունը",
+  "q_en": "What is the rule of law?",
+  "answers_hy": [
+   "Բոլորը պետք է հետևեն օրենքին",
+   "Ղեկավարները պետք է ենթարկվեն օրենքին",
+   "Կառավարությունը պետք է ենթարկվի օրենքին",
+   "Ոչ ոք օրենքից վեր չէ"
+  ],
+  "answers_en": [
+   "Everyone must follow the law.",
+   "Leaders must obey the law.",
+   "Government must obey the law.",
+   "No one is above the law."
+  ],
+  "options_hy": [
+   "Բոլորը պետք է հետևեն օրենքին",
+   "Անկախության հռչակագիրը",
+   "Որպեսզի ոչ մի մաս չդառնա չափից ուժեղ",
+   "Հանրապետություն"
+  ],
+  "options_en": [
+   "Everyone must follow the law.",
+   "Declaration of Independence",
+   "So one part does not become too powerful",
+   "Republic"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 14,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Շատ փաստաթղթեր են ազդել ԱՄՆ Սահմանադրության վրա։ Անվանեք մեկը",
+  "q_en": "Many documents influenced the U.S. Constitution. Name one.",
+  "answers_hy": [
+   "Անկախության հռչակագիրը",
+   "Համադաշնակցության հոդվածները",
+   "«Ֆեդերալիստի» հոդվածները",
+   "«Հակաֆեդերալիստի» հոդվածները",
+   "Վիրջինիայի իրավունքների հռչակագիրը",
+   "Կոնեկտիկուտի հիմնական օրենքները",
+   "«Մեյֆլաուերի» պայմանագիրը",
+   "Իրոկեզների խաղաղության մեծ օրենքը"
+  ],
+  "answers_en": [
+   "Declaration of Independence",
+   "Articles of Confederation",
+   "Federalist Papers",
+   "Anti-Federalist Papers",
+   "Virginia Declaration of Rights",
+   "Fundamental Orders of Connecticut",
+   "Mayflower Compact",
+   "Iroquois Great Law of Peace"
+  ],
+  "options_hy": [
+   "Որպեսզի ոչ մի մաս չդառնա չափից ուժեղ",
+   "Հանրապետություն",
+   "Անկախության հռչակագիրը",
+   "ԱՄՆ Սահմանադրությունը"
+  ],
+  "options_en": [
+   "So one part does not become too powerful",
+   "Republic",
+   "Declaration of Independence",
+   "U.S. Constitution"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 15,
+  "section": "Ամերիկյան կառավարման սկզբունքներ",
+  "section_en": "Principles of American Government",
+  "q_hy": "Կառավարությունը երեք ճյուղ ունի։ Ինչո՞ւ",
+  "q_en": "There are three branches of government. Why?",
+  "answers_hy": [
+   "Որպեսզի ոչ մի մաս չդառնա չափից ուժեղ",
+   "Փոխադարձ վերահսկողության և հավասարակշռության համար",
+   "Իշխանության ճյուղերի տարանջատման համար"
+  ],
+  "answers_en": [
+   "So one part does not become too powerful",
+   "Checks and balances",
+   "Separation of powers"
+  ],
+  "options_hy": [
+   "Որպեսզի ոչ մի մաս չդառնա չափից ուժեղ",
+   "Հանրապետություն",
+   "ԱՄՆ Սահմանադրությունը",
+   "Կազմում է կառավարությունը"
+  ],
+  "options_en": [
+   "So one part does not become too powerful",
+   "Republic",
+   "U.S. Constitution",
+   "Forms the government"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 16,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք կառավարության երեք ճյուղերը",
+  "q_en": "Name the three branches of government.",
+  "answers_hy": [
+   "Օրենսդիր, գործադիր և դատական",
+   "Կոնգրես, նախագահ և դատարաններ"
+  ],
+  "answers_en": [
+   "Legislative, executive, and judicial",
+   "Congress, president, and the courts"
+  ],
+  "options_hy": [
+   "Օրենսդիր, գործադիր և դատական",
+   "Գործադիր ճյուղի",
+   "ԱՄՆ Կոնգրեսը",
+   "Սենատը և Ներկայացուցիչների պալատը"
+  ],
+  "options_en": [
+   "Legislative, executive, and judicial",
+   "Executive branch",
+   "U.S. Congress",
+   "Senate and House of Representatives"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 17,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "ԱՄՆ նախագահը ո՞ր ճյուղի ղեկավարն է",
+  "q_en": "The President of the United States is in charge of which branch of government?",
+  "answers_hy": [
+   "Գործադիր ճյուղի"
+  ],
+  "answers_en": [
+   "Executive branch"
+  ],
+  "options_hy": [
+   "ԱՄՆ Կոնգրեսը",
+   "Սենատը և Ներկայացուցիչների պալատը",
+   "Ընդունում է օրենքներ",
+   "Գործադիր ճյուղի"
+  ],
+  "options_en": [
+   "U.S. Congress",
+   "Senate and House of Representatives",
+   "Writes laws",
+   "Executive branch"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 18,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Դաշնային կառավարության ո՞ր մասն է ընդունում օրենքները",
+  "q_en": "What part of the federal government writes laws?",
+  "answers_hy": [
+   "ԱՄՆ Կոնգրեսը",
+   "ԱՄՆ օրենսդիր մարմինը",
+   "Օրենսդիր ճյուղը"
+  ],
+  "answers_en": [
+   "U.S. Congress",
+   "U.S. legislature",
+   "Legislative branch"
+  ],
+  "options_hy": [
+   "Սենատը և Ներկայացուցիչների պալատը",
+   "Ընդունում է օրենքներ",
+   "ԱՄՆ Կոնգրեսը",
+   "Հարյուր (100)"
+  ],
+  "options_en": [
+   "Senate and House of Representatives",
+   "Writes laws",
+   "U.S. Congress",
+   "One hundred (100)"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 19,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Որո՞նք են ԱՄՆ Կոնգրեսի երկու մասերը",
+  "q_en": "What are the two parts of the U.S. Congress?",
+  "answers_hy": [
+   "Սենատը և Ներկայացուցիչների պալատը"
+  ],
+  "answers_en": [
+   "Senate and House of Representatives"
+  ],
+  "options_hy": [
+   "Սենատը և Ներկայացուցիչների պալատը",
+   "Ընդունում է օրենքներ",
+   "Հարյուր (100)",
+   "Վեց (6) տարի"
+  ],
+  "options_en": [
+   "Senate and House of Representatives",
+   "Writes laws",
+   "One hundred (100)",
+   "Six (6) years"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 20,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք ԱՄՆ Կոնգրեսի մեկ լիազորություն",
+  "q_en": "Name one power of the U.S. Congress.",
+  "answers_hy": [
+   "Ընդունում է օրենքներ",
+   "Պատերազմ է հայտարարում",
+   "Կազմում է դաշնային բյուջեն"
+  ],
+  "answers_en": [
+   "Writes laws",
+   "Declares war",
+   "Makes the federal budget"
+  ],
+  "options_hy": [
+   "Ընդունում է օրենքներ",
+   "Հարյուր (100)",
+   "Վեց (6) տարի",
+   "Ալեքս Պադիլյա"
+  ],
+  "options_en": [
+   "Writes laws",
+   "One hundred (100)",
+   "Six (6) years",
+   "Alex Padilla"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 21,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Քանի՞ ԱՄՆ սենատոր կա",
+  "q_en": "How many U.S. senators are there?",
+  "answers_hy": [
+   "Հարյուր (100)"
+  ],
+  "answers_en": [
+   "One hundred (100)"
+  ],
+  "options_hy": [
+   "Վեց (6) տարի",
+   "Հարյուր (100)",
+   "Ալեքս Պադիլյա",
+   "Չորս հարյուր երեսունհինգ (435)"
+  ],
+  "options_en": [
+   "Six (6) years",
+   "One hundred (100)",
+   "Alex Padilla",
+   "Four hundred thirty-five (435)"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 22,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Որքա՞ն է ԱՄՆ սենատորի պաշտոնավարման ժամկետը",
+  "q_en": "How long is a term for a U.S. senator?",
+  "answers_hy": [
+   "Վեց (6) տարի"
+  ],
+  "answers_en": [
+   "Six (6) years"
+  ],
+  "options_hy": [
+   "Վեց (6) տարի",
+   "Ալեքս Պադիլյա",
+   "Չորս հարյուր երեսունհինգ (435)",
+   "Երկու (2) տարի"
+  ],
+  "options_en": [
+   "Six (6) years",
+   "Alex Padilla",
+   "Four hundred thirty-five (435)",
+   "Two (2) years"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 23,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է ձեր նահանգի ԱՄՆ սենատորներից մեկը հիմա",
+  "q_en": "Who is one of your state's U.S. senators now?",
+  "answers_hy": [
+   "Ալեքս Պադիլյա",
+   "Ադամ Շիֆ"
+  ],
+  "answers_en": [
+   "Alex Padilla",
+   "Adam Schiff"
+  ],
+  "options_hy": [
+   "Չորս հարյուր երեսունհինգ (435)",
+   "Երկու (2) տարի",
+   "Որպեսզի ավելի ուշադիր հետևեն հասարակական կարծիքին",
+   "Ալեքս Պադիլյա"
+  ],
+  "options_en": [
+   "Four hundred thirty-five (435)",
+   "Two (2) years",
+   "To more closely follow public opinion",
+   "Alex Padilla"
+  ],
+  "correctIndex": 3,
+  "note_hy": "Կալիֆոռնիա",
+  "note_en": "California"
+ },
+ {
+  "id": 24,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Քանի՞ քվեարկող անդամ կա Ներկայացուցիչների պալատում",
+  "q_en": "How many voting members are in the House of Representatives?",
+  "answers_hy": [
+   "Չորս հարյուր երեսունհինգ (435)"
+  ],
+  "answers_en": [
+   "Four hundred thirty-five (435)"
+  ],
+  "options_hy": [
+   "Երկու (2) տարի",
+   "Չորս հարյուր երեսունհինգ (435)",
+   "Որպեսզի ավելի ուշադիր հետևեն հասարակական կարծիքին",
+   "Երկու (2)"
+  ],
+  "options_en": [
+   "Two (2) years",
+   "Four hundred thirty-five (435)",
+   "To more closely follow public opinion",
+   "Two (2)"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 25,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Որքա՞ն է Ներկայացուցիչների պալատի անդամի պաշտոնավարման ժամկետը",
+  "q_en": "How long is a term for a member of the House of Representatives?",
+  "answers_hy": [
+   "Երկու (2) տարի"
+  ],
+  "answers_en": [
+   "Two (2) years"
+  ],
+  "options_hy": [
+   "Որպեսզի ավելի ուշադիր հետևեն հասարակական կարծիքին",
+   "Երկու (2)",
+   "Հավասար ներկայացվածության համար (փոքր նահանգների համար)",
+   "Երկու (2) տարի"
+  ],
+  "options_en": [
+   "To more closely follow public opinion",
+   "Two (2)",
+   "Equal representation (for small states)",
+   "Two (2) years"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 26,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ինչո՞ւ են ԱՄՆ ներկայացուցիչները պաշտոնավարում ավելի կարճ, քան սենատորները",
+  "q_en": "Why do U.S. representatives serve shorter terms than U.S. senators?",
+  "answers_hy": [
+   "Որպեսզի ավելի ուշադիր հետևեն հասարակական կարծիքին"
+  ],
+  "answers_en": [
+   "To more closely follow public opinion"
+  ],
+  "options_hy": [
+   "Երկու (2)",
+   "Հավասար ներկայացվածության համար (փոքր նահանգների համար)",
+   "Որպեսզի ավելի ուշադիր հետևեն հասարակական կարծիքին",
+   "Լորա Ֆրիդման"
+  ],
+  "options_en": [
+   "Two (2)",
+   "Equal representation (for small states)",
+   "To more closely follow public opinion",
+   "Laura Friedman"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 27,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Քանի՞ սենատոր ունի յուրաքանչյուր նահանգ",
+  "q_en": "How many senators does each state have?",
+  "answers_hy": [
+   "Երկու (2)"
+  ],
+  "answers_en": [
+   "Two (2)"
+  ],
+  "options_hy": [
+   "Հավասար ներկայացվածության համար (փոքր նահանգների համար)",
+   "Լորա Ֆրիդման",
+   "Երկու (2)",
+   "Մայք Ջոնսոն"
+  ],
+  "options_en": [
+   "Equal representation (for small states)",
+   "Laura Friedman",
+   "Two (2)",
+   "Mike Johnson"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 28,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ինչո՞ւ է յուրաքանչյուր նահանգ ունենում երկու սենատոր",
+  "q_en": "Why does each state have two senators?",
+  "answers_hy": [
+   "Հավասար ներկայացվածության համար (փոքր նահանգների համար)",
+   "Մեծ փոխզիջում (Կոնեկտիկուտի փոխզիջում)"
+  ],
+  "answers_en": [
+   "Equal representation (for small states)",
+   "The Great Compromise (Connecticut Compromise)"
+  ],
+  "options_hy": [
+   "Լորա Ֆրիդման",
+   "Մայք Ջոնսոն",
+   "Հավասար ներկայացվածության համար (փոքր նահանգների համար)",
+   "Իր նահանգի քաղաքացիներին"
+  ],
+  "options_en": [
+   "Laura Friedman",
+   "Mike Johnson",
+   "Equal representation (for small states)",
+   "Citizens of their state"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 29,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք ձեր ԱՄՆ ներկայացուցչին",
+  "q_en": "Name your U.S. representative.",
+  "answers_hy": [
+   "Լորա Ֆրիդման"
+  ],
+  "answers_en": [
+   "Laura Friedman"
+  ],
+  "options_hy": [
+   "Լորա Ֆրիդման",
+   "Մայք Ջոնսոն",
+   "Իր նահանգի քաղաքացիներին",
+   "Իրենց նահանգի քաղաքացիները"
+  ],
+  "options_en": [
+   "Laura Friedman",
+   "Mike Johnson",
+   "Citizens of their state",
+   "Citizens from their state"
+  ],
+  "correctIndex": 0,
+  "note_hy": "Կալիֆոռնիա։ Ներկայացուցիչը կախված է ձեր հասցեից․ Գլենդեյլի մեծ մասը շրջան CA-28-ն է։ Հարցազրույցից առաջ ստուգեք house.gov կայքում։",
+  "note_en": "California. Your representative depends on your address; most of Glendale is in district CA-28. Check house.gov before your interview."
+ },
+ {
+  "id": 30,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է հիմա Ներկայացուցիչների պալատի խոսնակը",
+  "q_en": "What is the name of the Speaker of the House of Representatives now?",
+  "answers_hy": [
+   "Մայք Ջոնսոն"
+  ],
+  "answers_en": [
+   "Mike Johnson"
+  ],
+  "options_hy": [
+   "Մայք Ջոնսոն",
+   "Իր նահանգի քաղաքացիներին",
+   "Իրենց նահանգի քաղաքացիները",
+   "Իր ընտրաշրջանի քաղաքացիներին"
+  ],
+  "options_en": [
+   "Mike Johnson",
+   "Citizens of their state",
+   "Citizens from their state",
+   "Citizens in their (congressional) district"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 31,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞ւմ է ներկայացնում ԱՄՆ սենատորը",
+  "q_en": "Who does a U.S. senator represent?",
+  "answers_hy": [
+   "Իր նահանգի քաղաքացիներին",
+   "Իր նահանգի ժողովրդին"
+  ],
+  "answers_en": [
+   "Citizens of their state",
+   "People of their state"
+  ],
+  "options_hy": [
+   "Իրենց նահանգի քաղաքացիները",
+   "Իր ընտրաշրջանի քաղաքացիներին",
+   "Իրենց ընտրաշրջանի քաղաքացիները",
+   "Իր նահանգի քաղաքացիներին"
+  ],
+  "options_en": [
+   "Citizens from their state",
+   "Citizens in their (congressional) district",
+   "Citizens from their (congressional) district",
+   "Citizens of their state"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 32,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է ընտրում ԱՄՆ սենատորներին",
+  "q_en": "Who elects U.S. senators?",
+  "answers_hy": [
+   "Իրենց նահանգի քաղաքացիները"
+  ],
+  "answers_en": [
+   "Citizens from their state"
+  ],
+  "options_hy": [
+   "Իր ընտրաշրջանի քաղաքացիներին",
+   "Իրենց նահանգի քաղաքացիները",
+   "Իրենց ընտրաշրջանի քաղաքացիները",
+   "Նահանգի բնակչության պատճառով"
+  ],
+  "options_en": [
+   "Citizens in their (congressional) district",
+   "Citizens from their state",
+   "Citizens from their (congressional) district",
+   "Because of the state's population"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 33,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞ւմ է ներկայացնում Ներկայացուցիչների պալատի անդամը",
+  "q_en": "Who does a member of the House of Representatives represent?",
+  "answers_hy": [
+   "Իր ընտրաշրջանի քաղաքացիներին",
+   "Իր ընտրաշրջանի մարդկանց"
+  ],
+  "answers_en": [
+   "Citizens in their (congressional) district",
+   "People in their (congressional) district"
+  ],
+  "options_hy": [
+   "Իրենց ընտրաշրջանի քաղաքացիները",
+   "Նահանգի բնակչության պատճառով",
+   "Իր ընտրաշրջանի քաղաքացիներին",
+   "Չորս (4) տարով"
+  ],
+  "options_en": [
+   "Citizens from their (congressional) district",
+   "Because of the state's population",
+   "Citizens in their (congressional) district",
+   "Four (4) years"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 34,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է ընտրում Ներկայացուցիչների պալատի անդամներին",
+  "q_en": "Who elects members of the House of Representatives?",
+  "answers_hy": [
+   "Իրենց ընտրաշրջանի քաղաքացիները"
+  ],
+  "answers_en": [
+   "Citizens from their (congressional) district"
+  ],
+  "options_hy": [
+   "Նահանգի բնակչության պատճառով",
+   "Չորս (4) տարով",
+   "Իրենց ընտրաշրջանի քաղաքացիները",
+   "22-րդ փոփոխության պատճառով"
+  ],
+  "options_en": [
+   "Because of the state's population",
+   "Four (4) years",
+   "Citizens from their (congressional) district",
+   "Because of the 22nd Amendment"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 35,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Որոշ նահանգներ ավելի շատ ներկայացուցիչներ ունեն, քան մյուսները։ Ինչո՞ւ",
+  "q_en": "Some states have more representatives than other states. Why?",
+  "answers_hy": [
+   "Նահանգի բնակչության պատճառով",
+   "Որովհետև նրանք ավելի շատ մարդ ունեն",
+   "Որովհետև որոշ նահանգներ ավելի շատ մարդ ունեն"
+  ],
+  "answers_en": [
+   "Because of the state's population",
+   "Because they have more people",
+   "Because some states have more people"
+  ],
+  "options_hy": [
+   "Չորս (4) տարով",
+   "22-րդ փոփոխության պատճառով",
+   "Նահանգի բնակչության պատճառով",
+   "Դոնալդ Թրամփ"
+  ],
+  "options_en": [
+   "Four (4) years",
+   "Because of the 22nd Amendment",
+   "Because of the state's population",
+   "Donald Trump"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 36,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Քանի՞ տարով է ընտրվում ԱՄՆ նախագահը",
+  "q_en": "The President of the United States is elected for how many years?",
+  "answers_hy": [
+   "Չորս (4) տարով"
+  ],
+  "answers_en": [
+   "Four (4) years"
+  ],
+  "options_hy": [
+   "22-րդ փոփոխության պատճառով",
+   "Դոնալդ Թրամփ",
+   "Չորս (4) տարով",
+   "Ջեյ Դի Վենս"
+  ],
+  "options_en": [
+   "Because of the 22nd Amendment",
+   "Donald Trump",
+   "Four (4) years",
+   "JD Vance"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 37,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "ԱՄՆ նախագահը կարող է պաշտոնավարել միայն երկու ժամկետ։ Ինչո՞ւ",
+  "q_en": "The President of the United States can serve only two terms. Why?",
+  "answers_hy": [
+   "22-րդ փոփոխության պատճառով",
+   "Որպեսզի նախագահը չդառնա չափից ուժեղ"
+  ],
+  "answers_en": [
+   "Because of the 22nd Amendment",
+   "To keep the president from becoming too powerful"
+  ],
+  "options_hy": [
+   "22-րդ փոփոխության պատճառով",
+   "Դոնալդ Թրամփ",
+   "Ջեյ Դի Վենս",
+   "Փոխնախագահը (Միացյալ Նահանգների)"
+  ],
+  "options_en": [
+   "Because of the 22nd Amendment",
+   "Donald Trump",
+   "JD Vance",
+   "The Vice President (of the United States)"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 38,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է հիմա Միացյալ Նահանգների նախագահը",
+  "q_en": "What is the name of the President of the United States now?",
+  "answers_hy": [
+   "Դոնալդ Թրամփ"
+  ],
+  "answers_en": [
+   "Donald Trump"
+  ],
+  "options_hy": [
+   "Ջեյ Դի Վենս",
+   "Փոխնախագահը (Միացյալ Նահանգների)",
+   "Դոնալդ Թրամփ",
+   "Օրինագծերը ստորագրում է որպես օրենք"
+  ],
+  "options_en": [
+   "JD Vance",
+   "The Vice President (of the United States)",
+   "Donald Trump",
+   "Signs bills into law"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 39,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է հիմա Միացյալ Նահանգների փոխնախագահը",
+  "q_en": "What is the name of the Vice President of the United States now?",
+  "answers_hy": [
+   "Ջեյ Դի Վենս"
+  ],
+  "answers_en": [
+   "JD Vance"
+  ],
+  "options_hy": [
+   "Փոխնախագահը (Միացյալ Նահանգների)",
+   "Օրինագծերը ստորագրում է որպես օրենք",
+   "Ջեյ Դի Վենս",
+   "Նախագահը (Միացյալ Նահանգների)"
+  ],
+  "options_en": [
+   "The Vice President (of the United States)",
+   "Signs bills into law",
+   "JD Vance",
+   "The President (of the United States)"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 40,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Եթե նախագահն այլևս չի կարող պաշտոնավարել, ո՞վ է դառնում նախագահ",
+  "q_en": "If the president can no longer serve, who becomes president?",
+  "answers_hy": [
+   "Փոխնախագահը (Միացյալ Նահանգների)"
+  ],
+  "answers_en": [
+   "The Vice President (of the United States)"
+  ],
+  "options_hy": [
+   "Օրինագծերը ստորագրում է որպես օրենք",
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Խորհուրդ է տալիս նախագահին",
+   "Փոխնախագահը (Միացյալ Նահանգների)"
+  ],
+  "options_en": [
+   "Signs bills into law",
+   "The President (of the United States)",
+   "Advises the President (of the United States)",
+   "The Vice President (of the United States)"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 41,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք նախագահի մեկ լիազորություն",
+  "q_en": "Name one power of the president.",
+  "answers_hy": [
+   "Օրինագծերը ստորագրում է որպես օրենք",
+   "Վետո է դնում օրինագծերի վրա",
+   "Իրագործում է օրենքները",
+   "Զինված ուժերի գլխավոր հրամանատարն է",
+   "Գլխավոր դիվանագետն է",
+   "Նշանակում է դաշնային դատավորների"
+  ],
+  "answers_en": [
+   "Signs bills into law",
+   "Vetoes bills",
+   "Enforces laws",
+   "Commander in Chief (of the military)",
+   "Chief diplomat",
+   "Appoints federal judges"
+  ],
+  "options_hy": [
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Խորհուրդ է տալիս նախագահին",
+   "Օրինագծերը ստորագրում է որպես օրենք",
+   "Գլխավոր դատախազ, Պետքարտուղար"
+  ],
+  "options_en": [
+   "The President (of the United States)",
+   "Advises the President (of the United States)",
+   "Signs bills into law",
+   "Attorney General, Secretary of State"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 42,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է ԱՄՆ զինված ուժերի գլխավոր հրամանատարը",
+  "q_en": "Who is Commander in Chief of the U.S. military?",
+  "answers_hy": [
+   "Նախագահը (Միացյալ Նահանգների)"
+  ],
+  "answers_en": [
+   "The President (of the United States)"
+  ],
+  "options_hy": [
+   "Խորհուրդ է տալիս նախագահին",
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Այն որոշում է, թե ով է ընտրվում նախագահ"
+  ],
+  "options_en": [
+   "Advises the President (of the United States)",
+   "Attorney General, Secretary of State",
+   "The President (of the United States)",
+   "It decides who is elected president."
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 43,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է ստորագրում օրինագծերը, որ դրանք դառնան օրենք",
+  "q_en": "Who signs bills to become laws?",
+  "answers_hy": [
+   "Նախագահը (Միացյալ Նահանգների)"
+  ],
+  "answers_en": [
+   "The President (of the United States)"
+  ],
+  "options_hy": [
+   "Խորհուրդ է տալիս նախագահին",
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Այն որոշում է, թե ով է ընտրվում նախագահ"
+  ],
+  "options_en": [
+   "Advises the President (of the United States)",
+   "Attorney General, Secretary of State",
+   "The President (of the United States)",
+   "It decides who is elected president."
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 44,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է վետո դնում օրինագծերի վրա",
+  "q_en": "Who vetoes bills?",
+  "answers_hy": [
+   "Նախագահը (Միացյալ Նահանգների)"
+  ],
+  "answers_en": [
+   "The President (of the United States)"
+  ],
+  "options_hy": [
+   "Խորհուրդ է տալիս նախագահին",
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Այն որոշում է, թե ով է ընտրվում նախագահ"
+  ],
+  "options_en": [
+   "Advises the President (of the United States)",
+   "The President (of the United States)",
+   "Attorney General, Secretary of State",
+   "It decides who is elected president."
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 45,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է նշանակում դաշնային դատավորներին",
+  "q_en": "Who appoints federal judges?",
+  "answers_hy": [
+   "Նախագահը (Միացյալ Նահանգների)"
+  ],
+  "answers_en": [
+   "The President (of the United States)"
+  ],
+  "options_hy": [
+   "Խորհուրդ է տալիս նախագահին",
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Այն որոշում է, թե ով է ընտրվում նախագահ"
+  ],
+  "options_en": [
+   "Advises the President (of the United States)",
+   "Attorney General, Secretary of State",
+   "The President (of the United States)",
+   "It decides who is elected president."
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 46,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Գործադիր ճյուղը շատ մասեր ունի։ Անվանեք մեկը",
+  "q_en": "The executive branch has many parts. Name one.",
+  "answers_hy": [
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Կաբինետը",
+   "Դաշնային նախարարությունները և գերատեսչությունները"
+  ],
+  "answers_en": [
+   "President (of the United States)",
+   "Cabinet",
+   "Federal departments and agencies"
+  ],
+  "options_hy": [
+   "Նախագահը (Միացյալ Նահանգների)",
+   "Խորհուրդ է տալիս նախագահին",
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Այն որոշում է, թե ով է ընտրվում նախագահ"
+  ],
+  "options_en": [
+   "President (of the United States)",
+   "Advises the President (of the United States)",
+   "Attorney General, Secretary of State",
+   "It decides who is elected president."
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 47,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ի՞նչ է անում նախագահի կաբինետը",
+  "q_en": "What does the President's Cabinet do?",
+  "answers_hy": [
+   "Խորհուրդ է տալիս նախագահին"
+  ],
+  "answers_en": [
+   "Advises the President (of the United States)"
+  ],
+  "options_hy": [
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Խորհուրդ է տալիս նախագահին",
+   "Այն որոշում է, թե ով է ընտրվում նախագահ",
+   "Գերագույն դատարանը"
+  ],
+  "options_en": [
+   "Attorney General, Secretary of State",
+   "Advises the President (of the United States)",
+   "It decides who is elected president.",
+   "Supreme Court"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 48,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք կաբինետի մակարդակի երկու պաշտոն",
+  "q_en": "What are two Cabinet-level positions?",
+  "answers_hy": [
+   "Գլխավոր դատախազ",
+   "Գյուղատնտեսության նախարար",
+   "Առևտրի նախարար",
+   "Կրթության նախարար",
+   "Էներգետիկայի նախարար",
+   "Առողջապահության և սոցիալական ծառայությունների նախարար",
+   "Ներքին անվտանգության նախարար",
+   "Բնակարանաշինության և քաղաքաշինության նախարար",
+   "Ներքին գործերի նախարար",
+   "Աշխատանքի նախարար",
+   "Պետքարտուղար",
+   "Տրանսպորտի նախարար",
+   "Ֆինանսների նախարար",
+   "Վետերանների գործերի նախարար",
+   "Պատերազմի նախարար",
+   "Փոխնախագահ",
+   "Շրջակա միջավայրի պահպանության գործակալության ղեկավար",
+   "Փոքր բիզնեսի վարչության ղեկավար",
+   "Կենտրոնական հետախուզական վարչության տնօրեն",
+   "Կառավարման և բյուջեի գրասենյակի տնօրեն",
+   "Ազգային հետախուզության տնօրեն",
+   "ԱՄՆ առևտրի ներկայացուցիչ"
+  ],
+  "answers_en": [
+   "Attorney General",
+   "Secretary of Agriculture",
+   "Secretary of Commerce",
+   "Secretary of Education",
+   "Secretary of Energy",
+   "Secretary of Health and Human Services",
+   "Secretary of Homeland Security",
+   "Secretary of Housing and Urban Development",
+   "Secretary of the Interior",
+   "Secretary of Labor",
+   "Secretary of State",
+   "Secretary of Transportation",
+   "Secretary of the Treasury",
+   "Secretary of Veterans Affairs",
+   "Secretary of War",
+   "Vice President",
+   "Administrator of the Environmental Protection Agency",
+   "Administrator of the Small Business Administration",
+   "Director of the Central Intelligence Agency",
+   "Director of the Office of Management and Budget",
+   "Director of National Intelligence",
+   "United States Trade Representative"
+  ],
+  "options_hy": [
+   "Սենատոր, Գլխավոր դատավոր",
+   "Նահանգապետ, Քաղաքապետ",
+   "Գլխավոր դատախազ, Պետքարտուղար",
+   "Դեսպան, Կոնսուլ"
+  ],
+  "options_en": [
+   "Senator, Chief Justice",
+   "Governor, Mayor",
+   "Attorney General, Secretary of State",
+   "Ambassador, Consul"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 49,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ինչո՞ւ է կարևոր Ընտրական կոլեգիան",
+  "q_en": "Why is the Electoral College important?",
+  "answers_hy": [
+   "Այն որոշում է, թե ով է ընտրվում նախագահ",
+   "Այն փոխզիջում է նախագահի ժողովրդական ընտրության և Կոնգրեսի կողմից ընտրության միջև"
+  ],
+  "answers_en": [
+   "It decides who is elected president.",
+   "It provides a compromise between the popular election of the president and congressional selection."
+  ],
+  "options_hy": [
+   "Այն որոշում է, թե ով է ընտրվում նախագահ",
+   "Գերագույն դատարանը",
+   "Վերանայում է օրենքները",
+   "Ինը (9)"
+  ],
+  "options_en": [
+   "It decides who is elected president.",
+   "Supreme Court",
+   "Reviews laws",
+   "Nine (9)"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 50,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞րն է դատական ճյուղի մեկ մասը",
+  "q_en": "What is one part of the judicial branch?",
+  "answers_hy": [
+   "Գերագույն դատարանը",
+   "Դաշնային դատարանները"
+  ],
+  "answers_en": [
+   "Supreme Court",
+   "Federal Courts"
+  ],
+  "options_hy": [
+   "Գերագույն դատարանը",
+   "Վերանայում է օրենքները",
+   "Ինը (9)",
+   "Հինգ (5)"
+  ],
+  "options_en": [
+   "Supreme Court",
+   "Reviews laws",
+   "Nine (9)",
+   "Five (5)"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 51,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ի՞նչ է անում դատական ճյուղը",
+  "q_en": "What does the judicial branch do?",
+  "answers_hy": [
+   "Վերանայում է օրենքները",
+   "Բացատրում է օրենքները",
+   "Լուծում է օրենքի վերաբերյալ վեճերը (անհամաձայնությունները)",
+   "Որոշում է, թե արդյոք օրենքը հակասում է ԱՄՆ Սահմանադրությանը"
+  ],
+  "answers_en": [
+   "Reviews laws",
+   "Explains laws",
+   "Resolves disputes (disagreements) about the law",
+   "Decides if a law goes against the U.S. Constitution"
+  ],
+  "options_hy": [
+   "Գերագույն դատարանը",
+   "Վերանայում է օրենքները",
+   "Ինը (9)",
+   "Հինգ (5)"
+  ],
+  "options_en": [
+   "Supreme Court",
+   "Reviews laws",
+   "Nine (9)",
+   "Five (5)"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 52,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞րն է Միացյալ Նահանգների բարձրագույն դատարանը",
+  "q_en": "What is the highest court in the United States?",
+  "answers_hy": [
+   "Գերագույն դատարանը"
+  ],
+  "answers_en": [
+   "Supreme Court"
+  ],
+  "options_hy": [
+   "Ինը (9)",
+   "Հինգ (5)",
+   "Ցկյանս",
+   "Գերագույն դատարանը"
+  ],
+  "options_en": [
+   "Nine (9)",
+   "Five (5)",
+   "For life",
+   "Supreme Court"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 53,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Քանի՞ տեղ կա Գերագույն դատարանում",
+  "q_en": "How many seats are on the Supreme Court?",
+  "answers_hy": [
+   "Ինը (9)"
+  ],
+  "answers_en": [
+   "Nine (9)"
+  ],
+  "options_hy": [
+   "Հինգ (5)",
+   "Ցկյանս",
+   "Որպեսզի անկախ լինեն քաղաքականությունից",
+   "Ինը (9)"
+  ],
+  "options_en": [
+   "Five (5)",
+   "For life",
+   "To be independent (of politics)",
+   "Nine (9)"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 54,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Սովորաբար քանի՞ դատավոր է անհրաժեշտ Գերագույն դատարանում գործը որոշելու համար",
+  "q_en": "How many Supreme Court justices are usually needed to decide a case?",
+  "answers_hy": [
+   "Հինգ (5)"
+  ],
+  "answers_en": [
+   "Five (5)"
+  ],
+  "options_hy": [
+   "Հինգ (5)",
+   "Ցկյանս",
+   "Որպեսզի անկախ լինեն քաղաքականությունից",
+   "Ջոն Ռոբերտս"
+  ],
+  "options_en": [
+   "Five (5)",
+   "For life",
+   "To be independent (of politics)",
+   "John Roberts"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 55,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Որքա՞ն են պաշտոնավարում Գերագույն դատարանի դատավորները",
+  "q_en": "How long do Supreme Court justices serve?",
+  "answers_hy": [
+   "Ցկյանս",
+   "Ցկյանս նշանակում",
+   "Մինչև թոշակի անցնելը"
+  ],
+  "answers_en": [
+   "For life",
+   "Lifetime appointment",
+   "Until retirement"
+  ],
+  "options_hy": [
+   "Որպեսզի անկախ լինեն քաղաքականությունից",
+   "Ջոն Ռոբերտս",
+   "Թղթադրամ տպել",
+   "Ցկյանս"
+  ],
+  "options_en": [
+   "To be independent (of politics)",
+   "John Roberts",
+   "Print paper money",
+   "For life"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 56,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Գերագույն դատարանի դատավորները պաշտոնավարում են ցկյանս։ Ինչո՞ւ",
+  "q_en": "Supreme Court justices serve for life. Why?",
+  "answers_hy": [
+   "Որպեսզի անկախ լինեն քաղաքականությունից",
+   "Որպեսզի սահմանափակվի արտաքին (քաղաքական) ազդեցությունը"
+  ],
+  "answers_en": [
+   "To be independent (of politics)",
+   "To limit outside (political) influence"
+  ],
+  "options_hy": [
+   "Որպեսզի անկախ լինեն քաղաքականությունից",
+   "Ջոն Ռոբերտս",
+   "Թղթադրամ տպել",
+   "Ապահովել դպրոցներ և կրթություն"
+  ],
+  "options_en": [
+   "To be independent (of politics)",
+   "John Roberts",
+   "Print paper money",
+   "Provide schooling and education"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 57,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է հիմա Միացյալ Նահանգների գլխավոր դատավորը",
+  "q_en": "Who is the Chief Justice of the United States now?",
+  "answers_hy": [
+   "Ջոն Ռոբերտս"
+  ],
+  "answers_en": [
+   "John Roberts"
+  ],
+  "options_hy": [
+   "Թղթադրամ տպել",
+   "Ապահովել դպրոցներ և կրթություն",
+   "Այն ասում է, որ լիազորությունները, որոնք չեն տրվել դաշնային կառավարությանը, պատկանում են նահանգներին կամ ժողովրդին",
+   "Ջոն Ռոբերտս"
+  ],
+  "options_en": [
+   "Print paper money",
+   "Provide schooling and education",
+   "It states that the powers not given to the federal government belong to the states or to the people.",
+   "John Roberts"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 58,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք մեկ լիազորություն, որը միայն դաշնային կառավարությանն է",
+  "q_en": "Name one power that is only for the federal government.",
+  "answers_hy": [
+   "Թղթադրամ տպել",
+   "Մետաղադրամ հատել",
+   "Պատերազմ հայտարարել",
+   "Բանակ ստեղծել",
+   "Պայմանագրեր կնքել",
+   "Արտաքին քաղաքականություն վարել"
+  ],
+  "answers_en": [
+   "Print paper money",
+   "Mint coins",
+   "Declare war",
+   "Create an army",
+   "Make treaties",
+   "Set foreign policy"
+  ],
+  "options_hy": [
+   "Ապահովել դպրոցներ և կրթություն",
+   "Թղթադրամ տպել",
+   "Այն ասում է, որ լիազորությունները, որոնք չեն տրվել դաշնային կառավարությանը, պատկանում են նահանգներին կամ ժողովրդին",
+   "Գևին Նյուսոմ"
+  ],
+  "options_en": [
+   "Provide schooling and education",
+   "Print paper money",
+   "It states that the powers not given to the federal government belong to the states or to the people.",
+   "Gavin Newsom"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 59,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Անվանեք մեկ լիազորություն, որը միայն նահանգներինն է",
+  "q_en": "Name one power that is only for the states.",
+  "answers_hy": [
+   "Ապահովել դպրոցներ և կրթություն",
+   "Ապահովել պաշտպանություն (ոստիկանություն)",
+   "Ապահովել անվտանգություն (հրշեջ ծառայություն)",
+   "Վարորդական իրավունք տալ",
+   "Հաստատել հողօգտագործման և կառուցապատման կարգը"
+  ],
+  "answers_en": [
+   "Provide schooling and education",
+   "Provide protection (police)",
+   "Provide safety (fire departments)",
+   "Give a driver's license",
+   "Approve zoning and land use"
+  ],
+  "options_hy": [
+   "Այն ասում է, որ լիազորությունները, որոնք չեն տրվել դաշնային կառավարությանը, պատկանում են նահանգներին կամ ժողովրդին",
+   "Գևին Նյուսոմ",
+   "Սակրամենտո",
+   "Ապահովել դպրոցներ և կրթություն"
+  ],
+  "options_en": [
+   "It states that the powers not given to the federal government belong to the states or to the people.",
+   "Gavin Newsom",
+   "Sacramento",
+   "Provide schooling and education"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 60,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞րն է 10-րդ փոփոխության նպատակը",
+  "q_en": "What is the purpose of the 10th Amendment?",
+  "answers_hy": [
+   "Այն ասում է, որ լիազորությունները, որոնք չեն տրվել դաշնային կառավարությանը, պատկանում են նահանգներին կամ ժողովրդին"
+  ],
+  "answers_en": [
+   "It states that the powers not given to the federal government belong to the states or to the people."
+  ],
+  "options_hy": [
+   "Գևին Նյուսոմ",
+   "Սակրամենտո",
+   "Այն ասում է, որ լիազորությունները, որոնք չեն տրվել դաշնային կառավարությանը, պատկանում են նահանգներին կամ ժողովրդին",
+   "Օրենսդիր, գործադիր և դատական"
+  ],
+  "options_en": [
+   "Gavin Newsom",
+   "Sacramento",
+   "It states that the powers not given to the federal government belong to the states or to the people.",
+   "Legislative, executive, and judicial"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 61,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞վ է հիմա ձեր նահանգի նահանգապետը",
+  "q_en": "Who is the governor of your state now?",
+  "answers_hy": [
+   "Գևին Նյուսոմ"
+  ],
+  "answers_en": [
+   "Gavin Newsom"
+  ],
+  "options_hy": [
+   "Սակրամենտո",
+   "Գևին Նյուսոմ",
+   "Օրենսդիր, գործադիր և դատական",
+   "Գործադիր ճյուղի"
+  ],
+  "options_en": [
+   "Sacramento",
+   "Gavin Newsom",
+   "Legislative, executive, and judicial",
+   "Executive branch"
+  ],
+  "correctIndex": 1,
+  "note_hy": "Կալիֆոռնիա",
+  "note_en": "California"
+ },
+ {
+  "id": 62,
+  "section": "Կառավարման համակարգ",
+  "section_en": "System of Government",
+  "q_hy": "Ո՞րն է ձեր նահանգի մայրաքաղաքը",
+  "q_en": "What is the capital of your state?",
+  "answers_hy": [
+   "Սակրամենտո"
+  ],
+  "answers_en": [
+   "Sacramento"
+  ],
+  "options_hy": [
+   "Օրենսդիր, գործադիր և դատական",
+   "Սակրամենտո",
+   "Գործադիր ճյուղի",
+   "ԱՄՆ Կոնգրեսը"
+  ],
+  "options_en": [
+   "Legislative, executive, and judicial",
+   "Sacramento",
+   "Executive branch",
+   "U.S. Congress"
+  ],
+  "correctIndex": 1,
+  "note_hy": "Կալիֆոռնիա",
+  "note_en": "California"
+ },
+ {
+  "id": 63,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "ԱՄՆ Սահմանադրության մեջ չորս փոփոխություն կա այն մասին, թե ով կարող է քվեարկել։ Նկարագրեք մեկը",
+  "q_en": "There are four amendments to the U.S. Constitution about who can vote. Describe one of them.",
+  "answers_hy": [
+   "18 տարեկան և բարձր քաղաքացիները կարող են քվեարկել",
+   "Քվեարկելու համար պետք չէ վճարել (ընտրական հարկ)",
+   "Ցանկացած քաղաքացի կարող է քվեարկել (կանայք և տղամարդիկ կարող են քվեարկել)",
+   "Ցանկացած ռասայի տղամարդ քաղաքացին կարող է քվեարկել"
+  ],
+  "answers_en": [
+   "Citizens eighteen (18) and older (can vote)",
+   "You don't have to pay (a poll tax) to vote",
+   "Any citizen can vote. (Women and men can vote.)",
+   "A male citizen of any race (can vote)"
+  ],
+  "options_hy": [
+   "ԱՄՆ քաղաքացիները",
+   "Խոսքի ազատություն, Կրոնի ազատություն, Հավաքների ազատություն",
+   "Միացյալ Նահանգներին",
+   "18 տարեկան և բարձր քաղաքացիները կարող են քվեարկել"
+  ],
+  "options_en": [
+   "U.S. citizens",
+   "Freedom of speech, Freedom of religion, Freedom of assembly",
+   "The United States",
+   "Citizens eighteen (18) and older (can vote)"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 64,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Ո՞վ կարող է քվեարկել դաշնային ընտրություններում, առաջադրվել դաշնային պաշտոնի և լինել ատենակալ Միացյալ Նահանգներում",
+  "q_en": "Who can vote in federal elections, run for federal office, and serve on a jury in the United States?",
+  "answers_hy": [
+   "ԱՄՆ քաղաքացիները"
+  ],
+  "answers_en": [
+   "U.S. citizens"
+  ],
+  "options_hy": [
+   "Խոսքի ազատություն, Կրոնի ազատություն, Հավաքների ազատություն",
+   "ԱՄՆ քաղաքացիները",
+   "Միացյալ Նահանգներին",
+   "Պաշտպանել ԱՄՆ Սահմանադրությունը, Ենթարկվել Միացյալ Նահանգների օրենքներին"
+  ],
+  "options_en": [
+   "Freedom of speech, Freedom of religion, Freedom of assembly",
+   "U.S. citizens",
+   "The United States",
+   "Defend the U.S. Constitution, Obey the laws of the United States"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 65,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Որո՞նք են Միացյալ Նահանգներում ապրող բոլորի երեք իրավունքները",
+  "q_en": "What are three rights of everyone living in the United States?",
+  "answers_hy": [
+   "Արտահայտվելու ազատություն",
+   "Խոսքի ազատություն",
+   "Հավաքների ազատություն",
+   "Կառավարությանը դիմելու ազատություն",
+   "Կրոնի ազատություն",
+   "Զենք կրելու իրավունք"
+  ],
+  "answers_en": [
+   "Freedom of expression",
+   "Freedom of speech",
+   "Freedom of assembly",
+   "Freedom to petition the government",
+   "Freedom of religion",
+   "The right to bear arms"
+  ],
+  "options_hy": [
+   "Քվեարկելու իրավունք, Մեքենա վարելու իրավունք, Անվճար կրթության իրավունք",
+   "Խոսքի ազատություն, Կրոնի ազատություն, Հավաքների ազատություն",
+   "Ճանապարհորդելու իրավունք, Տուն գնելու իրավունք, Աշխատելու իրավունք",
+   "Անվճար բժշկական օգնության իրավունք, Մեքենա վարելու իրավունք, Քվեարկելու իրավունք"
+  ],
+  "options_en": [
+   "Right to vote, Right to drive, Right to free education",
+   "Freedom of speech, Freedom of religion, Freedom of assembly",
+   "Right to travel, Right to buy a home, Right to work",
+   "Right to free medical care, Right to drive, Right to vote"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 66,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Ինչի՞ն ենք հավատարմություն ցույց տալիս, երբ ասում ենք Հավատարմության երդումը",
+  "q_en": "What do we show loyalty to when we say the Pledge of Allegiance?",
+  "answers_hy": [
+   "Միացյալ Նահանգներին",
+   "Դրոշին"
+  ],
+  "answers_en": [
+   "The United States",
+   "The flag"
+  ],
+  "options_hy": [
+   "Միացյալ Նահանգներին",
+   "Պաշտպանել ԱՄՆ Սահմանադրությունը, Ենթարկվել Միացյալ Նահանգների օրենքներին",
+   "Ծնվելով Միացյալ Նահանգներում",
+   "Քվեարկել, Առաջադրվել պաշտոնի"
+  ],
+  "options_en": [
+   "The United States",
+   "Defend the U.S. Constitution, Obey the laws of the United States",
+   "Be born in the United States",
+   "Vote, Run for office"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 67,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Անվանեք երկու խոստում, որ նոր քաղաքացիները տալիս են Հավատարմության երդման մեջ",
+  "q_en": "Name two promises that new citizens make in the Oath of Allegiance.",
+  "answers_hy": [
+   "Հրաժարվել այլ երկրների հանդեպ հավատարմությունից",
+   "Պաշտպանել ԱՄՆ Սահմանադրությունը",
+   "Ենթարկվել Միացյալ Նահանգների օրենքներին",
+   "Ծառայել բանակում (եթե պահանջվի)",
+   "Ծառայել ազգին (եթե պահանջվի)",
+   "Հավատարիմ լինել Միացյալ Նահանգներին"
+  ],
+  "answers_en": [
+   "Give up loyalty to other countries",
+   "Defend the U.S. Constitution",
+   "Obey the laws of the United States",
+   "Serve in the military (if needed)",
+   "Serve the nation (if needed)",
+   "Be loyal to the United States"
+  ],
+  "options_hy": [
+   "Հարկեր չվճարել, Բանակում չծառայել",
+   "Պաշտպանել ԱՄՆ Սահմանադրությունը, Ենթարկվել Միացյալ Նահանգների օրենքներին",
+   "Պահպանել հավատարմությունը այլ երկրի, Չենթարկվել օրենքներին",
+   "Քվեարկել այլ երկրում, Անգլերեն չսովորել"
+  ],
+  "options_en": [
+   "Not pay taxes, Not serve in the military",
+   "Defend the U.S. Constitution, Obey the laws of the United States",
+   "Keep loyalty to another country, Not obey the laws",
+   "Vote in another country, Not learn English"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 68,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Ինչպե՞ս կարող են մարդիկ դառնալ Միացյալ Նահանգների քաղաքացի",
+  "q_en": "How can people become United States citizens?",
+  "answers_hy": [
+   "Ծնվելով Միացյալ Նահանգներում",
+   "Նատուրալիզացիայի միջոցով",
+   "Ծնողներից ստանալով (օրենքով սահմանված դեպքերում)"
+  ],
+  "answers_en": [
+   "Be born in the United States",
+   "Naturalize",
+   "Derive citizenship (under conditions set by Congress)"
+  ],
+  "options_hy": [
+   "Ծնվելով Միացյալ Նահանգներում",
+   "Քվեարկել, Առաջադրվել պաշտոնի",
+   "Քվեարկել",
+   "Օրենքով պահանջվում է"
+  ],
+  "options_en": [
+   "Be born in the United States",
+   "Vote, Run for office",
+   "Vote",
+   "Required by law"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 69,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Որո՞նք են Միացյալ Նահանգներում քաղաքացիական մասնակցության երկու օրինակ",
+  "q_en": "What are two examples of civic participation in the United States?",
+  "answers_hy": [
+   "Քվեարկել",
+   "Առաջադրվել պաշտոնի",
+   "Միանալ քաղաքական կուսակցությանը",
+   "Օգնել քարոզարշավին",
+   "Միանալ քաղաքացիական խմբի",
+   "Միանալ համայնքային խմբի",
+   "Ձեր կարծիքը հայտնել ընտրված պաշտոնյային",
+   "Կապ հաստատել ընտրված պաշտոնյաների հետ",
+   "Աջակցել կամ դեմ լինել հարցին կամ քաղաքականությանը",
+   "Գրել թերթին"
+  ],
+  "answers_en": [
+   "Vote",
+   "Run for office",
+   "Join a political party",
+   "Help with a campaign",
+   "Join a civic group",
+   "Join a community group",
+   "Give an elected official your opinion (on an issue)",
+   "Contact elected officials",
+   "Support or oppose an issue or policy",
+   "Write to a newspaper"
+  ],
+  "options_hy": [
+   "Հարկերից խուսափել, Օրենքը խախտել",
+   "Քվեարկել, Առաջադրվել պաշտոնի",
+   "Մեքենա վարել, Տուն գնել",
+   "Աշխատանքի գնալ, Դպրոց հաճախել"
+  ],
+  "options_en": [
+   "Avoid taxes, Break the law",
+   "Vote, Run for office",
+   "Drive a car, Buy a home",
+   "Go to work, Attend school"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 70,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Ո՞րն է մեկ ձև, որով ամերիկացիները կարող են ծառայել իրենց երկրին",
+  "q_en": "What is one way Americans can serve their country?",
+  "answers_hy": [
+   "Քվեարկել",
+   "Հարկեր վճարել",
+   "Ենթարկվել օրենքին",
+   "Ծառայել բանակում",
+   "Առաջադրվել պաշտոնի",
+   "Աշխատել տեղական, նահանգային կամ դաշնային կառավարության համար"
+  ],
+  "answers_en": [
+   "Vote",
+   "Pay taxes",
+   "Obey the law",
+   "Serve in the military",
+   "Run for office",
+   "Work for local, state, or federal government"
+  ],
+  "options_hy": [
+   "Օրենքով պահանջվում է",
+   "18 տարեկան և բարձր քաղաքացիները կարող են քվեարկել",
+   "ԱՄՆ քաղաքացիները",
+   "Քվեարկել"
+  ],
+  "options_en": [
+   "Required by law",
+   "Citizens eighteen (18) and older (can vote)",
+   "U.S. citizens",
+   "Vote"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 71,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Ինչո՞ւ է կարևոր վճարել դաշնային հարկեր",
+  "q_en": "Why is it important to pay federal taxes?",
+  "answers_hy": [
+   "Օրենքով պահանջվում է",
+   "Բոլոր մարդիկ վճարում են դաշնային կառավարությանը ֆինանսավորելու համար",
+   "ԱՄՆ Սահմանադրությամբ է պահանջվում (16-րդ փոփոխություն)",
+   "Քաղաքացիական պարտք է"
+  ],
+  "answers_en": [
+   "Required by law",
+   "All people pay to fund the federal government",
+   "Required by the U.S. Constitution (16th Amendment)",
+   "Civic duty"
+  ],
+  "options_hy": [
+   "18 տարեկան և բարձր քաղաքացիները կարող են քվեարկել",
+   "ԱՄՆ քաղաքացիները",
+   "Օրենքով պահանջվում է",
+   "Խոսքի ազատություն, Կրոնի ազատություն, Հավաքների ազատություն"
+  ],
+  "options_en": [
+   "Citizens eighteen (18) and older (can vote)",
+   "U.S. citizens",
+   "Required by law",
+   "Freedom of speech, Freedom of religion, Freedom of assembly"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 72,
+  "section": "Իրավունքներ և պարտականություններ",
+  "section_en": "Rights and Responsibilities",
+  "q_hy": "Կարևոր է, որ 18-ից 25 տարեկան բոլոր տղամարդիկ գրանցվեն Ընտրովի ծառայության համար։ Անվանեք մեկ պատճառ, թե ինչու",
+  "q_en": "It is important for all men age 18 through 25 to register for the Selective Service. Name one reason why.",
+  "answers_hy": [
+   "Օրենքով պահանջվում է",
+   "Քաղաքացիական պարտք է",
+   "Զորակոչը արդար է դարձնում, եթե պահանջվի"
+  ],
+  "answers_en": [
+   "Required by law",
+   "Civic duty",
+   "Makes the draft fair, if needed"
+  ],
+  "options_hy": [
+   "18 տարեկան և բարձր քաղաքացիները կարող են քվեարկել",
+   "ԱՄՆ քաղաքացիները",
+   "Խոսքի ազատություն, Կրոնի ազատություն, Հավաքների ազատություն",
+   "Օրենքով պահանջվում է"
+  ],
+  "options_en": [
+   "Citizens eighteen (18) and older (can vote)",
+   "U.S. citizens",
+   "Freedom of speech, Freedom of religion, Freedom of assembly",
+   "Required by law"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 73,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Գաղութարարները շատ պատճառներով եկան Ամերիկա։ Անվանեք մեկը",
+  "q_en": "The colonists came to America for many reasons. Name one.",
+  "answers_hy": [
+   "Ազատություն",
+   "Քաղաքական ազատություն",
+   "Կրոնական ազատություն",
+   "Տնտեսական հնարավորություն",
+   "Փախչել հալածանքներից"
+  ],
+  "answers_en": [
+   "Freedom",
+   "Political liberty",
+   "Religious freedom",
+   "Economic opportunity",
+   "Escape persecution"
+  ],
+  "options_hy": [
+   "Ազատություն",
+   "Բնիկ ամերիկացիները",
+   "Աֆրիկացիները",
+   "Ամերիկյան հեղափոխությունը"
+  ],
+  "options_en": [
+   "Freedom",
+   "Native Americans",
+   "Africans",
+   "American Revolution"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 74,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ո՞վ է ապրել Ամերիկայում մինչև եվրոպացիների գալը",
+  "q_en": "Who lived in America before the Europeans arrived?",
+  "answers_hy": [
+   "Բնիկ ամերիկացիները",
+   "Ամերիկայի հնդկացիները"
+  ],
+  "answers_en": [
+   "Native Americans",
+   "American Indians"
+  ],
+  "options_hy": [
+   "Բնիկ ամերիկացիները",
+   "Աֆրիկացիները",
+   "Ամերիկյան հեղափոխությունը",
+   "Բարձր հարկեր"
+  ],
+  "options_en": [
+   "Native Americans",
+   "Africans",
+   "American Revolution",
+   "High taxes"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 75,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Մարդկանց ո՞ր խումբն է բռնի կերպով բերվել և վաճառվել որպես ստրուկ",
+  "q_en": "What group of people was taken and sold as slaves?",
+  "answers_hy": [
+   "Աֆրիկացիները",
+   "Աֆրիկայից մարդիկ"
+  ],
+  "answers_en": [
+   "Africans",
+   "People from Africa"
+  ],
+  "options_hy": [
+   "Ամերիկյան հեղափոխությունը",
+   "Բարձր հարկեր",
+   "Թոմաս Ջեֆերսոնը",
+   "Աֆրիկացիները"
+  ],
+  "options_en": [
+   "American Revolution",
+   "High taxes",
+   "Thomas Jefferson",
+   "Africans"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 76,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ո՞ր պատերազմն են մղել ամերիկացիները Բրիտանիայից անկախություն ստանալու համար",
+  "q_en": "What war did the Americans fight to win independence from Britain?",
+  "answers_hy": [
+   "Ամերիկյան հեղափոխությունը",
+   "Ամերիկյան հեղափոխական պատերազմը",
+   "Ամերիկայի անկախության պատերազմը"
+  ],
+  "answers_en": [
+   "American Revolution",
+   "The American Revolutionary War",
+   "War for American Independence"
+  ],
+  "options_hy": [
+   "Բարձր հարկեր",
+   "Թոմաս Ջեֆերսոնը",
+   "1776 թվականի հուլիսի 4-ին",
+   "Ամերիկյան հեղափոխությունը"
+  ],
+  "options_en": [
+   "High taxes",
+   "Thomas Jefferson",
+   "July 4, 1776",
+   "American Revolution"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 77,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Անվանեք մեկ պատճառ, թե ինչու ամերիկացիները հայտարարեցին անկախություն Բրիտանիայից",
+  "q_en": "Name one reason why the Americans declared independence from Britain.",
+  "answers_hy": [
+   "Բարձր հարկեր",
+   "Հարկում առանց ներկայացվածության",
+   "Բրիտանացի զինվորները մնում էին ամերիկացիների տներում",
+   "Նրանք չունեին ինքնակառավարում",
+   "Բոստոնի կոտորածը",
+   "Բոստոնի թեյախմությունը (Թեյի մասին օրենքը)",
+   "Դրոշմանիշի մասին օրենքը",
+   "Շաքարի մասին օրենքը",
+   "Թաունշենդի օրենքները",
+   "Անտանելի օրենքները"
+  ],
+  "answers_en": [
+   "High taxes",
+   "Taxation without representation",
+   "British soldiers stayed in Americans' houses (boarding, quartering)",
+   "They did not have self-government",
+   "Boston Massacre",
+   "Boston Tea Party (Tea Act)",
+   "Stamp Act",
+   "Sugar Act",
+   "Townshend Acts",
+   "Intolerable (Coercive) Acts"
+  ],
+  "options_hy": [
+   "Թոմաս Ջեֆերսոնը",
+   "Բարձր հարկեր",
+   "1776 թվականի հուլիսի 4-ին",
+   "Բանկեր Հիլի ճակատամարտը"
+  ],
+  "options_en": [
+   "Thomas Jefferson",
+   "High taxes",
+   "July 4, 1776",
+   "Battle of Bunker Hill"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 78,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ո՞վ է գրել Անկախության հռչակագիրը",
+  "q_en": "Who wrote the Declaration of Independence?",
+  "answers_hy": [
+   "Թոմաս Ջեֆերսոնը"
+  ],
+  "answers_en": [
+   "Thomas Jefferson"
+  ],
+  "options_hy": [
+   "1776 թվականի հուլիսի 4-ին",
+   "Թոմաս Ջեֆերսոնը",
+   "Բանկեր Հիլի ճակատամարտը",
+   "Նյու Յորք, Փենսիլվանիա, Վիրջինիա, Մասաչուսեթս, Ջորջիա"
+  ],
+  "options_en": [
+   "July 4, 1776",
+   "Thomas Jefferson",
+   "Battle of Bunker Hill",
+   "New York, Pennsylvania, Virginia, Massachusetts, Georgia"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 79,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ե՞րբ է ընդունվել Անկախության հռչակագիրը",
+  "q_en": "When was the Declaration of Independence adopted?",
+  "answers_hy": [
+   "1776 թվականի հուլիսի 4-ին"
+  ],
+  "answers_en": [
+   "July 4, 1776"
+  ],
+  "options_hy": [
+   "Բանկեր Հիլի ճակատամարտը",
+   "1776 թվականի հուլիսի 4-ին",
+   "Նյու Յորք, Փենսիլվանիա, Վիրջինիա, Մասաչուսեթս, Ջորջիա",
+   "ԱՄՆ Սահմանադրությունը"
+  ],
+  "options_en": [
+   "Battle of Bunker Hill",
+   "July 4, 1776",
+   "New York, Pennsylvania, Virginia, Massachusetts, Georgia",
+   "U.S. Constitution"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 80,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ամերիկյան հեղափոխությունը շատ կարևոր իրադարձություններ ունեցավ։ Անվանեք մեկը",
+  "q_en": "The American Revolution had many important events. Name one.",
+  "answers_hy": [
+   "Բանկեր Հիլի ճակատամարտը",
+   "Անկախության հռչակագիրը",
+   "Վաշինգտոնի անցումը Դելավեր գետով (Թրենթոնի ճակատամարտը)",
+   "Սարատոգայի ճակատամարտը",
+   "Վելի Ֆորջը",
+   "Յորքթաունի ճակատամարտը (բրիտանացիների հանձնումը Յորքթաունում)"
+  ],
+  "answers_en": [
+   "Battle of Bunker Hill",
+   "Declaration of Independence",
+   "Washington Crossing the Delaware (Battle of Trenton)",
+   "Battle of Saratoga",
+   "Valley Forge",
+   "Battle of Yorktown (British surrender at Yorktown)"
+  ],
+  "options_hy": [
+   "Նյու Յորք, Փենսիլվանիա, Վիրջինիա, Մասաչուսեթս, Ջորջիա",
+   "ԱՄՆ Սահմանադրությունը",
+   "Բանկեր Հիլի ճակատամարտը",
+   "Ջեյմս Մեդիսոն"
+  ],
+  "options_en": [
+   "New York, Pennsylvania, Virginia, Massachusetts, Georgia",
+   "U.S. Constitution",
+   "Battle of Bunker Hill",
+   "James Madison"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 81,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Կային 13 սկզբնական նահանգներ։ Անվանեք հինգը",
+  "q_en": "There were 13 original states. Name five.",
+  "answers_hy": [
+   "Նյու Հեմփշիր",
+   "Մասաչուսեթս",
+   "Ռոդ Այլենդ",
+   "Կոնեկտիկուտ",
+   "Նյու Յորք",
+   "Նյու Ջերսի",
+   "Փենսիլվանիա",
+   "Դելավեր",
+   "Մերիլենդ",
+   "Վիրջինիա",
+   "Հյուսիսային Կարոլինա",
+   "Հարավային Կարոլինա",
+   "Ջորջիա"
+  ],
+  "answers_en": [
+   "New Hampshire",
+   "Massachusetts",
+   "Rhode Island",
+   "Connecticut",
+   "New York",
+   "New Jersey",
+   "Pennsylvania",
+   "Delaware",
+   "Maryland",
+   "Virginia",
+   "North Carolina",
+   "South Carolina",
+   "Georgia"
+  ],
+  "options_hy": [
+   "Կալիֆոռնիա, Տեխաս, Ֆլորիդա, Օհայո, Արիզոնա",
+   "Ալյասկա, Հավայի, Միչիգան, Օրեգոն, Նևադա",
+   "Նյու Յորք, Փենսիլվանիա, Վիրջինիա, Մասաչուսեթս, Ջորջիա",
+   "Տեխաս, Կալիֆոռնիա, Իլինոյս, Վաշինգտոն, Կոլորադո"
+  ],
+  "options_en": [
+   "California, Texas, Florida, Ohio, Arizona",
+   "Alaska, Hawaii, Michigan, Oregon, Nevada",
+   "New York, Pennsylvania, Virginia, Massachusetts, Georgia",
+   "Texas, California, Illinois, Washington, Colorado"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 82,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ո՞ր հիմնադիր փաստաթուղթն է գրվել 1787 թվականին",
+  "q_en": "What founding document was written in 1787?",
+  "answers_hy": [
+   "ԱՄՆ Սահմանադրությունը"
+  ],
+  "answers_en": [
+   "U.S. Constitution"
+  ],
+  "options_hy": [
+   "Ջեյմս Մեդիսոն",
+   "Նրանք օգնեցին մարդկանց հասկանալ ԱՄՆ Սահմանադրությունը",
+   "ԱՄՆ Սահմանադրությունը",
+   "Հիմնել է առաջին անվճար հանրային գրադարանները"
+  ],
+  "options_en": [
+   "James Madison",
+   "They helped people understand the U.S. Constitution.",
+   "U.S. Constitution",
+   "Founded the first free public libraries"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 83,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "«Ֆեդերալիստի» հոդվածները պաշտպանում էին ԱՄՆ Սահմանադրության ընդունումը։ Անվանեք հեղինակներից մեկին",
+  "q_en": "The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.",
+  "answers_hy": [
+   "Ջեյմս Մեդիսոն",
+   "Ալեքսանդր Համիլտոն",
+   "Ջոն Ջեյ",
+   "Պուբլիուս"
+  ],
+  "answers_en": [
+   "James Madison",
+   "Alexander Hamilton",
+   "John Jay",
+   "Publius"
+  ],
+  "options_hy": [
+   "Նրանք օգնեցին մարդկանց հասկանալ ԱՄՆ Սահմանադրությունը",
+   "Ջեյմս Մեդիսոն",
+   "Հիմնել է առաջին անվճար հանրային գրադարանները",
+   "«Մեր երկրի հայրը»"
+  ],
+  "options_en": [
+   "They helped people understand the U.S. Constitution.",
+   "James Madison",
+   "Founded the first free public libraries",
+   "“Father of Our Country”"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 84,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ինչո՞ւ էին կարևոր «Ֆեդերալիստի» հոդվածները",
+  "q_en": "Why were the Federalist Papers important?",
+  "answers_hy": [
+   "Նրանք օգնեցին մարդկանց հասկանալ ԱՄՆ Սահմանադրությունը",
+   "Նրանք պաշտպանում էին ԱՄՆ Սահմանադրության ընդունումը"
+  ],
+  "answers_en": [
+   "They helped people understand the U.S. Constitution.",
+   "They supported passing the U.S. Constitution."
+  ],
+  "options_hy": [
+   "Նրանք օգնեցին մարդկանց հասկանալ ԱՄՆ Սահմանադրությունը",
+   "Հիմնել է առաջին անվճար հանրային գրադարանները",
+   "«Մեր երկրի հայրը»",
+   "Անկախության հռչակագրի հեղինակը"
+  ],
+  "options_en": [
+   "They helped people understand the U.S. Constitution.",
+   "Founded the first free public libraries",
+   "“Father of Our Country”",
+   "Writer of the Declaration of Independence"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 85,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Բենջամին Ֆրանկլինը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "Benjamin Franklin is famous for many things. Name one.",
+  "answers_hy": [
+   "Հիմնել է առաջին անվճար հանրային գրադարանները",
+   "Միացյալ Նահանգների առաջին գլխավոր փոստապետը",
+   "Օգնել է գրել Անկախության հռչակագիրը",
+   "Գյուտարար",
+   "ԱՄՆ դիվանագետ"
+  ],
+  "answers_en": [
+   "Founded the first free public libraries",
+   "First Postmaster General of the United States",
+   "Helped write the Declaration of Independence",
+   "Inventor",
+   "U.S. diplomat"
+  ],
+  "options_hy": [
+   "«Մեր երկրի հայրը»",
+   "Անկախության հռչակագրի հեղինակը",
+   "«Սահմանադրության հայրը»",
+   "Հիմնել է առաջին անվճար հանրային գրադարանները"
+  ],
+  "options_en": [
+   "“Father of Our Country”",
+   "Writer of the Declaration of Independence",
+   "“Father of the Constitution”",
+   "Founded the first free public libraries"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 86,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ջորջ Վաշինգտոնը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "George Washington is famous for many things. Name one.",
+  "answers_hy": [
+   "«Մեր երկրի հայրը»",
+   "Միացյալ Նահանգների առաջին նախագահը",
+   "Մայրցամաքային բանակի գեներալը",
+   "Սահմանադրական համագումարի նախագահը"
+  ],
+  "answers_en": [
+   "“Father of Our Country”",
+   "First president of the United States",
+   "General of the Continental Army",
+   "President of the Constitutional Convention"
+  ],
+  "options_hy": [
+   "«Մեր երկրի հայրը»",
+   "Անկախության հռչակագրի հեղինակը",
+   "«Սահմանադրության հայրը»",
+   "Ֆինանսների առաջին նախարարը"
+  ],
+  "options_en": [
+   "“Father of Our Country”",
+   "Writer of the Declaration of Independence",
+   "“Father of the Constitution”",
+   "First Secretary of the Treasury"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 87,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Թոմաս Ջեֆերսոնը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "Thomas Jefferson is famous for many things. Name one.",
+  "answers_hy": [
+   "Անկախության հռչակագրի հեղինակը",
+   "Միացյալ Նահանգների երրորդ նախագահը",
+   "Կրկնապատկել է Միացյալ Նահանգների չափը (Լուիզիանայի գնումը)",
+   "Առաջին պետքարտուղարը",
+   "Հիմնել է Վիրջինիայի համալսարանը",
+   "Վիրջինիայի կրոնական ազատության օրենքի հեղինակը"
+  ],
+  "answers_en": [
+   "Writer of the Declaration of Independence",
+   "Third president of the United States",
+   "Doubled the size of the United States (Louisiana Purchase)",
+   "First Secretary of State",
+   "Founded the University of Virginia",
+   "Writer of the Virginia Statute on Religious Freedom"
+  ],
+  "options_hy": [
+   "«Սահմանադրության հայրը»",
+   "Ֆինանսների առաջին նախարարը",
+   "Ազատություն",
+   "Անկախության հռչակագրի հեղինակը"
+  ],
+  "options_en": [
+   "“Father of the Constitution”",
+   "First Secretary of the Treasury",
+   "Freedom",
+   "Writer of the Declaration of Independence"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 88,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ջեյմս Մեդիսոնը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "James Madison is famous for many things. Name one.",
+  "answers_hy": [
+   "«Սահմանադրության հայրը»",
+   "Միացյալ Նահանգների չորրորդ նախագահը",
+   "Նախագահ է եղել 1812 թվականի պատերազմի ժամանակ",
+   "«Ֆեդերալիստի» հոդվածների հեղինակներից մեկը"
+  ],
+  "answers_en": [
+   "“Father of the Constitution”",
+   "Fourth president of the United States",
+   "President during the War of 1812",
+   "One of the writers of the Federalist Papers"
+  ],
+  "options_hy": [
+   "Ֆինանսների առաջին նախարարը",
+   "«Սահմանադրության հայրը»",
+   "Ազատություն",
+   "Բնիկ ամերիկացիները"
+  ],
+  "options_en": [
+   "First Secretary of the Treasury",
+   "“Father of the Constitution”",
+   "Freedom",
+   "Native Americans"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 89,
+  "section": "Գաղութային շրջան և անկախություն",
+  "section_en": "Colonial Period and Independence",
+  "q_hy": "Ալեքսանդր Համիլտոնը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "Alexander Hamilton is famous for many things. Name one.",
+  "answers_hy": [
+   "Ֆինանսների առաջին նախարարը",
+   "«Ֆեդերալիստի» հոդվածների հեղինակներից մեկը",
+   "Օգնել է հիմնել Միացյալ Նահանգների առաջին բանկը",
+   "Գեներալ Ջորջ Վաշինգտոնի օգնականը",
+   "Մայրցամաքային կոնգրեսի անդամ"
+  ],
+  "answers_en": [
+   "First Secretary of the Treasury",
+   "One of the writers of the Federalist Papers",
+   "Helped establish the First Bank of the United States",
+   "Aide to General George Washington",
+   "Member of the Continental Congress"
+  ],
+  "options_hy": [
+   "Ազատություն",
+   "Բնիկ ամերիկացիները",
+   "Ֆինանսների առաջին նախարարը",
+   "Աֆրիկացիները"
+  ],
+  "options_en": [
+   "Freedom",
+   "Native Americans",
+   "First Secretary of the Treasury",
+   "Africans"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 90,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Ո՞ր տարածքն է Միացյալ Նահանգները գնել Ֆրանսիայից 1803 թվականին",
+  "q_en": "What territory did the United States buy from France in 1803?",
+  "answers_hy": [
+   "Լուիզիանայի տարածքը",
+   "Լուիզիանան"
+  ],
+  "answers_en": [
+   "Louisiana Territory",
+   "Louisiana"
+  ],
+  "options_hy": [
+   "1812 թվականի պատերազմը",
+   "Քաղաքացիական պատերազմը",
+   "Ֆորտ Սամթերի ճակատամարտը",
+   "Լուիզիանայի տարածքը"
+  ],
+  "options_en": [
+   "War of 1812",
+   "Civil War",
+   "Battle of Fort Sumter",
+   "Louisiana Territory"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 91,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Անվանեք մեկ պատերազմ, որը Միացյալ Նահանգները մղել է 1800-ական թվականներին",
+  "q_en": "Name one war fought by the United States in the 1800s.",
+  "answers_hy": [
+   "1812 թվականի պատերազմը",
+   "Մեքսիկա-ամերիկյան պատերազմը",
+   "Քաղաքացիական պատերազմը",
+   "Իսպանա-ամերիկյան պատերազմը"
+  ],
+  "answers_en": [
+   "War of 1812",
+   "Mexican-American War",
+   "Civil War",
+   "Spanish-American War"
+  ],
+  "options_hy": [
+   "1812 թվականի պատերազմը",
+   "Քաղաքացիական պատերազմը",
+   "Ֆորտ Սամթերի ճակատամարտը",
+   "Ազատել է ստրուկներին (Ազատագրման հռչակագիրը)"
+  ],
+  "options_en": [
+   "War of 1812",
+   "Civil War",
+   "Battle of Fort Sumter",
+   "Freed the slaves (Emancipation Proclamation)"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 92,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Անվանեք ԱՄՆ պատերազմը Հյուսիսի և Հարավի միջև",
+  "q_en": "Name the U.S. war between the North and the South.",
+  "answers_hy": [
+   "Քաղաքացիական պատերազմը"
+  ],
+  "answers_en": [
+   "The Civil War"
+  ],
+  "options_hy": [
+   "Քաղաքացիական պատերազմը",
+   "Ֆորտ Սամթերի ճակատամարտը",
+   "Ազատել է ստրուկներին (Ազատագրման հռչակագիրը)",
+   "Ազատել է ստրուկներին"
+  ],
+  "options_en": [
+   "The Civil War",
+   "Battle of Fort Sumter",
+   "Freed the slaves (Emancipation Proclamation)",
+   "Freed the slaves"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 93,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Քաղաքացիական պատերազմը շատ կարևոր իրադարձություններ ունեցավ։ Անվանեք մեկը",
+  "q_en": "The Civil War had many important events. Name one.",
+  "answers_hy": [
+   "Ֆորտ Սամթերի ճակատամարտը",
+   "Ազատագրման հռչակագիրը",
+   "Վիկսբուրգի ճակատամարտը",
+   "Գետիսբուրգի ճակատամարտը",
+   "Շերմանի արշավը",
+   "Հանձնումը Ապոմատոքսում",
+   "Անտիտեմի ճակատամարտը",
+   "Լինքոլնը սպանվեց"
+  ],
+  "answers_en": [
+   "Battle of Fort Sumter",
+   "Emancipation Proclamation",
+   "Battle of Vicksburg",
+   "Battle of Gettysburg",
+   "Sherman's March",
+   "Surrender at Appomattox",
+   "Battle of Antietam",
+   "Lincoln was assassinated."
+  ],
+  "options_hy": [
+   "Ազատել է ստրուկներին (Ազատագրման հռչակագիրը)",
+   "Ազատել է ստրուկներին",
+   "Ֆորտ Սամթերի ճակատամարտը",
+   "Քաղաքացիական պատերազմը"
+  ],
+  "options_en": [
+   "Freed the slaves (Emancipation Proclamation)",
+   "Freed the slaves",
+   "Battle of Fort Sumter",
+   "Civil War"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 94,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Աբրահամ Լինքոլնը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "Abraham Lincoln is famous for many things. Name one.",
+  "answers_hy": [
+   "Ազատել է ստրուկներին (Ազատագրման հռչակագիրը)",
+   "Պահպանել է Միությունը",
+   "Ղեկավարել է Միացյալ Նահանգները Քաղաքացիական պատերազմի ժամանակ",
+   "Միացյալ Նահանգների 16-րդ նախագահը",
+   "Արտասանել է Գետիսբուրգի ճառը"
+  ],
+  "answers_en": [
+   "Freed the slaves (Emancipation Proclamation)",
+   "Saved (or preserved) the Union",
+   "Led the United States during the Civil War",
+   "16th president of the United States",
+   "Delivered the Gettysburg Address"
+  ],
+  "options_hy": [
+   "Ազատել է ստրուկներին",
+   "Ազատել է ստրուկներին (Ազատագրման հռչակագիրը)",
+   "Քաղաքացիական պատերազմը",
+   "14-րդ փոփոխությունը"
+  ],
+  "options_en": [
+   "Freed the slaves",
+   "Freed the slaves (Emancipation Proclamation)",
+   "Civil War",
+   "14th Amendment"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 95,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Ի՞նչ արեց Ազատագրման հռչակագիրը",
+  "q_en": "What did the Emancipation Proclamation do?",
+  "answers_hy": [
+   "Ազատել է ստրուկներին",
+   "Ազատել է Համադաշնակցության ստրուկներին",
+   "Ազատել է Համադաշնակցության նահանգների ստրուկներին",
+   "Ազատել է հարավային նահանգների մեծ մասի ստրուկներին"
+  ],
+  "answers_en": [
+   "Freed the slaves",
+   "Freed slaves in the Confederacy",
+   "Freed slaves in the Confederate states",
+   "Freed slaves in most Southern states"
+  ],
+  "options_hy": [
+   "Քաղաքացիական պատերազմը",
+   "Ազատել է ստրուկներին",
+   "14-րդ փոփոխությունը",
+   "Քաղաքացիական պատերազմից հետո"
+  ],
+  "options_en": [
+   "Civil War",
+   "Freed the slaves",
+   "14th Amendment",
+   "After the Civil War"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 96,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Ո՞ր ԱՄՆ պատերազմն ավարտեց ստրկությունը",
+  "q_en": "What U.S. war ended slavery?",
+  "answers_hy": [
+   "Քաղաքացիական պատերազմը"
+  ],
+  "answers_en": [
+   "The Civil War"
+  ],
+  "options_hy": [
+   "14-րդ փոփոխությունը",
+   "Քաղաքացիական պատերազմից հետո",
+   "Քաղաքացիական պատերազմը",
+   "Սյուզան Բ. Էնթոնի"
+  ],
+  "options_en": [
+   "14th Amendment",
+   "After the Civil War",
+   "The Civil War",
+   "Susan B. Anthony"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 97,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Ո՞ր փոփոխությունն է ասում, որ Միացյալ Նահանգներում ծնված կամ քաղաքացիություն ստացած բոլոր անձինք ԱՄՆ քաղաքացիներ են",
+  "q_en": "What amendment says all persons born or naturalized in the United States, and subject to the jurisdiction thereof, are U.S. citizens?",
+  "answers_hy": [
+   "14-րդ փոփոխությունը"
+  ],
+  "answers_en": [
+   "14th Amendment"
+  ],
+  "options_hy": [
+   "14-րդ փոփոխությունը",
+   "Քաղաքացիական պատերազմից հետո",
+   "Սյուզան Բ. Էնթոնի",
+   "Լուիզիանայի տարածքը"
+  ],
+  "options_en": [
+   "14th Amendment",
+   "After the Civil War",
+   "Susan B. Anthony",
+   "Louisiana Territory"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 98,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Ե՞րբ են բոլոր տղամարդիկ ստացել քվեարկելու իրավունք",
+  "q_en": "When did all men get the right to vote?",
+  "answers_hy": [
+   "Քաղաքացիական պատերազմից հետո",
+   "Վերակառուցման շրջանում",
+   "15-րդ փոփոխությամբ",
+   "1870 թվականին"
+  ],
+  "answers_en": [
+   "After the Civil War",
+   "During Reconstruction",
+   "With the 15th Amendment",
+   "1870"
+  ],
+  "options_hy": [
+   "Սյուզան Բ. Էնթոնի",
+   "Լուիզիանայի տարածքը",
+   "1812 թվականի պատերազմը",
+   "Քաղաքացիական պատերազմից հետո"
+  ],
+  "options_en": [
+   "Susan B. Anthony",
+   "Louisiana Territory",
+   "War of 1812",
+   "After the Civil War"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 99,
+  "section": "1800-ական թվականներ",
+  "section_en": "The 1800s",
+  "q_hy": "Անվանեք 1800-ական թվականների կանանց իրավունքների շարժման մեկ առաջնորդի",
+  "q_en": "Name one leader of the women's rights movement in the 1800s.",
+  "answers_hy": [
+   "Սյուզան Բ. Էնթոնի",
+   "Էլիզաբեթ Քեդի Ստենթոն",
+   "Սոջորներ Թրութ",
+   "Հարրիեթ Թաբմեն",
+   "Լուկրեցիա Մոթ",
+   "Լյուսի Սթոուն"
+  ],
+  "answers_en": [
+   "Susan B. Anthony",
+   "Elizabeth Cady Stanton",
+   "Sojourner Truth",
+   "Harriet Tubman",
+   "Lucretia Mott",
+   "Lucy Stone"
+  ],
+  "options_hy": [
+   "Սյուզան Բ. Էնթոնի",
+   "Լուիզիանայի տարածքը",
+   "1812 թվականի պատերազմը",
+   "Քաղաքացիական պատերազմը"
+  ],
+  "options_en": [
+   "Susan B. Anthony",
+   "Louisiana Territory",
+   "War of 1812",
+   "Civil War"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 100,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Անվանեք մեկ պատերազմ, որը Միացյալ Նահանգները մղել է 1900-ական թվականներին",
+  "q_en": "Name one war fought by the United States in the 1900s.",
+  "answers_hy": [
+   "Առաջին համաշխարհային պատերազմը",
+   "Երկրորդ համաշխարհային պատերազմը",
+   "Կորեական պատերազմը",
+   "Վիետնամի պատերազմը",
+   "Պարսից ծոցի պատերազմը"
+  ],
+  "answers_en": [
+   "World War I",
+   "World War II",
+   "Korean War",
+   "Vietnam War",
+   "(Persian) Gulf War"
+  ],
+  "options_hy": [
+   "Որովհետև Գերմանիան հարձակվել էր ամերիկյան քաղաքացիական նավերի վրա",
+   "Առաջին համաշխարհային պատերազմը",
+   "1920 թվականին",
+   "Ժամանակակից պատմության ամենաերկար տնտեսական անկումը"
+  ],
+  "options_en": [
+   "Because Germany attacked U.S. (civilian) ships",
+   "World War I",
+   "1920",
+   "Longest economic recession in modern history"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 101,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ինչո՞ւ Միացյալ Նահանգները մտավ Առաջին համաշխարհային պատերազմ",
+  "q_en": "Why did the United States enter World War I?",
+  "answers_hy": [
+   "Որովհետև Գերմանիան հարձակվել էր ամերիկյան քաղաքացիական նավերի վրա",
+   "Աջակցելու դաշնակից տերություններին (Անգլիա, Ֆրանսիա, Իտալիա և Ռուսաստան)",
+   "Դեմ լինելու կենտրոնական տերություններին (Գերմանիա, Ավստրո-Հունգարիա, Օսմանյան կայսրություն և Բուլղարիա)"
+  ],
+  "answers_en": [
+   "Because Germany attacked U.S. (civilian) ships",
+   "To support the Allied Powers (England, France, Italy, and Russia)",
+   "To oppose the Central Powers (Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria)"
+  ],
+  "options_hy": [
+   "Որովհետև Գերմանիան հարձակվել էր ամերիկյան քաղաքացիական նավերի վրա",
+   "1920 թվականին",
+   "Ժամանակակից պատմության ամենաերկար տնտեսական անկումը",
+   "1929 թվականի Մեծ փլուզումը"
+  ],
+  "options_en": [
+   "Because Germany attacked U.S. (civilian) ships",
+   "1920",
+   "Longest economic recession in modern history",
+   "The Great Crash (1929)"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 102,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ե՞րբ են բոլոր կանայք ստացել քվեարկելու իրավունք",
+  "q_en": "When did all women get the right to vote?",
+  "answers_hy": [
+   "1920 թվականին",
+   "Առաջին համաշխարհային պատերազմից հետո",
+   "19-րդ փոփոխությամբ"
+  ],
+  "answers_en": [
+   "1920",
+   "After World War I",
+   "With the 19th Amendment"
+  ],
+  "options_hy": [
+   "Ժամանակակից պատմության ամենաերկար տնտեսական անկումը",
+   "1920 թվականին",
+   "1929 թվականի Մեծ փլուզումը",
+   "Ֆրանկլին Ռուզվելտը"
+  ],
+  "options_en": [
+   "Longest economic recession in modern history",
+   "1920",
+   "The Great Crash (1929)",
+   "Franklin Roosevelt"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 103,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ի՞նչ էր Մեծ ճգնաժամը",
+  "q_en": "What was the Great Depression?",
+  "answers_hy": [
+   "Ժամանակակից պատմության ամենաերկար տնտեսական անկումը"
+  ],
+  "answers_en": [
+   "Longest economic recession in modern history"
+  ],
+  "options_hy": [
+   "1929 թվականի Մեծ փլուզումը",
+   "Ֆրանկլին Ռուզվելտը",
+   "Ժամանակակից պատմության ամենաերկար տնտեսական անկումը",
+   "Պերլ Հարբորի ռմբակոծման պատճառով"
+  ],
+  "options_en": [
+   "The Great Crash (1929)",
+   "Franklin Roosevelt",
+   "Longest economic recession in modern history",
+   "Bombing of Pearl Harbor"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 104,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ե՞րբ է սկսվել Մեծ ճգնաժամը",
+  "q_en": "When did the Great Depression start?",
+  "answers_hy": [
+   "1929 թվականի Մեծ փլուզումը",
+   "1929 թվականի ֆոնդային շուկայի փլուզումը"
+  ],
+  "answers_en": [
+   "The Great Crash (1929)",
+   "Stock market crash of 1929"
+  ],
+  "options_hy": [
+   "Ֆրանկլին Ռուզվելտը",
+   "Պերլ Հարբորի ռմբակոծման պատճառով",
+   "Գեներալ է եղել Երկրորդ համաշխարհային պատերազմի ժամանակ",
+   "1929 թվականի Մեծ փլուզումը"
+  ],
+  "options_en": [
+   "Franklin Roosevelt",
+   "Bombing of Pearl Harbor",
+   "General during World War II",
+   "The Great Crash (1929)"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 105,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ո՞վ էր նախագահը Մեծ ճգնաժամի և Երկրորդ համաշխարհային պատերազմի ժամանակ",
+  "q_en": "Who was president during the Great Depression and World War II?",
+  "answers_hy": [
+   "Ֆրանկլին Ռուզվելտը"
+  ],
+  "answers_en": [
+   "Franklin Roosevelt"
+  ],
+  "options_hy": [
+   "Պերլ Հարբորի ռմբակոծման պատճառով",
+   "Գեներալ է եղել Երկրորդ համաշխարհային պատերազմի ժամանակ",
+   "Խորհրդային Միությունը",
+   "Ֆրանկլին Ռուզվելտը"
+  ],
+  "options_en": [
+   "Bombing of Pearl Harbor",
+   "General during World War II",
+   "Soviet Union",
+   "Franklin Roosevelt"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 106,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ինչո՞ւ Միացյալ Նահանգները մտավ Երկրորդ համաշխարհային պատերազմ",
+  "q_en": "Why did the United States enter World War II?",
+  "answers_hy": [
+   "Պերլ Հարբորի ռմբակոծման պատճառով",
+   "Ճապոնացիները հարձակվեցին Պերլ Հարբորի վրա",
+   "Աջակցելու դաշնակից տերություններին (Անգլիա, Ֆրանսիա և Ռուսաստան)",
+   "Դեմ լինելու առանցքի տերություններին (Գերմանիա, Իտալիա և Ճապոնիա)"
+  ],
+  "answers_en": [
+   "Bombing of Pearl Harbor",
+   "Japanese attacked Pearl Harbor",
+   "To support the Allied Powers (England, France, and Russia)",
+   "To oppose the Axis Powers (Germany, Italy, and Japan)"
+  ],
+  "options_hy": [
+   "Պերլ Հարբորի ռմբակոծման պատճառով",
+   "Գեներալ է եղել Երկրորդ համաշխարհային պատերազմի ժամանակ",
+   "Խորհրդային Միությունը",
+   "Կոմունիզմը"
+  ],
+  "options_en": [
+   "Bombing of Pearl Harbor",
+   "General during World War II",
+   "Soviet Union",
+   "Communism"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 107,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Դուայթ Էյզենհաուերը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "Dwight Eisenhower is famous for many things. Name one.",
+  "answers_hy": [
+   "Գեներալ է եղել Երկրորդ համաշխարհային պատերազմի ժամանակ",
+   "Նախագահ է եղել Կորեական պատերազմի վերջում",
+   "Միացյալ Նահանգների 34-րդ նախագահը",
+   "Ստորագրել է 1956 թվականի դաշնային մայրուղիների օրենքը (ստեղծել է միջնահանգային համակարգը)"
+  ],
+  "answers_en": [
+   "General during World War II",
+   "President at the end of (during) the Korean War",
+   "34th president of the United States",
+   "Signed the Federal-Aid Highway Act of 1956 (Created the Interstate System)"
+  ],
+  "options_hy": [
+   "Գեներալ է եղել Երկրորդ համաշխարհային պատերազմի ժամանակ",
+   "Խորհրդային Միությունը",
+   "Կոմունիզմը",
+   "Կասեցնելու կոմունիզմի տարածումը"
+  ],
+  "options_en": [
+   "General during World War II",
+   "Soviet Union",
+   "Communism",
+   "To stop the spread of communism"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 108,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ո՞վ էր Միացյալ Նահանգների գլխավոր մրցակիցը Սառը պատերազմի ժամանակ",
+  "q_en": "Who was the United States' main rival during the Cold War?",
+  "answers_hy": [
+   "Խորհրդային Միությունը",
+   "ԽՍՀՄ-ը",
+   "Ռուսաստանը"
+  ],
+  "answers_en": [
+   "Soviet Union",
+   "USSR",
+   "Russia"
+  ],
+  "options_hy": [
+   "Կոմունիզմը",
+   "Կասեցնելու կոմունիզմի տարածումը",
+   "Պայքարում էր ռասայական խտրականությունը վերացնելու համար",
+   "Խորհրդային Միությունը"
+  ],
+  "options_en": [
+   "Communism",
+   "To stop the spread of communism",
+   "Fought to end racial discrimination",
+   "Soviet Union"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 109,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Սառը պատերազմի ժամանակ ո՞րն էր Միացյալ Նահանգների գլխավոր մտահոգություններից մեկը",
+  "q_en": "During the Cold War, what was one main concern of the United States?",
+  "answers_hy": [
+   "Կոմունիզմը",
+   "Միջուկային պատերազմը"
+  ],
+  "answers_en": [
+   "Communism",
+   "Nuclear war"
+  ],
+  "options_hy": [
+   "Կասեցնելու կոմունիզմի տարածումը",
+   "Կոմունիզմը",
+   "Պայքարում էր ռասայական խտրականությունը վերացնելու համար",
+   "Պայքարել է քաղաքացիական իրավունքների համար"
+  ],
+  "options_en": [
+   "To stop the spread of communism",
+   "Communism",
+   "Fought to end racial discrimination",
+   "Fought for civil rights"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 110,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ինչո՞ւ Միացյալ Նահանգները մտավ Կորեական պատերազմ",
+  "q_en": "Why did the United States enter the Korean War?",
+  "answers_hy": [
+   "Կասեցնելու կոմունիզմի տարածումը"
+  ],
+  "answers_en": [
+   "To stop the spread of communism"
+  ],
+  "options_hy": [
+   "Պայքարում էր ռասայական խտրականությունը վերացնելու համար",
+   "Պայքարել է քաղաքացիական իրավունքների համար",
+   "Կասեցնելու կոմունիզմի տարածումը",
+   "Որպեսզի իրաքյան զորքը դուրս բերի Քուվեյթից"
+  ],
+  "options_en": [
+   "Fought to end racial discrimination",
+   "Fought for civil rights",
+   "To stop the spread of communism",
+   "To force the Iraqi military from Kuwait"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 111,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ինչո՞ւ Միացյալ Նահանգները մտավ Վիետնամի պատերազմ",
+  "q_en": "Why did the United States enter the Vietnam War?",
+  "answers_hy": [
+   "Կասեցնելու կոմունիզմի տարածումը"
+  ],
+  "answers_en": [
+   "To stop the spread of communism"
+  ],
+  "options_hy": [
+   "Կասեցնելու կոմունիզմի տարածումը",
+   "Պայքարում էր ռասայական խտրականությունը վերացնելու համար",
+   "Պայքարել է քաղաքացիական իրավունքների համար",
+   "Որպեսզի իրաքյան զորքը դուրս բերի Քուվեյթից"
+  ],
+  "options_en": [
+   "To stop the spread of communism",
+   "Fought to end racial discrimination",
+   "Fought for civil rights",
+   "To force the Iraqi military from Kuwait"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 112,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ի՞նչ արեց քաղաքացիական իրավունքների շարժումը",
+  "q_en": "What did the civil rights movement do?",
+  "answers_hy": [
+   "Պայքարում էր ռասայական խտրականությունը վերացնելու համար"
+  ],
+  "answers_en": [
+   "Fought to end racial discrimination"
+  ],
+  "options_hy": [
+   "Պայքարել է քաղաքացիական իրավունքների համար",
+   "Որպեսզի իրաքյան զորքը դուրս բերի Քուվեյթից",
+   "Ահաբեկիչները հարձակվեցին Միացյալ Նահանգների վրա",
+   "Պայքարում էր ռասայական խտրականությունը վերացնելու համար"
+  ],
+  "options_en": [
+   "Fought for civil rights",
+   "To force the Iraqi military from Kuwait",
+   "Terrorists attacked the United States",
+   "Fought to end racial discrimination"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 113,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Մարտին Լյութեր Քինգ կրտսերը հայտնի է շատ բաներով։ Անվանեք մեկը",
+  "q_en": "Martin Luther King, Jr. is famous for many things. Name one.",
+  "answers_hy": [
+   "Պայքարել է քաղաքացիական իրավունքների համար",
+   "Աշխատել է բոլոր ամերիկացիների հավասարության համար",
+   "Աշխատել է, որ մարդկանց չդատեն մաշկի գույնով, այլ բնավորության բովանդակությամբ"
+  ],
+  "answers_en": [
+   "Fought for civil rights",
+   "Worked for equality for all Americans",
+   "Worked to ensure that people would “not be judged by the color of their skin, but by the content of their character”"
+  ],
+  "options_hy": [
+   "Պայքարել է քաղաքացիական իրավունքների համար",
+   "Որպեսզի իրաքյան զորքը դուրս բերի Քուվեյթից",
+   "Ահաբեկիչները հարձակվեցին Միացյալ Նահանգների վրա",
+   "Ահաբեկչության դեմ գլոբալ պատերազմը"
+  ],
+  "options_en": [
+   "Fought for civil rights",
+   "To force the Iraqi military from Kuwait",
+   "Terrorists attacked the United States",
+   "(Global) War on Terror"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 114,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ինչո՞ւ Միացյալ Նահանգները մտավ Պարսից ծոցի պատերազմ",
+  "q_en": "Why did the United States enter the Persian Gulf War?",
+  "answers_hy": [
+   "Որպեսզի իրաքյան զորքը դուրս բերի Քուվեյթից"
+  ],
+  "answers_en": [
+   "To force the Iraqi military from Kuwait"
+  ],
+  "options_hy": [
+   "Ահաբեկիչները հարձակվեցին Միացյալ Նահանգների վրա",
+   "Որպեսզի իրաքյան զորքը դուրս բերի Քուվեյթից",
+   "Ահաբեկչության դեմ գլոբալ պատերազմը",
+   "Չերոկի"
+  ],
+  "options_en": [
+   "Terrorists attacked the United States",
+   "To force the Iraqi military from Kuwait",
+   "(Global) War on Terror",
+   "Cherokee"
+  ],
+  "correctIndex": 1
+ },
+ {
+  "id": 115,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Ո՞ր խոշոր իրադարձությունն է տեղի ունեցել 2001 թվականի սեպտեմբերի 11-ին Միացյալ Նահանգներում",
+  "q_en": "What major event happened on September 11, 2001 in the United States?",
+  "answers_hy": [
+   "Ահաբեկիչները հարձակվեցին Միացյալ Նահանգների վրա",
+   "Ահաբեկիչները գրավեցին երկու ինքնաթիռ և բախվեցին Նյու Յորքի Համաշխարհային առևտրի կենտրոնին",
+   "Ահաբեկիչները գրավեցին ինքնաթիռ և բախվեցին Վիրջինիայի Արլինգտոնի Պենտագոնին",
+   "Ահաբեկիչները գրավեցին ինքնաթիռ, որը ուղղված էր Վաշինգտոն և վթարվեց Փենսիլվանիայի դաշտում"
+  ],
+  "answers_en": [
+   "Terrorists attacked the United States",
+   "Terrorists took over two planes and crashed them into the World Trade Center in New York City",
+   "Terrorists took over a plane and crashed into the Pentagon in Arlington, Virginia",
+   "Terrorists took over a plane originally aimed at Washington, D.C., and crashed in a field in Pennsylvania"
+  ],
+  "options_hy": [
+   "Ահաբեկիչները հարձակվեցին Միացյալ Նահանգների վրա",
+   "Ահաբեկչության դեմ գլոբալ պատերազմը",
+   "Չերոկի",
+   "Էլեկտրական լամպը"
+  ],
+  "options_en": [
+   "Terrorists attacked the United States",
+   "(Global) War on Terror",
+   "Cherokee",
+   "Light bulb"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 116,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Անվանեք ԱՄՆ մեկ ռազմական հակամարտություն 2001 թվականի սեպտեմբերի 11-ի հարձակումներից հետո",
+  "q_en": "Name one U.S. military conflict after the September 11, 2001 attacks.",
+  "answers_hy": [
+   "Ահաբեկչության դեմ գլոբալ պատերազմը",
+   "Աֆղանստանի պատերազմը",
+   "Իրաքի պատերազմը"
+  ],
+  "answers_en": [
+   "(Global) War on Terror",
+   "War in Afghanistan",
+   "War in Iraq"
+  ],
+  "options_hy": [
+   "Չերոկի",
+   "Էլեկտրական լամպը",
+   "Ահաբեկչության դեմ գլոբալ պատերազմը",
+   "Առաջին համաշխարհային պատերազմը"
+  ],
+  "options_en": [
+   "Cherokee",
+   "Light bulb",
+   "(Global) War on Terror",
+   "World War I"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 117,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Անվանեք Միացյալ Նահանգների հնդկացիական մեկ ցեղ",
+  "q_en": "Name one American Indian tribe in the United States.",
+  "answers_hy": [
+   "Ապաչի",
+   "Բլեքֆիթ",
+   "Կայուգա",
+   "Չերոկի",
+   "Շեյեն",
+   "Չիպևա",
+   "Չոկտո",
+   "Կրիկ",
+   "Կրոու",
+   "Հոպի",
+   "Հյուրոն",
+   "Ինուպիատ",
+   "Լակոտա",
+   "Մոհավք",
+   "Մոհիգան",
+   "Նավահո",
+   "Օնեյդա",
+   "Օնոնդագա",
+   "Պուեբլո",
+   "Սեմինոլ",
+   "Սենեկա",
+   "Շոնի",
+   "Սիու",
+   "Տետոն",
+   "Տուսկարորա"
+  ],
+  "answers_en": [
+   "Apache",
+   "Blackfeet",
+   "Cayuga",
+   "Cherokee",
+   "Cheyenne",
+   "Chippewa",
+   "Choctaw",
+   "Creek",
+   "Crow",
+   "Hopi",
+   "Huron",
+   "Inupiat",
+   "Lakota",
+   "Mohawk",
+   "Mohegan",
+   "Navajo",
+   "Oneida",
+   "Onondaga",
+   "Pueblo",
+   "Seminole",
+   "Seneca",
+   "Shawnee",
+   "Sioux",
+   "Teton",
+   "Tuscarora"
+  ],
+  "options_hy": [
+   "Էլեկտրական լամպը",
+   "Առաջին համաշխարհային պատերազմը",
+   "Որովհետև Գերմանիան հարձակվել էր ամերիկյան քաղաքացիական նավերի վրա",
+   "Չերոկի"
+  ],
+  "options_en": [
+   "Light bulb",
+   "World War I",
+   "Because Germany attacked U.S. (civilian) ships",
+   "Cherokee"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 118,
+  "section": "Նորագույն պատմություն",
+  "section_en": "Recent American History",
+  "q_hy": "Անվանեք ամերիկյան մեկ նորարարության օրինակ",
+  "q_en": "Name one example of an American innovation.",
+  "answers_hy": [
+   "Էլեկտրական լամպը",
+   "Ավտոմեքենան",
+   "Երկնաքերները",
+   "Ինքնաթիռը",
+   "Հավաքման գիծը (կոնվեյերը)",
+   "Լուսնի վրա վայրէջքը",
+   "Ինտեգրալ սխեման (միկրոչիպը)"
+  ],
+  "answers_en": [
+   "Light bulb",
+   "Automobile (cars, internal combustion engine)",
+   "Skyscrapers",
+   "Airplane",
+   "Assembly line",
+   "Landing on the moon",
+   "Integrated circuit (IC)"
+  ],
+  "options_hy": [
+   "Էլեկտրական լամպը",
+   "Առաջին համաշխարհային պատերազմը",
+   "Որովհետև Գերմանիան հարձակվել էր ամերիկյան քաղաքացիական նավերի վրա",
+   "1920 թվականին"
+  ],
+  "options_en": [
+   "Light bulb",
+   "World War I",
+   "Because Germany attacked U.S. (civilian) ships",
+   "1920"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 119,
+  "section": "Խորհրդանիշներ",
+  "section_en": "Symbols",
+  "q_hy": "Ո՞րն է Միացյալ Նահանգների մայրաքաղաքը",
+  "q_en": "What is the capital of the United States?",
+  "answers_hy": [
+   "Վաշինգտոն, Կոլումբիայի շրջան"
+  ],
+  "answers_en": [
+   "Washington, D.C."
+  ],
+  "options_hy": [
+   "Նյու Յորքի նավահանգստում",
+   "Որովհետև կային 13 սկզբնական գաղութներ",
+   "Վաշինգտոն, Կոլումբիայի շրջան",
+   "Որովհետև յուրաքանչյուր նահանգի համար մեկ աստղ կա"
+  ],
+  "options_en": [
+   "New York (Harbor)",
+   "Because there were 13 original colonies",
+   "Washington, D.C.",
+   "Because there is one star for each state"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 120,
+  "section": "Խորհրդանիշներ",
+  "section_en": "Symbols",
+  "q_hy": "Որտե՞ղ է Ազատության արձանը",
+  "q_en": "Where is the Statue of Liberty?",
+  "answers_hy": [
+   "Նյու Յորքի նավահանգստում",
+   "Ազատության կղզում"
+  ],
+  "answers_en": [
+   "New York (Harbor)",
+   "Liberty Island"
+  ],
+  "options_hy": [
+   "Որովհետև կային 13 սկզբնական գաղութներ",
+   "Որովհետև յուրաքանչյուր նահանգի համար մեկ աստղ կա",
+   "«Աստղազարդ դրոշը»",
+   "Նյու Յորքի նավահանգստում"
+  ],
+  "options_en": [
+   "Because there were 13 original colonies",
+   "Because there is one star for each state",
+   "The Star-Spangled Banner",
+   "New York (Harbor)"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 121,
+  "section": "Խորհրդանիշներ",
+  "section_en": "Symbols",
+  "q_hy": "Ինչո՞ւ ունի դրոշը 13 գիծ",
+  "q_en": "Why does the flag have 13 stripes?",
+  "answers_hy": [
+   "Որովհետև կային 13 սկզբնական գաղութներ",
+   "Որովհետև գծերը ներկայացնում են սկզբնական գաղութները"
+  ],
+  "answers_en": [
+   "Because there were 13 original colonies",
+   "Because the stripes represent the original colonies"
+  ],
+  "options_hy": [
+   "Որովհետև յուրաքանչյուր նահանգի համար մեկ աստղ կա",
+   "«Աստղազարդ դրոշը»",
+   "Շատերից՝ մեկ",
+   "Որովհետև կային 13 սկզբնական գաղութներ"
+  ],
+  "options_en": [
+   "Because there is one star for each state",
+   "The Star-Spangled Banner",
+   "Out of many, one",
+   "Because there were 13 original colonies"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 122,
+  "section": "Խորհրդանիշներ",
+  "section_en": "Symbols",
+  "q_hy": "Ինչո՞ւ ունի դրոշը 50 աստղ",
+  "q_en": "Why does the flag have 50 stars?",
+  "answers_hy": [
+   "Որովհետև յուրաքանչյուր նահանգի համար մեկ աստղ կա",
+   "Որովհետև յուրաքանչյուր աստղ ներկայացնում է մեկ նահանգ",
+   "Որովհետև կա 50 նահանգ"
+  ],
+  "answers_en": [
+   "Because there is one star for each state",
+   "Because each star represents a state",
+   "Because there are 50 states"
+  ],
+  "options_hy": [
+   "«Աստղազարդ դրոշը»",
+   "Շատերից՝ մեկ",
+   "Վաշինգտոն, Կոլումբիայի շրջան",
+   "Որովհետև յուրաքանչյուր նահանգի համար մեկ աստղ կա"
+  ],
+  "options_en": [
+   "The Star-Spangled Banner",
+   "Out of many, one",
+   "Washington, D.C.",
+   "Because there is one star for each state"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 123,
+  "section": "Խորհրդանիշներ",
+  "section_en": "Symbols",
+  "q_hy": "Ո՞րն է ազգային օրհներգի անունը",
+  "q_en": "What is the name of the national anthem?",
+  "answers_hy": [
+   "«Աստղազարդ դրոշը»"
+  ],
+  "answers_en": [
+   "The Star-Spangled Banner"
+  ],
+  "options_hy": [
+   "Շատերից՝ մեկ",
+   "Վաշինգտոն, Կոլումբիայի շրջան",
+   "«Աստղազարդ դրոշը»",
+   "Նյու Յորքի նավահանգստում"
+  ],
+  "options_en": [
+   "Out of many, one",
+   "Washington, D.C.",
+   "The Star-Spangled Banner",
+   "New York (Harbor)"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 124,
+  "section": "Խորհրդանիշներ",
+  "section_en": "Symbols",
+  "q_hy": "Երկրի առաջին կարգախոսն էր «E Pluribus Unum»։ Ի՞նչ է դա նշանակում",
+  "q_en": "The Nation's first motto was “E Pluribus Unum.” What does that mean?",
+  "answers_hy": [
+   "Շատերից՝ մեկ",
+   "Մենք բոլորս դառնում ենք մեկ"
+  ],
+  "answers_en": [
+   "Out of many, one",
+   "We all become one"
+  ],
+  "options_hy": [
+   "Վաշինգտոն, Կոլումբիայի շրջան",
+   "Նյու Յորքի նավահանգստում",
+   "Շատերից՝ մեկ",
+   "Որովհետև կային 13 սկզբնական գաղութներ"
+  ],
+  "options_en": [
+   "Washington, D.C.",
+   "New York (Harbor)",
+   "Out of many, one",
+   "Because there were 13 original colonies"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 125,
+  "section": "Տոներ",
+  "section_en": "Holidays",
+  "q_hy": "Ի՞նչ է Անկախության օրը",
+  "q_en": "What is Independence Day?",
+  "answers_hy": [
+   "Տոն՝ նվիրված ԱՄՆ անկախության տոնակատարությանը",
+   "Երկրի ծննդյան օրը"
+  ],
+  "answers_en": [
+   "A holiday to celebrate U.S. independence (from Britain)",
+   "The country's birthday"
+  ],
+  "options_hy": [
+   "Նոր տարվա օրը, Անկախության օրը, Երախտագիտության օրը",
+   "Տոն՝ ի պատիվ զինծառայության մեջ զոհված զինվորների",
+   "Տոն՝ նվիրված ԱՄՆ անկախության տոնակատարությանը",
+   "Տոն՝ ի պատիվ ԱՄՆ զինվորականների"
+  ],
+  "options_en": [
+   "New Year's Day, Independence Day, Thanksgiving Day",
+   "A holiday to honor soldiers who died in military service",
+   "A holiday to celebrate U.S. independence (from Britain)",
+   "A holiday to honor people in the U.S. military"
+  ],
+  "correctIndex": 2
+ },
+ {
+  "id": 126,
+  "section": "Տոներ",
+  "section_en": "Holidays",
+  "q_hy": "Անվանեք երեք ազգային ԱՄՆ տոն",
+  "q_en": "Name three national U.S. holidays.",
+  "answers_hy": [
+   "Նոր տարվա օրը",
+   "Մարտին Լյութեր Քինգ կրտսերի օրը",
+   "Նախագահների օրը (Վաշինգտոնի ծննդյան օրը)",
+   "Հիշատակի օրը",
+   "Ջունթինթ",
+   "Անկախության օրը",
+   "Աշխատանքի օրը",
+   "Կոլումբոսի օրը",
+   "Վետերանների օրը",
+   "Երախտագիտության օրը",
+   "Սուրբ Ծննդյան օրը"
+  ],
+  "answers_en": [
+   "New Year's Day",
+   "Martin Luther King, Jr. Day",
+   "Presidents Day (Washington's Birthday)",
+   "Memorial Day",
+   "Juneteenth",
+   "Independence Day",
+   "Labor Day",
+   "Columbus Day",
+   "Veterans Day",
+   "Thanksgiving Day",
+   "Christmas Day"
+  ],
+  "options_hy": [
+   "Նոր տարվա օրը, Անկախության օրը, Երախտագիտության օրը",
+   "Հելոուին, Վալենտինի օրը, Զատիկ",
+   "Մայրերի օրը, Հայրերի օրը, Հելոուին",
+   "Զատիկ, Սուրբ Պատրիկի օրը, Վալենտինի օրը"
+  ],
+  "options_en": [
+   "New Year's Day, Independence Day, Thanksgiving Day",
+   "Halloween, Valentine's Day, Easter",
+   "Mother's Day, Father's Day, Halloween",
+   "Easter, Saint Patrick's Day, Valentine's Day"
+  ],
+  "correctIndex": 0
+ },
+ {
+  "id": 127,
+  "section": "Տոներ",
+  "section_en": "Holidays",
+  "q_hy": "Ի՞նչ է Հիշատակի օրը",
+  "q_en": "What is Memorial Day?",
+  "answers_hy": [
+   "Տոն՝ ի պատիվ զինծառայության մեջ զոհված զինվորների"
+  ],
+  "answers_en": [
+   "A holiday to honor soldiers who died in military service"
+  ],
+  "options_hy": [
+   "Տոն՝ ի պատիվ ԱՄՆ զինվորականների",
+   "Տոն՝ նվիրված ԱՄՆ անկախության տոնակատարությանը",
+   "Նոր տարվա օրը, Անկախության օրը, Երախտագիտության օրը",
+   "Տոն՝ ի պատիվ զինծառայության մեջ զոհված զինվորների"
+  ],
+  "options_en": [
+   "A holiday to honor people in the U.S. military",
+   "A holiday to celebrate U.S. independence (from Britain)",
+   "New Year's Day, Independence Day, Thanksgiving Day",
+   "A holiday to honor soldiers who died in military service"
+  ],
+  "correctIndex": 3
+ },
+ {
+  "id": 128,
+  "section": "Տոներ",
+  "section_en": "Holidays",
+  "q_hy": "Ի՞նչ է Վետերանների օրը",
+  "q_en": "What is Veterans Day?",
+  "answers_hy": [
+   "Տոն՝ ի պատիվ ԱՄՆ զինվորականների",
+   "Տոն՝ ի պատիվ մարդկանց, ովքեր ծառայել են ԱՄՆ բանակում"
+  ],
+  "answers_en": [
+   "A holiday to honor people in the U.S. military",
+   "A holiday to honor people who have served (in the U.S. military)"
+  ],
+  "options_hy": [
+   "Տոն՝ նվիրված ԱՄՆ անկախության տոնակատարությանը",
+   "Տոն՝ ի պատիվ ԱՄՆ զինվորականների",
+   "Նոր տարվա օրը, Անկախության օրը, Երախտագիտության օրը",
+   "Տոն՝ ի պատիվ զինծառայության մեջ զոհված զինվորների"
+  ],
+  "options_en": [
+   "A holiday to celebrate U.S. independence (from Britain)",
+   "A holiday to honor people in the U.S. military",
+   "New Year's Day, Independence Day, Thanksgiving Day",
+   "A holiday to honor soldiers who died in military service"
+  ],
+  "correctIndex": 1
+ }
+]</script>
+<script>
+var BANK = JSON.parse(document.getElementById('bank-data').textContent);
+var EXAM_ASK = 20, EXAM_PASS = 12, EXAM_FAIL = 9;
+var mode = null, queue = [], idx = 0, nCorrect = 0, nWrong = 0, log = [], answered = false;
+
+function show(id){
+  ['view-home','view-sections','view-quiz','view-results'].forEach(function(v){
+    document.getElementById(v).classList.toggle('hidden', v !== id);
+  });
+  document.getElementById('scroller').scrollTop = 0;
+}
+function goHome(){ show('view-home'); }
+function shuffle(a){
+  for (var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function showSections(){
+  var box = document.getElementById('section-list');
+  box.innerHTML = '';
+  var all = document.createElement('button');
+  all.className = 'mode-btn';
+  all.innerHTML = '<span class="t">All questions<span class="hy">Բոլոր հարցերը</span></span><span class="d">128 questions, in order · 128 հարց՝ հերթականությամբ</span>';
+  all.onclick = function(){ startPractice(null); };
+  box.appendChild(all);
+  var seen = [];
+  BANK.forEach(function(q){ if (seen.indexOf(q.section) === -1) seen.push(q.section); });
+  seen.forEach(function(s){
+    var count = BANK.filter(function(q){ return q.section === s; }).length;
+    var sample = BANK.filter(function(q){ return q.section === s; })[0];
+    var b = document.createElement('button');
+    b.className = 'mode-btn';
+    b.innerHTML = '<span class="t"><span class="sec-en"></span><span class="hy sec-hy"></span></span><span class="d">' + count + ' questions · հարց</span>';
+    b.querySelector('.sec-en').textContent = sample.section_en;
+    b.querySelector('.sec-hy').textContent = s;
+    b.onclick = function(){ startPractice(s); };
+    box.appendChild(b);
+  });
+  show('view-sections');
+}
+
+function startPractice(section){
+  mode = 'practice';
+  queue = section ? BANK.filter(function(q){ return q.section === section; }) : BANK.slice();
+  idx = 0; nCorrect = 0; nWrong = 0; log = [];
+  show('view-quiz');
+  renderQuestion();
+}
+
+function startExam(){
+  mode = 'exam';
+  queue = shuffle(BANK.slice());
+  idx = 0; nCorrect = 0; nWrong = 0; log = [];
+  show('view-quiz');
+  renderQuestion();
+}
+
+function scoreText(){
+  return 'Correct (Ճիշտ)՝ ' + nCorrect + ' · Wrong (Սխալ)՝ ' + nWrong;
+}
+
+function renderQuestion(){
+  answered = false;
+  var q = queue[idx];
+  var total = (mode === 'exam') ? EXAM_ASK : queue.length;
+  document.getElementById('q-counter').textContent = 'Question ' + (idx + 1) + ' / ' + total + ' · Հարց ' + (idx + 1) + ' / ' + total;
+  document.getElementById('q-score').textContent = (mode === 'practice') ? scoreText() : '';
+  document.getElementById('q-bar').style.width = Math.round(idx / total * 100) + '%';
+  document.getElementById('q-section').textContent = q.section_en + ' · ' + q.section;
+  var ca = document.getElementById('q-ca');
+  if (mode === 'practice' && q.note_hy) { ca.classList.remove('hidden'); } else { ca.classList.add('hidden'); }
+  document.getElementById('q-text').textContent = q.q_en;
+  document.getElementById('q-text-hy').textContent = q.q_hy;
+  var box = document.getElementById('q-options');
+  box.innerHTML = '';
+  q.options_hy.forEach(function(opt, i){
+    var b = document.createElement('button');
+    b.className = 'opt';
+    var en = document.createElement('span'); en.className = 'en'; en.textContent = q.options_en[i];
+    var hy = document.createElement('span'); hy.className = 'hy'; hy.textContent = opt;
+    b.appendChild(en); b.appendChild(hy);
+    b.onclick = function(){ pick(i, b); };
+    box.appendChild(b);
+  });
+  var why = document.getElementById('q-why');
+  why.className = 'why'; why.innerHTML = '';
+  document.getElementById('q-next').classList.add('hidden');
+}
+
+function pick(i, btn){
+  if (answered) return;
+  answered = true;
+  var q = queue[idx];
+  var ok = (i === q.correctIndex);
+  if (ok) nCorrect++; else nWrong++;
+  log.push({ q: q, chosen: i, ok: ok });
+  var opts = document.getElementById('q-options').children;
+  for (var k = 0; k < opts.length; k++){
+    opts[k].disabled = true;
+    if (k === q.correctIndex) opts[k].classList.add('correct');
+  }
+  if (!ok) btn.classList.add('wrong');
+  if (mode === 'exam'){
+    if (nCorrect >= EXAM_PASS || nWrong >= EXAM_FAIL || idx + 1 >= EXAM_ASK){ finishExam(); return; }
+    document.getElementById('q-next').classList.remove('hidden');
+    return;
+  }
+  // practice: instant feedback
+  var why = document.getElementById('q-why');
+  why.className = 'why show ' + (ok ? 'ok' : 'bad');
+  var html = '<span class="verdict">' + (ok ? 'Correct · Ճիշտ է' : 'Wrong · Սխալ է') + '</span>';
+  html += 'Correct answer: <b>' + q.options_en[q.correctIndex] + '</b>';
+  html += '<div class="ans-hy">Ճիշտ պատասխան՝ <b>' + q.options_hy[q.correctIndex] + '</b></div>';
+  if (q.answers_en.length > 1){
+    html += '<div class="accepted">Accepted answers: ' + q.answers_en.join(' · ') + '</div>';
+  }
+  if (q.answers_hy.length > 1){
+    html += '<div class="accepted">Ընդունվող պատասխաններ՝ ' + q.answers_hy.join(' · ') + '</div>';
+  }
+  if (q.note_en){ html += '<div class="accepted">' + q.note_en + '</div>'; }
+  if (q.note_hy){ html += '<div class="accepted">' + q.note_hy + '</div>'; }
+  why.innerHTML = html;
+  var nextBtn = document.getElementById('q-next');
+  nextBtn.textContent = (idx + 1 >= queue.length) ? 'Finish practice · Ավարտել պարապմունքը' : 'Next question · Հաջորդ հարցը';
+  nextBtn.classList.remove('hidden');
+  document.getElementById('q-score').textContent = scoreText();
+}
+
+function nextQuestion(){
+  idx++;
+  if (idx >= queue.length){
+    if (mode === 'practice'){ finishPractice(); return; }
+    finishExam(); return;
+  }
+  renderQuestion();
+}
+
+function finishPractice(){
+  var t = document.getElementById('r-title');
+  t.className = 'result-big';
+  t.innerHTML = 'Practice complete<span class="hy">Պարապմունքն ավարտված է</span>';
+  document.getElementById('r-stats').textContent =
+    'Total questions: ' + log.length + ' · Correct: ' + nCorrect + ' · Wrong: ' + nWrong +
+    ' (Ընդհանուր հարց՝ ' + log.length + ' · Ճիշտ՝ ' + nCorrect + ' · Սխալ՝ ' + nWrong + ')';
+  document.getElementById('r-advice').textContent = nWrong > 0
+    ? 'Your mistakes are listed below. Go over them again, then try the “Exam” mode. · Ստորև ձեր սխալներն են։ Անցեք դրանք նորից, ապա փորձեք «Քննություն» ռեժիմը։'
+    : 'You answered every question correctly. Try the “Exam” mode. · Բոլոր հարցերին պատասխանել եք ճիշտ։ Փորձեք «Քննություն» ռեժիմը։';
+  document.getElementById('r-again').textContent = 'Take the exam · Անցնել քննություն';
+  renderReview();
+  show('view-results');
+}
+
+function finishExam(){
+  var pass = nCorrect >= EXAM_PASS;
+  var t = document.getElementById('r-title');
+  t.className = 'result-big ' + (pass ? 'pass' : 'fail');
+  t.innerHTML = pass ? 'Congratulations — you passed the exam<span class="hy">Շնորհավորում ենք։ Դուք հաղթահարեցիք քննությունը</span>' : 'Exam not passed<span class="hy">Քննությունը չի հաղթահարվել</span>';
+  document.getElementById('r-stats').textContent =
+    'Questions asked: ' + log.length + ' · Correct: ' + nCorrect + ' · Wrong: ' + nWrong +
+    ' (12 correct needed to pass) · Հարցվել է ' + log.length + ' հարց · Ճիշտ՝ ' + nCorrect + ' · Սխալ՝ ' + nWrong +
+    ' (հաղթահարելու համար պետք է 12 ճիշտ)';
+  document.getElementById('r-advice').textContent = pass
+    ? 'You are ready for the interview. Keep reviewing the material in “Practice” mode. · Դուք պատրաստ եք հարցազրույցին։ Շարունակեք կրկնել նյութը «Պարապմունք» ռեժիմով։'
+    : 'Keep practicing in “Practice” mode, study your mistakes, and try again. · Շարունակեք պարապել «Պարապմունք» ռեժիմով, ուսումնասիրեք սխալները և փորձեք նորից։';
+  document.getElementById('r-again').textContent = 'New exam · Նոր քննություն';
+  renderReview();
+  show('view-results');
+}
+
+function renderReview(){
+  var box = document.getElementById('r-review');
+  box.innerHTML = '';
+  var mistakes = log.filter(function(e){ return !e.ok; });
+  if (!mistakes.length) return;
+  var h = document.createElement('h2');
+  h.textContent = 'Review of mistakes · Սխալների վերանայում';
+  box.appendChild(h);
+  mistakes.forEach(function(e){
+    var d = document.createElement('div');
+    d.className = 'review-item';
+    d.innerHTML = '<div class="rq"></div><div class="rq-hy"></div><div class="ry"></div><div class="ry-hy"></div><div class="rc"></div><div class="rc-hy"></div>';
+    d.querySelector('.rq').textContent = e.q.q_en;
+    d.querySelector('.rq-hy').textContent = e.q.q_hy;
+    d.querySelector('.ry').textContent = 'Your answer: ' + e.q.options_en[e.chosen];
+    d.querySelector('.ry-hy').textContent = 'Ձեր պատասխանը՝ ' + e.q.options_hy[e.chosen];
+    d.querySelector('.rc').textContent = 'Correct answer: ' + e.q.options_en[e.q.correctIndex];
+    d.querySelector('.rc-hy').textContent = 'Ճիշտ պատասխան՝ ' + e.q.options_hy[e.q.correctIndex];
+    box.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>

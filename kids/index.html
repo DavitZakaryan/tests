@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read Armenian! — Kids' Literacy Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#C0392B; --accent-dark:#96281B; --accent-soft:#FDECEA;
+    --ink:#2D2A26; --muted:#7A7268; --bg:#FFF9F1; --card:#FFFFFF;
+    --ok:#1E8449; --ok-bg:#D5F5E3; --bad:#B03A2E; --bad-bg:#FDEDEC;
+    --line:#F0E2D4; --amber:#F39C12; --amber-bg:#FEF5E7;
+    --radius:20px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  body{ font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Armenian",sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; }
+  .hy{ font-family:"Noto Sans Armenian","Nunito",sans-serif; }
+  .wrap{ max-width:700px; margin:0 auto; padding:16px 16px 56px; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 18px; }
+  .logo{ font-weight:900; font-size:22px; letter-spacing:.2px; }
+  .logo span{ color:var(--accent); }
+  .counter-chip{ background:var(--accent); color:#fff; font-weight:800; font-size:14px; padding:8px 14px; border-radius:999px; border:none; cursor:pointer; font-family:inherit; white-space:nowrap; }
+  .counter-chip:active{ transform:scale(.97); }
+  .card{ background:var(--card); border:2px solid var(--line); border-radius:var(--radius); padding:24px 20px; box-shadow:0 2px 8px rgba(150,90,40,.06); }
+  h1{ font-size:28px; line-height:1.25; margin-bottom:8px; font-weight:900; }
+  h2{ font-size:22px; line-height:1.3; margin-bottom:8px; font-weight:900; }
+  .sub{ color:var(--muted); font-size:15.5px; margin-bottom:20px; font-weight:600; }
+  .hidden{ display:none !important; }
+
+  /* Level cards on home */
+  .level-card{ border:2px solid var(--line); border-radius:var(--radius); padding:18px; margin-bottom:14px; background:#FFFDF9; }
+  .level-head{ display:flex; align-items:center; gap:14px; margin-bottom:6px; }
+  .badge{ font-size:38px; line-height:1; width:62px; height:62px; flex:0 0 62px; display:flex; align-items:center; justify-content:center; background:var(--accent-soft); border-radius:18px; }
+  .level-name{ font-size:19px; font-weight:900; }
+  .level-stars{ color:var(--amber); font-size:16px; letter-spacing:2px; min-height:20px; }
+  .level-blurb{ color:var(--muted); font-size:14.5px; font-weight:600; margin:2px 0 14px; }
+  .passed-tag{ display:inline-block; background:var(--ok-bg); color:var(--ok); font-size:12px; font-weight:900; padding:2px 10px; border-radius:999px; margin-left:8px; vertical-align:middle; }
+  .mode-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .mode-btn{ flex:1 1 30%; border:2px solid var(--line); background:#fff; border-radius:14px; padding:13px 8px; cursor:pointer; font-family:inherit; font-size:16px; font-weight:800; color:var(--ink); min-height:56px; }
+  .mode-btn:hover{ border-color:var(--accent); }
+  .mode-btn:active{ transform:scale(.98); }
+  .mode-btn .d{ display:block; font-size:12px; color:var(--muted); font-weight:700; margin-top:2px; }
+  .mode-btn.learn{ background:var(--amber-bg); border-color:#F5CBA7; }
+  .mode-btn.test{ background:var(--accent-soft); border-color:#F5B7B1; }
+
+  /* Buttons */
+  .btn{ display:inline-block; background:var(--accent); color:#fff; border:none; border-radius:14px; padding:14px 28px; font-size:17px; font-weight:800; cursor:pointer; font-family:inherit; min-height:56px; }
+  .btn:hover{ background:var(--accent-dark); }
+  .btn:active{ transform:scale(.98); }
+  .btn.ghost{ background:#fff; color:var(--accent); border:2px solid var(--accent); }
+  .btn.soft{ background:var(--accent-soft); color:var(--accent-dark); }
+  .btn:disabled{ opacity:.45; cursor:default; }
+  .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+
+  /* Quiz */
+  .progress-row{ display:flex; justify-content:space-between; font-size:13.5px; color:var(--muted); font-weight:800; margin-bottom:8px; }
+  .bar{ height:10px; background:var(--line); border-radius:999px; overflow:hidden; margin-bottom:18px; }
+  .bar i{ display:block; height:100%; background:var(--accent); width:0%; transition:width .3s; border-radius:999px; }
+  .chip{ display:inline-block; background:var(--accent-soft); color:var(--accent-dark); font-size:12.5px; font-weight:900; padding:4px 12px; border-radius:999px; margin-bottom:14px; }
+  .chip + .chip{ margin-left:6px; background:var(--amber-bg); color:#9A6B0F; }
+  .instruction{ font-size:18px; font-weight:700; line-height:1.45; margin-bottom:16px; }
+  .prompt-big{ text-align:center; margin:6px 0 18px; }
+  .prompt-word{ font-size:52px; font-weight:800; line-height:1.2; }
+  .prompt-letter{ font-size:84px; font-weight:800; line-height:1.1; }
+  .prompt-sentence{ font-size:32px; font-weight:700; line-height:1.35; }
+  .prompt-text-block{ font-size:27px; font-weight:700; line-height:1.5; background:#FFFDF9; border:2px solid var(--line); border-radius:16px; padding:18px; }
+  .scene-big{ font-size:76px; text-align:center; margin:8px 0 16px; letter-spacing:6px; }
+  .parts-row{ display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:8px 0 6px; }
+  .part-tile{ background:var(--accent-soft); border:2px solid #F5B7B1; color:var(--accent-dark); border-radius:14px; padding:12px 18px; font-size:34px; font-weight:800; }
+  .part-plus{ font-size:26px; font-weight:900; color:var(--muted); }
+  .part-eq{ font-size:26px; font-weight:900; color:var(--muted); }
+  .built-word{ text-align:center; font-size:40px; font-weight:800; margin-bottom:14px; }
+
+  /* Options */
+  .opts{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .opts.one-col{ grid-template-columns:1fr; }
+  .opt{ position:relative; display:flex; align-items:center; justify-content:center; gap:10px; width:100%; border:3px solid var(--line); background:#fff; border-radius:16px; padding:16px 12px; min-height:74px; font-size:19px; font-weight:700; cursor:pointer; color:var(--ink); font-family:inherit; text-align:center; }
+  .opt:hover{ border-color:var(--accent); }
+  .opt .hy-big{ font-size:34px; font-weight:800; line-height:1.15; }
+  .opt .hy-word{ font-size:26px; font-weight:700; }
+  .opt .emoji{ font-size:44px; line-height:1; }
+  .opt .lbl{ display:block; font-size:14px; color:var(--muted); font-weight:800; margin-top:2px; }
+  .opt .col{ display:flex; flex-direction:column; align-items:center; }
+  .opt.correct{ border-color:var(--ok); background:var(--ok-bg); }
+  .opt.selected{ border-color:var(--accent); background:var(--accent-soft); }
+  .opt.wrong{ border-color:var(--bad); background:var(--bad-bg); }
+  .opt.dim{ opacity:.55; }
+  .opt:disabled{ cursor:default; }
+
+  /* Feedback */
+  .feedback{ border-radius:16px; padding:16px 18px; font-size:16px; margin:16px 0 4px; display:none; font-weight:700; }
+  .feedback.show{ display:block; }
+  .feedback.ok{ background:var(--ok-bg); }
+  .feedback.bad{ background:var(--amber-bg); }
+  .feedback .verdict{ font-weight:900; display:block; font-size:18px; margin-bottom:4px; }
+  .feedback.ok .verdict{ color:var(--ok); }
+  .feedback.bad .verdict{ color:#9A6B0F; }
+  .reveal-word{ font-size:40px; font-weight:800; text-align:center; margin:8px 0 2px; }
+  .reveal-word .lit{ color:var(--accent); background:#FDECEA; border-radius:8px; padding:0 4px; }
+  .feedback .note-line{ margin-top:8px; font-weight:700; }
+
+  /* Letter tiles (find-the-letter + build) */
+  .word-tiles{ display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:10px 0 18px; }
+  .tile{ min-width:58px; height:68px; padding:0 10px; border-radius:14px; border:3px solid var(--line); background:#fff; font-size:34px; font-weight:800; cursor:pointer; font-family:"Noto Sans Armenian",sans-serif; color:var(--ink); }
+  .tile:active{ transform:scale(.96); }
+  .tile.correct{ border-color:var(--ok); background:var(--ok-bg); color:var(--ok); }
+  .tile.wrong{ border-color:var(--bad); background:var(--bad-bg); }
+  .tile.used{ opacity:.28; pointer-events:none; }
+  .build-area{ min-height:74px; border:3px dashed #E8C9A8; border-radius:16px; background:#FFFDF9; display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; padding:10px; margin-bottom:14px; }
+  .build-area .placeholder{ color:var(--muted); font-weight:700; font-size:15px; }
+  .built-chip{ background:var(--accent); color:#fff; border:none; border-radius:12px; padding:10px 16px; font-size:28px; font-weight:800; cursor:pointer; font-family:"Noto Sans Armenian",sans-serif; }
+  .tile-pool{ display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+
+  /* Alphabet strip */
+  .alpha-strip{ font-size:19px; line-height:1.9; text-align:center; background:#FFFDF9; border:2px solid var(--line); border-radius:14px; padding:10px 12px; margin-bottom:18px; font-weight:700; word-spacing:4px; }
+  .alpha-strip .lit{ color:#fff; background:var(--accent); border-radius:7px; padding:1px 6px; }
+
+  /* Learn cards */
+  .learn-card{ text-align:center; padding:10px 4px 4px; }
+  .learn-emoji{ font-size:64px; margin-bottom:6px; }
+  .learn-big{ font-size:56px; font-weight:800; line-height:1.25; }
+  .learn-big .lit{ color:var(--accent); background:#FDECEA; border-radius:8px; padding:0 5px; }
+  .learn-parts{ font-size:30px; font-weight:800; color:var(--accent-dark); margin-bottom:2px; }
+  .learn-note{ color:var(--muted); font-weight:700; font-size:16px; margin-top:8px; }
+  .learn-nav{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:20px; }
+  .learn-count{ font-weight:800; color:var(--muted); font-size:14px; }
+
+  /* Results */
+  .stars-big{ font-size:46px; text-align:center; letter-spacing:8px; margin:6px 0 10px; }
+  .stars-big .off{ opacity:.22; }
+  .result-title{ text-align:center; font-size:25px; font-weight:900; margin-bottom:6px; }
+  .result-stats{ text-align:center; font-size:17px; font-weight:700; margin-bottom:4px; }
+  .result-date{ text-align:center; color:var(--muted); font-weight:700; font-size:14px; margin-bottom:16px; }
+  .words-title{ font-weight:900; font-size:16px; margin:14px 0 8px; }
+  .word-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .word-chip{ background:var(--accent-soft); color:var(--accent-dark); border-radius:999px; padding:8px 16px; font-size:20px; font-weight:700; }
+  .word-chip.sent{ font-size:16px; }
+  footer.disc{ margin-top:24px; font-size:12.5px; color:var(--muted); text-align:center; line-height:1.6; font-weight:600; }
+  @media (max-width:520px){
+    .prompt-word{ font-size:44px; }
+    .prompt-letter{ font-size:70px; }
+    .prompt-sentence{ font-size:27px; }
+    .opt .hy-big{ font-size:29px; }
+    .learn-big{ font-size:46px; }
+    h1{ font-size:25px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Read <span>Armenian!</span> 📚</div>
+    <button class="counter-chip" id="counter-chip" onclick="showWords()">⭐ Words I can read: 0</button>
+  </header>
+
+  <!-- HOME / LEVELS -->
+  <div id="view-home">
+    <div class="card">
+      <h1>You speak Armenian. Now read it! 🏔️</h1>
+      <p class="sub">Letters, words, and sentences from home — the words you already say every day, now in print. Pick a level: first <b>Learn</b>, then <b>Practice</b>, then take the <b>Test</b>.</p>
+      <div id="level-list"></div>
+      <p class="sub" style="margin-bottom:0">For parents: no accounts, no ads — progress is saved on this device. The Test result screen lists exactly which words your child can now read.</p>
+    </div>
+  </div>
+
+  <!-- LEARN -->
+  <div id="view-learn" class="hidden">
+    <div class="card">
+      <div><span class="chip" id="l-level"></span><span class="chip">Learn</span></div>
+      <div class="learn-card" id="l-card"></div>
+      <div class="learn-nav">
+        <button class="btn soft" id="l-prev" onclick="learnMove(-1)">← Back</button>
+        <span class="learn-count" id="l-count"></span>
+        <button class="btn soft" id="l-next" onclick="learnMove(1)">Next →</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="l-practice" onclick="learnToPractice()">Start Practice →</button>
+        <button class="btn ghost" onclick="goHome()">All levels</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ (Practice / Test) -->
+  <div id="view-quiz" class="hidden">
+    <div class="card">
+      <div class="progress-row"><span id="q-counter"></span><span id="q-score"></span></div>
+      <div class="bar"><i id="q-bar"></i></div>
+      <div><span class="chip" id="q-level"></span><span class="chip" id="q-mode"></span></div>
+      <div id="q-body"></div>
+      <div class="feedback" id="q-feedback"></div>
+      <div class="btn-row">
+        <button class="btn hidden" id="q-next" onclick="nextItem()">Next →</button>
+        <button class="btn ghost" onclick="goHome()">Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="view-results" class="hidden">
+    <div class="card">
+      <div class="stars-big" id="r-stars"></div>
+      <div class="result-title" id="r-title"></div>
+      <p class="result-stats" id="r-stats"></p>
+      <p class="result-date" id="r-date"></p>
+      <div id="r-words-wrap">
+        <div class="words-title" id="r-words-title">Words I can now read:</div>
+        <div class="word-chips" id="r-words"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="r-again-test">Test again</button>
+        <button class="btn soft" id="r-again-practice">Practice</button>
+        <button class="btn ghost" onclick="goHome()">All levels</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORDS I CAN READ -->
+  <div id="view-words" class="hidden">
+    <div class="card">
+      <h2>⭐ Words I can read</h2>
+      <p class="sub" id="w-sub"></p>
+      <div class="word-chips" id="w-list"></div>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="goHome()">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="disc">Eastern Armenian · reformed orthography · Made for kids who speak Armenian at home and are learning to read it.</footer>
+</div>
+
+<script type="application/json" id="learn-data">
+{
+ "0": [
+  {"big":"Մ մ","litWord":"մայր","lit":0,"emoji":"👩","note":"This letter is called «մեն». It starts the word for mother."},
+  {"big":"Շ շ","litWord":"շուն","lit":0,"emoji":"🐶","note":"This letter is called «շա». It starts the word for dog."},
+  {"big":"Հ հ","litWord":"հաց","lit":0,"emoji":"🍞","note":"This letter is called «հո». It starts the word for bread."},
+  {"big":"Ա ա","litWord":"արև","lit":0,"emoji":"☀️","note":"This letter is called «այբ» — the very first letter of the alphabet. It starts the word for sun."},
+  {"big":"Տ տ","litWord":"տուն","lit":0,"emoji":"🏠","note":"This letter is called «տյուն». It starts the word for house."},
+  {"big":"Կ կ","litWord":"կատու","lit":0,"emoji":"🐱","note":"This letter is called «կեն». It starts the word for cat."},
+  {"big":"Գ գ","litWord":"գիրք","lit":0,"emoji":"📖","note":"This letter is called «գիմ». It starts the word for book."},
+  {"big":"Ջ ջ","litWord":"ջուր","lit":0,"emoji":"💧","note":"This letter is called «ջե». It starts the word for water."},
+  {"big":"Ր ր","litWord":"արև","lit":1,"emoji":"☀️","note":"This is the SOFT r, called «րե». It is inside the word for sun."},
+  {"big":"Ռ ռ","litWord":"առյուծ","lit":1,"emoji":"🦁","note":"This is the STRONG r, called «ռա» — the lion's letter!"}
+ ],
+ "1": [
+  {"big":"ՏԻ","emoji":"🔤","note":"A syllable is one beat of a word. Read it out loud: T + I."},
+  {"parts":"ՄԱ + ՅՐ","big":"մայր","emoji":"👩","note":"Two parts together make the word for mother."},
+  {"parts":"ԿԱ + ՏՈՒ","big":"կատու","emoji":"🐱","note":"Two parts together make the word for cat."},
+  {"parts":"տա + ՏԻ + կ","big":"տատիկ","emoji":"👵","note":"Three parts together make Grandma's word."},
+  {"parts":"կա + Թ","big":"կաթ","emoji":"🥛","note":"One letter at the end makes the word for milk."},
+  {"big":"պապիկ","emoji":"👴","note":"Grandpa's word has two parts: պա-պիկ."},
+  {"big":"դպրոց","emoji":"🏫","note":"The school word hides a sound: the first “uh” is a secret — you hear it, but it isn't written!"},
+  {"parts":"ԵՂ + ԲԱՅՐ","big":"եղբայր","emoji":"👦","note":"Two parts together make your word for brother."}
+ ],
+ "2": [
+  {"big":"տատիկ","emoji":"👵","note":"grandmother"},
+  {"big":"խնձոր","emoji":"🍎","note":"apple"},
+  {"big":"դպրոց","emoji":"🏫","note":"school"},
+  {"big":"հաց","emoji":"🍞","note":"bread"},
+  {"big":"հայր","emoji":"👨","note":"father"},
+  {"big":"կատու","emoji":"🐱","note":"cat"},
+  {"big":"կաթ","emoji":"🥛","note":"milk"},
+  {"big":"կով","emoji":"🐄","note":"cow"},
+  {"big":"գլուխ","emoji":"","note":"head"},
+  {"big":"ընկեր","emoji":"🤝","note":"friend — careful: this word's ը IS written!"},
+  {"big":"շուն","emoji":"🐶","note":"dog — the letters ՈՒ are a team, they say “oo”."},
+  {"big":"ոտք","emoji":"🦶","note":"foot — at the start of a word, Ո sounds like “vo”."},
+  {"big":"ձուկ","emoji":"🐟","note":"fish"}
+ ],
+ "3": [
+  {"big":"Սա իմ մայրն է","emoji":"👩","note":"This is my mother."},
+  {"big":"Շունը հաց է ուտում","emoji":"🐶🍞","note":"The dog is eating bread."},
+  {"big":"Աղջիկը գիրք է կարդում","emoji":"👧📖","note":"The girl is reading a book."},
+  {"big":"Սա մեր տունն է","emoji":"🏠","note":"This is our house."},
+  {"big":"Ինչպե՞ս ես","emoji":"👋","note":"How are you? — The answer: Լավ եմ (I am fine)."}
+ ],
+ "4": [
+  {"big":"հայր","emoji":"👨","note":"father — build it from the letters Հ Ա Յ Ր."},
+  {"big":"առյուծ","emoji":"🦁","note":"lion — this word has the STRONG r (ռ), the lion's letter!"},
+  {"big":"ջուր","emoji":"💧","note":"water — the letters ՈՒ work as one team tile."},
+  {"big":"ընկեր","emoji":"🤝","note":"friend — its first letter ը is written. Remember it!"},
+  {"big":"Սա իմ տատիկն է։ Տատիկը հաց է թխում։","emoji":"📖","note":"A mini book! This is my grandma. Grandma is baking bread."}
+ ]
+}
+</script>
+
+<script type="application/json" id="items-data">
+[
+ {"id":1,"level":0,"type":"mc","instruction":"You say this word at home! Read it — which letter does it start with?","options":[{"t":"Մ","c":true},{"t":"Ն"},{"t":"Ս"},{"t":"Տ"}],"reveal":{"word":"մայր","lit":0},"promptText":"մայր","promptStyle":"word"},
+ {"id":2,"level":0,"type":"mc","instruction":"A word from your kitchen. Read it — which letter does it start with?","options":[{"t":"Շ","c":true},{"t":"Ս"},{"t":"Չ"},{"t":"Ժ"}],"reveal":{"word":"շուն","lit":0},"promptText":"շուն","promptStyle":"word"},
+ {"id":3,"level":0,"type":"mc","instruction":"You say this word at home! Read it — which letter does it start with?","options":[{"t":"Հ","c":true},{"t":"Կ"},{"t":"Ղ"},{"t":"Ց"}],"reveal":{"word":"հաց","lit":0},"promptText":"հաց","promptStyle":"word"},
+ {"id":4,"level":0,"type":"mc","instruction":"Read this letter's name — the name kids learn in Armenian school. Tap that letter.","options":[{"t":"Ա","c":true},{"t":"Բ"},{"t":"Գ"},{"t":"Դ"}],"promptText":"այբ","promptStyle":"word"},
+ {"id":5,"level":0,"type":"mc","instruction":"Read the letter's name. Tap that letter.","options":[{"t":"Կ","c":true},{"t":"Գ"},{"t":"Ղ"},{"t":"Ք"}],"promptText":"կեն","promptStyle":"word"},
+ {"id":6,"level":0,"type":"mc","instruction":"This letter is Տ. Which word starts with its sound? Read the words and choose.","promptText":"Տ","promptStyle":"letter","options":[{"t":"տուն","e":"🏠","c":true},{"t":"մայր","e":"👩"},{"t":"գիրք","e":"📖"},{"t":"շուն","e":"🐶"}]},
+ {"id":7,"level":0,"type":"mc","instruction":"Every Armenian letter has a big and a small form, like A and a. Tap the small form of Շ.","options":[{"t":"շ","c":true},{"t":"ս"},{"t":"չ"},{"t":"ջ"}]},
+ {"id":8,"level":0,"type":"mc","instruction":"Careful — these two look alike! Tap the small form of Ր.","options":[{"t":"ր","c":true},{"t":"ռ"},{"t":"տ"},{"t":"դ"}]},
+ {"id":9,"level":0,"type":"findletter","instruction":"Read the word: տատիկ — your grandma's word! Tap the letter կ in it.","tiles":["Տ","Ա","Տ","Ի","Կ"],"correctTile":4},
+ {"id":10,"level":0,"type":"mc","instruction":"Read the first word: գիրք. Which other word starts with the same letter? Read them all.","promptText":"գիրք","promptStyle":"word","options":[{"t":"գլուխ","c":true},{"t":"դուռ"},{"t":"մատիտ"},{"t":"տետր"}]},
+ {"id":11,"level":0,"type":"mc","instruction":"This letter is Ջ. Which word starts with its sound? Read the words and choose.","promptText":"Ջ","promptStyle":"letter","options":[{"t":"ջուր","c":true},{"t":"ձուկ"},{"t":"դուռ"},{"t":"բերան"}]},
+ {"id":12,"level":0,"type":"mc","instruction":"The alphabet is like a train. Which letter comes right after Կ?","alphaStrip":true,"options":[{"t":"Հ","c":true},{"t":"Գ"},{"t":"Մ"},{"t":"Ս"}]},
+ {"id":13,"level":1,"type":"mc","instruction":"Read this part: ՏԻ. Tap the syllable that matches.","promptText":"ՏԻ","promptStyle":"word","options":[{"t":"տի","c":true},{"t":"տա"},{"t":"տու"},{"t":"կի"}]},
+ {"id":14,"level":1,"type":"mc","instruction":"Put the parts together: ՄԱ + ՅՐ. Read the word you built! What is it?","parts":["ՄԱ","ՅՐ"],"builtWord":"մայր","options":[{"e":"👩","label":"mother","c":true},{"e":"👨","label":"father"},{"e":"🏠","label":"house"},{"e":"🐶","label":"dog"}]},
+ {"id":15,"level":1,"type":"mc","instruction":"Build the word: ԿԱ + ՏՈՒ. Read it. What does it say?","parts":["ԿԱ","ՏՈՒ"],"builtWord":"կատու","options":[{"label":"cat","c":true},{"label":"dog"},{"label":"fish"},{"label":"bird"}]},
+ {"id":16,"level":1,"type":"mc","instruction":"A part fell out! տա___կ — you say this word to your grandma's name every day. Which part completes it?","promptText":"տա___կ","promptStyle":"word","options":[{"t":"ՏԻ","c":true},{"t":"ՏՈՒ"},{"t":"ԿԱ"},{"t":"ՄԱ"}],"reveal":{"word":"տատիկ"}},
+ {"id":17,"level":1,"type":"mc","instruction":"կա___ — which end makes the word for 'milk', the one in your fridge?","promptText":"կա___","promptStyle":"word","options":[{"t":"Թ","c":true},{"t":"Տ"},{"t":"Ս"},{"t":"Ր"}],"reveal":{"word":"կաթ"}},
+ {"id":18,"level":1,"type":"mc","instruction":"Read the word slowly: պապիկ. How many parts (syllables) does it have?","options":[{"t":"2","c":true},{"t":"1"},{"t":"3"},{"t":"4"}],"note":"պա-պիկ — two parts!","promptText":"պապիկ","promptStyle":"word"},
+ {"id":19,"level":1,"type":"mc","instruction":"This school word hides a sound! Read it: դպրոց. Which part do you HEAR first when you say it?","promptText":"դպրոց","promptStyle":"word","options":[{"t":"դը","c":true},{"t":"դա"},{"t":"դի"},{"t":"դու"}],"note":"The 'uh' at the start is a secret — you hear it, but it isn't written!"},
+ {"id":20,"level":1,"type":"mc","instruction":"Build your word for 'brother': ԵՂ + ԲԱՅՐ. Read what you built. Who is it?","parts":["ԵՂ","ԲԱՅՐ"],"builtWord":"եղբայր","options":[{"label":"brother","c":true},{"label":"sister"},{"label":"father"},{"label":"mother"}]},
+ {"id":21,"level":2,"type":"mc","instruction":"Read this word — you say it every day. What is it?","promptText":"տատիկ","promptStyle":"word","options":[{"e":"👵","label":"grandmother","c":true},{"e":"👴","label":"grandfather"},{"e":"👩","label":"mother"},{"e":"👧","label":"sister"}],"credit":"տատիկ"},
+ {"id":22,"level":2,"type":"mc","instruction":"Read this word — you say it every day. What is it?","promptText":"խնձոր","promptStyle":"word","options":[{"e":"🍎","label":"apple","c":true},{"e":"🍞","label":"bread"},{"e":"🥛","label":"milk"},{"e":"🌸","label":"flower"}],"credit":"խնձոր"},
+ {"id":23,"level":2,"type":"mc","instruction":"Read the word. What does it mean?","promptText":"դպրոց","promptStyle":"word","options":[{"label":"school","c":true},{"label":"book"},{"label":"pencil"},{"label":"house"}],"credit":"դպրոց"},
+ {"id":24,"level":2,"type":"mc","instruction":"Find the written word for: bread","options":[{"t":"հաց","c":true},{"t":"հայր"},{"t":"կաթ"},{"t":"տուն"}],"credit":"հաց","scene":"🍞"},
+ {"id":25,"level":2,"type":"mc","instruction":"Find the written word for: cat","options":[{"t":"կատու","c":true},{"t":"կաթ"},{"t":"կով"},{"t":"տատիկ"}],"credit":"կատու","scene":"🐱"},
+ {"id":26,"level":2,"type":"mc","instruction":"Read the word. What does it mean?","promptText":"գլուխ","promptStyle":"word","options":[{"label":"head","c":true},{"label":"book"},{"label":"mouth"},{"label":"school"}],"credit":"գլուխ"},
+ {"id":27,"level":2,"type":"mc","instruction":"You know this word: կատու. One letter is missing in writing: կ_տու. Which letter?","promptText":"կ_տու","promptStyle":"word","options":[{"t":"Ա","c":true},{"t":"Ի"},{"t":"ՈՒ"},{"t":"Ե"}],"credit":"կատու"},
+ {"id":28,"level":2,"type":"mc","instruction":"Careful one! The word is 'friend'. How is it written?","options":[{"t":"ընկեր","c":true},{"t":"նկեր"},{"t":"ընգեր"},{"t":"ինկեր"}],"credit":"ընկեր"},
+ {"id":29,"level":2,"type":"mc","instruction":"The letters ՈՒ work as a team — together they say 'oo'. Read this word: շուն. What is it?","promptText":"շուն","promptStyle":"word","options":[{"e":"🐶","label":"dog","c":true},{"e":"🐱","label":"cat"},{"e":"🐄","label":"cow"},{"e":"🐟","label":"fish"}],"credit":"շուն"},
+ {"id":30,"level":2,"type":"mc","instruction":"Plot twist: at the start of a word, Ո sounds like 'vo'. Read: ոտք. What is it?","promptText":"ոտք","promptStyle":"word","options":[{"label":"foot","c":true},{"label":"hand"},{"label":"eye"},{"label":"ear"}],"credit":"ոտք"},
+ {"id":31,"level":2,"type":"mc","instruction":"Read all four words. Three are animals. Tap the one that is NOT.","options":[{"t":"շուն"},{"t":"կատու"},{"t":"ձուկ"},{"t":"հաց","c":true}],"credit":"հաց"},
+ {"id":32,"level":3,"type":"mc","instruction":"Read the sentence: Սա իմ մայրն է. Which picture matches?","promptText":"Սա իմ մայրն է","promptStyle":"sentence","options":[{"e":"👩","label":"mother","c":true},{"e":"👵","label":"grandmother"},{"e":"👨","label":"father"},{"e":"👧","label":"sister"}],"credit":"Սա իմ մայրն է"},
+ {"id":33,"level":3,"type":"mc","instruction":"Read: Շունը հաց է ուտում.","promptText":"Շունը հաց է ուտում","promptStyle":"sentence","options":[{"e":"🐶🍞","label":"dog eating bread","c":true},{"e":"🐱🥛","label":"cat drinking milk"},{"e":"🐶💤","label":"dog sleeping"},{"e":"🧒📖","label":"boy reading a book"}],"credit":"Շունը հաց է ուտում"},
+ {"id":34,"level":3,"type":"mc","instruction":"Read: Աղջիկը գիրք է կարդում. Is it true for the picture?","scene":"👧📖","promptText":"Աղջիկը գիրք է կարդում","promptStyle":"sentence","options":[{"t":"True","c":true},{"t":"False"}],"noShuffle":true,"credit":"Աղջիկը գիրք է կարդում"},
+ {"id":35,"level":3,"type":"build","instruction":"Build the sentence you would say at home: 'This is our house.' Tap the words in order.","tiles":["Սա","մեր","տունն","է"],"target":"Սա մեր տունն է","joiner":" ","credit":"Սա մեր տունն է"},
+ {"id":36,"level":4,"type":"build","instruction":"Build the word for 'father' with the letter tiles.","tiles":["Հ","Ա","Յ","Ր","Տ","Ս"],"target":"հայր","joiner":"","credit":"հայր","scene":"👨"},
+ {"id":37,"level":4,"type":"build","instruction":"Build the word for 'lion'. Careful — this word has the STRONG r (ռ), the lion's letter!","tiles":["Ա","Ռ","Յ","ՈՒ","Ծ","ր"],"target":"առյուծ","joiner":"","credit":"առյուծ","scene":"🦁"},
+ {"id":38,"level":4,"type":"mc","instruction":"Read Grandpa's question: Ինչպե՞ս ես. Which written answer fits?","promptText":"Ինչպե՞ս ես","promptStyle":"sentence","options":[{"t":"Լավ եմ","c":true},{"t":"Ցտեսություն"},{"t":"Շնորհակալություն"},{"t":"Իմ անունը ... է"}],"credit":"Լավ եմ"},
+ {"id":39,"level":4,"type":"build","instruction":"Build the word for 'water' with the letter tiles — you ask for it at dinner every day.","tiles":["Ջ","ՈՒ","Ր","Ճ","Չ"],"target":"ջուր","joiner":"","credit":"ջուր","scene":"💧"},
+ {"id":40,"level":4,"type":"mc","instruction":"Read this like a real book. What is Grandma doing?","promptText":"Սա իմ տատիկն է։ Տատիկը հաց է թխում։","promptStyle":"textblock","options":[{"label":"She is baking bread","c":true},{"label":"She is reading"},{"label":"She is sleeping"},{"label":"She is drinking tea"}],"credit":"Սա իմ տատիկն է։ Տատիկը հաց է թխում։"}
+]
+</script>
+
+<script>
+"use strict";
+const LEARN = JSON.parse(document.getElementById('learn-data').textContent);
+const ITEMS = JSON.parse(document.getElementById('items-data').textContent);
+const ALPHABET = "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև";
+const LEVELS = [
+  {n:0, name:"Letters I Can Hear", badge:"🏔️", blurb:"The sounds you know — now in print. Letters through words from home."},
+  {n:1, name:"Building Words", badge:"🧩", blurb:"Syllables, teams of letters, and the secret sounds of Armenian print."},
+  {n:2, name:"Words I Know", badge:"📖", blurb:"Read whole words — the ones you say every day."},
+  {n:3, name:"Sentences at Home", badge:"🏠", blurb:"Whole sentences about family, home, and the dog."},
+  {n:4, name:"I Can Write", badge:"✍️", blurb:"Spell with letter tiles, answer Grandpa, and read a mini book."}
+];
+const STORE_KEY = "hyKidsTrainerV1";
+let store = {stars:{}, passed:{}, read:[]};
+try{ const raw = localStorage.getItem(STORE_KEY); if(raw){ const p = JSON.parse(raw); if(p && typeof p === "object") store = Object.assign(store, p); } }catch(e){}
+function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+
+/* ---------- helpers ---------- */
+function $(id){ return document.getElementById(id); }
+function show(id){
+  ["view-home","view-learn","view-quiz","view-results","view-words"].forEach(function(v){ $(v).classList.toggle("hidden", v !== id); });
+  window.scrollTo(0, 0);
+}
+function shuffle(a){ for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function esc(s){ return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+function starStr(n){ let s = ""; for(let i = 0; i < 3; i++) s += (i < n) ? "⭐" : '<span class="off">⭐</span>'; return s; }
+function updateCounter(){ $("counter-chip").textContent = "⭐ Words I can read: " + store.read.length; }
+function litWordHtml(word, litIdx){
+  return Array.from(word).map(function(c, i){ return i === litIdx ? '<span class="lit">' + esc(c) + "</span>" : esc(c); }).join("");
+}
+
+/* ---------- home ---------- */
+function renderHome(){
+  const list = $("level-list");
+  list.innerHTML = "";
+  LEVELS.forEach(function(L){
+    const count = ITEMS.filter(function(i){ return i.level === L.n; }).length;
+    const stars = store.stars[L.n] || 0;
+    const div = document.createElement("div");
+    div.className = "level-card";
+    div.innerHTML =
+      '<div class="level-head"><div class="badge">' + L.badge + "</div>" +
+      "<div><div class=\"level-name\">Level " + L.n + " · " + esc(L.name) + (store.passed[L.n] ? '<span class="passed-tag">TEST PASSED ✓</span>' : "") + "</div>" +
+      '<div class="level-stars">' + (stars ? "⭐".repeat(stars) : "") + "</div></div></div>" +
+      '<p class="level-blurb">' + esc(L.blurb) + " · " + count + " tasks</p>" +
+      '<div class="mode-row">' +
+      '<button class="mode-btn learn" onclick="startLearn(' + L.n + ')">📖 Learn<span class="d">cards first</span></button>' +
+      '<button class="mode-btn" onclick="startQuiz(' + L.n + ",'practice')\">🎯 Practice<span class=\"d\">all " + count + ' tasks</span></button>' +
+      '<button class="mode-btn test" onclick="startQuiz(' + L.n + ",'test')\">🏆 Test<span class=\"d\">" + Math.min(10, count) + " tasks · pass 80%</span></button>" +
+      "</div>";
+    list.appendChild(div);
+  });
+  updateCounter();
+}
+function goHome(){ renderHome(); show("view-home"); }
+function showWords(){
+  const w = $("w-list"); w.innerHTML = "";
+  if(!store.read.length){
+    $("w-sub").textContent = "No words yet — finish some Level 2, 3 and 4 tasks and the words you read will appear here!";
+  } else {
+    $("w-sub").textContent = store.read.length + (store.read.length === 1 ? " word" : " words") + " read so far. Parents: point at any word and ask — “Read this to me!”";
+    store.read.forEach(function(word){
+      const s = document.createElement("span");
+      s.className = "word-chip hy" + (word.length > 14 ? " sent" : "");
+      s.textContent = word;
+      w.appendChild(s);
+    });
+  }
+  show("view-words");
+}
+
+/* ---------- learn mode ---------- */
+let learn = null;
+function startLearn(level){
+  learn = {level: level, idx: 0};
+  $("l-level").textContent = "Level " + level + " · " + LEVELS[level].name;
+  $("l-practice").onclick = function(){ startQuiz(level, "practice"); };
+  renderLearnCard();
+  show("view-learn");
+}
+function renderLearnCard(){
+  const cards = LEARN[learn.level];
+  const c = cards[learn.idx];
+  let h = "";
+  if(c.emoji) h += '<div class="learn-emoji">' + c.emoji + "</div>";
+  if(c.parts) h += '<div class="learn-parts hy">' + esc(c.parts) + "</div>";
+  h += '<div class="learn-big hy">' + esc(c.big) + "</div>";
+  if(c.litWord) h += '<div class="learn-big hy">' + litWordHtml(c.litWord, c.lit || 0) + "</div>";
+  if(c.note) h += '<div class="learn-note">' + esc(c.note) + "</div>";
+  $("l-card").innerHTML = h;
+  $("l-count").textContent = "Card " + (learn.idx + 1) + " of " + cards.length;
+  $("l-prev").disabled = learn.idx === 0;
+  $("l-next").disabled = learn.idx === cards.length - 1;
+}
+function learnMove(d){
+  const cards = LEARN[learn.level];
+  learn.idx = Math.min(cards.length - 1, Math.max(0, learn.idx + d));
+  renderLearnCard();
+}
+function learnToPractice(){ if(learn) startQuiz(learn.level, "practice"); }
+
+/* ---------- quiz engine ---------- */
+let quiz = null;
+function startQuiz(level, mode){
+  const all = ITEMS.filter(function(i){ return i.level === level; });
+  const picked = (mode === "test") ? shuffle(all.slice()).slice(0, Math.min(10, all.length)) : all.slice();
+  quiz = {level: level, mode: mode, items: picked, idx: 0, firstTry: 0, sessionWords: [], builtFrom: [], tries: 0, done: false};
+  show("view-quiz");
+  renderItem();
+}
+function currentItem(){ return quiz.items[quiz.idx]; }
+
+function renderItem(){
+  const it = currentItem();
+  quiz.tries = 0; quiz.done = false; quiz.builtFrom = [];
+  $("q-counter").textContent = "Task " + (quiz.idx + 1) + " of " + quiz.items.length;
+  $("q-score").textContent = "⭐ " + quiz.firstTry;
+  $("q-bar").style.width = Math.round(quiz.idx / quiz.items.length * 100) + "%";
+  $("q-level").textContent = "Level " + quiz.level + " · " + LEVELS[quiz.level].name;
+  $("q-mode").textContent = quiz.mode === "test" ? "🏆 Test" : "🎯 Practice";
+  const fb = $("q-feedback"); fb.className = "feedback"; fb.innerHTML = "";
+  $("q-next").classList.add("hidden");
+
+  const b = $("q-body");
+  let h = '<div class="instruction">' + esc(it.instruction) + "</div>";
+  if(it.scene) h += '<div class="scene-big">' + it.scene + "</div>";
+  if(it.alphaStrip){
+    h += '<div class="alpha-strip hy">' + Array.from(ALPHABET).map(function(c){ return c === "կ" ? '<span class="lit">' + c.toUpperCase() + "</span>" : esc(c.toUpperCase()); }).join(" ") + "</div>";
+  }
+  if(it.promptText){
+    const cls = it.promptStyle === "letter" ? "prompt-letter" : it.promptStyle === "sentence" ? "prompt-sentence" : it.promptStyle === "textblock" ? "prompt-text-block" : "prompt-word";
+    h += '<div class="prompt-big"><div class="' + cls + ' hy">' + esc(it.promptText) + "</div>";
+    h += "</div>";
+  }
+  if(it.parts){
+    h += '<div class="parts-row">' + it.parts.map(function(p, i){ return (i ? '<span class="part-plus">+</span>' : "") + '<span class="part-tile hy">' + esc(p) + "</span>"; }).join("") + '<span class="part-eq">=</span></div>';
+    if(it.builtWord) h += '<div class="built-words hy">' + esc(it.builtWord) + "</div>";
+  }
+  b.innerHTML = h;
+
+  if(it.type === "mc") renderMc(it, b);
+  else if(it.type === "findletter") renderFind(it, b);
+  else if(it.type === "build") renderBuild(it, b);
+}
+
+function optClass(o){
+  if(!o.t) return "";
+  return Array.from(o.t).length <= 2 ? "hy-big" : "hy-word";
+}
+function renderMc(it, b){
+  const wrap = document.createElement("div");
+  const oneCol = it.options.some(function(o){ return (o.t && Array.from(o.t).length > 12) || (o.label && o.label.length > 18); });
+  wrap.className = "opts" + (oneCol ? " one-col" : "");
+  const opts = it.noShuffle ? it.options.slice() : shuffle(it.options.slice());
+  opts.forEach(function(o){
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn._opt = o;
+    let inner = '<span class="col">';
+    if(o.e) inner += '<span class="emoji">' + o.e + "</span>";
+    if(o.t) inner += '<span class="' + optClass(o) + ' hy">' + esc(o.t) + "</span>";
+    if(o.label) inner += '<span class="lbl">' + esc(o.label) + "</span>";
+    inner += "</span>";
+    btn.innerHTML = inner;
+    btn.onclick = function(){ if(!quiz.done) gradeMc(it, o, btn, wrap); };
+    wrap.appendChild(btn);
+  });
+  b.appendChild(wrap);
+}
+function findCorrectBtn(wrap){
+  let found = null;
+  wrap.querySelectorAll(".opt").forEach(function(x){ if(x._opt && x._opt.c) found = x; });
+  return found;
+}
+function lockWrap(wrap){ wrap.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; }); }
+function gradeMc(it, o, btn, wrap){
+  const first = quiz.tries === 0;
+  if(o.c){
+    btn.classList.add("correct");
+    lockWrap(wrap);
+    finishItem(first, it);
+  } else {
+    quiz.tries++;
+    btn.classList.add("wrong");
+    const cb = findCorrectBtn(wrap);
+    if(cb) cb.classList.add("correct");
+    lockWrap(wrap);
+    finishItem(false, it);
+  }
+}
+
+/* find-the-letter */
+function renderFind(it, b){
+  const wrap = document.createElement("div");
+  wrap.className = "word-tiles";
+  it.tiles.forEach(function(t, i){
+    const btn = document.createElement("button");
+    btn.className = "tile hy"; btn.textContent = t;
+    btn.onclick = function(){
+      if(quiz.done) return;
+      if(i === it.correctTile){
+        btn.classList.add("correct");
+        wrap.querySelectorAll(".tile").forEach(function(x){ x.disabled = true; });
+        finishItem(quiz.tries === 0, it);
+      } else {
+        quiz.tries++;
+        btn.classList.add("wrong"); btn.disabled = true;
+      }
+    };
+    wrap.appendChild(btn);
+  });
+  b.appendChild(wrap);
+}
+
+/* tile building */
+function renderBuild(it, b){
+  const area = document.createElement("div");
+  area.className = "build-area"; area.id = "build-area";
+  area.innerHTML = '<span class="placeholder">Tap the tiles below to build…</span>';
+  b.appendChild(area);
+  const pool = document.createElement("div");
+  pool.className = "tile-pool"; pool.id = "tile-pool";
+  shuffle(it.tiles.map(function(t, i){ return {t: t, id: i}; })).forEach(function(tile){
+    const btn = document.createElement("button");
+    btn.className = "tile hy"; btn.textContent = tile.t;
+    btn.onclick = function(){ buildTap(it, tile, btn); };
+    pool.appendChild(btn);
+  });
+  b.appendChild(pool);
+  const row = document.createElement("div");
+  row.className = "btn-row";
+  const chk = document.createElement("button");
+  chk.className = "btn"; chk.textContent = "✓ Check";
+  chk.onclick = buildCheck;
+  const rst = document.createElement("button");
+  rst.className = "btn soft"; rst.textContent = "Start over";
+  rst.onclick = buildReset;
+  row.appendChild(chk); row.appendChild(rst);
+  b.appendChild(row);
+}
+function buildTap(it, tile, btn){
+  if(quiz.done || btn.classList.contains("used")) return;
+  btn.classList.add("used");
+  quiz.builtFrom.push({tile: tile, btn: btn});
+  drawBuilt(it);
+}
+function drawBuilt(it){
+  const area = $("build-area");
+  area.innerHTML = "";
+  if(!quiz.builtFrom.length){ area.innerHTML = '<span class="placeholder">Tap the tiles below to build…</span>'; return; }
+  quiz.builtFrom.forEach(function(entry, pos){
+    const chip = document.createElement("button");
+    chip.className = "built-chip hy"; chip.textContent = entry.tile.t;
+    chip.onclick = function(){
+      if(quiz.done) return;
+      entry.btn.classList.remove("used");
+      quiz.builtFrom.splice(pos, 1);
+      drawBuilt(it);
+    };
+    area.appendChild(chip);
+  });
+}
+function buildReset(){
+  if(!quiz || quiz.done) return;
+  quiz.builtFrom.forEach(function(e){ e.btn.classList.remove("used"); });
+  quiz.builtFrom = [];
+  drawBuilt(currentItem());
+}
+function buildCheck(){
+  if(!quiz || quiz.done) return;
+  const it = currentItem();
+  const built = quiz.builtFrom.map(function(e){ return e.tile.t; }).join(it.joiner);
+  const ok = it.joiner === " " ? built === it.target : built.toLowerCase() === it.target.toLowerCase();
+  if(ok){
+    finishItem(quiz.tries === 0, it);
+  } else {
+    quiz.tries++;
+    const fb = $("q-feedback");
+    fb.className = "feedback show bad";
+    fb.innerHTML = '<span class="verdict">Not yet — look carefully and try again!</span>You can tap a placed tile to take it back.';
+  }
+}
+
+/* shared finish for one item */
+function finishItem(firstTry, it){
+  quiz.done = true;
+  if(firstTry) quiz.firstTry++;
+  if(it.credit){
+    if(store.read.indexOf(it.credit) === -1){ store.read.push(it.credit); save(); }
+    if(quiz.mode === "practice" || firstTry){ if(quiz.sessionWords.indexOf(it.credit) === -1) quiz.sessionWords.push(it.credit); }
+    updateCounter();
+  }
+  const fb = $("q-feedback");
+  fb.className = "feedback show " + (firstTry ? "ok" : "bad");
+  let h = firstTry ? '<span class="verdict">⭐ Yes! You read it!</span>' : '<span class="verdict">Good try — here is the right one:</span>';
+  if(it.reveal){
+    h += '<div class="reveal-word hy">' + (typeof it.reveal.lit === "number" ? litWordHtml(it.reveal.word, it.reveal.lit) : esc(it.reveal.word)) + "</div>";
+  }
+  if(it.note) h += '<div class="note-line">' + esc(it.note) + "</div>";
+  fb.innerHTML = h;
+  $("q-score").textContent = "⭐ " + quiz.firstTry;
+  const nx = $("q-next");
+  nx.textContent = quiz.idx === quiz.items.length - 1 ? "Finish ✓" : "Next →";
+  nx.classList.remove("hidden");
+}
+function nextItem(){
+  quiz.idx++;
+  if(quiz.idx >= quiz.items.length) finishQuiz();
+  else renderItem();
+}
+
+/* results */
+function finishQuiz(){
+  const total = quiz.items.length;
+  const score = quiz.firstTry;
+  const pct = total ? score / total : 0;
+  let stars, passed = null;
+  if(quiz.mode === "test"){
+    const need = Math.ceil(total * 0.8);
+    passed = score >= need;
+    stars = pct >= 0.9 ? 3 : passed ? 2 : 1;
+    if(passed) store.passed[quiz.level] = true;
+  } else {
+    stars = pct >= 0.9 ? 3 : pct >= 0.6 ? 2 : 1;
+  }
+  if(!store.stars[quiz.level] || store.stars[quiz.level] < stars) store.stars[quiz.level] = stars;
+  save(); updateCounter();
+
+  $("r-stars").innerHTML = starStr(stars);
+  $("r-title").textContent = quiz.mode === "test"
+    ? (passed ? "🏆 Test passed — Level " + quiz.level + "!" : "Level " + quiz.level + " Test — keep going!")
+    : "🎯 Practice done — Level " + quiz.level + "!";
+  $("r-stats").textContent = score + " of " + total + " first-try correct" + (quiz.mode === "test" && !passed ? " · Pass is " + Math.ceil(total * 0.8) + " — practice a little and try again!" : "");
+  $("r-date").textContent = new Date().toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"});
+  const words = quiz.sessionWords;
+  $("r-words-title").textContent = quiz.level >= 3 ? "Words and sentences I can now read:" : "Words I can now read:";
+  const w = $("r-words"); w.innerHTML = "";
+  if(words.length){
+    words.forEach(function(word){
+      const s = document.createElement("span");
+      s.className = "word-chip hy" + (word.length > 14 ? " sent" : "");
+      s.textContent = word;
+      w.appendChild(s);
+    });
+    $("r-words-wrap").classList.remove("hidden");
+  } else {
+    $("r-words-wrap").classList.add("hidden");
+  }
+  const lv = quiz.level;
+  $("r-again-test").onclick = function(){ startQuiz(lv, "test"); };
+  $("r-again-practice").onclick = function(){ startQuiz(lv, "practice"); };
+  show("view-results");
+}
+
+renderHome();
+show("view-home");
+</script>
+</body>
+</html>

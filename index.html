@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>My Tests · Իմ թեստերը</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root {
+    --bg: var(--tg-theme-bg-color, #ffffff);
+    --text: var(--tg-theme-text-color, #111827);
+    --hint: var(--tg-theme-hint-color, #6b7280);
+    --accent: var(--tg-theme-button-color, #2563EB);
+    --card-bg: var(--tg-theme-bg-color, #ffffff);
+    --border: #e5e7eb;
+    --active-bg: #eff6ff;
+    --shadow: 0 1px 3px rgba(0,0,0,.05);
+  }
+  [data-scheme="dark"] {
+    --card-bg: var(--tg-theme-secondary-bg-color, #2c2c2e);
+    --border: rgba(255,255,255,.16);
+    --active-bg: rgba(82,136,247,.20);
+    --shadow: 0 1px 3px rgba(0,0,0,.45);
+  }
+  html, body {
+    position:fixed; inset:0; height:100%; overflow:hidden;
+    overscroll-behavior:none; touch-action:manipulation;
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Armenian", sans-serif;
+  }
+  #app {
+    height:100dvh; height:var(--tg-viewport-height, 100dvh);
+    display:flex; flex-direction:column;
+  }
+
+  /* ---------- list view ---------- */
+  #listView {
+    flex:1 1 auto; overflow-y:auto; overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    padding:28px 20px calc(96px + env(safe-area-inset-bottom));
+    display:flex; flex-direction:column; align-items:center;
+  }
+  h1 { font-size:26px; font-weight:800; text-align:center; letter-spacing:.2px; }
+  h1 .hy { display:block; font-size:17px; font-weight:600; color:var(--hint); margin-top:4px; }
+  .sub { margin-top:10px; font-size:14px; color:var(--hint); text-align:center; }
+  .list { width:100%; max-width:440px; margin-top:26px; display:flex; flex-direction:column; gap:14px; }
+  .card {
+    display:flex; align-items:center; gap:14px; width:100%;
+    padding:18px 16px; border:1.5px solid var(--border); border-radius:16px;
+    background:var(--card-bg); color:var(--text); text-align:left; cursor:pointer;
+    box-shadow:var(--shadow);
+    touch-action:manipulation; user-select:none; -webkit-user-select:none;
+    font-family:inherit;
+  }
+  .card:active { border-color:var(--accent); background:var(--active-bg); }
+  .ico { font-size:23px; line-height:1; flex:0 0 auto; width:52px; height:52px; display:flex; align-items:center; justify-content:center; border-radius:14px; }
+  .ic-dmv { background:rgba(37,99,235,.12); color:#2563EB; }
+  .ic-us { background:rgba(220,38,38,.10); color:#DC2626; }
+  .ic-pol { background:rgba(124,58,237,.12); color:#7C3AED; }
+  [data-scheme="dark"] .ic-dmv { background:rgba(82,136,247,.20); color:#7FB0FF; }
+  [data-scheme="dark"] .ic-us { background:rgba(248,113,113,.18); color:#FCA5A5; }
+  [data-scheme="dark"] .ic-pol { background:rgba(167,139,250,.20); color:#C4B5FD; }
+  .ig-ic { font-size:17px; background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+  .tt { flex:1 1 auto; min-width:0; }
+  .t1 { font-size:17px; font-weight:700; }
+  .t2 { font-size:13.5px; color:var(--hint); margin-top:2px; }
+  .arr { font-size:14px; color:var(--hint); flex:0 0 auto; }
+  .foot { margin-top:auto; padding-top:26px; text-align:center; }
+  .foot a {
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:13.5px; font-weight:600; color:var(--hint); text-decoration:none;
+    padding:8px 10px; touch-action:manipulation;
+  }
+  .foot a:active { color:var(--accent); }
+  .foot svg { flex:0 0 auto; display:block; }
+
+  /* ---------- test view ---------- */
+  #testView { flex:1 1 auto; display:none; flex-direction:column; min-height:0; }
+  #bar {
+    flex:0 0 auto; height:48px; display:flex; align-items:center; gap:10px;
+    padding:0 10px; border-bottom:1px solid var(--border); background:var(--bg);
+  }
+  #backBtn {
+    display:flex; align-items:center; gap:2px;
+    border:none; background:none; cursor:pointer;
+    color:var(--accent); font-size:16px; font-weight:600; font-family:inherit;
+    padding:8px 8px 8px 2px; touch-action:manipulation;
+  }
+  #barTitle {
+    flex:1 1 auto; font-size:15px; font-weight:700; text-align:center;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  #barSpacer { flex:0 0 64px; }
+  #frameWrap { flex:1 1 auto; position:relative; min-height:0; }
+  #frame { position:absolute; inset:0; width:100%; height:100%; border:0; background:var(--bg); }
+  #loading {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:15px; color:var(--hint); background:var(--bg);
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- List of tests -->
+  <div id="listView">
+    <h1>My Tests <span class="hy">Իմ թեստերը</span></h1>
+    <p class="sub">Choose a test · Ընտրիր թեստը</p>
+
+    <div class="list">
+      <button class="card" data-url="dmv/" data-title="DMV Test CA">
+        <div class="ico ic-dmv"><i class="fa-solid fa-car-side"></i></div>
+        <div class="tt">
+          <div class="t1">DMV Test CA</div>
+          <div class="t2">Կալիֆոռնիայի վարորդական թեստի տրենաժոր · 180 հարց</div>
+        </div>
+        <div class="arr"><i class="fa-solid fa-chevron-right"></i></div>
+      </button>
+
+      <button class="card" data-url="https://euphonious-dieffenbachia-f0b919.netlify.app" data-title="U.S. Citizenship Test">
+        <div class="ico ic-us"><i class="fa-solid fa-flag-usa"></i></div>
+        <div class="tt">
+          <div class="t1">U.S. Citizenship Test</div>
+          <div class="t2">ԱՄՆ քաղաքացիության թեստ · 128 հարց · USCIS 2025</div>
+        </div>
+        <div class="arr"><i class="fa-solid fa-chevron-right"></i></div>
+      </button>
+
+      <button class="card" data-url="https://unrivaled-jelly-211b2b.netlify.app" data-title="Դեմոկրա՞տ, թե՞ հանրապետական">
+        <div class="ico ic-pol"><i class="fa-solid fa-check-to-slot"></i></div>
+        <div class="tt">
+          <div class="t1">Դեմոկրա՞տ, թե՞ հանրապետական</div>
+          <div class="t2">Political test · Democrat or Republican? · 30 հարց</div>
+        </div>
+        <div class="arr"><i class="fa-solid fa-chevron-right"></i></div>
+      </button>
+    </div>
+
+    <div class="foot">
+      <a href="https://www.instagram.com/davit.zakaryan_/" data-ig="https://www.instagram.com/davit.zakaryan_/" aria-label="Instagram — Davit Zakaryan">
+        <i class="fa-brands fa-instagram ig-ic" aria-hidden="true"></i>
+        by Davit Zakaryan
+      </a>
+    </div>
+  </div>
+
+  <!-- One test, inside the same app window -->
+  <div id="testView">
+    <div id="bar">
+      <button id="backBtn">‹ Tests</button>
+      <div id="barTitle"></div>
+      <div id="barSpacer"></div>
+    </div>
+    <div id="frameWrap">
+      <div id="loading">Loading…</div>
+      <iframe id="frame" title="Test"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var tg = (window.Telegram && Telegram.WebApp) ? Telegram.WebApp : null;
+  function setH() {
+    if (tg && tg.viewportStableHeight) {
+      document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportStableHeight + 'px');
+    }
+  }
+  function applyScheme() {
+    var s = null;
+    if (tg && tg.colorScheme) s = tg.colorScheme;
+    if (!s && window.matchMedia) s = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (s) document.documentElement.setAttribute('data-scheme', s);
+    if (tg) {
+      try { if (tg.setBackgroundColor) tg.setBackgroundColor('bg_color'); } catch (e) {}
+      try { if (tg.setHeaderColor) tg.setHeaderColor('bg_color'); } catch (e) {}
+    }
+  }
+  if (tg) {
+    try {
+      tg.ready();
+      tg.expand();
+      if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();
+      setH();
+      if (tg.onEvent) {
+        tg.onEvent('viewportChanged', setH);
+        tg.onEvent('themeChanged', applyScheme);
+      }
+    } catch (e) {}
+  }
+  applyScheme();
+  if (window.matchMedia) {
+    try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyScheme); } catch (e) {}
+  }
+  // No zoom on double tap / pinch
+  document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+  var lastTouch = 0;
+  document.addEventListener('touchend', function (e) {
+    var now = Date.now();
+    if (now - lastTouch <= 300) e.preventDefault();
+    lastTouch = now;
+  }, { passive: false });
+  document.addEventListener('dblclick', function (e) { e.preventDefault(); });
+
+  var listView = document.getElementById('listView');
+  var testView = document.getElementById('testView');
+  var frame = document.getElementById('frame');
+  var loading = document.getElementById('loading');
+  var barTitle = document.getElementById('barTitle');
+
+  function showList() {
+    frame.removeAttribute('src');
+    testView.style.display = 'none';
+    listView.style.display = 'flex';
+    if (tg && tg.BackButton) { try { tg.BackButton.hide(); } catch (e) {} }
+  }
+  function showTest(url, title) {
+    barTitle.textContent = title;
+    loading.style.display = 'flex';
+    listView.style.display = 'none';
+    testView.style.display = 'flex';
+    var scheme = document.documentElement.getAttribute('data-scheme');
+    if (scheme) url += (url.indexOf('?') === -1 ? '?' : '&') + 'theme=' + scheme;
+    frame.src = url;
+    if (tg && tg.BackButton) {
+      try { tg.BackButton.show(); tg.BackButton.onClick(showList); } catch (e) {}
+    }
+  }
+  frame.addEventListener('load', function () { loading.style.display = 'none'; });
+  document.querySelectorAll('.card').forEach(function (c) {
+    c.addEventListener('click', function () {
+      showTest(c.getAttribute('data-url'), c.getAttribute('data-title'));
+    });
+  });
+  document.getElementById('backBtn').addEventListener('click', showList);
+
+  // Instagram footer: external destination — hand it to Telegram's link opener
+  var ig = document.querySelector('[data-ig]');
+  if (ig) {
+    ig.addEventListener('click', function (e) {
+      if (tg && tg.openLink) {
+        e.preventDefault();
+        tg.openLink(ig.getAttribute('data-ig'));
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
