@@ -235,6 +235,7 @@
   #startScr .rowbtns .btn{padding:9px 8px;font-size:13px}
   #startScr #startBtn{padding:11px 24px;font-size:16px}
   #startScr .sound-row{margin-top:7px;font-size:12px} #startScr .sound-toggle{padding:5px 11px;font-size:12px}
+  #startScr #themeRow{margin:2px 0 4px}
   @media(max-width:640px){
     #startScr .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     #startScr #mEvent{display:none}
@@ -292,6 +293,53 @@
   .tbtn{border-color:rgba(56,225,255,.4);background:rgba(6,14,30,.8);box-shadow:0 0 14px rgba(56,225,255,.2)}
   .tbtn.big{background:radial-gradient(circle at 35% 30%, #ffc078, #ff8a2a);color:#2a1503;box-shadow:0 0 22px rgba(255,158,69,.6)}
   #pauseBtn,#soundBtn{border-color:rgba(56,225,255,.4);box-shadow:0 0 12px rgba(56,225,255,.2)}
+
+  /* ===== ДНЕВНАЯ ТЕМА (body.theme-day) =====
+     Светлая зимняя палитра: светло-голубой дневной свет, белые панели,
+     тёмный читаемый текст, никакого неонового свечения. Ночная тема выше
+     при этом не тронута — день включается только классом на body. */
+  body.theme-day{--ink:#1d2f3f;--muted:#57707f;--panel:rgba(255,255,255,.88);--line:rgba(70,120,160,.38);--cold:#1590c4;background:#bcd7ea}
+  body.theme-day .overlay{background:radial-gradient(90% 60% at 15% 0%, rgba(255,255,255,.55), transparent 60%),radial-gradient(80% 55% at 85% 100%, rgba(255,190,110,.28), transparent 60%),radial-gradient(120% 100% at 50% 0%, rgba(206,229,244,.94), rgba(158,192,220,.96))}
+  body.theme-day .panel{background:rgba(248,251,253,.96);border-color:rgba(90,140,180,.55);box-shadow:0 0 0 1px rgba(90,140,180,.12),0 18px 50px rgba(50,90,130,.28)}
+  body.theme-day .card{background:rgba(255,255,255,.88);border-color:rgba(90,140,180,.4);box-shadow:0 4px 16px rgba(50,90,130,.16)}
+  body.theme-day .game-logo{border-color:rgba(90,150,200,.65);box-shadow:0 10px 26px rgba(50,90,130,.3)}
+  body.theme-day .panel h1{text-shadow:none;color:#1d2f3f}
+  body.theme-day .panel h1 span{color:#e07f24;text-shadow:none}
+  body.theme-day #waveBanner .w1{color:#1668a0;text-shadow:0 1px 8px rgba(255,255,255,.8)}
+  body.theme-day #waveBanner .w2{color:#1d2f3f;text-shadow:0 2px 18px rgba(255,255,255,.85),0 0 26px rgba(140,190,235,.5)}
+  body.theme-day .btn{box-shadow:0 0 12px rgba(255,158,69,.3),0 6px 18px rgba(120,70,10,.22)}
+  body.theme-day .btn.ghost{background:rgba(255,255,255,.55);color:#1668a0;border-color:rgba(70,130,180,.55);box-shadow:none;text-shadow:none}
+  body.theme-day .tab{border-color:rgba(70,120,160,.4);background:rgba(255,255,255,.5)}
+  body.theme-day .tab.on{box-shadow:0 4px 12px rgba(30,140,200,.3)}
+  body.theme-day .pill{border-color:rgba(70,120,160,.4);background:rgba(255,255,255,.5)}
+  body.theme-day .pill.on{box-shadow:0 4px 12px rgba(30,140,200,.3)}
+  body.theme-day .pill.warn.on{box-shadow:0 4px 12px rgba(230,60,60,.3)}
+  body.theme-day .buy{box-shadow:0 4px 10px rgba(255,140,40,.3)}
+  body.theme-day .buy.ghost2{background:transparent;box-shadow:none}
+  body.theme-day .chip{border-color:rgba(70,120,160,.4);box-shadow:none;background:rgba(255,255,255,.55)}
+  body.theme-day .chip b{color:#e07f24}
+  body.theme-day .lbl2{color:#1668a0;text-shadow:none}
+  body.theme-day kbd{background:#e3edf5;border-color:rgba(70,120,160,.45);color:#1d2f3f;box-shadow:none}
+  body.theme-day .hero,body.theme-day .ucard,body.theme-day .srow{background:rgba(255,255,255,.55)}
+  body.theme-day .hero.on{border-color:#e07f24;background:rgba(255,180,84,.22);box-shadow:0 4px 12px rgba(255,150,50,.25)}
+  body.theme-day .ucard:hover{border-color:#1590c4}
+  body.theme-day .ucard.evo{border-color:#a06ee0;box-shadow:none;background:rgba(190,150,255,.16)}
+  body.theme-day .sound-toggle{background:rgba(255,255,255,.55)}
+  body.theme-day .tg-note{background:rgba(90,170,235,.14);border-color:rgba(70,140,200,.4)}
+  body.theme-day .bar{background:rgba(20,50,80,.14);box-shadow:inset 0 1px 3px rgba(40,80,120,.25)}
+  body.theme-day .bar i{box-shadow:none}
+  body.theme-day #stats b{color:#1668a0}
+  body.theme-day #ammoBox .mag{text-shadow:none}
+  body.theme-day #hint{background:rgba(255,255,255,.9);border-color:rgba(70,120,160,.45);box-shadow:0 4px 14px rgba(50,90,130,.2);color:#1d2f3f}
+  body.theme-day #msg{background:rgba(255,255,255,.9);border-color:rgba(70,120,160,.4);color:#1d2f3f}
+  body.theme-day #shareImg{border-color:rgba(90,140,180,.55);box-shadow:0 8px 22px rgba(50,90,130,.25)}
+  body.theme-day #stick{border-color:rgba(70,120,160,.5);background:rgba(255,255,255,.3);box-shadow:0 4px 16px rgba(50,90,130,.2)}
+  body.theme-day #knob{background:radial-gradient(circle at 35% 30%, #ffffff, #a9cfe9);border-color:rgba(120,170,215,.8);box-shadow:0 4px 12px rgba(50,90,130,.3)}
+  body.theme-day .tbtn{border-color:rgba(70,120,160,.5);background:rgba(255,255,255,.82);color:#1d2f3f;box-shadow:0 4px 14px rgba(50,90,130,.2)}
+  body.theme-day .tbtn.big{background:radial-gradient(circle at 35% 30%, #ffc078, #ff8a2a);color:#2a1503;box-shadow:0 4px 16px rgba(255,140,40,.45)}
+  body.theme-day #pauseBtn,body.theme-day #soundBtn{border-color:rgba(70,120,160,.5);box-shadow:0 4px 12px rgba(50,90,130,.2)}
+  body.theme-day #bossBar{color:#d23b3b;text-shadow:0 1px 8px rgba(255,255,255,.8)}
+  body.theme-day .cal i{background:rgba(255,255,255,.55)}
 </style>
 </head>
 <body>
@@ -352,6 +400,8 @@
         <button class="tab" data-tab="quest" type="button">Задания</button>
       </div>
       <div id="tab-play">
+        <div class="lbl2">Тема — время суток</div>
+        <div class="pillrow" id="themeRow"></div>
         <div class="lbl2">Уровень угрозы (сложнее — больше награда)</div>
         <div class="pillrow" id="threatRow"></div>
         <div class="lbl2">Режим забега</div>
@@ -624,8 +674,18 @@ const EVOS=[
  {id:'evo3',n:'🏎️ Таран-монстр',d:'ЭВОЛЮЦИЯ: машина давит вдвое сильнее и не ломается от толпы. Нужны: Броня машины×1 + Скорость×1.',need:{carUp:1,spd:1},f:()=>{car.ramMul=2;car.maxHp*=1.5;car.hp=car.maxHp;}},
  {id:'evo4',n:'💉 Полевой госпиталь',d:'ЭВОЛЮЦИЯ: сильная регенерация. Нужны: Здоровье×2 + Регенерация×1.',need:{hp:2,regen:1},f:()=>{player.regen+=1.6;player.maxHp+=20;}}];
 const MODES={normal:{n:'Обычный'},night:{n:'🌙 Только ночь'},nocar:{n:'🚶 Без машины'},frost:{n:'🥶 Мороз'}};
-let META={scrap:0,bestWave:0,bestScore:0,totalKills:0,totalRuns:0,streak:0,lastDay:'',claimDay:{},heroes:{mechanic:true,hunter:true},perm:{},quests:null,season:{},ach:{},lastSeen:0,offline:0};
+let META={scrap:0,bestWave:0,bestScore:0,totalKills:0,totalRuns:0,streak:0,lastDay:'',claimDay:{},heroes:{mechanic:true,hunter:true},perm:{},quests:null,season:{},ach:{},lastSeen:0,offline:0,theme:'night'};
 let SEL={hero:'mechanic',threat:1,mode:'normal'};
+/* ---------- тема оформления: ☀️ день / 🌙 неоновая ночь ---------- */
+let THEME='night';
+function effTheme(){ /* мутатор «Только ночь» принудительно включает ночную тему на забег */ return SEL.mode==='night' ? 'night' : (META.theme==='day' ? 'day' : 'night'); }
+function applyTheme(){
+  THEME = effTheme();
+  document.body.classList.toggle('theme-day', THEME==='day');
+  document.body.classList.toggle('mode-night', SEL.mode==='night');
+  try{ const cs=document.querySelector('meta[name="color-scheme"]'); if(cs) cs.setAttribute('content', THEME==='day'?'light':'dark'); }catch(e){}
+  try{ if(TG){ const c = THEME==='day' ? '#a8cbe8' : '#040918'; if(TG.setHeaderColor) TG.setHeaderColor(c); if(TG.setBackgroundColor) TG.setBackgroundColor(c); } }catch(e){}
+}
 let RUN={up:{},scrap:0,reviveUsed:false,endless:false,loot:0,reroll:10,shop:[],carUp:{},picked:false,boss:null};
 PERMS.forEach(x=>{ if(META.perm[x.id]==null) META.perm[x.id]=0; });
 function todayStr(d){ d=d||new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
@@ -634,20 +694,27 @@ function saveMeta(){ cloudSave(); }
 function loadMeta(){ const done=j=>{ try{ if(j){ const m=JSON.parse(j); if(m&&typeof m==='object') META=Object.assign(META,m); } }catch(e){} PERMS.forEach(x=>{ if(!META.perm||META.perm[x.id]==null){ META.perm=META.perm||{}; META.perm[x.id]=0; } }); /* оффлайн-сбор лагеря, лимит 8 часов */
    if(META.lastSeen){ const hrs=Math.min(8,(Date.now()-META.lastSeen)/3600000); if(hrs>=1){ META.offline=Math.floor(hrs*6); } }
    ensureQuests(); renderStart(); };
- try{ if(TG&&TG.CloudStorage) TG.CloudStorage.getItem('zw_meta_v1',(e,v)=>loadMeta(v||window.__zwMeta||null)); else loadMeta(window.__zwMeta||null); }catch(e){ loadMeta(null); } }
+ try{ if(TG&&TG.CloudStorage) TG.CloudStorage.getItem('zw_meta_v1',(e,v)=>done(v||window.__zwMeta||null)); else done(window.__zwMeta||null); }catch(e){ done(null); } }
+loadMeta();
 function scrapMul(){ return (1+SEL.threat*.25)*(SEL.hero==='scavenger'?1.35:1); }
 function ensureQuests(){ const t=todayStr(); if(!META.quests||META.quests.date!==t){ const pool=[{id:'k50',n:'Убей 50 зомби',goal:50,key:'kills'},{id:'w8',n:'Дойди до волны 8',goal:8,key:'wave'},{id:'l10',n:'Собери 10 припасов (лут с зомби и ящиков)',goal:10,key:'loot'},{id:'k120',n:'Убей 120 зомби',goal:120,key:'kills'},{id:'s500',n:'Набери 1500 очков за день',goal:1500,key:'score'}]; /* забег дня: детерминированный выбор по дате */
    let seed=0; for(const c of t) seed+=c.charCodeAt(0); const list=[]; for(let i=0;i<3;i++) list.push(pool[(seed+i*2)%pool.length]); META.quests={date:t,list:list,prog:{},claimed:{}}; } }
 function questAdd(key,n){ if(!META.quests) return; META.quests.prog[key]=(META.quests.prog[key]||0)+n; META.quests.list.forEach(q=>{ if(q.key===key&&(META.quests.prog[key]||0)>=q.goal&&!META.quests.claimed[q.id]){ META.quests.claimed[q.id]=true; META.scrap+=30; showMsg('✅ Задание выполнено: '+q.n+' · +30 🔩'); saveMeta(); } }); }
 function eventName(){ const d=new Date(), md=(d.getMonth()+1)*100+d.getDate(); if(md>=1224||md<=107) return '🎄 Событие: Морозная волна'; if(md>=1031-7&&md<=1031) return '🎃 Событие: Тыквенный мороз'; return '❄️ Обычные дни'; }
-function renderStart(){ const g=id=>document.getElementById(id); if(!g('mScrap'))return;
+function renderStart(){ applyTheme(); const g=id=>document.getElementById(id); if(!g('mScrap'))return;
  g('mScrap').textContent=META.scrap; const mc=g('mCloud'); if(mc) mc.textContent=(TG&&TG.CloudStorage)?'☁️ Прогресс: облако Telegram':'💾 Прогресс: эта сессия (в Telegram — облако)'; g('mBest').textContent=META.bestWave; g('mStreak').textContent=META.streak; g('mEvent').textContent=eventName();
  if(META.offline>0){ const n=g('offlineNote'); n.classList.remove('hidden'); g('offlineText').innerHTML='<b>Пока тебя не было, лагерь собрал припасы:</b> +'+META.offline+' 🔩 уже начислено в баланс ниже — нажми, чтобы забрать в металлолом забегов.'; n.onclick=()=>{ META.scrap+=META.offline; META.offline=0; n.classList.add('hidden'); saveMeta(); renderStart(); }; }
  /* угрозы */
  g('threatRow').innerHTML=[0,1,2,3,4,5].map(i=>'<button type="button" class="pill warn'+(SEL.threat===i?' on':'')+'" data-threat="'+i+'">☠️ '+i+'</button>').join('');
  g('threatRow').querySelectorAll('[data-threat]').forEach(b=>b.onclick=()=>{ SEL.threat=+b.dataset.threat; haptic('click'); renderStart(); });
  g('modeRow').innerHTML=Object.keys(MODES).map(k=>'<button type="button" class="pill'+(SEL.mode===k?' on':'')+'" data-mode="'+k+'">'+MODES[k].n+'</button>').join('');
- g('modeRow').querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{ SEL.mode=b.dataset.mode; document.body.classList.toggle('mode-night',SEL.mode==='night'); haptic('click'); renderStart(); });
+ g('modeRow').querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{ SEL.mode=b.dataset.mode; applyTheme(); haptic('click'); renderStart(); });
+ /* тема оформления: выбор хранится в META и уходит в общий сейв (CloudStorage) */
+ const themeRow=g('themeRow');
+ if(themeRow){
+   themeRow.innerHTML=[['day','☀️ День'],['night','🌙 Ночь']].map(t=>'<button type="button" class="pill'+((META.theme||'night')===t[0]?' on':'')+'" data-theme="'+t[0]+'">'+t[1]+'</button>').join('');
+   themeRow.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{ META.theme=b.dataset.theme; saveMeta(); applyTheme(); haptic('click'); renderStart(); if(META.theme==='day'&&SEL.mode==='night') showMsg('Режим «🌙 Только ночь» включён: в этом забеге останется ночь, день применится в обычном режиме'); });
+ }
  g('heroGrid').innerHTML=Object.keys(HEROES).map(k=>{ const h=HEROES[k], own=!!META.heroes[k]; return '<button type="button" class="hero'+(SEL.hero===k?' on':'')+'" data-hero="'+k+'"><b>'+h.n+(own?'':' · 🔩'+h.cost)+'</b><span>'+h.d+'</span></button>'; }).join('');
  g('heroGrid').querySelectorAll('[data-hero]').forEach(b=>b.onclick=()=>{ const k=b.dataset.hero; if(!META.heroes[k]){ if(META.scrap>=HEROES[k].cost){ META.scrap-=HEROES[k].cost; META.heroes[k]=true; showMsg('Герой открыт: '+HEROES[k].n);} else { showMsg('Не хватает металлолома: надо '+HEROES[k].cost+' 🔩'); return; } } SEL.hero=k; saveMeta(); renderStart(); });
  g('permList').innerHTML=PERMS.map(x=>{ const lv=META.perm[x.id]||0, cost=x.base*(lv+1); return '<div class="srow"><div><b>'+x.n+'</b> · ур. '+lv+'/'+x.max+'<small>'+x.d+'</small></div><button class="buy" data-perm="'+x.id+'" '+(lv>=x.max||META.scrap<cost?'disabled':'')+'>'+(lv>=x.max?'МАКС':'🔩 '+cost)+'</button></div>'; }).join('');
@@ -667,7 +734,7 @@ function renderStart(){ const g=id=>document.getElementById(id); if(!g('mScrap')
 function purchaseStars(pack){ try{ if(TG&&TG.sendData){ TG.sendData(JSON.stringify({action:'buy_stars',pack:pack})); showMsg('Заявка отправлена боту — счёт на ⭐ придёт от бота, если его сервер включён.'); } else showMsg('Покупки за Stars работают только внутри Telegram через бота.'); }catch(e){ showMsg('Не удалось отправить заявку боту.'); } }
 function openInter(){ if(wave<=0) return; RUN.picked=false; renderInter(); document.getElementById('interScr').classList.remove('hidden'); tgMainButton(null); }
 function closeInter(){ document.getElementById('interScr').classList.add('hidden'); RUN.reroll=10; RUN.shop=[]; startWave(); }
-function makeShareCard(){ try{ const c=document.createElement('canvas'); c.width=900; c.height=1100; const x=c.getContext('2d'); const bg=x.createLinearGradient(0,0,0,1100); bg.addColorStop(0,'#081226'); bg.addColorStop(1,'#040918'); x.fillStyle=bg; x.fillRect(0,0,900,1100); const fr=x.createLinearGradient(0,0,900,1100); fr.addColorStop(0,'#38e1ff'); fr.addColorStop(1,'#ff9e45'); x.strokeStyle=fr; x.lineWidth=10; x.save(); x.shadowColor='rgba(56,225,255,.7)'; x.shadowBlur=24; x.strokeRect(24,24,852,1052); x.restore(); x.textAlign='center'; x.save(); x.shadowColor='rgba(255,158,69,.8)'; x.shadowBlur=26; x.fillStyle='#ffb35c'; x.font='44px "Russo One", sans-serif'; x.fillText('ЗОМБИ-ВЫЖИВАНИЕ',450,160); x.fillText('ЗИМОЙ',450,225); x.restore(); x.fillStyle='#eaf6ff'; x.font='30px "Russo One", sans-serif'; x.fillText('Волна: '+wave,450,420); x.fillText('Убито зомби: '+kills,450,495); x.fillText('Счёт: '+score,450,570); x.fillStyle='#38e1ff'; x.fillText('Металлолом: +'+Math.floor(RUN.scrap),450,645); x.font='20px "Russo One", sans-serif'; x.fillStyle='#9fc3dd'; x.fillText('Угроза: '+SEL.threat,450,740); x.fillStyle='#7fa8c4'; x.fillText(BOT_LINK,450,1010); const img=document.getElementById('shareImg'); img.src=c.toDataURL('image/png'); img.dataset.url=img.src; }catch(e){} }
+function makeShareCard(){ try{ const D=THEME==='day'; const c=document.createElement('canvas'); c.width=900; c.height=1100; const x=c.getContext('2d'); const bg=x.createLinearGradient(0,0,0,1100); if(D){ bg.addColorStop(0,'#f2f8fc'); bg.addColorStop(1,'#d3e5f1'); } else { bg.addColorStop(0,'#081226'); bg.addColorStop(1,'#040918'); } x.fillStyle=bg; x.fillRect(0,0,900,1100); const fr=x.createLinearGradient(0,0,900,1100); fr.addColorStop(0,'#38e1ff'); fr.addColorStop(1,'#ff9e45'); x.strokeStyle=fr; x.lineWidth=10; x.save(); x.shadowColor='rgba(56,225,255,.7)'; x.shadowBlur=D?0:24; x.strokeRect(24,24,852,1052); x.restore(); x.textAlign='center'; x.save(); x.shadowColor='rgba(255,158,69,.8)'; x.shadowBlur=D?0:26; x.fillStyle=D?'#e07f24':'#ffb35c'; x.font='44px "Russo One", sans-serif'; x.fillText('ЗОМБИ-ВЫЖИВАНИЕ',450,160); x.fillText('ЗИМОЙ',450,225); x.restore(); x.fillStyle=D?'#1d2f3f':'#eaf6ff'; x.font='30px "Russo One", sans-serif'; x.fillText('Волна: '+wave,450,420); x.fillText('Убито зомби: '+kills,450,495); x.fillText('Счёт: '+score,450,570); x.fillStyle=D?'#1668a0':'#38e1ff'; x.fillText('Металлолом: +'+Math.floor(RUN.scrap),450,645); x.font='20px "Russo One", sans-serif'; x.fillStyle=D?'#4a6a82':'#9fc3dd'; x.fillText('Угроза: '+SEL.threat,450,740); x.fillStyle=D?'#6d8ea6':'#7fa8c4'; x.fillText(BOT_LINK,450,1010); const img=document.getElementById('shareImg'); img.src=c.toDataURL('image/png'); img.dataset.url=img.src; }catch(e){} }
 
 /* ---------- мир ---------- */
 let buildings=[], wrecks=[], trees=[], fires=[], crates=[], pickups=[];
@@ -716,7 +783,7 @@ function resetGame(){
   RUN={up:{},scrap:0,reviveUsed:false,endless:false,loot:0,reroll:10,shop:[],carUp:{},picked:false,boss:null};
   (function applyBase(){ const pm=META.perm||{}; player.maxHp=100+(pm.hp||0)*10; player.hp=player.maxHp; player.dmgMul=1+(pm.dmg||0)*.08; player.speed=172*(1+(pm.spd||0)*.05); player.warmMul=1-(pm.warm||0)*.08; player.reserve=48+(pm.ammo||0)*12; if(SEL.hero==='hunter'){ player.dmgMul*=1.25; player.magSize=16; player.mag=16; } if(SEL.hero==='medic'){ player.maxHp+=30; player.hp=player.maxHp; } if(SEL.hero==='scavenger'){ player.speed*=1.1; } })();
   car={x:1785,y:1395,a:-.4,r:34,fuel:62,speed:0,maxFwd:335,maxRev:-120,hp:100,maxHp:100,ramMul:1,fuelMul:1,lights:false};
-  car.fuel=Math.min(100,62+((META.perm&&META.perm.car)||0)*10+(SEL.hero==='mechanic'?18:0)); if(SEL.hero==='mechanic'){ car.maxHp=140; car.hp=140; } if(SEL.mode==='nocar'){ car.fuel=0; } if(META.pendingAmmo){ player.reserve+=META.pendingAmmo; META.pendingAmmo=0; } document.body.classList.toggle('mode-night',SEL.mode==='night');
+  car.fuel=Math.min(100,62+((META.perm&&META.perm.car)||0)*10+(SEL.hero==='mechanic'?18:0)); if(SEL.hero==='mechanic'){ car.maxHp=140; car.hp=140; } if(SEL.mode==='nocar'){ car.fuel=0; } if(META.pendingAmmo){ player.reserve+=META.pendingAmmo; META.pendingAmmo=0; } applyTheme();
   zombies=[]; bullets=[]; parts=[]; floaters=[];
   wave=0; toSpawn=0; spawnT=0; betweenT=1.2; kills=0; score=0; shotsFired=0; elapsed=0;
   cam.x=player.x-W/2; cam.y=player.y-H/2;
@@ -935,7 +1002,7 @@ function gameOver(){
   state='over'; engine(false); sOver();
   tgMainButton('🔁 Играть снова', ()=>startGame());
   try{ if(TG && TG.BackButton) TG.BackButton.hide(); }catch(e){}
-  document.getElementById('overTitle').textContent = player.warm<=0&&Math.random()<.5?'Холод и зомби победили':'Ты не пережил ночь';
+  document.getElementById('overTitle').textContent = player.warm<=0&&Math.random()<.5?'Холод и зомби победили':(THEME==='day'?'Ты не пережил день':'Ты не пережил ночь');
   document.getElementById('overText').textContent='Ты продержался '+Math.floor(elapsed/60)+' мин '+(Math.floor(elapsed)%60)+' сек в заснеженном городе. Каждая следующая волна будет злее — но теперь ты знаешь улицы.';
   document.getElementById('fWaves').textContent=wave;
   document.getElementById('fKills').textContent=kills;
@@ -968,68 +1035,71 @@ function updateHUD(){
   el('ammoBox').classList.toggle('low',player.mag<=3);
   el('waveVal').textContent=Math.max(1,wave); el('leftVal').textContent=zombies.length+toSpawn;
   el('killVal').textContent=kills; el('scoreVal').textContent=score;
-  document.getElementById('vig').style.boxShadow='inset 0 0 '+(player.warm<35?150:90)+'px '+(player.warm<35?55:25)+'px rgba(110,180,255,'+(player.warm<35?.55:.14)+')';
+  document.getElementById('vig').style.boxShadow = THEME==='day'
+    ? 'inset 0 0 '+(player.warm<35?150:90)+'px '+(player.warm<35?55:25)+'px rgba(150,195,235,'+(player.warm<35?.4:.05)+')'
+    : 'inset 0 0 '+(player.warm<35?150:90)+'px '+(player.warm<35?55:25)+'px rgba(110,180,255,'+(player.warm<35?.55:.14)+')';
 }
 
 /* ---------- отрисовка ---------- */
 function draw(){
   ctx.clearRect(0,0,W,H);
+  const D = THEME==='day';
   const sx=cam.x+(shake?(Math.random()-.5)*shake:0), sy=cam.y+(shake?(Math.random()-.5)*shake:0);
   ctx.save(); ctx.translate(-sx,-sy);
 
-  /* земля ночью: тёмно-синий снег, блёстки и холодные отблески */
-  ctx.fillStyle='#17263f'; ctx.fillRect(sx-10,sy-10,W+20,H+20);
+  /* земля: ночью — тёмно-синий снег, днём — белый голубоватый снег в дневном свете */
+  ctx.fillStyle=D?'#dde9f2':'#17263f'; ctx.fillRect(sx-10,sy-10,W+20,H+20);
   const gx0=Math.floor((sx-58)/48)*48, gy0=Math.floor((sy-58)/48)*48;
-  ctx.fillStyle='#1e3050';
+  ctx.fillStyle=D?'#e9f2f8':'#1e3050';
   for(let gx=gx0;gx<sx+W+48;gx+=48) for(let gy=gy0;gy<sy+H+48;gy+=48){ if(((gx*31+gy*57)%7)<2){ ctx.beginPath(); ctx.ellipse(gx+((gx+gy)%3)*9,gy+((gx*3+gy)%3)*9,13,8,0,0,7); ctx.fill(); } }
-  ctx.fillStyle='rgba(190,225,255,.5)';
+  ctx.fillStyle=D?'rgba(255,255,255,.9)':'rgba(190,225,255,.5)';
   for(let gx=gx0;gx<sx+W+48;gx+=48) for(let gy=gy0;gy<sy+H+48;gy+=48){ if(((gx*13+gy*29)%11)<1) ctx.fillRect(gx+20,gy+28,3,3); }
-  /* дороги: тёмный асфальт, неоновые кромки и разметка */
-  ctx.fillStyle='#0a1120';
+  /* дороги: ночью — тёмный асфальт с неоном, днём — светлый асфальт и белая разметка */
+  ctx.fillStyle=D?'#a7b3bf':'#0a1120';
   for(const ry of [640,1300,1960]) ctx.fillRect(0,ry,WORLD.w,120);
   for(const rx of [640,1340,2040,2640]) ctx.fillRect(rx,0,120,WORLD.h);
-  ctx.fillStyle='rgba(56,225,255,.5)';
+  ctx.fillStyle=D?'rgba(70,110,150,.45)':'rgba(56,225,255,.5)';
   for(const ry of [640,1300,1960]){ ctx.fillRect(0,ry,WORLD.w,2); ctx.fillRect(0,ry+118,WORLD.w,2); }
   for(const rx of [640,1340,2040,2640]){ ctx.fillRect(rx,0,2,WORLD.h); ctx.fillRect(rx+118,0,2,WORLD.h); }
-  ctx.fillStyle='rgba(255,217,138,.55)';
+  ctx.fillStyle=D?'rgba(255,255,255,.8)':'rgba(255,217,138,.55)';
   for(const ry of [640,1300,1960]) for(let x=20;x<WORLD.w;x+=96) ctx.fillRect(x,ry+58,44,4);
   for(const rx of [640,1340,2040,2640]) for(let y=20;y<WORLD.h;y+=96) ctx.fillRect(rx+58,y,4,44);
   /* снежные обочины — мягкие светлые полосы вдоль дорог */
-  ctx.fillStyle='rgba(160,195,235,.35)';
+  ctx.fillStyle=D?'rgba(255,255,255,.6)':'rgba(160,195,235,.35)';
   for(const ry of [640,1300,1960]) for(let x=0;x<WORLD.w;x+=64){ ctx.fillRect(x,ry-5,40,3); ctx.fillRect(x+24,ry+122,40,3); }
   for(const rx of [640,1340,2040,2640]) for(let y=0;y<WORLD.h;y+=64){ ctx.fillRect(rx-5,y+24,3,40); ctx.fillRect(rx+122,y,3,40); }
 
   const inView=(x,y,m)=>x>sx-m&&x<sx+W+m&&y>sy-m&&y<sy+H+m;
 
-  /* костры — тёплое неоновое свечение радиальными градиентами */
-  for(const f of fires){ if(!inView(f.x,f.y,190))continue; const fl2=1+Math.sin(elapsed*9+f.ph)*.06; const R=(f.r+52)*fl2; const g=ctx.createRadialGradient(f.x,f.y,4,f.x,f.y,R); g.addColorStop(0,'rgba(255,170,70,.34)'); g.addColorStop(.55,'rgba(255,130,40,.14)'); g.addColorStop(1,'rgba(255,120,40,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(f.x,f.y,R,0,7); ctx.fill(); }
+  /* костры — тёплый акцент в обеих темах: ночью неоновый жар, днём мягкое тепло */
+  for(const f of fires){ if(!inView(f.x,f.y,190))continue; const fl2=1+Math.sin(elapsed*9+f.ph)*.06; const R=(f.r+52)*fl2; const g=ctx.createRadialGradient(f.x,f.y,4,f.x,f.y,R); g.addColorStop(0,D?'rgba(255,170,70,.22)':'rgba(255,170,70,.34)'); g.addColorStop(.55,D?'rgba(255,130,40,.08)':'rgba(255,130,40,.14)'); g.addColorStop(1,'rgba(255,120,40,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(f.x,f.y,R,0,7); ctx.fill(); }
 
-  /* здания: тёмные ночные силуэты, гладкие снежные крыши, окна светятся цианом и теплом */
+  /* здания: ночью — тёмные силуэты со светящимися окнами, днём — светлые фасады и стёкла */
   const sorted=[...buildings].sort((a,b)=>a.y-b.y);
   for(const b of sorted){ if(!inView(b.x+b.w/2,b.y+b.h/2,420))continue;
-    ctx.fillStyle='rgba(2,6,14,.5)'; roundRect(b.x+10,b.y+b.hgt+10,b.w,b.h-4,6); ctx.fill();
-    const wg=ctx.createLinearGradient(b.x,b.y+b.hgt,b.x,b.y+b.hgt+b.h); wg.addColorStop(0,'#1c2a44'); wg.addColorStop(1,'#101a2e');
+    ctx.fillStyle=D?'rgba(70,100,130,.25)':'rgba(2,6,14,.5)'; roundRect(b.x+10,b.y+b.hgt+10,b.w,b.h-4,6); ctx.fill();
+    const wg=ctx.createLinearGradient(b.x,b.y+b.hgt,b.x,b.y+b.hgt+b.h); if(D){ wg.addColorStop(0,'#d3dee7'); wg.addColorStop(1,'#aebfcc'); } else { wg.addColorStop(0,'#1c2a44'); wg.addColorStop(1,'#101a2e'); }
     ctx.fillStyle=wg; roundRect(b.x,b.y+b.hgt,b.w,b.h,4); ctx.fill();
-    ctx.strokeStyle='rgba(90,160,220,.35)'; ctx.lineWidth=1.5; roundRect(b.x,b.y+b.hgt,b.w,b.h,4); ctx.stroke();
+    ctx.strokeStyle=D?'rgba(90,120,150,.45)':'rgba(90,160,220,.35)'; ctx.lineWidth=1.5; roundRect(b.x,b.y+b.hgt,b.w,b.h,4); ctx.stroke();
     /* крыша — гладкий снежный скат вместо ступенек */
-    ctx.fillStyle='#8fb0d4';
+    ctx.fillStyle=D?'#f7fafc':'#8fb0d4';
     ctx.beginPath(); ctx.moveTo(b.x-6,b.y+b.hgt); ctx.lineTo(b.x+b.w*.5,b.y+b.hgt-b.hgt*.85); ctx.lineTo(b.x+b.w+6,b.y+b.hgt); ctx.closePath(); ctx.fill();
-    ctx.fillStyle='rgba(230,244,255,.85)';
+    ctx.fillStyle=D?'#ffffff':'rgba(230,244,255,.85)';
     ctx.beginPath(); ctx.moveTo(b.x+b.w*.5,b.y+b.hgt-b.hgt*.85); ctx.lineTo(b.x+b.w+6,b.y+b.hgt); ctx.lineTo(b.x+b.w*.62,b.y+b.hgt); ctx.closePath(); ctx.fill();
-    /* окна: тёмные, тёплые и циановые — ночной город не спит */
-    for(let wx=b.x+16;wx<b.x+b.w-20;wx+=36) for(let wy=b.y+b.hgt+18;wy<b.y+b.hgt+b.h-18;wy+=34){ const lit=((wx*7+wy*13)%5); ctx.fillStyle=lit<2?'#ffd98a':lit===2?'rgba(127,231,255,.9)':'rgba(6,12,24,.8)'; roundRect(wx,wy,14,10,2); ctx.fill(); }
-    /* неоновая вывеска с названием */
-    ctx.save(); ctx.shadowColor='rgba(56,225,255,.9)'; ctx.shadowBlur=9; ctx.fillStyle='#aee9ff'; ctx.font='12px "Russo One", sans-serif'; ctx.fillText(b.name,b.x+10,b.y+b.hgt+b.h-8); ctx.restore();
+    /* окна: ночью светятся теплом и цианом, днём — дневное стекло и редкие тёплые */
+    for(let wx=b.x+16;wx<b.x+b.w-20;wx+=36) for(let wy=b.y+b.hgt+18;wy<b.y+b.hgt+b.h-18;wy+=34){ const lit=((wx*7+wy*13)%5); ctx.fillStyle=D?(lit<1?'rgba(255,190,90,.85)':'rgba(96,138,175,.65)'):(lit<2?'#ffd98a':lit===2?'rgba(127,231,255,.9)':'rgba(6,12,24,.8)'); roundRect(wx,wy,14,10,2); ctx.fill(); }
+    /* вывеска с названием: ночью неон, днём обычная тёмная надпись */
+    ctx.save(); if(!D){ ctx.shadowColor='rgba(56,225,255,.9)'; ctx.shadowBlur=9; } ctx.fillStyle=D?'#2c5a7d':'#aee9ff'; ctx.font='12px "Russo One", sans-serif'; ctx.fillText(b.name,b.x+10,b.y+b.hgt+b.h-8); ctx.restore();
   }
 
-  /* ели ночью: тёмная хвоя гладкими ярусами, снежные шапки */
+  /* ели: тёмная хвоя ночью, зелёная днём; снежные шапки в обеих темах */
   for(const t of trees){ if(!inView(t.x,t.y,60))continue; const s=t.s;
-    ctx.fillStyle='rgba(2,6,14,.45)'; ctx.beginPath(); ctx.ellipse(t.x,t.y+8*s,13*s,5*s,0,0,7); ctx.fill();
+    ctx.fillStyle=D?'rgba(70,100,130,.25)':'rgba(2,6,14,.45)'; ctx.beginPath(); ctx.ellipse(t.x,t.y+8*s,13*s,5*s,0,0,7); ctx.fill();
     ctx.fillStyle='#4a3826'; ctx.fillRect(t.x-2*s,t.y-2*s,4*s,10*s);
-    ctx.fillStyle='#14382a';
+    ctx.fillStyle=D?'#2e7a4c':'#14382a';
     ctx.beginPath(); ctx.moveTo(t.x,t.y-30*s); ctx.lineTo(t.x+12*s,t.y-6*s); ctx.lineTo(t.x-12*s,t.y-6*s); ctx.closePath(); ctx.fill();
     ctx.beginPath(); ctx.moveTo(t.x,t.y-22*s); ctx.lineTo(t.x+10*s,t.y+1*s); ctx.lineTo(t.x-10*s,t.y+1*s); ctx.closePath(); ctx.fill();
-    ctx.fillStyle='rgba(210,235,255,.8)';
+    ctx.fillStyle=D?'rgba(255,255,255,.95)':'rgba(210,235,255,.8)';
     ctx.beginPath(); ctx.moveTo(t.x,t.y-30*s); ctx.lineTo(t.x+5*s,t.y-19*s); ctx.lineTo(t.x-5*s,t.y-19*s); ctx.closePath(); ctx.fill();
     ctx.beginPath(); ctx.moveTo(t.x,t.y-22*s); ctx.lineTo(t.x+7*s,t.y-12*s); ctx.lineTo(t.x+3*s,t.y-12*s); ctx.lineTo(t.x,t.y-18*s); ctx.lineTo(t.x-3*s,t.y-12*s); ctx.lineTo(t.x-7*s,t.y-12*s); ctx.closePath(); ctx.fill();
   }
@@ -1054,7 +1124,7 @@ function draw(){
   for(const f of fires){ if(!inView(f.x,f.y,80))continue; const fl=Math.sin(elapsed*11+f.ph)*2.2;
     ctx.strokeStyle='#4a3421'; ctx.lineWidth=5; ctx.lineCap='round';
     ctx.beginPath(); ctx.moveTo(f.x-12,f.y+7); ctx.lineTo(f.x+12,f.y+5); ctx.moveTo(f.x-11,f.y+4); ctx.lineTo(f.x+11,f.y+8); ctx.stroke();
-    ctx.save(); ctx.shadowColor='rgba(255,140,40,.95)'; ctx.shadowBlur=18;
+    ctx.save(); ctx.shadowColor='rgba(255,140,40,.95)'; ctx.shadowBlur=D?6:18;
     ctx.fillStyle='#ff7a1e'; ctx.beginPath(); ctx.moveTo(f.x-9,f.y+6); ctx.quadraticCurveTo(f.x-8,f.y-8-fl,f.x,f.y-16-fl); ctx.quadraticCurveTo(f.x+8,f.y-8-fl,f.x+9,f.y+6); ctx.closePath(); ctx.fill();
     ctx.fillStyle='#ffb03a'; ctx.beginPath(); ctx.moveTo(f.x-5.5,f.y+6); ctx.quadraticCurveTo(f.x-5,f.y-4-fl,f.x,f.y-10-fl); ctx.quadraticCurveTo(f.x+5,f.y-4-fl,f.x+5.5,f.y+6); ctx.closePath(); ctx.fill();
     ctx.fillStyle='#ffe9a3'; ctx.beginPath(); ctx.moveTo(f.x-3,f.y+6); ctx.quadraticCurveTo(f.x-2,f.y,f.x,f.y-5-fl*.6); ctx.quadraticCurveTo(f.x+2,f.y,f.x+3,f.y+6); ctx.closePath(); ctx.fill();
@@ -1072,9 +1142,9 @@ function draw(){
   /* игрок пешком */
   if(!player.inCar) drawPlayer();
 
-  /* пули — светящиеся неоновые трассеры */
-  ctx.save(); ctx.shadowColor='rgba(255,200,90,.95)'; ctx.shadowBlur=8;
-  for(const b of bullets){ ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(Math.atan2(b.vy,b.vx)); const tg=ctx.createLinearGradient(-12,0,6,0); tg.addColorStop(0,'rgba(255,170,60,0)'); tg.addColorStop(1,'#fff3c4'); ctx.fillStyle=tg; roundRect(-12,-1.8,18,3.6,1.8); ctx.fill(); ctx.restore(); }
+  /* пули: ночью — светящиеся неоновые трассеры, днём — тёмно-оранжевые без свечения */
+  ctx.save(); ctx.shadowColor='rgba(255,200,90,.95)'; ctx.shadowBlur=D?0:8;
+  for(const b of bullets){ ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(Math.atan2(b.vy,b.vx)); const tg=ctx.createLinearGradient(-12,0,6,0); tg.addColorStop(0,'rgba(255,170,60,0)'); tg.addColorStop(1,D?'#c85e12':'#fff3c4'); ctx.fillStyle=tg; roundRect(-12,-1.8,18,3.6,1.8); ctx.fill(); ctx.restore(); }
   ctx.restore();
 
   /* частицы */
@@ -1087,8 +1157,8 @@ function draw(){
   ctx.globalAlpha=1; ctx.textAlign='left';
   ctx.restore();
 
-  /* снегопад — мягкие круглые снежинки в ночном свете */
-  ctx.fillStyle='#eaf6ff';
+  /* снегопад — мягкие круглые снежинки, днём светлая метель */
+  ctx.fillStyle=D?'#ffffff':'#eaf6ff';
   for(const s of snowflakes){ s.y+=s.v/900; s.x+=Math.sin(elapsed*1.4+s.ph)*.0006+.0009; if(s.y>1){s.y=0;s.x=Math.random();} if(s.x>1)s.x=0;
     ctx.globalAlpha=.3+s.s*.16; ctx.beginPath(); ctx.arc(s.x*W,s.y*H,s.s*.85,0,7); ctx.fill(); }
   ctx.globalAlpha=1;
@@ -1096,56 +1166,59 @@ function draw(){
   drawMinimap(sx,sy);
 }
 function drawCar(x,y,a,color,wreck,looted,hero){
+  const D = THEME==='day';
   ctx.save(); ctx.translate(x,y); ctx.rotate(a);
-  ctx.fillStyle='rgba(2,6,14,.5)'; roundRect(-34,-14,74,38,8); ctx.fill();
-  if(hero){ ctx.fillStyle='rgba(56,225,255,.13)'; ctx.beginPath(); ctx.ellipse(0,0,52,28,0,0,7); ctx.fill(); }
+  ctx.fillStyle=D?'rgba(70,100,130,.28)':'rgba(2,6,14,.5)'; roundRect(-34,-14,74,38,8); ctx.fill();
+  if(hero){ ctx.fillStyle=D?'rgba(70,130,180,.16)':'rgba(56,225,255,.13)'; ctx.beginPath(); ctx.ellipse(0,0,52,28,0,0,7); ctx.fill(); }
   /* колёса */
   ctx.fillStyle='#0a0e14';
   roundRect(-27,-21,13,6,2); ctx.fill(); roundRect(15,-21,13,6,2); ctx.fill(); roundRect(-27,15,13,6,2); ctx.fill(); roundRect(15,15,13,6,2); ctx.fill();
   /* кузов: базовый цвет + глянцевый градиент поверх */
   ctx.fillStyle=color; roundRect(-36,-17,72,34,7); ctx.fill();
   const cg=ctx.createLinearGradient(0,-17,0,17); cg.addColorStop(0,'rgba(255,255,255,.20)'); cg.addColorStop(.5,'rgba(255,255,255,0)'); cg.addColorStop(1,'rgba(0,0,0,.28)'); ctx.fillStyle=cg; roundRect(-36,-17,72,34,7); ctx.fill();
-  ctx.strokeStyle='rgba(200,235,255,.35)'; ctx.lineWidth=1.5; roundRect(-36,-17,72,34,7); ctx.stroke();
+  ctx.strokeStyle=D?'rgba(70,100,130,.4)':'rgba(200,235,255,.35)'; ctx.lineWidth=1.5; roundRect(-36,-17,72,34,7); ctx.stroke();
   ctx.fillStyle='#1d2c3d'; roundRect(-12,-13,22,26,4); ctx.fill();
   ctx.fillStyle='rgba(160,210,240,.75)'; roundRect(-16,-12,5,24,2); ctx.fill(); roundRect(11,-12,4,24,2); ctx.fill();
   ctx.fillStyle='rgba(235,245,255,.9)'; roundRect(16,-13,14,26,3); ctx.fill(); roundRect(-36,-17,9,34,3); ctx.fill();
-  /* фары — неоновое свечение; у машины игрока — конус света */
-  if(hero){ const hg=ctx.createLinearGradient(36,0,155,0); hg.addColorStop(0,'rgba(255,240,190,.20)'); hg.addColorStop(1,'rgba(255,240,190,0)'); ctx.fillStyle=hg; ctx.beginPath(); ctx.moveTo(36,-13); ctx.lineTo(155,-36); ctx.lineTo(155,36); ctx.lineTo(36,13); ctx.closePath(); ctx.fill(); }
-  ctx.save(); ctx.shadowColor='rgba(255,233,168,.95)'; ctx.shadowBlur=hero?14:8; ctx.fillStyle='#ffe9a8'; roundRect(33,-12,4,7,2); ctx.fill(); roundRect(33,5,4,7,2); ctx.fill(); ctx.restore();
+  /* фары: ночью — неоновое свечение и конус света, днём — просто стёкла фар без свечения */
+  if(hero&&!D){ const hg=ctx.createLinearGradient(36,0,155,0); hg.addColorStop(0,'rgba(255,240,190,.20)'); hg.addColorStop(1,'rgba(255,240,190,0)'); ctx.fillStyle=hg; ctx.beginPath(); ctx.moveTo(36,-13); ctx.lineTo(155,-36); ctx.lineTo(155,36); ctx.lineTo(36,13); ctx.closePath(); ctx.fill(); }
+  ctx.save(); ctx.shadowColor='rgba(255,233,168,.95)'; ctx.shadowBlur=D?0:(hero?14:8); ctx.fillStyle=D?'#fff3cf':'#ffe9a8'; roundRect(33,-12,4,7,2); ctx.fill(); roundRect(33,5,4,7,2); ctx.fill(); ctx.restore();
   ctx.fillStyle='#ff5d5d'; roundRect(-37,-12,3,7,1); ctx.fill(); roundRect(-37,5,3,7,1); ctx.fill();
-  if(hero){ ctx.save(); ctx.shadowColor='rgba(56,225,255,.9)'; ctx.shadowBlur=8; ctx.fillStyle='#aee9ff'; ctx.font='10px "Russo One", sans-serif'; ctx.textAlign='center'; ctx.fillText('ТВОЯ',0,-27); ctx.restore(); }
+  if(hero){ ctx.save(); if(!D){ ctx.shadowColor='rgba(56,225,255,.9)'; ctx.shadowBlur=8; } ctx.fillStyle=D?'#2c5a7d':'#aee9ff'; ctx.font='10px "Russo One", sans-serif'; ctx.textAlign='center'; ctx.fillText('ТВОЯ',0,-27); ctx.restore(); }
   if(wreck&&!looted){ ctx.fillStyle='rgba(255,217,138,.95)'; ctx.font='bold 13px sans-serif'; ctx.textAlign='center'; ctx.fillText('?',0,-27); }
   ctx.restore();
 }
 function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 function drawPlayer(){
+  const D = THEME==='day';
   const P=player, bob=Math.sin(P.step)*1.6;
   ctx.save(); ctx.translate(P.x,P.y);
-  ctx.fillStyle='rgba(2,6,14,.45)'; ctx.beginPath(); ctx.ellipse(0,10,12,5,0,0,7); ctx.fill();
+  ctx.fillStyle=D?'rgba(70,100,130,.25)':'rgba(2,6,14,.45)'; ctx.beginPath(); ctx.ellipse(0,10,12,5,0,0,7); ctx.fill();
   ctx.rotate(P.aim);
   /* винтовка */
   ctx.fillStyle='#1c232c'; roundRect(6,-2.5,26,5,2); ctx.fill(); roundRect(28,-1.5,8,3,1); ctx.fill();
   ctx.fillStyle='#5a422a'; roundRect(0,-2,7,4,1); ctx.fill();
   ctx.restore(); ctx.save(); ctx.translate(P.x,P.y+bob);
-  /* тёплая куртка — круглый спрайт с циановой неоновой окантовкой */
+  /* тёплая куртка — круглый спрайт: ночью циановая неоновая окантовка, днём белая */
   ctx.fillStyle='#b8492f'; ctx.beginPath(); ctx.arc(0,0,12,0,7); ctx.fill();
   ctx.fillStyle='#7e2f22'; ctx.fillRect(-12,4,24,3.5);
-  ctx.strokeStyle='rgba(140,230,255,.75)'; ctx.lineWidth=1.6; ctx.beginPath(); ctx.arc(0,0,12,0,7); ctx.stroke();
+  ctx.strokeStyle=D?'rgba(255,255,255,.9)':'rgba(140,230,255,.75)'; ctx.lineWidth=1.6; ctx.beginPath(); ctx.arc(0,0,12,0,7); ctx.stroke();
   /* голова в шапке с помпоном */
   ctx.fillStyle='#e0b98f'; ctx.beginPath(); ctx.arc(0,0,6.5,0,7); ctx.fill();
   ctx.fillStyle='#2c4a72'; ctx.beginPath(); ctx.arc(0,-1,7,Math.PI,0); ctx.fill();
   ctx.fillRect(-7,-2.5,14,2.5);
-  ctx.save(); ctx.shadowColor='rgba(255,158,69,.9)'; ctx.shadowBlur=7; ctx.fillStyle='#ff9e45'; ctx.beginPath(); ctx.arc(0,-8.6,2.4,0,7); ctx.fill(); ctx.restore();
+  ctx.save(); ctx.shadowColor='rgba(255,158,69,.9)'; ctx.shadowBlur=D?0:7; ctx.fillStyle='#ff9e45'; ctx.beginPath(); ctx.arc(0,-8.6,2.4,0,7); ctx.fill(); ctx.restore();
   if(P.reload>0){ ctx.fillStyle='#ffd98a'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText('···',0,-20); }
   ctx.restore();
 }
 function drawZombie(z){
+  const D = THEME==='day';
   ctx.save(); ctx.translate(z.x,z.y);
-  ctx.fillStyle='rgba(2,6,14,.45)'; ctx.beginPath(); ctx.ellipse(0,z.r*.62,z.r*.85,5,0,0,7); ctx.fill();
+  ctx.fillStyle=D?'rgba(70,100,130,.25)':'rgba(2,6,14,.45)'; ctx.beginPath(); ctx.ellipse(0,z.r*.62,z.r*.85,5,0,0,7); ctx.fill();
   const tgt=player, a=angTo(z,tgt), wob=Math.sin(z.wob)*.12;
   ctx.rotate(a+wob);
-  const body=z.type==='boss'?'#6e2f38':z.type==='tank'?'#55663f':z.type==='fast'?'#6d814c':'#5d7345';
-  const skin=z.type==='tank'?'#9db37c':'#aec78d';
+  const body=D?(z.type==='boss'?'#8a4048':z.type==='tank'?'#6d7f52':z.type==='fast'?'#7f945f':'#72875c'):(z.type==='boss'?'#6e2f38':z.type==='tank'?'#55663f':z.type==='fast'?'#6d814c':'#5d7345');
+  const skin=D?'#c2d6a4':(z.type==='tank'?'#9db37c':'#aec78d');
   const R=z.r, sway=Math.sin(z.wob*1.4)*2.5;
   /* руки тянутся вперёд */
   ctx.strokeStyle=skin; ctx.lineWidth=5.5; ctx.lineCap='round';
@@ -1159,23 +1232,24 @@ function drawZombie(z){
   /* голова */
   ctx.fillStyle=skin; ctx.beginPath(); ctx.arc(R*.42,0,R*.52,0,7); ctx.fill();
   ctx.fillStyle='#31402a'; ctx.beginPath(); ctx.arc(R*.36,-R*.08,R*.5,Math.PI*.95,Math.PI*1.8); ctx.fill();
-  /* глаза — яркое неоновое свечение (у босса красные) */
-  ctx.save(); const ec=z.type==='boss'?'#ff4444':'#c6ff5e'; ctx.shadowColor=ec; ctx.shadowBlur=z.type==='boss'?14:10; ctx.fillStyle=ec;
+  /* глаза: ночью — яркое неоновое свечение (у босса красные), днём — обычные тёмные, без свечения */
+  ctx.save(); const ec=z.type==='boss'?'#ff4444':'#c6ff5e'; if(!D){ ctx.shadowColor=ec; ctx.shadowBlur=z.type==='boss'?14:10; } ctx.fillStyle=D?'#26331f':ec;
   ctx.beginPath(); ctx.arc(R*.72,-3.4,2.3,0,7); ctx.fill(); ctx.beginPath(); ctx.arc(R*.72,3.4,2.3,0,7); ctx.fill(); ctx.restore();
   ctx.restore();
   /* полоска HP у крепких — скруглённая, светящаяся */
-  if(z.type==='tank'||z.type==='boss'){ const bw=z.type==='boss'?72:40; ctx.fillStyle='rgba(0,0,0,.55)'; roundRect(z.x-bw/2,z.y-z.r-15,bw,7,3); ctx.fill(); ctx.fillStyle='#ff5d5d'; roundRect(z.x-bw/2+1,z.y-z.r-14,Math.max(3,(bw-2)*clamp(z.hp/(z.maxHp||124),0,1)),5,2); ctx.fill(); if(z.type==='boss'){ ctx.save(); ctx.shadowColor='rgba(255,210,62,.9)'; ctx.shadowBlur=8; ctx.fillStyle='#ffd23e'; ctx.font='11px "Russo One", sans-serif'; ctx.textAlign='center'; ctx.fillText('БОСС',z.x,z.y-z.r-22); ctx.restore(); } }
+  if(z.type==='tank'||z.type==='boss'){ const bw=z.type==='boss'?72:40; ctx.fillStyle='rgba(0,0,0,.55)'; roundRect(z.x-bw/2,z.y-z.r-15,bw,7,3); ctx.fill(); ctx.fillStyle='#ff5d5d'; roundRect(z.x-bw/2+1,z.y-z.r-14,Math.max(3,(bw-2)*clamp(z.hp/(z.maxHp||124),0,1)),5,2); ctx.fill(); if(z.type==='boss'){ ctx.save(); ctx.shadowColor='rgba(255,210,62,.9)'; ctx.shadowBlur=D?0:8; ctx.fillStyle=D?'#c47f0d':'#ffd23e'; ctx.font='11px "Russo One", sans-serif'; ctx.textAlign='center'; ctx.fillText('БОСС',z.x,z.y-z.r-22); ctx.restore(); } }
 }
 function drawMinimap(sx,sy){
+  const D = THEME==='day';
   const mw=118,mh=90,x0=W-mw-12,y0=H-mh-12-(document.body.classList.contains('touch')?150:0);
-  ctx.fillStyle='rgba(8,13,20,.88)'; ctx.fillRect(x0,y0,mw,mh);
-  ctx.strokeStyle='rgba(180,210,230,.45)'; ctx.lineWidth=2; ctx.strokeRect(x0,y0,mw,mh);
+  ctx.fillStyle=D?'rgba(244,249,252,.92)':'rgba(8,13,20,.88)'; ctx.fillRect(x0,y0,mw,mh);
+  ctx.strokeStyle=D?'rgba(70,110,150,.55)':'rgba(180,210,230,.45)'; ctx.lineWidth=2; ctx.strokeRect(x0,y0,mw,mh);
   const kx=mw/WORLD.w, ky=mh/WORLD.h;
   ctx.fillStyle='rgba(255,140,58,.95)'; for(const f of fires) ctx.fillRect(x0+f.x*kx-2,y0+f.y*ky-2,4,4);
   ctx.fillStyle='rgba(255,80,80,.95)'; for(const z of zombies) ctx.fillRect(x0+z.x*kx-1.5,y0+z.y*ky-1.5,3,3);
-  ctx.fillStyle='#7ee2a0'; ctx.fillRect(x0+player.x*kx-2.5,y0+player.y*ky-2.5,5,5);
+  ctx.fillStyle=D?'#2f9e5f':'#7ee2a0'; ctx.fillRect(x0+player.x*kx-2.5,y0+player.y*ky-2.5,5,5);
   ctx.fillStyle='#ffb454'; ctx.fillRect(x0+car.x*kx-2,y0+car.y*ky-2,4,4);
-  ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.strokeRect(x0+sx*kx,y0+sy*ky,W*kx,H*ky);
+  ctx.strokeStyle=D?'rgba(40,70,100,.4)':'rgba(255,255,255,.35)'; ctx.strokeRect(x0+sx*kx,y0+sy*ky,W*kx,H*ky);
 }
 
 /* ---------- цикл ---------- */
@@ -1223,7 +1297,7 @@ document.getElementById('rerollBtn').addEventListener('click',()=>{ const total=
 document.getElementById('endlessBtn').addEventListener('click',()=>{ RUN.endless=true; showMsg('🌑 Бесконечная ночь: волны без финала, сложность растёт'); closeInter(); });
 document.getElementById('dailyBtn').addEventListener('click',()=>{ const t=todayStr(); if(META.lastDay===t){ showMsg('Сегодня награда уже забрана. Календарь — во вкладке «Задания».'); return; } const y=new Date(); y.setDate(y.getDate()-1); if(META.lastDay===todayStr(y)) META.streak=(META.streak||0)+1; else if(!META.lastDay) META.streak=1; /* пропуск НЕ сбрасывает серию в ноль — она просто не растёт */
  const dayN=((META.streak-1)%30)+1; const rw=20+dayN*5; META.scrap+=rw; META.lastDay=t; META.claimDay=META.claimDay||{}; META.claimDay['d'+dayN]=true; saveMeta(); renderStart(); showMsg('🎁 Ежедневная награда: день '+dayN+' · +'+rw+' 🔩 · серия '+META.streak); haptic('pickup'); });
-document.getElementById('dayRunBtn').addEventListener('click',()=>{ const t=todayStr(); let seed=0; for(const c of t) seed+=c.charCodeAt(0); SEL.threat=seed%6; SEL.mode=Object.keys(MODES)[seed%4]; document.body.classList.toggle('mode-night',SEL.mode==='night'); renderStart(); showMsg('📅 Забег дня '+t+': угроза ☠️'+SEL.threat+', режим '+MODES[SEL.mode].n+' — одинаковые условия у всех сегодня'); });
+document.getElementById('dayRunBtn').addEventListener('click',()=>{ const t=todayStr(); let seed=0; for(const c of t) seed+=c.charCodeAt(0); SEL.threat=seed%6; SEL.mode=Object.keys(MODES)[seed%4]; applyTheme(); renderStart(); showMsg('📅 Забег дня '+t+': угроза ☠️'+SEL.threat+', режим '+MODES[SEL.mode].n+' — одинаковые условия у всех сегодня'); });
 document.getElementById('inviteBtn').addEventListener('click',()=>{ const url='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK+'?start=invite')+'&text='+encodeURIComponent('Заходи в «Зомби-выживание зимой» — получишь стартовый бонус +50 🔩, а мне дадут награду, когда дойдёшь до волны 5 🧟❄️'); try{ if(TG&&TG.openTelegramLink) TG.openTelegramLink(url); else window.open(url,'_blank'); }catch(e){ window.open(url,'_blank'); } });
 document.getElementById('homeBtn').addEventListener('click',()=>{ try{ if(TG&&TG.addToHomeScreen){ TG.addToHomeScreen(); showMsg('Если Telegram предложил — подтверди добавление на главный экран'); } else showMsg('Кнопка «на главный экран» работает внутри Telegram'); }catch(e){ showMsg('Telegram не поддержал добавление'); } });
 document.getElementById('shareBtn').addEventListener('click',()=>{ const text='🧟❄️ Я дошёл до волны '+wave+' в «Зомби-выживание зимой»: убито '+kills+', счёт '+score+'. Попробуй пережить дольше!'; const url='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK)+'&text='+encodeURIComponent(text); try{ if(TG&&TG.shareToStory&&document.getElementById('shareImg').src){ /* shareToStory требует публичный URL картинки — в статике её нет, поэтому честно уходим в обычный шеринг */ } if(TG&&TG.openTelegramLink) TG.openTelegramLink(url); else window.open(url,'_blank'); }catch(e){ window.open(url,'_blank'); } });
@@ -1232,6 +1306,7 @@ renderStart();
 
 /* Telegram: стартовая главная кнопка и тема */
 initTelegram();
+applyTheme(); /* initTelegram ставит тёмную шапку — возвращаем цвет выбранной темы */
 if(inTelegram){ tgMainButton('🎮 Начать выживание', ()=>startGame()); const note=document.getElementById('tgNote'); if(note) note.innerHTML='<span style="font-size:19px">✅</span><span><b>Вы внутри Telegram.</b> Игра уже развёрнута на весь экран: главная кнопка Telegram внизу дублирует старт, кнопка «Назад» ставит паузу, а удары и выстрелы отзываются вибрацией.</span>'; }
 else { const note=document.getElementById('tgNote'); if(note) note.innerHTML='<span style="font-size:19px">✈️</span><span><b>Telegram-версия готова:</b> эту же страницу можно открыть как Mini App из Telegram — она сама развернётся на весь экран, покажет главную кнопку Telegram и включит вибрацию. В обычном браузере игра работает полностью так же, со всеми звуками.</span>'; }
 </script>
