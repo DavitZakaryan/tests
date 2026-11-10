@@ -156,6 +156,90 @@
     #soundBtn{top:calc(132px + var(--tg-top, 0px))}
     #waveBanner .w2{font-size:38px}
   }
+
+  /* === НОВЫЕ СИСТЕМЫ: герои, прокачка, магазин, задания === */
+  .meta-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .chip{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:12.5px;font-weight:700}
+  .chip b{color:var(--accent)}
+  .tabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+  .tab{flex:1;min-width:70px;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);border-radius:10px;padding:8px 4px;font-weight:800;font-size:13px}
+  .tab.on{background:var(--accent);color:#23160a;border-color:transparent}
+  .pillrow{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+  .pill{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);border-radius:99px;padding:6px 12px;font-weight:700;font-size:13px}
+  .pill.on{background:var(--cold);color:#0a1a26;border-color:transparent}
+  .pill.warn.on{background:var(--danger);color:#fff}
+  .lbl2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800;margin:8px 0 2px}
+  .heroes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hero{cursor:pointer;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);border-radius:12px;padding:10px 12px}
+  .hero.on{border-color:var(--accent);background:rgba(255,180,84,.14)}
+  .hero b{display:block;font-size:15px}.hero span{font-size:12.5px;color:var(--muted);line-height:1.4;display:block;margin-top:2px}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  @media(max-width:560px){.cards3{grid-template-columns:1fr}.heroes{grid-template-columns:1fr}}
+  .ucard{cursor:pointer;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);border-radius:12px;padding:12px}
+  .ucard:hover{border-color:var(--accent)} .ucard b{display:block;font-size:15px;margin-bottom:4px}.ucard span{font-size:12.5px;color:var(--muted);line-height:1.45;display:block}
+  .ucard.evo{border-color:#c792ff;background:rgba(160,90,255,.14)}
+  .shop{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:560px){.shop{grid-template-columns:1fr}}
+  .srow{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:10px;padding:9px 11px;font-size:13.5px}
+  .srow small{display:block;color:var(--muted);margin-top:1px}
+  .buy{cursor:pointer;border:0;border-radius:9px;background:var(--accent);color:#23160a;font-weight:800;padding:8px 12px;white-space:nowrap;font-size:13px}
+  .buy:disabled{opacity:.4}.buy.ghost2{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .list{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+  .qdone{color:var(--good);font-weight:800}
+  #bossBar{position:absolute;left:50%;transform:translateX(-50%);top:calc(118px + var(--tg-top,0px));z-index:6;width:min(520px,86vw);display:none;text-align:center;font-weight:800;font-size:13px}
+  #bossBar .bar{height:10px;margin-top:4px}
+  #bossBar i{background:var(--danger)}
+  .cal{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 10px}
+  .cal i{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.07);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;font-weight:700}
+  .cal i.got{background:var(--good);color:#0a1a10;border-color:transparent}.cal i.today{border-color:var(--accent);color:var(--accent)}
+  #shareImg{width:100%;max-width:300px;border-radius:12px;border:1px solid var(--line);display:block;margin:10px auto}
+  .rowbtns{display:flex;gap:8px;flex-wrap:wrap}.rowbtns .btn{flex:1;width:auto;padding:11px 10px;font-size:14px}
+  body.mode-night #vig{box-shadow:inset 0 0 180px 70px rgba(2,6,18,.78) !important}
+
+  /* Компактность новых панелей: всё влезает без прокрутки (свайп убран) */
+  #interScr .panel{padding:16px 18px}
+  #interScr .ucard{padding:9px} #interScr .ucard b{font-size:13.5px} #interScr .ucard span{font-size:11.5px}
+  #interScr .srow{padding:7px 9px;font-size:12.5px}
+  #carList{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  @media(max-width:560px){ .cards3{grid-template-columns:repeat(3,1fr)} .shop{grid-template-columns:1fr 1fr} #carList{grid-template-columns:1fr 1fr} }
+  
+  @media(max-height:760px){ #interScr .sub{display:none} #startScr .tip{display:none} }
+  @media(max-width:640px){ #startScr .game-logo{width:64px;margin-bottom:6px} #startScr .sound-row span{display:none} .meta-bar{gap:5px} .chip{padding:4px 8px;font-size:11.5px} .tab{padding:6px 2px;font-size:12px} .pill{padding:5px 9px;font-size:12px} }
+
+  /* Стартовый экран влезает целиком на 900px десктопа и 844px телефона, управление видно */
+  #startScr .tg-note{display:none}
+  #startScr .panel > .tip{display:none}
+  #startScr .game-logo{width:84px;margin-bottom:8px}
+  #startScr .panel{padding:18px 24px}
+  #startScr .sub{margin-bottom:10px}
+  #startScr .grid{font-size:12.5px;gap:5px 14px;margin-bottom:12px;line-height:1.35}
+  #startScr .sound-row{margin-top:8px}
+  @media(max-width:640px){ #startScr .grid{display:none} #startScr .game-logo{width:58px} }
+
+  /* Финальное ужатие старта: все кнопки видны и нажимаются на 900px и 844px */
+  #startScr .game-logo{width:62px;margin-bottom:6px}
+  #startScr .panel{padding:14px 20px}
+  #startScr h1{font-size:clamp(23px,4.5vw,32px)}
+  #startScr .sub{font-size:13.5px;line-height:1.4;margin-bottom:8px}
+  #startScr .tg-badge{margin-bottom:7px;padding:3px 10px}
+  #startScr .meta-bar{flex-wrap:nowrap;overflow:hidden;margin-bottom:8px;gap:5px}
+  #startScr .chip{font-size:11px;padding:4px 8px;white-space:nowrap}
+  #startScr .tabs{margin-bottom:8px} #startScr .tab{padding:6px 2px;font-size:12.5px}
+  #startScr .lbl2{margin:5px 0 1px;font-size:11px}
+  #startScr .pillrow{margin:4px 0 6px;gap:5px} #startScr .pill{padding:5px 9px;font-size:12px}
+  #startScr .grid{font-size:11.5px;gap:4px 12px;margin-bottom:10px}
+  #startScr .grid kbd{padding:0 5px;font-size:11px}
+  #startScr .rowbtns .btn{padding:9px 8px;font-size:13px}
+  #startScr #startBtn{padding:11px 24px;font-size:16px}
+  #startScr .sound-row{margin-top:7px;font-size:12px} #startScr .sound-toggle{padding:5px 11px;font-size:12px}
+  @media(max-width:640px){
+    #startScr .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    #startScr #mEvent{display:none}
+    #startScr .meta-bar{flex-wrap:wrap}
+    #startScr .game-logo{width:46px}
+    #startScr .panel{padding:12px 14px}
+    #startScr #friendNote{display:none}
+  }
 </style>
 </head>
 <body>
@@ -170,12 +254,13 @@
       <div class="bar-row"><span class="lbl">Топливо</span><div class="bar"><i id="fuelFill"></i></div><span class="val" id="fuelVal"></span></div>
     </div>
     <div class="card" id="ammoBox"><div class="mag"><span id="magVal">12</span></div><div class="res">в запасе: <span id="resVal">36</span> · R — перезарядка</div></div>
-    <div class="card" id="stats"><div>Волна <b id="waveVal">1</b> · Зомби: <b id="leftVal">0</b></div><div>Убито: <b id="killVal">0</b> · Счёт: <b id="scoreVal">0</b></div></div>
+    <div class="card" id="stats"><div>Волна <b id="waveVal">1</b> · Зомби: <b id="leftVal">0</b></div><div>Убито: <b id="killVal">0</b> · Счёт: <b id="scoreVal">0</b> · 🔩 <b id="scrapVal">0</b></div></div>
   </div>
   <button id="soundBtn" title="Звук вкл/выкл" aria-label="Звук вкл/выкл">🔊</button>
   <button id="pauseBtn" title="Пауза">II</button>
   <div id="hint"></div>
   <div id="msg"></div>
+  <div id="bossBar">👹 БОСС<div class="bar"><i id="bossFill"></i></div></div>
   <div id="waveBanner"><div class="w1">Волна</div><div class="w2" id="waveNum">1</div></div>
 
   <div id="touch">
@@ -205,7 +290,50 @@
         <div><span>🚗</span><span>Твоя машина — тёмно-зелёная, у заправки. Дави зомби, но следи за топливом.</span></div>
         <div><span>🔥</span><span>Костры согревают. В брошенных машинах и ящиках — патроны, аптечки, канистры и еда.</span></div>
       </div>
-      <button class="btn" id="startBtn">Начать выживание</button>
+      
+      <div class="meta-bar"><span class="chip">🔩 Металлолом: <b id="mScrap">0</b></span><span class="chip">🏆 Рекорд: волна <b id="mBest">0</b></span><span class="chip">🔥 Серия дней: <b id="mStreak">0</b></span><span class="chip" id="mEvent">❄️ Обычные дни</span><span class="chip" id="mCloud">☁️ Прогресс: …</span></div>
+      <div id="offlineNote" class="tg-note hidden"><span style="font-size:19px">🏕️</span><span id="offlineText"></span></div>
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-tab="play" type="button">Играть</button>
+        <button class="tab" data-tab="hero" type="button">Герой</button>
+        <button class="tab" data-tab="meta" type="button">Прокачка</button>
+        <button class="tab" data-tab="quest" type="button">Задания</button>
+      </div>
+      <div id="tab-play">
+        <div class="lbl2">Уровень угрозы (сложнее — больше награда)</div>
+        <div class="pillrow" id="threatRow"></div>
+        <div class="lbl2">Режим забега</div>
+        <div class="pillrow" id="modeRow"></div>
+        <div class="rowbtns" style="margin-bottom:10px">
+          <button class="btn ghost" id="dayRunBtn" type="button" style="margin-top:0">📅 Забег дня — одна карта на всех</button>
+          <button class="btn ghost" id="dailyBtn" type="button" style="margin-top:0">🎁 Ежедневная награда</button>
+        </div>
+        <div class="rowbtns">
+          <button class="btn ghost" id="inviteBtn" type="button" style="margin-top:0">👥 Пригласить друга</button>
+          <button class="btn ghost" id="homeBtn" type="button" style="margin-top:0">📌 На главный экран</button>
+        </div>
+        <p class="tip" id="friendNote"></p>
+      </div>
+      <div id="tab-hero" class="hidden"><div class="heroes" id="heroGrid"></div><p class="tip">Герой открывается навсегда за металлолом — или уже твой. У каждого своё стартовое оружие и бонус.</p></div>
+      <div id="tab-meta" class="hidden">
+        <div class="lbl2">Постоянные улучшения — не сгорают после проигрыша</div>
+        <div class="list" id="permList"></div>
+        <div class="lbl2">Сезонный трек наград (бесплатный)</div>
+        <div class="list" id="seasonList"></div>
+        <p class="tip">Реклама за награду (AdsGram/Monetag) появится, когда бот подключит рекламную сеть и выдаст blockId — без него кнопки «смотреть рекламу» в игре нет, чтобы не выдавать награду за пустой таймер.</p>
+        <div class="lbl2">Покупки за Telegram Stars ⭐</div>
+        <div class="list" id="starsList"></div>
+        <p class="tip">Оплата Stars оформляется через бота: кнопка отправляет заявку боту (sendData), бот выставляет счёт. Без работающего сервера бота счёт не придёт — это честное ограничение, в самой странице оплату не подделать.</p>
+      </div>
+      <div id="tab-quest" class="hidden">
+        <div class="lbl2">Задания на сегодня</div>
+        <div class="list" id="questList"></div>
+        <div class="lbl2">Календарь наград — 30 дней (пропуск не сбрасывает серию в ноль)</div>
+        <div class="cal" id="calRow"></div>
+        <div class="lbl2">Достижения и рекорды</div>
+        <div class="list" id="achList"></div>
+      </div>
+<button class="btn" id="startBtn">Начать выживание</button>
       <div class="sound-row"><button class="sound-toggle" id="soundToggleStart" type="button">🔊 Звук: вкл</button><span>Выстрелы, зомби, машина, ветер и подбор лута — всё озвучено. Кнопка 🔊 в игре — выкл/вкл.</span></div>
       <p class="tip">На телефоне и в Telegram: левый стик — движение, 🔥 — огонь (прицел сам наводится на ближайшего зомби), ✋ — действие. Совет: не шуми без нужды — выстрелы и двигатель привлекают зомби со всей округи.</p>
     </div>
@@ -221,7 +349,34 @@
         <div class="fs"><b id="fKills">0</b><span>зомби убито</span></div>
         <div class="fs"><b id="fScore">0</b><span>итоговый счёт</span></div>
       </div>
-      <button class="btn" id="againBtn">Играть снова</button>
+      
+      <p class="sub" id="scrapLine" style="margin-top:0"></p>
+      <img id="shareImg" alt="Картинка результата забега для сторис" />
+      <div class="rowbtns">
+        <button class="btn" id="shareBtn" type="button">📤 Поделиться результатом</button>
+        
+      </div>
+      <div class="rowbtns" style="margin-top:8px">
+        <button class="btn ghost" id="dlBtn" type="button" style="margin-top:0">⬇️ Скачать картинку результата (для сторис)</button>
+      </div>
+<button class="btn" id="againBtn">Играть снова</button>
+    </div>
+  </div>
+
+  
+  <!-- МЕЖДУ ВОЛНАМИ: улучшения, магазин, машина -->
+  <div class="overlay hidden" id="interScr">
+    <div class="panel">
+      <h1 style="font-size:26px">Волна зачищена 🎉</h1>
+      <p class="sub" id="interSub">Выбери 1 улучшение, загляни в магазин — потом следующая волна.</p>
+      <div class="lbl2">Улучшение — 1 из 3</div>
+      <div class="cards3" id="upGrid"></div>
+      <div class="lbl2" style="margin-top:14px">Магазин за лут · 🔩 <span id="shopScrap">0</span></div>
+      <div class="shop" id="shopGrid"></div>
+      <div class="rowbtns" style="margin-top:8px"><button class="btn ghost" id="rerollBtn" type="button" style="margin-top:0">🔄 Перебросить магазин</button><button class="btn ghost hidden" id="endlessBtn" type="button" style="margin-top:0">🌑 Бесконечная ночь — продолжить после финала</button></div>
+      <div class="lbl2" style="margin-top:14px">Прокачка машины карточками</div>
+      <div class="list" id="carList"></div>
+      <button class="btn" id="nextWaveBtn">К следующей волне →</button>
     </div>
   </div>
 
@@ -383,6 +538,82 @@ function engine(on){ if(!AC)return;
   if(!on&&engineOsc){ const o=engineOsc,g=engineGain; engineOsc=null; try{g.gain.linearRampToValueAtTime(0,AC.currentTime+.25);}catch(e){} setTimeout(()=>{try{o.stop()}catch(e){}},350); }
 }
 
+
+/* ================= НОВЫЕ СИСТЕМЫ (анализ индустрии) ================= */
+const FINAL_WAVE=15, BOT_LINK='https://t.me/zombi_winter_game_bot';
+const HEROES={
+ mechanic:{n:'🔧 Механик',d:'Старт: пистолет + машина прочнее, бак больше, ремонт в магазине дешевле.',cost:0},
+ hunter:{n:'🎯 Охотник',d:'Старт: винтовка — урон +25%, магазин 16, прицел точнее.',cost:0},
+ medic:{n:'🩺 Медик',d:'Старт: дробовик-темп, +30 к макс. здоровью, аптечки падают чаще.',cost:120},
+ scavenger:{n:'🎒 Собиратель',d:'Старт: быстрый бег, лута и металлолома заметно больше.',cost:120}};
+const PERMS=[
+ {id:'hp',n:'Закалка',d:'+10 к макс. здоровью за уровень',max:5,base:40},
+ {id:'dmg',n:'Смазка ствола',d:'+8% к урону за уровень',max:5,base:40},
+ {id:'spd',n:'Тёплые ботинки',d:'+5% к скорости за уровень',max:5,base:35},
+ {id:'warm',n:'Термобельё',d:'Замерзаешь на 8% медленнее за уровень',max:5,base:35},
+ {id:'car',n:'Запасная канистра',d:'+10 к стартовому топливу за уровень',max:5,base:30},
+ {id:'ammo',n:'Схрон патронов',d:'+12 патронов в запасе за уровень',max:5,base:30}];
+const UPS=[
+ {id:'dmg',n:'💥 Урон +20%',d:'Каждая пуля бьёт сильнее.',f:()=>{player.dmgMul*=1.2;}},
+ {id:'rate',n:'⚡ Темп +18%',d:'Стреляешь заметно быстрее.',f:()=>{player.rateMul*=1.18;}},
+ {id:'mag',n:'🔋 Магазин +4',d:'Больше патронов до перезарядки.',f:()=>{player.magSize+=4;}},
+ {id:'spd',n:'🏃 Скорость +12%',d:'Быстрее ноги — дольше жизнь.',f:()=>{player.speed*=1.12;}},
+ {id:'hp',n:'❤️ Здоровье +25',d:'Максимум и текущее здоровье растут.',f:()=>{player.maxHp+=25;player.hp=Math.min(player.maxHp,player.hp+25);}},
+ {id:'armor',n:'🛡️ Броня +12%',d:'Меньше урона от укусов.',f:()=>{player.armor=Math.min(.6,player.armor+.12);}},
+ {id:'warm',n:'🧣 Утепление',d:'Замерзаешь на 20% медленнее.',f:()=>{player.warmMul*=.8;}},
+ {id:'regen',n:'♻️ Регенерация',d:'+0.5 здоровья в секунду.',f:()=>{player.regen+=.5;}},
+ {id:'carUp',n:'🚗 Броня машины',d:'Машина держит на 40% больше ударов.',f:()=>{car.maxHp*=1.4;car.hp=Math.min(car.maxHp,car.hp+30);}}];
+const EVOS=[
+ {id:'evo1',n:'🔥👑 Адский ствол',d:'ЭВОЛЮЦИЯ: урон ×1.6 и темп ×1.3. Нужны: Урон×2 + Темп×1.',need:{dmg:2,rate:1},f:()=>{player.dmgMul*=1.6;player.rateMul*=1.3;}},
+ {id:'evo2',n:'🧊 Термо-броня',d:'ЭВОЛЮЦИЯ: почти не замерзаешь + броня. Нужны: Утепление×1 + Броня×1.',need:{warm:1,armor:1},f:()=>{player.warmMul*=.45;player.armor=Math.min(.65,player.armor+.15);}},
+ {id:'evo3',n:'🏎️ Таран-монстр',d:'ЭВОЛЮЦИЯ: машина давит вдвое сильнее и не ломается от толпы. Нужны: Броня машины×1 + Скорость×1.',need:{carUp:1,spd:1},f:()=>{car.ramMul=2;car.maxHp*=1.5;car.hp=car.maxHp;}},
+ {id:'evo4',n:'💉 Полевой госпиталь',d:'ЭВОЛЮЦИЯ: сильная регенерация. Нужны: Здоровье×2 + Регенерация×1.',need:{hp:2,regen:1},f:()=>{player.regen+=1.6;player.maxHp+=20;}}];
+const MODES={normal:{n:'Обычный'},night:{n:'🌙 Только ночь'},nocar:{n:'🚶 Без машины'},frost:{n:'🥶 Мороз'}};
+let META={scrap:0,bestWave:0,bestScore:0,totalKills:0,totalRuns:0,streak:0,lastDay:'',claimDay:{},heroes:{mechanic:true,hunter:true},perm:{},quests:null,season:{},ach:{},lastSeen:0,offline:0};
+let SEL={hero:'mechanic',threat:1,mode:'normal'};
+let RUN={up:{},scrap:0,reviveUsed:false,endless:false,loot:0,reroll:10,shop:[],carUp:{},picked:false,boss:null};
+PERMS.forEach(x=>{ if(META.perm[x.id]==null) META.perm[x.id]=0; });
+function todayStr(d){ d=d||new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function cloudSave(){ /* П.19: мета-прогресс живёт в Telegram CloudStorage, а не в памяти телефона */ META.lastSeen=Date.now(); let j=JSON.stringify(META); if(j.length>3900){ const slim=Object.assign({},META,{claimDay:{}}); j=JSON.stringify(slim); } try{ if(TG&&TG.CloudStorage){ TG.CloudStorage.setItem('zw_meta_v1',j,(err)=>{ if(err) try{ window.__zwMeta=j; }catch(e){} }); return; } }catch(e){} try{ window.__zwMeta=j; }catch(e){} }
+function saveMeta(){ cloudSave(); }
+function loadMeta(){ const done=j=>{ try{ if(j){ const m=JSON.parse(j); if(m&&typeof m==='object') META=Object.assign(META,m); } }catch(e){} PERMS.forEach(x=>{ if(!META.perm||META.perm[x.id]==null){ META.perm=META.perm||{}; META.perm[x.id]=0; } }); /* оффлайн-сбор лагеря, лимит 8 часов */
+   if(META.lastSeen){ const hrs=Math.min(8,(Date.now()-META.lastSeen)/3600000); if(hrs>=1){ META.offline=Math.floor(hrs*6); } }
+   ensureQuests(); renderStart(); };
+ try{ if(TG&&TG.CloudStorage) TG.CloudStorage.getItem('zw_meta_v1',(e,v)=>loadMeta(v||window.__zwMeta||null)); else loadMeta(window.__zwMeta||null); }catch(e){ loadMeta(null); } }
+function scrapMul(){ return (1+SEL.threat*.25)*(SEL.hero==='scavenger'?1.35:1); }
+function ensureQuests(){ const t=todayStr(); if(!META.quests||META.quests.date!==t){ const pool=[{id:'k50',n:'Убей 50 зомби',goal:50,key:'kills'},{id:'w8',n:'Дойди до волны 8',goal:8,key:'wave'},{id:'l10',n:'Собери 10 припасов (лут с зомби и ящиков)',goal:10,key:'loot'},{id:'k120',n:'Убей 120 зомби',goal:120,key:'kills'},{id:'s500',n:'Набери 1500 очков за день',goal:1500,key:'score'}]; /* забег дня: детерминированный выбор по дате */
+   let seed=0; for(const c of t) seed+=c.charCodeAt(0); const list=[]; for(let i=0;i<3;i++) list.push(pool[(seed+i*2)%pool.length]); META.quests={date:t,list:list,prog:{},claimed:{}}; } }
+function questAdd(key,n){ if(!META.quests) return; META.quests.prog[key]=(META.quests.prog[key]||0)+n; META.quests.list.forEach(q=>{ if(q.key===key&&(META.quests.prog[key]||0)>=q.goal&&!META.quests.claimed[q.id]){ META.quests.claimed[q.id]=true; META.scrap+=30; showMsg('✅ Задание выполнено: '+q.n+' · +30 🔩'); saveMeta(); } }); }
+function eventName(){ const d=new Date(), md=(d.getMonth()+1)*100+d.getDate(); if(md>=1224||md<=107) return '🎄 Событие: Морозная волна'; if(md>=1031-7&&md<=1031) return '🎃 Событие: Тыквенный мороз'; return '❄️ Обычные дни'; }
+function renderStart(){ const g=id=>document.getElementById(id); if(!g('mScrap'))return;
+ g('mScrap').textContent=META.scrap; const mc=g('mCloud'); if(mc) mc.textContent=(TG&&TG.CloudStorage)?'☁️ Прогресс: облако Telegram':'💾 Прогресс: эта сессия (в Telegram — облако)'; g('mBest').textContent=META.bestWave; g('mStreak').textContent=META.streak; g('mEvent').textContent=eventName();
+ if(META.offline>0){ const n=g('offlineNote'); n.classList.remove('hidden'); g('offlineText').innerHTML='<b>Пока тебя не было, лагерь собрал припасы:</b> +'+META.offline+' 🔩 уже начислено в баланс ниже — нажми, чтобы забрать в металлолом забегов.'; n.onclick=()=>{ META.scrap+=META.offline; META.offline=0; n.classList.add('hidden'); saveMeta(); renderStart(); }; }
+ /* угрозы */
+ g('threatRow').innerHTML=[0,1,2,3,4,5].map(i=>'<button type="button" class="pill warn'+(SEL.threat===i?' on':'')+'" data-threat="'+i+'">☠️ '+i+'</button>').join('');
+ g('threatRow').querySelectorAll('[data-threat]').forEach(b=>b.onclick=()=>{ SEL.threat=+b.dataset.threat; haptic('click'); renderStart(); });
+ g('modeRow').innerHTML=Object.keys(MODES).map(k=>'<button type="button" class="pill'+(SEL.mode===k?' on':'')+'" data-mode="'+k+'">'+MODES[k].n+'</button>').join('');
+ g('modeRow').querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{ SEL.mode=b.dataset.mode; document.body.classList.toggle('mode-night',SEL.mode==='night'); haptic('click'); renderStart(); });
+ g('heroGrid').innerHTML=Object.keys(HEROES).map(k=>{ const h=HEROES[k], own=!!META.heroes[k]; return '<button type="button" class="hero'+(SEL.hero===k?' on':'')+'" data-hero="'+k+'"><b>'+h.n+(own?'':' · 🔩'+h.cost)+'</b><span>'+h.d+'</span></button>'; }).join('');
+ g('heroGrid').querySelectorAll('[data-hero]').forEach(b=>b.onclick=()=>{ const k=b.dataset.hero; if(!META.heroes[k]){ if(META.scrap>=HEROES[k].cost){ META.scrap-=HEROES[k].cost; META.heroes[k]=true; showMsg('Герой открыт: '+HEROES[k].n);} else { showMsg('Не хватает металлолома: надо '+HEROES[k].cost+' 🔩'); return; } } SEL.hero=k; saveMeta(); renderStart(); });
+ g('permList').innerHTML=PERMS.map(x=>{ const lv=META.perm[x.id]||0, cost=x.base*(lv+1); return '<div class="srow"><div><b>'+x.n+'</b> · ур. '+lv+'/'+x.max+'<small>'+x.d+'</small></div><button class="buy" data-perm="'+x.id+'" '+(lv>=x.max||META.scrap<cost?'disabled':'')+'>'+(lv>=x.max?'МАКС':'🔩 '+cost)+'</button></div>'; }).join('');
+ g('permList').querySelectorAll('[data-perm]').forEach(b=>b.onclick=()=>{ const x=PERMS.find(y=>y.id===b.dataset.perm), lv=META.perm[x.id]||0, cost=x.base*(lv+1); if(lv<x.max&&META.scrap>=cost){ META.scrap-=cost; META.perm[x.id]=lv+1; saveMeta(); renderStart(); } });
+ const season=[{id:'s1',n:'Дойди до волны 5 (всего)',goal:5,key:'bestWave',rw:40},{id:'s2',n:'Убей 300 зомби (всего)',goal:300,key:'totalKills',rw:80},{id:'s3',n:'Дойди до волны 10',goal:10,key:'bestWave',rw:120},{id:'s4',n:'Убей 1000 зомби (всего)',goal:1000,key:'totalKills',rw:200}];
+ g('seasonList').innerHTML=season.map(x=>{ const v=META[x.key]||0, done=v>=x.goal, cl=!!META.season[x.id]; return '<div class="srow"><div><b>'+x.n+'</b><small>Прогресс: '+Math.min(v,x.goal)+' / '+x.goal+' · награда '+x.rw+' 🔩</small></div><button class="buy" data-season="'+x.id+'" '+(done&&!cl?'':'disabled')+'>'+(cl?'Забрано':'Забрать')+'</button></div>'; }).join('') || '';
+ g('seasonList').querySelectorAll('[data-season]').forEach(b=>b.onclick=()=>{ const x=season.find(y=>y.id===b.dataset.season); if(x&&!META.season[x.id]&&(META[x.key]||0)>=x.goal){ META.season[x.id]=true; META.scrap+=x.rw; saveMeta(); renderStart(); } });
+ g('starsList').innerHTML=[['pack_s','Малый запас',50,'+150 🔩 и 60 патронов в следующем забеге'],['pack_m','Лагерный набор',150,'+500 🔩'],['pack_l','Зимний арсенал',400,'+1500 🔩 и все герои']].map(x=>'<div class="srow"><div><b>'+x[1]+' · ⭐ '+x[2]+'</b><small>'+x[3]+'</small></div><button class="buy" data-stars="'+x[0]+'">Купить</button></div>').join('');
+ g('starsList').querySelectorAll('[data-stars]').forEach(b=>b.onclick=()=>purchaseStars(b.dataset.stars));
+ ensureQuests();
+ g('questList').innerHTML=META.quests.list.map(q=>{ const pr=Math.min(META.quests.prog[q.key]||0,q.goal); return '<div class="srow"><div><b>'+q.n+'</b><small>'+pr+' / '+q.goal+'</small></div>'+(META.quests.claimed[q.id]?'<span class="qdone">✅ +30 🔩</span>':'<span>30 🔩</span>')+'</div>'; }).join('');
+ const dayNum=Math.min(30,(META.streak||0)+1); let cal=''; for(let i=1;i<=30;i++){ const got=META.claimDay&&META.claimDay['d'+i]; cal+='<i class="'+(got?'got':i===dayNum?'today':'')+'">'+i+'</i>'; } g('calRow').innerHTML=cal;
+ const ach=[['Рекорд волны',META.bestWave],['Рекорд счёта',META.bestScore],['Всего убито зомби',META.totalKills],['Всего забегов',META.totalRuns]];
+ g('achList').innerHTML=ach.map(a=>'<div class="srow"><div><b>'+a[0]+'</b></div><b>'+a[1]+'</b></div>').join('')+'<div class="srow"><div><b>Достижения</b><small>'+(META.bestWave>=5?'🏅 «Пережил пятую волну» ':'')+(META.bestWave>=10?'🏅 «Десятка» ':'')+(META.totalKills>=500?'🏅 «Истребитель» ':'')+((META.bestWave<5&&META.totalKills<500)?'Пока пусто — первая 🏅 за волну 5':'')+'</small></div></div>';
+ const sp=TG&&TG.initDataUnsafe&&TG.initDataUnsafe.start_param; if(sp&&String(sp).indexOf('invite')===0&&!META.friendBonus){ META.friendBonus=true; META.scrap+=50; g('friendNote').textContent='🎁 Ты пришёл по приглашению друга: +50 🔩 стартового металлолома уже у тебя. Дойди до волны 5 — и друг получит свою награду (проверка волны — на сервере бота).'; saveMeta(); }
+}
+function purchaseStars(pack){ try{ if(TG&&TG.sendData){ TG.sendData(JSON.stringify({action:'buy_stars',pack:pack})); showMsg('Заявка отправлена боту — счёт на ⭐ придёт от бота, если его сервер включён.'); } else showMsg('Покупки за Stars работают только внутри Telegram через бота.'); }catch(e){ showMsg('Не удалось отправить заявку боту.'); } }
+function openInter(){ if(wave<=0) return; RUN.picked=false; renderInter(); document.getElementById('interScr').classList.remove('hidden'); tgMainButton(null); }
+function closeInter(){ document.getElementById('interScr').classList.add('hidden'); RUN.reroll=10; RUN.shop=[]; startWave(); }
+function makeShareCard(){ try{ const c=document.createElement('canvas'); c.width=900; c.height=1100; const x=c.getContext('2d'); x.fillStyle='#0d1b28'; x.fillRect(0,0,900,1100); x.fillStyle='#ffb454'; x.font='900 64px Segoe UI,sans-serif'; x.textAlign='center'; x.fillText('ЗОМБИ-ВЫЖИВАНИЕ',450,140); x.fillText('ЗИМОЙ',450,215); x.fillStyle='#eef4f8'; x.font='700 44px Segoe UI,sans-serif'; x.fillText('Волна: '+wave,450,380); x.fillText('Убито зомби: '+kills,450,460); x.fillText('Счёт: '+score,450,540); x.fillText('Металлолом: +'+Math.floor(RUN.scrap)+' 🔩',450,620); x.font='400 32px Segoe UI,sans-serif'; x.fillStyle='#a9bcc9'; x.fillText('Герой: '+HEROES[SEL.hero].n+' · Угроза ☠️ '+SEL.threat,450,720); x.fillText(BOT_LINK,450,1010); const img=document.getElementById('shareImg'); img.src=c.toDataURL('image/png'); img.dataset.url=img.src; }catch(e){} }
+
 /* ---------- мир ---------- */
 let buildings=[], wrecks=[], trees=[], fires=[], crates=[], pickups=[];
 function rectsOverlap(a,b,p){ return a.x-p < b.x+b.w && a.x+a.w+p > b.x && a.y-p < b.y+b.h && a.y+a.h+p > b.y; }
@@ -426,8 +657,11 @@ for(let i=0;i<130;i++) snowflakes.push({x:Math.random(),y:Math.random(),s:rand(1
 
 function resetGame(){
   buildWorld();
-  player={x:1700,y:1330,r:14,hp:100,warm:100,aim:0,speed:172,reload:0,mag:12,reserve:48,fireCd:0,hurtCd:0,step:0,inCar:false,dead:false};
-  car={x:1785,y:1395,a:-.4,r:34,fuel:62,speed:0,maxFwd:335,maxRev:-120,hp:100};
+  player={x:1700,y:1330,r:14,hp:100,maxHp:100,warm:100,aim:0,speed:172,reload:0,mag:12,magSize:12,reserve:48,fireCd:0,hurtCd:0,step:0,inCar:false,dead:false,dmgMul:1,rateMul:1,armor:0,warmMul:1,regen:0};
+  RUN={up:{},scrap:0,reviveUsed:false,endless:false,loot:0,reroll:10,shop:[],carUp:{},picked:false,boss:null};
+  (function applyBase(){ const pm=META.perm||{}; player.maxHp=100+(pm.hp||0)*10; player.hp=player.maxHp; player.dmgMul=1+(pm.dmg||0)*.08; player.speed=172*(1+(pm.spd||0)*.05); player.warmMul=1-(pm.warm||0)*.08; player.reserve=48+(pm.ammo||0)*12; if(SEL.hero==='hunter'){ player.dmgMul*=1.25; player.magSize=16; player.mag=16; } if(SEL.hero==='medic'){ player.maxHp+=30; player.hp=player.maxHp; } if(SEL.hero==='scavenger'){ player.speed*=1.1; } })();
+  car={x:1785,y:1395,a:-.4,r:34,fuel:62,speed:0,maxFwd:335,maxRev:-120,hp:100,maxHp:100,ramMul:1,fuelMul:1,lights:false};
+  car.fuel=Math.min(100,62+((META.perm&&META.perm.car)||0)*10+(SEL.hero==='mechanic'?18:0)); if(SEL.hero==='mechanic'){ car.maxHp=140; car.hp=140; } if(SEL.mode==='nocar'){ car.fuel=0; } if(META.pendingAmmo){ player.reserve+=META.pendingAmmo; META.pendingAmmo=0; } document.body.classList.toggle('mode-night',SEL.mode==='night');
   zombies=[]; bullets=[]; parts=[]; floaters=[];
   wave=0; toSpawn=0; spawnT=0; betweenT=1.2; kills=0; score=0; shotsFired=0; elapsed=0;
   cam.x=player.x-W/2; cam.y=player.y-H/2;
@@ -435,7 +669,7 @@ function resetGame(){
 function lootTable(src){
   const roll=Math.random(); let got=null;
   if(roll<.34){ const n=6+Math.floor(Math.random()*10); player.reserve+=n; got='+'+n+' патронов'; }
-  else if(roll<.55){ player.hp=clamp(player.hp+30,0,100); got='+30 здоровья (аптечка)'; }
+  else if(roll<.55){ player.hp=clamp(player.hp+30,0,player.maxHp||100); got='+30 здоровья (аптечка)'; }
   else if(roll<.76){ if(src==='car'||Math.random()<.6){ car.fuel=clamp(car.fuel+22,0,100); got='+22 топлива (канистра)'; } else { player.warm=clamp(player.warm+35,0,100); got='Горячая еда: +35 тепла'; } }
   else if(roll<.9){ player.warm=clamp(player.warm+30,0,100); got='Термос с чаем: +30 тепла'; }
   else { score+=150; got='Находка: +150 к счёту'; }
@@ -487,12 +721,12 @@ bindBtn('tInteract',()=>interact());
 bindBtn('tReload',()=>startReload());
 
 /* ---------- игровые действия ---------- */
-function startReload(){ if(state!=='play'||paused||player.inCar||player.reload>0||player.mag>=12||player.reserve<=0)return; player.reload=1.05; sReload(); }
+function startReload(){ if(state!=='play'||paused||player.inCar||player.reload>0||player.mag>=(player.magSize||12)||player.reserve<=0)return; player.reload=1.05; sReload(); }
 function shoot(){
   if(player.mag<=0){ sEmpty(); player.fireCd=.3; startReload(); return; }
-  player.mag--; shotsFired++; player.fireCd=.16; sShoot();
+  player.mag--; shotsFired++; player.fireCd=.16/Math.max(.4,player.rateMul||1); sShoot();
   const a=player.aim+rand(-.028,.028);
-  bullets.push({x:player.x+Math.cos(player.aim)*22,y:player.y+Math.sin(player.aim)*22,vx:Math.cos(a)*880,vy:Math.sin(a)*880,life:.75});
+  bullets.push({x:player.x+Math.cos(player.aim)*22,y:player.y+Math.sin(player.aim)*22,vx:Math.cos(a)*880,vy:Math.sin(a)*880,life:.75,dmg:34*(player.dmgMul||1)});
   for(let i=0;i<4;i++) parts.push({x:player.x+Math.cos(player.aim)*26,y:player.y+Math.sin(player.aim)*26,vx:rand(-30,30),vy:rand(-30,30),life:rand(.08,.2),c:'#ffd98a',s:rand(1.5,3)});
   noiseWake(300);
 }
@@ -508,16 +742,17 @@ function interact(){
   if(state!=='play'||paused)return; audio();
   const it=nearestInteract(); if(!it)return;
   if(it.type==='exit'){ player.inCar=false; player.x=car.x+Math.cos(car.a+Math.PI/2)*44; player.y=car.y+Math.sin(car.a+Math.PI/2)*44; if(collide(player.x,player.y,player.r)){player.x=car.x- Math.cos(car.a+Math.PI/2)*44; player.y=car.y-Math.sin(car.a+Math.PI/2)*44;} engine(false); sEnterCar(); showMsg('Ты вышел на мороз. Грейся у костров.'); }
-  else if(it.type==='enter'){ if(car.fuel<=0){ showMsg('Бак пуст — нужна канистра из брошенных машин'); sEmpty(); return; } player.inCar=true; audio(); engine(true); sEnterCar(); showMsg('В машине тепло. W/S — газ/тормоз, A/D — руль'); }
-  else if(it.type==='loot'){ it.obj.looted=true; const got=lootTable(it.src==='wreck'?'car':'crate'); sPickup(); floater(player.x,player.y-30,got,'#ffe1a1'); score+=25; }
+  else if(it.type==='enter'){ if(SEL.mode==='nocar'){ showMsg('Режим «Без машины» — только пешком'); return; } if(car.fuel<=0){ showMsg('Бак пуст — нужна канистра из брошенных машин'); sEmpty(); return; } player.inCar=true; audio(); engine(true); sEnterCar(); showMsg('В машине тепло. W/S — газ/тормоз, A/D — руль'); }
+  else if(it.type==='loot'){ it.obj.looted=true; RUN.loot++; questAdd('loot',1); const got=lootTable(it.src==='wreck'?'car':'crate'); sPickup(); floater(player.x,player.y-30,got,'#ffe1a1'); score+=25; }
 }
 let msgT=null;
 function showMsg(t){ const m=document.getElementById('msg'); m.textContent=t; m.style.opacity=1; clearTimeout(msgT); msgT=setTimeout(()=>m.style.opacity=0,2600); }
 function floater(x,y,text,c){ floaters.push({x,y,text,c:c||'#fff',life:1.6}); }
 function banner(n){ const b=document.getElementById('waveBanner'); document.getElementById('waveNum').textContent=n; b.style.opacity=1; setTimeout(()=>b.style.opacity=0,2100); }
-function startWave(){ if(wave>0) sWaveClear(); wave++; toSpawn=5+wave*3; spawnT=.5; banner(wave); sWave(); showMsg(wave===1?'Они учуяли тебя. Не дай окружить себя!':'Волна '+wave+' — их больше, и они быстрее'); }
+function startWave(){ if(wave>0) sWaveClear(); wave++; const isBoss=(wave%5===0); toSpawn=Math.round((5+wave*3)*(1+SEL.threat*.18))+(isBoss?2:0); spawnT=.5; banner(wave); sWave(); if(isBoss){ setTimeout(()=>{ spawnBoss(); },900); showMsg('👹 БОСС-ВОЛНА '+wave+'! Держи дистанцию'); } else showMsg(wave===1?'Они учуяли тебя. Не дай окружить себя!':'Волна '+wave+' — их больше, и они быстрее'); questAdd('wave',0); if(META.quests){ META.quests.prog.wave=Math.max(META.quests.prog.wave||0,wave); META.quests.list.forEach(q=>{ if(q.key==='wave'&&wave>=q.goal&&!META.quests.claimed[q.id]){ META.quests.claimed[q.id]=true; META.scrap+=30; showMsg('✅ Задание: '+q.n+' · +30 🔩'); saveMeta(); } }); } }
 
 /* ---------- зомби ---------- */
+function spawnBoss(){ const px=player.inCar?car.x:player.x, py=player.inCar?car.y:player.y; const z={x:clamp(px+rand(-300,300),40,WORLD.w-40),y:clamp(py-320,40,WORLD.h-40),r:34,hp:(650+wave*90)*(1+SEL.threat*.25),maxHp:(650+wave*90)*(1+SEL.threat*.25),sp:rand(42,52),dmg:24,type:'boss',alert:true,wob:rand(0,6),atkCd:0}; zombies.push(z); RUN.boss=z; const bb=document.getElementById('bossBar'); if(bb) bb.style.display='block'; }
 function spawnZombie(){
   let x,y,tries=0;
   do{ const side=Math.floor(rand(0,4)); const px=player.inCar?car.x:player.x, py=player.inCar?car.y:player.y;
@@ -529,7 +764,7 @@ function spawnZombie(){
   let z={x,y,r:15,hp:30,sp:rand(52,72),dmg:9,type:'norm',alert:false,wob:rand(0,6),atkCd:0};
   if(wave>=2&&roll<.18){ z.type='fast'; z.hp=20; z.sp=rand(105,125); z.r=13; z.dmg=7; }
   else if(wave>=3&&roll>.9){ z.type='tank'; z.hp=110; z.sp=rand(36,46); z.r=21; z.dmg=16; }
-  z.hp+= wave*2.2; zombies.push(z);
+  z.hp=(z.hp+wave*2.2)*(1+SEL.threat*.22); z.sp*= (1+SEL.threat*.05)*(SEL.mode==='night'?1.1:1); z.maxHp=z.hp; zombies.push(z);
 }
 
 /* ---------- обновление ---------- */
@@ -538,13 +773,14 @@ function update(dt){
   const P=player;
   /* волны */
   if(toSpawn>0){ spawnT-=dt; if(spawnT<=0){ spawnZombie(); toSpawn--; spawnT=Math.max(.25,1.15-wave*.07); } }
-  else if(zombies.length===0){ betweenT-=dt; if(betweenT<=0){ startWave(); betweenT=4; } }
+  else if(zombies.length===0){ betweenT-=dt; if(betweenT<=0){ betweenT=4; if(wave<=0){ startWave(); } else if(wave>=FINAL_WAVE&&!RUN.endless){ openInter(); } else { if(document.getElementById('interScr').classList.contains('hidden')) openInter(); } } }
+  { const bb=document.getElementById('bossBar'); if(bb&&RUN.boss){ bb.style.display='block'; const bf=document.getElementById('bossFill'); if(bf) bf.style.width=clamp(RUN.boss.hp/(RUN.boss.maxHp||1)*100,0,100)+'%'; } else if(bb) bb.style.display='none'; }
 
   if(P.inCar){
     /* --- машина --- */
     const fwd=(keys.KeyW||keys.ArrowUp?1:0)+(keys.KeyS||keys.ArrowDown?-1:0)+(joy.active?-joy.dy:0);
     const turn=(keys.KeyA||keys.ArrowLeft?-1:0)+(keys.KeyD||keys.ArrowRight?1:0)+(joy.active?joy.dx:0);
-    if(car.fuel>0&&fwd!==0){ car.speed+=fwd*190*dt; car.fuel=Math.max(0,car.fuel-Math.abs(fwd)*dt*1.5); if(engineOsc)engineOsc.frequency.value=55+Math.abs(car.speed)*.22; }
+    if(car.fuel>0&&fwd!==0){ car.speed+=fwd*190*dt; car.fuel=Math.max(0,car.fuel-Math.abs(fwd)*dt*1.5*(car.fuelMul||1)); if(engineOsc)engineOsc.frequency.value=55+Math.abs(car.speed)*.22; }
     else car.speed-=car.speed*Math.min(1,dt*1.4);
     if(keys.KeyS||keys.ArrowDown) car.speed-=car.speed*Math.min(1,dt*2.2)*0; // тормоз естественным трением
     car.speed=clamp(car.speed,car.maxRev,car.maxFwd);
@@ -559,7 +795,7 @@ function update(dt){
     else { car.x=nx; car.y=ny; }
     P.x=car.x; P.y=car.y; P.aim=car.a;
     /* давим зомби */
-    if(Math.abs(car.speed)>55){ for(const z of zombies){ if(z.hp>0&&Math.hypot(z.x-car.x,z.y-car.y)<40){ z.hp-=Math.abs(car.speed)*.55; sHit(); burst(z.x,z.y,'#5d7a4a',7); if(z.hp<=0)killZombie(z,'Машина раздавила зомби'); } } }
+    if(Math.abs(car.speed)>55){ for(const z of zombies){ if(z.hp>0&&Math.hypot(z.x-car.x,z.y-car.y)<40){ z.hp-=Math.abs(car.speed)*.55*(car.ramMul||1); sHit(); burst(z.x,z.y,'#5d7a4a',7); if(z.hp<=0)killZombie(z,'Машина раздавила зомби'); } } }
     if(car.fuel<=0&&Math.abs(car.speed)<4){ showMsgThrottled('Топливо кончилось! Ищи канистры в брошенных машинах'); }
     /* тепло в машине */
     P.warm=clamp(P.warm+(car.fuel>0?9:-4)*dt,0,100);
@@ -581,11 +817,11 @@ function update(dt){
     }
     P.fireCd-=dt;
     if((mouse.down||touchFire)&&P.fireCd<=0&&P.reload<=0) shoot();
-    if(P.reload>0){ P.reload-=dt; if(P.reload<=0){ const take=Math.min(12-P.mag,P.reserve); P.mag+=take; P.reserve-=take; } }
+    if(P.reload>0){ P.reload-=dt; if(P.reload<=0){ const take=Math.min((P.magSize||12)-P.mag,P.reserve); P.mag+=take; P.reserve-=take; } }
     /* холод */
     let nearFire=false; for(const f of fires) if(Math.hypot(P.x-f.x,P.y-f.y)<f.r) nearFire=true;
     if(nearFire) P.warm=clamp(P.warm+13*dt,0,100);
-    else P.warm=clamp(P.warm-(sprint?2.6:1.55)*dt,0,100);
+    else P.warm=clamp(P.warm-(sprint?2.6:1.55)*(P.warmMul||1)*(SEL.mode==='frost'?1.8:1)*dt,0,100); if(P.regen) P.hp=clamp(P.hp+P.regen*dt,0,P.maxHp||100);
   }
   if(P.warm<=0){ P.hp-=3.4*dt; if(Math.random()<dt*.5) showMsgThrottled('Ты замерзаешь! Срочно к костру или в машину!'); }
   P.hurtCd-=dt;
@@ -605,7 +841,7 @@ function update(dt){
     else if(z.atkCd<=0){
       z.atkCd=.85;
       if(P.inCar){ car.hp-=z.dmg*.7; sBite(); shake=Math.max(shake,4); if(car.hp<=0){ car.hp=0; P.hp-=14; showMsg('Машина разбита! Выбирайся пешком'); P.inCar=false; engine(false); P.x=car.x+40; } }
-      else { if(P.hurtCd<=0){ P.hp-=z.dmg; P.hurtCd=.25; sHurt(); shake=Math.max(shake,5); burst(P.x,P.y,'#c33',5);} }
+      else { if(P.hurtCd<=0){ P.hp-=z.dmg*(1-(P.armor||0)); P.hurtCd=.25; sHurt(); shake=Math.max(shake,5); burst(P.x,P.y,'#c33',5);} }
     }
   }
   zombies=zombies.filter(z=>z.hp>0);
@@ -613,7 +849,7 @@ function update(dt){
   /* --- пули --- */
   for(const b of bullets){ b.x+=b.vx*dt; b.y+=b.vy*dt; b.life-=dt;
     if(b.life>0){ for(const bd of buildings) if(b.x>bd.x&&b.x<bd.x+bd.w&&b.y>bd.y&&b.y<bd.y+bd.h){ b.life=0; burst(b.x,b.y,'#cfd8de',3); break; } }
-    if(b.life>0) for(const z of zombies){ if(z.hp>0&&Math.hypot(z.x-b.x,z.y-b.y)<z.r+3){ z.hp-=34; z.alert=true; b.life=0; sHit(); burst(z.x,z.y,'#5d7a4a',6); if(z.hp<=0)killZombie(z); break; } }
+    if(b.life>0) for(const z of zombies){ if(z.hp>0&&Math.hypot(z.x-b.x,z.y-b.y)<z.r+3){ z.hp-=(b.dmg||34); z.alert=true; b.life=0; sHit(); burst(z.x,z.y,'#5d7a4a',6); if(z.hp<=0)killZombie(z); break; } }
   }
   bullets=bullets.filter(b=>b.life>0);
 
@@ -638,7 +874,7 @@ function update(dt){
 let shake=0, msgThrottle=0;
 function showMsgThrottled(t){ const n=performance.now(); if(n-msgThrottle>4200){ msgThrottle=n; showMsg(t);} }
 function burst(x,y,c,n){ for(let i=0;i<n;i++) parts.push({x,y,vx:rand(-95,95),vy:rand(-95,95),life:rand(.2,.5),c,s:rand(2,4.5)}); }
-function killZombie(z,how){ kills++; haptic('hit'); const pts=z.type==='tank'?150:z.type==='fast'?60:40; score+=pts; burst(z.x,z.y,'#48663a',10); floater(z.x,z.y-18,'+'+pts,'#bfe3a8'); if(Math.random()<.09){ const kinds=['ammo','med','food']; const k=kinds[Math.floor(Math.random()*3)]; pickups.push({x:z.x,y:z.y,kind:k,r:12,bob:rand(0,6)}); } }
+function killZombie(z,how){ kills++; META.totalKills++; questAdd('kills',1); questAdd('score',0); if(META.quests){ META.quests.prog.score=(META.quests.prog.score||0)+(z.type==='boss'?500:z.type==='tank'?150:z.type==='fast'?60:40); } haptic('hit'); const pts=z.type==='boss'?500:z.type==='tank'?150:z.type==='fast'?60:40; score+=pts; const sc=(z.type==='boss'?60:z.type==='tank'?10:z.type==='fast'?4:3)*scrapMul(); RUN.scrap+=sc; if(z.type==='boss'){ RUN.boss=null; const bb=document.getElementById('bossBar'); if(bb) bb.style.display='none'; floater(z.x,z.y-40,'👹 БОСС ПОВЕРЖЕН +'+Math.floor(sc)+' 🔩','#ffd98a'); } burst(z.x,z.y,'#48663a',10); floater(z.x,z.y-18,'+'+pts,'#bfe3a8'); if(Math.random()<(SEL.hero==='medic'?.14:.09)){ const kinds=['ammo','med','food']; const k=kinds[Math.floor(Math.random()*3)]; pickups.push({x:z.x,y:z.y,kind:k,r:12,bob:rand(0,6)}); } }
 
 function gameOver(){
   state='over'; engine(false); sOver();
@@ -649,6 +885,7 @@ function gameOver(){
   document.getElementById('fWaves').textContent=wave;
   document.getElementById('fKills').textContent=kills;
   document.getElementById('fScore').textContent=score;
+  META.bestWave=Math.max(META.bestWave,wave); META.bestScore=Math.max(META.bestScore,score); META.totalRuns++; META.scrap+=Math.floor(RUN.scrap); RUN.scrap=0; saveMeta(); renderStart(); const sl=document.getElementById('scrapLine'); if(sl) sl.textContent='Забег принёс металлолом — он уже в постоянной прокачке. Рекорд: волна '+META.bestWave+'.'; makeShareCard(); 
   document.getElementById('overScr').classList.remove('hidden');
   document.getElementById('hud').classList.add('hidden');
   document.body.classList.remove('playing');
@@ -657,7 +894,7 @@ function gameOver(){
 /* подборашки с зомби */
 function checkPickups(){
   if(player.inCar)return;
-  for(const p of pickups){ if(!p.taken&&Math.hypot(player.x-p.x,player.y-p.y)<26){ p.taken=true; sPickup();
+  for(const p of pickups){ if(!p.taken&&Math.hypot(player.x-p.x,player.y-p.y)<26){ p.taken=true; RUN.loot++; questAdd('loot',1); sPickup();
     if(p.kind==='ammo'){ player.reserve+=10; floater(p.x,p.y-20,'+10 патронов','#ffe1a1'); }
     if(p.kind==='med'){ player.hp=clamp(player.hp+25,0,100); floater(p.x,p.y-20,'+25 здоровья','#ffb3b3'); }
     if(p.kind==='food'){ player.warm=clamp(player.warm+30,0,100); floater(p.x,p.y-20,'+30 тепла','#aee3ff'); }
@@ -672,7 +909,7 @@ function updateHUD(){
   el('hpFill').style.background=player.hp<30?'var(--danger)':'var(--good)';
   el('warmFill').style.width=clamp(player.warm,0,100)+'%'; el('warmVal').textContent=Math.ceil(player.warm);
   el('fuelFill').style.width=clamp(car.fuel,0,100)+'%'; el('fuelVal').textContent=Math.ceil(car.fuel);
-  el('magVal').textContent=player.reload>0?'···':player.mag; el('resVal').textContent=player.reserve;
+  el('magVal').textContent=player.reload>0?'···':player.mag; const sv=el('scrapVal'); if(sv) sv.textContent=Math.floor(META.scrap+RUN.scrap); el('resVal').textContent=player.reserve;
   el('ammoBox').classList.toggle('low',player.mag<=3);
   el('waveVal').textContent=Math.max(1,wave); el('leftVal').textContent=zombies.length+toSpawn;
   el('killVal').textContent=kills; el('scoreVal').textContent=score;
@@ -815,7 +1052,7 @@ function drawZombie(z){
   ctx.fillStyle='rgba(60,80,100,.3)'; ctx.beginPath(); ctx.ellipse(0,z.r*.7,z.r*.85,z.r*.32,0,0,7); ctx.fill();
   const tgt=player, a=angTo(z,tgt), wob=Math.sin(z.wob)*.18;
   ctx.rotate(a+wob);
-  const body=z.type==='tank'?'#4c5a3d':z.type==='fast'?'#5d6e46':'#55663f';
+  const body=z.type==='boss'?'#5a2f35':z.type==='tank'?'#4c5a3d':z.type==='fast'?'#5d6e46':'#55663f';
   const skin=z.type==='tank'?'#8fa36b':'#9db37c';
   /* руки вперёд */
   ctx.strokeStyle=skin; ctx.lineWidth=4.5; ctx.beginPath(); ctx.moveTo(4,-6); ctx.lineTo(z.r+7,-8+Math.sin(z.wob*1.4)*2); ctx.moveTo(4,6); ctx.lineTo(z.r+7,8-Math.sin(z.wob*1.4)*2); ctx.stroke();
@@ -829,7 +1066,7 @@ function drawZombie(z){
   ctx.fillStyle='#e8ffb0'; ctx.fillRect(z.r*.32,-3.4,2.4,2.4); ctx.fillRect(z.r*.32,1.4,2.4,2.4);
   ctx.restore();
   /* полоска HP у крепких */
-  if(z.type==='tank'){ ctx.fillStyle='rgba(0,0,0,.4)'; ctx.fillRect(z.x-20,z.y-32,40,5); ctx.fillStyle='#c4544f'; ctx.fillRect(z.x-20,z.y-32,40*clamp(z.hp/124,0,1),5); }
+  if(z.type==='tank'||z.type==='boss'){ const bw=z.type==='boss'?72:40; ctx.fillStyle='rgba(0,0,0,.4)'; ctx.fillRect(z.x-bw/2,z.y-z.r-14,bw,5); ctx.fillStyle='#c4544f'; ctx.fillRect(z.x-bw/2,z.y-z.r-14,bw*clamp(z.hp/(z.maxHp||124),0,1),5); if(z.type==='boss'){ ctx.fillStyle='#ffd23e'; ctx.font='bold 16px sans-serif'; ctx.textAlign='center'; ctx.fillText('👹 БОСС',z.x,z.y-z.r-20); ctx.textAlign='left'; } }
 }
 function drawMinimap(sx,sy){
   const mw=118,mh=90,x0=W-mw-12,y0=H-mh-12-(document.body.classList.contains('touch')?150:0);
@@ -847,7 +1084,7 @@ function drawMinimap(sx,sy){
 function loop(t){
   requestAnimationFrame(loop);
   const dt=Math.min(.033,(t-lastT)/1000||0); lastT=t;
-  if(state==='play'&&!paused){ update(dt); checkPickups(); }
+  if(state==='play'&&!paused&&document.getElementById('interScr').classList.contains('hidden')){ update(dt); checkPickups(); }
   if(state==='play'||state==='over'||state==='menu'){ if(player) draw(); }
 }
 resetGame();
@@ -866,7 +1103,7 @@ function startGame(){
   document.body.classList.add('playing');
   tgMainButton(null);
   try{ if(TG && TG.BackButton) TG.BackButton.show(); }catch(e){}
-  showMsg('Найди костёр или грейся в машине. Зелёная машина — у тебя за спиной.');
+  document.getElementById('interScr').classList.add('hidden'); const bb2=document.getElementById('bossBar'); if(bb2) bb2.style.display='none'; showMsg('Герой: '+HEROES[SEL.hero].n+' · Угроза ☠️'+SEL.threat+' · '+MODES[SEL.mode].n+'. Найди костёр или грейся в машине.');
 }
 function togglePause(){ if(state!=='play')return; paused=!paused; sClick(); document.getElementById('pauseScr').classList.toggle('hidden',!paused); if(paused){ engine(false); tgMainButton('▶ Продолжить', ()=>togglePause()); } else { tgMainButton(null); if(player.inCar)engine(true); } }
 document.getElementById('startBtn').addEventListener('click',startGame);
@@ -880,6 +1117,21 @@ document.getElementById('soundToggleStart').addEventListener('click',()=>{ audio
 window.addEventListener('pointerdown',()=>audio(),{once:false});
 /* Стоны зомби рядом — случайно, пока идёт игра */
 setInterval(()=>{ if(state==='play' && !paused && soundOn && zombies && zombies.length){ const near = zombies.some(z=>player && Math.hypot(z.x-player.x,z.y-player.y)<380); if(near && Math.random()<0.55) sGroan(); } }, 3400);
+
+/* ---------- проводка новых кнопок ---------- */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t)); ['play','hero','meta','quest'].forEach(k=>{ const elx=document.getElementById('tab-'+k); if(elx) elx.classList.toggle('hidden',k!==t.dataset.tab); }); haptic('click'); renderStart(); }));
+document.getElementById('nextWaveBtn').addEventListener('click',()=>{ sClick(); closeInter(); });
+document.getElementById('rerollBtn').addEventListener('click',()=>{ const total=META.scrap+RUN.scrap; if(total<RUN.reroll){ showMsg('Не хватает 🔩 на переброс'); return; } let pay=Math.min(RUN.scrap,RUN.reroll); RUN.scrap-=pay; META.scrap-=(RUN.reroll-pay); RUN.reroll=Math.round(RUN.reroll*1.8); genShop(); saveMeta(); renderInter(); });
+document.getElementById('endlessBtn').addEventListener('click',()=>{ RUN.endless=true; showMsg('🌑 Бесконечная ночь: волны без финала, сложность растёт'); closeInter(); });
+document.getElementById('dailyBtn').addEventListener('click',()=>{ const t=todayStr(); if(META.lastDay===t){ showMsg('Сегодня награда уже забрана. Календарь — во вкладке «Задания».'); return; } const y=new Date(); y.setDate(y.getDate()-1); if(META.lastDay===todayStr(y)) META.streak=(META.streak||0)+1; else if(!META.lastDay) META.streak=1; /* пропуск НЕ сбрасывает серию в ноль — она просто не растёт */
+ const dayN=((META.streak-1)%30)+1; const rw=20+dayN*5; META.scrap+=rw; META.lastDay=t; META.claimDay=META.claimDay||{}; META.claimDay['d'+dayN]=true; saveMeta(); renderStart(); showMsg('🎁 Ежедневная награда: день '+dayN+' · +'+rw+' 🔩 · серия '+META.streak); haptic('pickup'); });
+document.getElementById('dayRunBtn').addEventListener('click',()=>{ const t=todayStr(); let seed=0; for(const c of t) seed+=c.charCodeAt(0); SEL.threat=seed%6; SEL.mode=Object.keys(MODES)[seed%4]; document.body.classList.toggle('mode-night',SEL.mode==='night'); renderStart(); showMsg('📅 Забег дня '+t+': угроза ☠️'+SEL.threat+', режим '+MODES[SEL.mode].n+' — одинаковые условия у всех сегодня'); });
+document.getElementById('inviteBtn').addEventListener('click',()=>{ const url='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK+'?start=invite')+'&text='+encodeURIComponent('Заходи в «Зомби-выживание зимой» — получишь стартовый бонус +50 🔩, а мне дадут награду, когда дойдёшь до волны 5 🧟❄️'); try{ if(TG&&TG.openTelegramLink) TG.openTelegramLink(url); else window.open(url,'_blank'); }catch(e){ window.open(url,'_blank'); } });
+document.getElementById('homeBtn').addEventListener('click',()=>{ try{ if(TG&&TG.addToHomeScreen){ TG.addToHomeScreen(); showMsg('Если Telegram предложил — подтверди добавление на главный экран'); } else showMsg('Кнопка «на главный экран» работает внутри Telegram'); }catch(e){ showMsg('Telegram не поддержал добавление'); } });
+document.getElementById('shareBtn').addEventListener('click',()=>{ const text='🧟❄️ Я дошёл до волны '+wave+' в «Зомби-выживание зимой»: убито '+kills+', счёт '+score+'. Попробуй пережить дольше!'; const url='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK)+'&text='+encodeURIComponent(text); try{ if(TG&&TG.shareToStory&&document.getElementById('shareImg').src){ /* shareToStory требует публичный URL картинки — в статике её нет, поэтому честно уходим в обычный шеринг */ } if(TG&&TG.openTelegramLink) TG.openTelegramLink(url); else window.open(url,'_blank'); }catch(e){ window.open(url,'_blank'); } });
+document.getElementById('dlBtn').addEventListener('click',()=>{ const img=document.getElementById('shareImg'); if(!img||!img.src) return; const a=document.createElement('a'); a.href=img.src; a.download='zombi-rezultat-volna-'+wave+'.png'; document.body.appendChild(a); a.click(); a.remove(); showMsg('Картинка сохранена — её можно поставить в сторис Telegram'); });
+renderStart();
+
 /* Telegram: стартовая главная кнопка и тема */
 initTelegram();
 if(inTelegram){ tgMainButton('🎮 Начать выживание', ()=>startGame()); const note=document.getElementById('tgNote'); if(note) note.innerHTML='<span style="font-size:19px">✅</span><span><b>Вы внутри Telegram.</b> Игра уже развёрнута на весь экран: главная кнопка Telegram внизу дублирует старт, кнопка «Назад» ставит паузу, а удары и выстрелы отзываются вибрацией.</span>'; }
