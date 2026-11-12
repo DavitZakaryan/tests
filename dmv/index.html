@@ -72,6 +72,29 @@
   .review-item .rc{ color:var(--ok); font-weight:600; }
   footer{ margin-top:22px; font-size:12.5px; color:var(--muted); text-align:center; line-height:1.6; }
   footer a{ color:var(--blue); }
+
+  .prem-badge{ display:inline-block; background:#F59E0B; color:#fff; font-size:11px; font-weight:800; padding:2px 9px; border-radius:999px; vertical-align:middle; margin-left:8px; letter-spacing:.4px; }
+  .q-timer{ font-weight:700; color:var(--ink); }
+  .q-timer.low{ color:var(--bad); }
+  .feat{ list-style:none; margin:6px 0 14px; }
+  .feat li{ position:relative; padding:7px 0 7px 32px; font-size:15px; }
+  .feat li i{ position:absolute; left:2px; top:10px; color:var(--blue); width:20px; text-align:center; }
+  .price{ font-size:23px; font-weight:800; text-align:center; margin:8px 0 2px; }
+  .price-note{ text-align:center; color:var(--muted); font-size:13.5px; margin-bottom:16px; }
+  .pay-err{ display:none; background:var(--bad-bg); color:var(--bad); border-radius:12px; padding:12px 14px; font-size:14.5px; margin-top:12px; }
+  .pay-err.show{ display:block; }
+  .pay-info{ display:none; background:var(--chip-bg); color:var(--ink); border-radius:12px; padding:12px 14px; font-size:14.5px; margin-top:12px; text-align:center; }
+  .pay-info.show{ display:block; }
+  .owned{ display:none; background:var(--ok-bg); color:var(--ok); border-radius:12px; padding:12px 14px; font-size:14.5px; text-align:center; margin-top:12px; font-weight:600; }
+  .owned.show{ display:block; }
+  .topics h3{ font-size:16px; margin:18px 0 10px; }
+  .topic-row{ margin-bottom:10px; font-size:14px; }
+  .topic-row .tr-head{ display:flex; justify-content:space-between; margin-bottom:4px; }
+  .topic-row .bar{ margin-bottom:0; }
+  .topic-row .bar i{ background:var(--ok); transition:width .3s; }
+  .topic-row.weak .bar i{ background:var(--bad); }
+  .topic-row .weak-tag{ color:var(--bad); font-weight:700; }
+  .review h4{ font-size:15px; margin:16px 0 8px; }
 </style>
 </head>
 <body>
@@ -92,15 +115,35 @@
       <span class="mb-ic"><i class="fa-solid fa-book-open"></i></span><div class="t" id="t-practice"></div>
       <div class="d" id="t-practice-d"></div>
     </button>
-    <button class="mode-btn" onclick="startQuiz('exam')">
-      <span class="mb-ic"><i class="fa-solid fa-stopwatch"></i></span><div class="t" id="t-exam"></div>
+    <button class="mode-btn" onclick="openExam()">
+      <span class="mb-ic"><i class="fa-solid fa-stopwatch"></i></span><div class="t" id="t-exam"></div><span class="prem-badge" id="t-prem-badge"></span>
       <div class="d" id="t-exam-d"></div>
     </button>
     <p class="note" id="t-note"></p>
   </section>
 
+  <section id="screen-paywall" class="card" style="display:none">
+    <h1 id="p-title"></h1>
+    <p class="sub" id="p-sub"></p>
+    <ul class="feat">
+      <li><i class="fa-solid fa-stopwatch"></i><span id="p-f1"></span></li>
+      <li><i class="fa-solid fa-layer-group"></i><span id="p-f2"></span></li>
+      <li><i class="fa-solid fa-chart-simple"></i><span id="p-f3"></span></li>
+    </ul>
+    <div class="price" id="p-price"></div>
+    <div class="price-note" id="p-price-note"></div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn" id="btn-buy" onclick="buyPremium()"></button>
+      <button class="btn ghost" id="btn-pay-home" onclick="goHome()"></button>
+    </div>
+    <div class="pay-info" id="p-info"></div>
+    <div class="pay-err" id="p-err"></div>
+    <div class="owned" id="p-owned"></div>
+    <p class="note" id="p-restore-note"></p>
+  </section>
+
   <section id="screen-quiz" class="card" style="display:none">
-    <div class="progress-row"><span id="q-count"></span><span id="q-mode"></span></div>
+    <div class="progress-row"><span id="q-count"></span><span class="q-timer" id="q-timer" style="display:none"></span><span id="q-mode"></span></div>
     <div class="bar"><i id="q-bar"></i></div>
     <div class="q-text" id="q-text"></div>
     <div id="q-opts"></div>
@@ -119,6 +162,7 @@
       <button class="btn ghost" id="btn-home" onclick="goHome()"></button>
       <button class="btn ghost" id="btn-share" onclick="shareResult()"></button>
     </div>
+    <div class="topics" id="r-topics"></div>
     <div class="review" id="r-review"></div>
   </section>
 
@@ -153,6 +197,24 @@ const STRINGS = {
     home: "Home",
     share: "Share result",
     shareText: (n,t)=>"I scored "+n+"/"+t+" on the California DMV exam simulation. Try it yourself!",
+    premBadge: "⭐ PREMIUM",
+    payTitle: "Exam simulation — Premium",
+    paySub: "The full exam experience — like the real DMV test.",
+    payF1: "36 questions with a 45-minute timer — the pace of the real exam",
+    payF2: "Mistake review grouped by topic, so you see exactly what to re-study",
+    payF3: "Statistics by topic with your weakest topics highlighted",
+    payPrice: "99 ⭐ Telegram Stars",
+    payPriceNote: "One-time payment. Premium is yours forever — no subscription.",
+    payBuy: "Unlock for 99 ⭐",
+    payOwned: "✅ Premium is active. Good luck on the exam!",
+    payErrUnavailable: "Payment is temporarily unavailable. Please try again later.",
+    payErrGeneric: "Something went wrong. Please try again.",
+    payPending: "Waiting for payment confirmation…",
+    payRestore: "Bought Premium on another device? After payment, the bot sends a restore link to your Telegram chat — open it here and Premium activates on this device too.",
+    topicsTitle: "Results by topic",
+    weakTag: "weak topic",
+    timeUp: "Time is up! Your exam has been submitted automatically.",
+    topics: { alcohol: "Alcohol & drugs", signs: "Signs & signals", speed: "Speed limits", parking: "Parking", rightofway: "Right of way & pedestrians", sharing: "Sharing the road", maneuvers: "Turns & passing", safety: "Safe driving & conditions", laws: "Licenses, laws & penalties", other: "General questions" },
     footer: "Demo version. Questions are written from the official <a href='https://www.dmv.ca.gov/portal/driver-handbooks/' target='_blank' rel='noopener'>California Driver Handbook</a> (dmv.ca.gov). This is general study material, not an official DMV test. <br><a href='privacy.html'>Privacy Policy</a> · <a href='terms.html'>Terms of Service</a>"
   },
   ru: {
@@ -181,6 +243,24 @@ const STRINGS = {
     home: "На главную",
     share: "Поделиться результатом",
     shareText: (n,t)=>"Мой результат в симуляции экзамена DMV: "+n+"/"+t+". Попробуй и ты!",
+    premBadge: "⭐ PREMIUM",
+    payTitle: "Симуляция экзамена — Premium",
+    paySub: "Полноценный экзамен — как настоящий тест DMV.",
+    payF1: "36 вопросов с таймером на 45 минут — темп настоящего экзамена",
+    payF2: "Разбор ошибок по темам — сразу видно, что нужно подучить",
+    payF3: "Статистика по темам: ваши слабые темы подсвечены",
+    payPrice: "99 ⭐ Telegram Stars",
+    payPriceNote: "Разовый платёж. Premium ваш навсегда — без подписки.",
+    payBuy: "Открыть за 99 ⭐",
+    payOwned: "✅ Premium активен. Удачи на экзамене!",
+    payErrUnavailable: "Оплата временно недоступна. Попробуйте позже.",
+    payErrGeneric: "Что-то пошло не так. Попробуйте ещё раз.",
+    payPending: "Ждём подтверждение оплаты…",
+    payRestore: "Купили Premium на другом устройстве? После оплаты бот пришлёт в ваш Telegram ссылку восстановления — откройте её здесь, и Premium активируется и на этом устройстве.",
+    topicsTitle: "Результаты по темам",
+    weakTag: "слабая тема",
+    timeUp: "Время вышло! Экзамен отправлен автоматически.",
+    topics: { alcohol: "Алкоголь и наркотики", signs: "Знаки и сигналы", speed: "Скорость и ограничения", parking: "Парковка", rightofway: "Приоритет и пешеходы", sharing: "Совместное движение", maneuvers: "Повороты и обгон", safety: "Безопасность и условия", laws: "Права, законы и штрафы", other: "Общие вопросы" },
     footer: "Демоверсия. Вопросы написаны по официальному <a href='https://www.dmv.ca.gov/portal/driver-handbooks/' target='_blank' rel='noopener'>California Driver Handbook</a> (dmv.ca.gov). Это учебный материал общего характера, а не официальный тест DMV. <br><a href='privacy.html'>Политика конфиденциальности</a> · <a href='terms.html'>Условия использования</a>"
   },
   hy: {
@@ -209,6 +289,24 @@ const STRINGS = {
     home: "Գլխավոր էջ",
     share: "Կիսվել արդյունքով",
     shareText: (n,t)=>"Իմ արդյունքը DMV քննության սիմուլյացիայում՝ "+n+"/"+t+"։ Փորձի՛ր նաև դու։",
+    premBadge: "⭐ PREMIUM",
+    payTitle: "Քննության սիմուլյացիա — Premium",
+    paySub: "Լիարժեք քննություն՝ ինչպես իրական DMV թեստը։",
+    payF1: "36 հարց՝ 45 րոպե ժամանակաչափով՝ իրական քննության տեմպով",
+    payF2: "Սխալների վերլուծություն ըստ թեմաների՝ երևում է, թե ինչ կրկնել",
+    payF3: "Վիճակագրություն ըստ թեմաների՝ ձեր թույլ թեմաները նշված են",
+    payPrice: "99 ⭐ Telegram Stars",
+    payPriceNote: "Միանվագ վճար։ Premium-ը ձերն է ընդմիշտ՝ առանց բաժանորդագրության։",
+    payBuy: "Բացել 99 ⭐-ով",
+    payOwned: "✅ Premium-ը ակտիվ է։ Հաջողություն քննությանը։",
+    payErrUnavailable: "Վճարումը ժամանակավորապես անհասանելի է։ Փորձեք ավելի ուշ։",
+    payErrGeneric: "Ինչ-որ բան սխալ ընթացավ։ Փորձեք նորից։",
+    payPending: "Սպասում ենք վճարման հաստատմանը…",
+    payRestore: "Գնել եք Premium այլ սարքով։ Վճարումից հետո բոտը Telegram-ում կուղարկի վերականգնման հղում՝ բացեք այն այստեղ, և Premium-ը կմիանա նաև այս սարքում։",
+    topicsTitle: "Արդյունքներն ըստ թեմաների",
+    weakTag: "թույլ թեմա",
+    timeUp: "Ժամանակը սպառվեց։ Քննությունն ավտոմատ ուղարկվեց։",
+    topics: { alcohol: "Ալկոհոլ և թմրանյութեր", signs: "Նշաններ և ազդանշաններ", speed: "Արագություն և սահմանափակումներ", parking: "Կայանում", rightofway: "Առաջնահերթություն և հետիոտներ", sharing: "Համատեղ երթևեկություն", maneuvers: "Շրջադարձեր և վազանցում", safety: "Անվտանգություն և պայմաններ", laws: "Օրենքներ և տուգանքներ", other: "Ընդհանուր հարցեր" },
     footer: "Դեմո տարբերակ։ Հարցերը գրված են ըստ պաշտոնական <a href='https://www.dmv.ca.gov/portal/driver-handbooks/' target='_blank' rel='noopener'>California Driver Handbook</a>-ի (dmv.ca.gov)։ Սա ընդհանուր ուսուցողական նյութ է, այլ ոչ թե DMV-ի պաշտոնական թեստ։ <br><a href='privacy.html'>Գաղտնիության քաղաքականություն</a> · <a href='terms.html'>Օգտագործման պայմաններ</a>"
   }
 };
@@ -819,7 +917,7 @@ let lastResult = null;
 function S(){ return STRINGS[lang]; }
 function bank(){ return QB[lang]; }
 function show(id){
-  ["screen-home","screen-quiz","screen-result"].forEach(function(x){
+  ["screen-home","screen-paywall","screen-quiz","screen-result"].forEach(function(x){
     document.getElementById(x).style.display = (x===id) ? "block" : "none";
   });
 }
@@ -840,6 +938,18 @@ function applyStrings(){
   document.getElementById("btn-home").textContent = s.home;
   document.getElementById("btn-share").textContent = s.share;
   document.getElementById("btn-next").textContent = (order.length && idx >= order.length-1) ? s.finish : s.next;
+  document.getElementById("t-prem-badge").textContent = s.premBadge;
+  document.getElementById("p-title").textContent = s.payTitle;
+  document.getElementById("p-sub").textContent = s.paySub;
+  document.getElementById("p-f1").textContent = s.payF1;
+  document.getElementById("p-f2").textContent = s.payF2;
+  document.getElementById("p-f3").textContent = s.payF3;
+  document.getElementById("p-price").textContent = s.payPrice;
+  document.getElementById("p-price-note").textContent = s.payPriceNote;
+  document.getElementById("btn-buy").textContent = s.payBuy;
+  document.getElementById("btn-pay-home").textContent = s.home;
+  document.getElementById("p-restore-note").textContent = s.payRestore;
+  if(window.__premium){ var po = document.getElementById("p-owned"); po.textContent = s.payOwned; po.className = "owned show"; }
 }
 function setLang(l){
   lang = l;
@@ -905,6 +1015,7 @@ function pickOption(i){
 function nextQuestion(){
   if(idx < order.length-1){ idx++; renderQuestion(); window.scrollTo(0,0); }
   else {
+    stopTimer();
     var b = bank(), score = 0;
     for(var k=0;k<order.length;k++){ if(answers[k] === b[order[k]].c) score++; }
     lastResult = { score: score, total: order.length };
@@ -926,6 +1037,7 @@ function renderResult(){
     st.className = "result-status";
   }
   document.getElementById("r-note").textContent = s.scoreNote(r.score, r.total);
+  renderTopics();
   var rev = document.getElementById("r-review");
   rev.innerHTML = "";
   var missed = [];
@@ -934,19 +1046,33 @@ function renderResult(){
     rev.innerHTML = "<h3>" + s.reviewTitle + "</h3><p>" + s.noMistakes + "</p>";
     return;
   }
-  var h = "<h3>" + s.reviewTitle + " (" + missed.length + ")</h3>";
-  missed.forEach(function(k){
+  function itemHtml(k){
     var item = b[order[k]];
     var yours = (answers[k] === null) ? "—" : item.o[answers[k]];
-    h += "<div class='review-item'><div class='rq'>" + item.q + "</div>"
+    return "<div class='review-item'><div class='rq'>" + item.q + "</div>"
       + "<div class='ra'>" + s.yourAnswer + yours + "</div>"
       + "<div class='rc'>" + s.correctAnswer + item.o[item.c] + "</div>"
       + "<div>" + item.w + "</div></div>";
-  });
+  }
+  var h = "<h3>" + s.reviewTitle + " (" + missed.length + ")</h3>";
+  if(mode === "exam"){
+    var groups = {}, gorder = [];
+    missed.forEach(function(k){
+      var t = topicOf(order[k]);
+      if(!groups[t]){ groups[t] = []; gorder.push(t); }
+      groups[t].push(k);
+    });
+    gorder.forEach(function(t){
+      h += "<h4>" + s.topics[t] + " (" + groups[t].length + ")</h4>";
+      groups[t].forEach(function(k){ h += itemHtml(k); });
+    });
+  } else {
+    missed.forEach(function(k){ h += itemHtml(k); });
+  }
   rev.innerHTML = h;
 }
-function restart(){ startQuiz(mode); window.scrollTo(0,0); }
-function goHome(){ show("screen-home"); window.scrollTo(0,0); }
+function restart(){ if(mode === "exam"){ startPremiumExam(); } else { startQuiz(mode); } window.scrollTo(0,0); }
+function goHome(){ stopTimer(); show("screen-home"); window.scrollTo(0,0); }
 function shareResult(){
   var s = S(), r = lastResult; if(!r) return;
   var url = "https://t.me/dmvtestca_bot";
@@ -959,6 +1085,226 @@ function shareResult(){
 }
 applyStrings();
 </script>
+
+<script>
+/* ===== DMV Premium (Telegram Stars) — premium v1, build 2026-11-12 =====
+   Free practice stays untouched. The exam simulation is Premium:
+   45-minute timer, mistake review grouped by topic, per-topic stats.
+   Payment: the app asks the dmv-bot-backend for a Stars invoice link,
+   pays via Telegram.WebApp.openInvoice, and the backend activates an
+   unlock key only when Telegram reports successful_payment for the
+   claim that was embedded in the invoice payload. The key is stored
+   in localStorage; the buyer also receives a restore link from the
+   bot (?unlock=<key>) for other devices.
+   API_BASE: public HTTPS base of dmv-bot-backend. Empty string means
+   "not wired yet" — the paywall then honestly reports that payment is
+   unavailable (fail-safe). A ?api=https://host query parameter
+   overrides it (used for testing). */
+var API_BASE = "";
+var EXAM_SECONDS = 45 * 60;
+var PRICE_STARS = 99;
+window.__premium = false;
+var __timerId = null;
+var __timerLeft = 0;
+
+function apiBase(){
+  try{
+    var q = new URLSearchParams(location.search).get("api");
+    if(q) return q.replace(/\/+$/, "");
+  }catch(e){}
+  return API_BASE;
+}
+function topicOf(qi){
+  function classify(q){
+    function has(){
+      for(var i=0;i<arguments.length;i++){ if(q.indexOf(arguments[i]) >= 0) return true; }
+      return false;
+    }
+    if(has("alcohol", "blood alcohol", "under the influence", "dui", "drug", "marijuana", "cannabis")) return "alcohol";
+    if(has("sign", "signal", "flashing", "traffic light", "red light", "green light", "arrow", "marking", "center line", "yellow line", "white line", "diamond", "crossbuck", "lane ends")) return "signs";
+    if(has("speed", "mph", "miles per hour")) return "speed";
+    if(has("park", "curb")) return "parking";
+    if(has("yield", "right-of-way", "right of way", "pedestrian", "crosswalk", "school", "blind intersection", "emergency vehicle", "funeral")) return "rightofway";
+    if(has("bicycle", "bicyclist", "cyclist", "motorcycle", "truck", "blind spot", "following distance", "tailgat", " bus", "train", "trolley", "share the road")) return "sharing";
+    if(has("u-turn", "passing", "pass on", "pass a", "left-turn", "center left-turn", "turn left", "turn right", "backed up", "flow of traffic", "breaks down", "breakdown", "freeway exit")) return "maneuvers";
+    if(has("seat belt", "seatbelt", "child", "airbag", "headlight", "fog", "rain", "wet", "slippery", "skid", "hydroplan", "brake", "tire", "distract", "cell phone", "texting", "drowsy", "fatigue", "mirror", "steering", "wiper")) return "safety";
+    if(has("license", "insurance", "registration", "collision", "fine", "suspend", "revok", "points", "dmv", "permit", "illegal", "against the law")) return "laws";
+    return null;
+  }
+  var qOnly = QB.en[qi].q.toLowerCase();
+  return classify(qOnly) || classify(qOnly + " " + QB.en[qi].w.toLowerCase()) || "other";
+}
+function fmtTime(sec){
+  var m = Math.floor(sec/60), s2 = sec % 60;
+  return (m < 10 ? "0" : "") + m + ":" + (s2 < 10 ? "0" : "") + s2;
+}
+function startTimer(){
+  stopTimer();
+  __timerLeft = EXAM_SECONDS;
+  var el = document.getElementById("q-timer");
+  el.style.display = "inline";
+  el.classList.remove("low");
+  el.textContent = "\u23F1 " + fmtTime(__timerLeft);
+  __timerId = setInterval(function(){
+    __timerLeft--;
+    if(__timerLeft <= 0){
+      el.textContent = "\u23F1 00:00";
+      stopTimer();
+      finishExamTimedOut();
+      return;
+    }
+    if(__timerLeft <= 60) el.classList.add("low");
+    el.textContent = "\u23F1 " + fmtTime(__timerLeft);
+  }, 1000);
+}
+function stopTimer(){
+  if(__timerId){ clearInterval(__timerId); __timerId = null; }
+  var el = document.getElementById("q-timer");
+  if(el) el.style.display = "none";
+}
+function finishExamTimedOut(){
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if(tg && tg.showAlert){ try{ tg.showAlert(S().timeUp); }catch(e){} }
+  var b = bank(), score = 0;
+  for(var k=0;k<order.length;k++){ if(answers[k] === b[order[k]].c) score++; }
+  lastResult = { score: score, total: order.length };
+  show("screen-result");
+  renderResult();
+  window.scrollTo(0,0);
+}
+function renderTopics(){
+  var box = document.getElementById("r-topics");
+  box.innerHTML = "";
+  if(mode !== "exam" || !lastResult) return;
+  var s = S(), b = bank();
+  var stats = {}, torder = [];
+  for(var k=0;k<order.length;k++){
+    var t = topicOf(order[k]);
+    if(!stats[t]){ stats[t] = { ok: 0, total: 0 }; torder.push(t); }
+    stats[t].total++;
+    if(answers[k] === b[order[k]].c) stats[t].ok++;
+  }
+  torder.sort(function(a, c){
+    var ra = stats[a].ok / stats[a].total, rc = stats[c].ok / stats[c].total;
+    if(ra !== rc) return ra - rc;
+    return stats[c].total - stats[a].total;
+  });
+  var h = "<h3>" + s.topicsTitle + "</h3>";
+  torder.forEach(function(t){
+    var st = stats[t], pct = Math.round(st.ok / st.total * 100);
+    var weak = (st.ok / st.total) < 0.8 && st.total >= 2;
+    h += "<div class='topic-row" + (weak ? " weak" : "") + "'><div class='tr-head'><span>"
+      + s.topics[t] + (weak ? " \u00B7 <span class='weak-tag'>" + s.weakTag + "</span>" : "")
+      + "</span><span>" + st.ok + " / " + st.total + "</span></div>"
+      + "<div class='bar'><i style='width:" + pct + "%'></i></div></div>";
+  });
+  box.innerHTML = h;
+}
+function openExam(){
+  if(window.__premium){ startPremiumExam(); }
+  else { show("screen-paywall"); window.scrollTo(0,0); }
+}
+function startPremiumExam(){
+  startQuiz("exam");
+  startTimer();
+}
+function payError(msg){
+  var e = document.getElementById("p-err");
+  e.textContent = msg;
+  e.className = "pay-err show";
+}
+function clearPayError(){
+  var e = document.getElementById("p-err");
+  e.textContent = "";
+  e.className = "pay-err";
+}
+function payInfo(msg){
+  var e = document.getElementById("p-info");
+  e.textContent = msg || "";
+  e.className = msg ? "pay-info show" : "pay-info";
+}
+function setPremium(on){
+  window.__premium = !!on;
+  var po = document.getElementById("p-owned");
+  if(on){ po.textContent = S().payOwned; po.className = "owned show"; }
+  else { po.className = "owned"; }
+}
+function apiPost(path, body){
+  return fetch(apiBase() + path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body || {})
+  }).then(function(r){
+    return r.json().catch(function(){ return {}; }).then(function(j){ return { status: r.status, body: j }; });
+  });
+}
+function validateKey(key){
+  if(!key) return;
+  if(!apiBase()){ setPremium(true); return; }
+  apiPost("/api/entitlement", { key: key }).then(function(res){
+    if(res.body && res.body.premium){ setPremium(true); }
+    else if(res.body && res.body.error === "payments_unavailable"){ setPremium(true); }
+    else { try{ localStorage.removeItem("dmv_premium_key"); }catch(e){} setPremium(false); }
+  }).catch(function(){ setPremium(true); });
+}
+function buyPremium(){
+  clearPayError();
+  payInfo("");
+  var s = S();
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if(!apiBase() || !tg || !tg.openInvoice){ payError(s.payErrUnavailable); return; }
+  var btn = document.getElementById("btn-buy");
+  btn.disabled = true;
+  apiPost("/api/invoice", { initData: tg.initData || "" }).then(function(res){
+    if(res.status !== 200 || !res.body || !res.body.url){ throw new Error("invoice"); }
+    var claim = res.body.claim;
+    tg.openInvoice(res.body.url, function(status){
+      if(status === "paid"){
+        payInfo(s.payPending);
+        pollClaim(claim, 0, btn);
+      } else {
+        btn.disabled = false;
+        if(status !== "cancelled" && status !== "pending") payError(s.payErrGeneric);
+      }
+    });
+  }).catch(function(){
+    btn.disabled = false;
+    payError(s.payErrUnavailable);
+  });
+}
+function pollClaim(claim, n, btn){
+  if(n > 24){ btn.disabled = false; payInfo(""); payError(S().payErrGeneric); return; }
+  setTimeout(function(){
+    apiPost("/api/claim", { claim: claim }).then(function(res){
+      if(res.body && res.body.status === "paid" && res.body.key){
+        try{ localStorage.setItem("dmv_premium_key", res.body.key); }catch(e){}
+        payInfo("");
+        setPremium(true);
+        btn.disabled = false;
+        startPremiumExam();
+      } else {
+        pollClaim(claim, n + 1, btn);
+      }
+    }).catch(function(){ pollClaim(claim, n + 1, btn); });
+  }, 1500);
+}
+(function initPremium(){
+  var key = null;
+  try{
+    var u = new URLSearchParams(location.search);
+    var unlock = u.get("unlock");
+    if(unlock){ key = unlock; localStorage.setItem("dmv_premium_key", key); }
+    var tg = window.Telegram && window.Telegram.WebApp;
+    if(!key && tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param){
+      var sp = tg.initDataUnsafe.start_param;
+      if(sp.indexOf("unlock_") === 0){ key = sp.slice(7); localStorage.setItem("dmv_premium_key", key); }
+    }
+    if(!key) key = localStorage.getItem("dmv_premium_key");
+  }catch(e){}
+  if(key) validateKey(key);
+})();
+</script>
+
 <script>
 (function(){var tg=window.Telegram&&window.Telegram.WebApp;function scheme(){var s=null;try{s=new URLSearchParams(window.location.search).get('theme');}catch(e){}if(s!=='dark'&&s!=='light')s=null;if(!s&&tg&&tg.colorScheme)s=tg.colorScheme;if(!s&&window.matchMedia)s=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';return s;}function apply(){var s=scheme();if(s)document.documentElement.setAttribute('data-scheme',s);if(tg){try{if(tg.setHeaderColor)tg.setHeaderColor(s==='dark'?'#131418':'#F3F4F6');if(tg.setBackgroundColor)tg.setBackgroundColor(s==='dark'?'#131418':'#F3F4F6');}catch(e){}}}apply();if(!tg)return;try{tg.ready();tg.expand();if(tg.disableVerticalSwipes)tg.disableVerticalSwipes();if(tg.onEvent)tg.onEvent('themeChanged',apply);}catch(e){}})();
 </script>
