@@ -211,6 +211,7 @@ const STRINGS = {
     payErrGeneric: "Something went wrong. Please try again.",
     payPending: "Waiting for payment confirmation…",
     payBotHint: "Opening the bot chat — tap «⭐ Premium — 99 Stars» there to pay with Telegram Stars. After payment the bot will send your activation link.",
+    payBotLink: "Open the bot chat",
     payRestore: "Bought Premium on another device? After payment, the bot sends a restore link to your Telegram chat — open it here and Premium activates on this device too.",
     topicsTitle: "Results by topic",
     weakTag: "weak topic",
@@ -258,6 +259,7 @@ const STRINGS = {
     payErrGeneric: "Что-то пошло не так. Попробуйте ещё раз.",
     payPending: "Ждём подтверждение оплаты…",
     payBotHint: "Открываю чат бота — нажмите там «⭐ Premium — 99 Stars», чтобы оплатить звёздами Telegram. После оплаты бот пришлёт ссылку активации.",
+    payBotLink: "Открыть чат бота",
     payRestore: "Купили Premium на другом устройстве? После оплаты бот пришлёт в ваш Telegram ссылку восстановления — откройте её здесь, и Premium активируется и на этом устройстве.",
     topicsTitle: "Результаты по темам",
     weakTag: "слабая тема",
@@ -305,6 +307,7 @@ const STRINGS = {
     payErrGeneric: "Ինչ-որ բան սխալ ընթացավ։ Փորձեք նորից։",
     payPending: "Սպասում ենք վճարման հաստատմանը…",
     payBotHint: "Բացում եմ բոտի չատը՝ սեղմեք այնտեղ «⭐ Premium — 99 Stars»՝ Telegram Stars-ով վճարելու համար։ Վճարումից հետո բոտը կուղարկի ակտիվացման հղումը։",
+    payBotLink: "Բացել բոտի չատը",
     payRestore: "Գնել եք Premium այլ սարքով։ Վճարումից հետո բոտը Telegram-ում կուղարկի վերականգնման հղում՝ բացեք այն այստեղ, և Premium-ը կմիանա նաև այս սարքում։",
     topicsTitle: "Արդյունքներն ըստ թեմաների",
     weakTag: "թույլ թեմա",
@@ -1090,10 +1093,10 @@ applyStrings();
 </script>
 
 <script>
-/* ===== DMV Premium (Telegram Stars) — premium v2, build 2026-11-16 =====
+/* ===== DMV Premium (Telegram Stars) — premium v3, build 2026-11-16 =====
    Free practice stays untouched. The exam simulation is Premium:
    45-minute timer, mistake review grouped by topic, per-topic stats.
-   Payment v2 (chat flow): with no public API base, the Buy button
+   Payment v3 (chat flow): with no public API base, the Buy button
    hands the user over to the @dmvtestca_bot chat (?start=premium);
    the bot sends the Stars invoice in chat, the backend answers
    pre_checkout and, on successful_payment, messages the buyer an
@@ -1224,6 +1227,18 @@ function payInfo(msg){
   e.textContent = msg || "";
   e.className = msg ? "pay-info show" : "pay-info";
 }
+function payInfoLink(msg, url, label){
+  var e = document.getElementById("p-info");
+  e.innerHTML = "";
+  e.appendChild(document.createTextNode(msg + " "));
+  var a = document.createElement("a");
+  a.href = url;
+  a.textContent = label;
+  a.style.color = "#6ab0ff";
+  a.style.fontWeight = "700";
+  e.appendChild(a);
+  e.className = "pay-info show";
+}
 function setPremium(on){
   window.__premium = !!on;
   var po = document.getElementById("p-owned");
@@ -1254,8 +1269,9 @@ function buyPremium(){
   var s = S();
   var tg = window.Telegram && window.Telegram.WebApp;
   if(!apiBase()){
-    if(tg && tg.openTelegramLink){ payInfo(s.payBotHint); tg.openTelegramLink("https://t.me/dmvtestca_bot?start=premium"); }
-    else { payError(s.payErrUnavailable); }
+    var botUrl = "https://t.me/dmvtestca_bot?start=premium";
+    if(tg && tg.openTelegramLink){ payInfo(s.payBotHint); tg.openTelegramLink(botUrl); }
+    else { payInfoLink(s.payBotHint, botUrl, s.payBotLink); }
     return;
   }
   if(!tg || !tg.openInvoice){ payError(s.payErrUnavailable); return; }
