@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Изгнанники — поселение</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+  html,body{position:fixed;inset:0;overflow:hidden;overscroll-behavior:none;background:#2a1d12;font-family:-apple-system,'Segoe UI',Roboto,sans-serif;color:#f3e5cf}
+  #app{display:flex;flex-direction:column;height:100%;width:100%}
+  /* ===== Top resource bar ===== */
+  #topbar{display:flex;align-items:center;gap:6px;padding:6px 8px;background:linear-gradient(#4a3220,#3a2716);border-bottom:2px solid #1d1208;flex-wrap:wrap;z-index:5}
+  .res{display:flex;align-items:center;gap:4px;background:rgba(0,0,0,.35);border:1px solid rgba(255,210,140,.25);border-radius:10px;padding:3px 8px;font-size:15px;font-weight:700;min-width:64px;justify-content:center}
+  .res small{font-weight:400;opacity:.75;font-size:11px}
+  .res.bad{color:#ff9a8a;border-color:#ff6b57}
+  #datebox{margin-left:auto;text-align:right;font-size:13px;line-height:1.15}
+  #datebox b{font-size:15px}
+  .spdbtn{background:#5d4126;border:1px solid rgba(255,210,140,.35);color:#f3e5cf;border-radius:9px;font-size:15px;padding:4px 9px;cursor:pointer}
+  .spdbtn.on{background:#c98f2e;color:#1d1208;font-weight:800}
+  /* ===== Map ===== */
+  #mapwrap{flex:1;position:relative;overflow:hidden;background:#39512a}
+  canvas#game{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+  #logline{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(20,12,5,.78);border:1px solid rgba(255,210,140,.25);border-radius:10px;padding:6px 10px;font-size:13px;pointer-events:none;min-height:20px}
+  #logline.warn{color:#ffb3a7;border-color:#ff6b57}
+  #logline.good{color:#b7f0b1;border-color:#57c256}
+  /* ===== Context panel ===== */
+  #panel{background:#3a2716;border-top:2px solid #1d1208;padding:8px 10px;display:none;z-index:5}
+  #panel.show{display:block}
+  #panel .ttl{font-size:16px;font-weight:800;margin-bottom:2px}
+  #panel .sub{font-size:13px;opacity:.85;margin-bottom:6px}
+  #panel .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .pbtn{background:#5d4126;border:1px solid rgba(255,210,140,.35);color:#f3e5cf;border-radius:9px;font-size:15px;padding:6px 12px;cursor:pointer;font-weight:700}
+  .pbtn:active{background:#c98f2e;color:#1d1208}
+  .pbtn.danger{background:#6e2a20;border-color:#ff6b57}
+  .wcount{font-size:16px;font-weight:800;min-width:86px;text-align:center}
+  /* ===== Build bar ===== */
+  #buildbar{display:flex;gap:6px;padding:8px;background:linear-gradient(#3a2716,#2a1d12);border-top:2px solid #1d1208;overflow-x:auto;z-index:5}
+  .bbtn{flex:0 0 auto;width:86px;background:#4a3220;border:2px solid rgba(255,210,140,.25);border-radius:12px;padding:6px 2px 5px;text-align:center;cursor:pointer;color:#f3e5cf}
+  .bbtn .ic{font-size:24px;line-height:1.1}
+  .bbtn .nm{font-size:12px;font-weight:700}
+  .bbtn .cost{font-size:11px;opacity:.85}
+  .bbtn.sel{border-color:#ffc93e;background:#6b4a22}
+  .bbtn.poor{opacity:.45}
+  /* ===== Overlay banner ===== */
+  #banner{position:absolute;inset:0;background:rgba(15,8,3,.82);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
+  #banner.show{display:flex}
+  #banner .card{background:#3a2716;border:2px solid #c98f2e;border-radius:16px;padding:22px;max-width:420px;text-align:center}
+  #banner h2{font-size:24px;margin-bottom:10px}
+  #banner p{font-size:15px;line-height:1.45;margin-bottom:16px}
+  #banner button{background:#c98f2e;color:#1d1208;border:none;border-radius:10px;font-size:17px;font-weight:800;padding:10px 22px;cursor:pointer}
+  #help{position:absolute;top:8px;left:8px;z-index:6;background:rgba(20,12,5,.78);border:1px solid rgba(255,210,140,.3);border-radius:10px;padding:7px 10px;font-size:12.5px;line-height:1.5;max-width:250px;display:none}
+  #help.show{display:block}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="topbar">
+    <div class="res" id="res-logs">🪵 <span>0</span></div>
+    <div class="res" id="res-food">🍞 <span>0</span></div>
+    <div class="res" id="res-fire">🔥 <span>0</span></div>
+    <div class="res" id="res-pop">👥 <span>0</span><small></small></div>
+    <div class="res" id="res-store">📦 <span>0</span></div>
+    <button class="spdbtn" id="btn-help">?</button>
+    <button class="spdbtn" id="spd0">⏸</button>
+    <button class="spdbtn on" id="spd1">▶</button>
+    <button class="spdbtn" id="spd2">⏩</button>
+    <button class="spdbtn" id="btn-new">↺</button>
+    <div id="datebox"><b id="d-season">Весна</b><br><span id="d-date">Год 1</span></div>
+  </div>
+  <div id="mapwrap">
+    <canvas id="game" width="880" height="600"></canvas>
+    <div id="help">
+      <b>Как играть</b><br>
+      1. Постройте дома — жителям негде жить.<br>
+      2. Лесоруб рубит лес → брёвна. Дровокол делает из брёвен дрова.<br>
+      3. Собиратель и охотник добывают еду.<br>
+      4. К зиме нужны еда и дрова: без дров дома мёрзнут, без еды — голод.<br>
+      5. Назначайте рабочих, нажимая на здания.<br>
+      Цель: вырастить поселение до 30 жителей.
+    </div>
+    <div id="logline">Изгнанники прибыли. Постройте первые дома.</div>
+    <div id="banner"><div class="card"><h2 id="b-title"></h2><p id="b-text"></p><button id="b-btn">Играть дальше</button></div></div>
+  </div>
+  <div id="panel"></div>
+  <div id="buildbar"></div>
+</div>
+<script>
+"use strict";
+/* ===== Telegram Mini App: locked viewport, no swipes (standing rule) ===== */
+var TG = null;
+try{
+  TG = window.Telegram && window.Telegram.WebApp;
+  if(TG){ TG.ready(); TG.expand(); if(TG.disableVerticalSwipes) TG.disableVerticalSwipes(); }
+}catch(e){}
+document.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+document.addEventListener("touchmove", function(e){ e.preventDefault(); }, { passive:false });
+
+/* ===== Constants ===== */
+var TILE = 40, COLS = 22, ROWS = 15, W = COLS*TILE, H = ROWS*TILE;
+var MONTH_MS = 5000; /* one game month at speed 1 */
+var DEFS = {
+  house:     { name:"Дом",        icon:"🏠", cost:16, maxW:0, desc:"Жильё для 5 человек. Зимой греется дровами." },
+  forester:  { name:"Лесоруб",    icon:"🪓", cost:12, maxW:3, desc:"Рубит деревья рядом → брёвна.", radius:4 },
+  woodcutter:{ name:"Дровокол",  icon:"🔥", cost:8,  maxW:2, desc:"Колет брёвна → дрова для домов (держит запас до 200)." },
+  gatherer:  { name:"Собиратель", icon:"🧺", cost:10, maxW:3, desc:"Собирает ягоды и коренья в лесу. Зимой не работает.", radius:4 },
+  hunter:    { name:"Охотник",   icon:"🏹", cost:12, maxW:2, desc:"Добывает мясо круглый год, зимой меньше.", radius:5 },
+  storage:   { name:"Склад",     icon:"📦", cost:14, maxW:0, desc:"+300 к складу: хранит еду и дрова (брёвна лежат на улице).", storage:300 }
+};
+var ORDER = ["house","forester","woodcutter","gatherer","hunter","storage"];
+var SEASONS = ["Зима","Зима","Весна","Весна","Весна","Лето","Лето","Лето","Осень","Осень","Осень","Зима"];
+var MONTHS_RU = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+function isWinter(m){ return m===11 || m===0 || m===1; }
+function seasonOf(m){ return SEASONS[m]; }
+
+/* ===== State ===== */
+var S = null;
+var placing = null;      /* building type being placed */
+var selected = null;     /* selected building id */
+var hoverTile = null;
+var snowflakes = [];
+function tid(x,y){ return y*COLS + x; }
+function inB(x,y){ return x>=0 && y>=0 && x<COLS && y<ROWS; }
+
+function genTerrain(){
+  var t = [];
+  for(var i=0;i<COLS*ROWS;i++) t.push({ k:0, trees:0 }); /* 0 grass, 1 forest, 2 water */
+  /* river: wavy column around x=17 */
+  var rx = 17;
+  for(var y=0;y<ROWS;y++){
+    if(y===7){ /* bridge row stays crossable: water both sides, bridge drawn */
+    }
+    t[tid(rx,y)].k = 2;
+    if(y%3===2) rx += (Math.random()<0.5? -1: 1);
+    if(rx<15) rx=15; if(rx>19) rx=19;
+    t[tid(rx,y)].k = 2;
+  }
+  /* forest blobs */
+  for(var b=0;b<26;b++){
+    var cx = Math.floor(Math.random()*COLS), cy = Math.floor(Math.random()*ROWS);
+    var r = 1 + Math.floor(Math.random()*3);
+    for(var x=cx-r;x<=cx+r;x++) for(var y=cy-r;y<=cy+r;y++){
+      if(!inB(x,y)) continue;
+      if(Math.abs(x-cx)+Math.abs(y-cy) > r+1) continue;
+      var c = t[tid(x,y)];
+      if(c.k!==0) continue;
+      /* keep the spawn clearing (center-west) free */
+      if(x>=8 && x<=12 && y>=5 && y<=9) continue;
+      c.k = 1; c.trees = 2 + Math.floor(Math.random()*2); /* 2-3 */
+    }
+  }
+  return t;
+}
+
+function mkPerson(age, x, y){
+  return { age:age, x:x, y:y, tx:x, ty:y, home:-1, job:-1, hungry:0, cold:0, wait:Math.random()*2000 };
+}
+function newGame(){
+  S = {
+    logs:60, food:120, fire:40,
+    month:2, year:1, speed:1, over:false, won:false,
+    terrain:genTerrain(), buildings:[], people:[], nextB:1, nextP:1,
+    frac:{ logs:0, fire:0, food:0 }, logMsg:"", logKind:""
+  };
+  var cx = 10*TILE, cy = 7*TILE;
+  var ages = [34,32,28,26,24,22,20,19,8,5];
+  for(var i=0;i<ages.length;i++){
+    var p = mkPerson(ages[i], cx + (Math.random()*80-40), cy + (Math.random()*80-40));
+    p.id = S.nextP++; S.people.push(p);
+  }
+  /* starter storage barn in the clearing */
+  addBuilding("storage", 9, 6, true);
+  setLog("Изгнанники прибыли с одной телегой. Постройте дома, пока не пришла зима.", "");
+  save();
+}
+function addBuilding(type, tx, ty, instant){
+  var b = { id:S.nextB++, type:type, tx:tx, ty:ty, workers:0, prog: instant? 999 : 0, done: !!instant };
+  S.buildings.push(b);
+  return b;
+}
+function bAt(tx,ty){
+  for(var i=0;i<S.buildings.length;i++){
+    var b = S.buildings[i];
+    if(tx>=b.tx && tx<b.tx+2 && ty>=b.ty && ty<b.ty+2) return b;
+  }
+  return null;
+}
+function adults(){ return S.people.filter(function(p){ return p.age>=16; }); }
+function laborers(){
+  var used = 0;
+  S.buildings.forEach(function(b){ if(b.done) used += b.workers; });
+  return adults().length - used;
+}
+function houseCap(){
+  var c = 0;
+  S.buildings.forEach(function(b){ if(b.done && b.type==="house") c += 5; });
+  return c;
+}
+function storageCap(){
+  var c = 300;
+  S.buildings.forEach(function(b){ if(b.done && b.type==="storage") c += 300; });
+  return c;
+}
+function storedTotal(){ return Math.floor(S.fire) + Math.floor(S.food); } /* склад хранит еду и дрова; брёвна лежат на улице без лимита */
+function residents(b){ return S.people.filter(function(p){ return p.home===b.id; }); }
+function setLog(msg, kind){
+  S.logMsg = msg; S.logKind = kind || "";
+  var el = document.getElementById("logline");
+  el.textContent = msg;
+  el.className = kind || "";
+  el.id = "logline";
+}
+/* ===== Save / load (local) ===== */
+function save(){
+  try{
+    var data = { logs:S.logs, food:S.food, fire:S.fire, month:S.month, year:S.year,
+      terrain:S.terrain, buildings:S.buildings, nextB:S.nextB, nextP:S.nextP, won:S.won,
+      people:S.people.map(function(p){ return { id:p.id, age:p.age, x:p.x, y:p.y, home:p.home, job:p.job, hungry:p.hungry||0, cold:p.cold||0 }; }) };
+    localStorage.setItem("exiles_save_v1", JSON.stringify(data));
+  }catch(e){}
+}
+function load(){
+  try{
+    var raw = localStorage.getItem("exiles_save_v1");
+    if(!raw) return false;
+    var d = JSON.parse(raw);
+    if(!d || !d.terrain || d.terrain.length !== COLS*ROWS) return false;
+    S = { logs:d.logs, food:d.food, fire:d.fire, month:d.month, year:d.year, speed:1, over:false,
+      won:!!d.won, terrain:d.terrain, buildings:d.buildings, nextB:d.nextB, nextP:d.nextP,
+      frac:{ logs:0, fire:0, food:0 }, logMsg:"", logKind:"",
+      people:d.people.map(function(q){ var p = mkPerson(q.age, q.x, q.y); p.id=q.id; p.home=q.home; p.job=q.job; p.hungry=q.hungry; p.cold=q.cold; return p; }) };
+    return true;
+  }catch(e){ return false; }
+}
+
+/* ===== Simulation ===== */
+function forestInRadius(b, r){
+  var tiles = [];
+  for(var x=b.tx-r; x<b.tx+2+r; x++) for(var y=b.ty-r; y<b.ty+2+r; y++){
+    if(!inB(x,y)) continue;
+    var c = S.terrain[tid(x,y)];
+    if(c.k===1 && c.trees>0) tiles.push(c);
+  }
+  return tiles;
+}
+function room(){ return Math.max(0, storageCap() - storedTotal()); }
+function syncJobs(){
+  var pool = adults().slice();
+  S.buildings.forEach(function(b){
+    if(!b.done){ return; }
+    var need = b.workers;
+    for(var i=0;i<pool.length && need>0;i++){
+      if(pool[i].job===-1){ pool[i].job = b.id; need--; }
+    }
+    /* if building lost workers (deaths), count is already consistent */
+  });
+}
+function houseMoveIns(){
+  S.buildings.forEach(function(b){
+    if(!b.done || b.type!=="house") return;
+    var res = residents(b);
+    while(res.length < 5){
+      var cand = S.people.filter(function(p){ return p.home===-1; });
+      if(!cand.length) break;
+      cand.sort(function(a,c){ return (c.age>=16) - (a.age>=16); });
+      cand[0].home = b.id; res.push(cand[0]);
+    }
+  });
+}
+function kill(p, why){
+  var idx = S.people.indexOf(p);
+  if(idx<0) return;
+  S.people.splice(idx,1);
+  if(p.job>0){
+    var b = S.buildings.find(function(x){ return x.id===p.job; });
+    if(b && b.workers>0) b.workers--;
+  }
+  setLog("Умер житель: " + why + ". Осталось жителей: " + S.people.length, "warn");
+}
+function produce(){
+  var m = S.month, winter = isWinter(m);
+  S.buildings.forEach(function(b){
+    if(!b.done || b.workers<=0) return;
+    var w = b.workers, i, tiles;
+    if(b.type==="forester"){
+      for(i=0;i<w;i++){
+        tiles = forestInRadius(b, DEFS.forester.radius);
+        if(!tiles.length) break;
+        var c = tiles[Math.floor(Math.random()*tiles.length)];
+        c.trees--; if(c.trees<=0){ c.k = 0; c.trees = 0; }
+        var add = Math.min(4, room()); S.logs += add;
+      }
+    } else if(b.type==="woodcutter"){
+      for(i=0;i<w;i++){
+        if(S.fire >= 200) break; /* запас дров полон — дальше не колем */
+        var use = Math.min(4, Math.floor(S.logs));
+        if(use<=0) break;
+        var addF = Math.min(use*2, room());
+        S.logs -= use; S.fire += addF;
+      }
+    } else if(b.type==="gatherer"){
+      if(winter) return;
+      tiles = forestInRadius(b, DEFS.gatherer.radius);
+      var f = Math.min(1, tiles.length/6);
+      var base = (m>=8 && m<=10) ? 4.5 : 6;
+      S.food += Math.min(base*w*f, room());
+    } else if(b.type==="hunter"){
+      tiles = forestInRadius(b, DEFS.hunter.radius);
+      var f2 = tiles.length>=3 ? 1 : 0.5;
+      var base2 = winter ? 4 : 5;
+      S.food += Math.min(base2*w*f2, room());
+    }
+  });
+}
+function consume(){
+  var need = S.people.length;
+  if(S.food >= need){ S.food -= need; S.people.forEach(function(p){ p.hungry = 0; }); }
+  else {
+    S.food = 0;
+    S.people.forEach(function(p){ p.hungry = (p.hungry||0)+1; });
+    if(S.people.length) setLog("Не хватает еды! Жители голодают.", "warn");
+  }
+  if(isWinter(S.month)){
+    var houses = S.buildings.filter(function(b){ return b.done && b.type==="house" && residents(b).length>0; });
+    var needF = houses.length * 2;
+    if(S.fire >= needF){ S.fire -= needF; S.people.forEach(function(p){ p.cold = 0; }); }
+    else {
+      S.fire = 0;
+      S.people.forEach(function(p){ p.cold = (p.cold||0)+1; });
+      if(S.people.length) setLog("Не хватает дров! Дома мёрзнут.", "warn");
+    }
+  } else {
+    S.people.forEach(function(p){ p.cold = 0; });
+  }
+}
+function demography(){
+  /* births: a couple needs any free housing slot in the settlement */
+  S.buildings.forEach(function(b){
+    if(!b.done || b.type!=="house") return;
+    var res = residents(b);
+    var breeders = res.filter(function(p){ return p.age>=18 && p.age<=42; });
+    if(breeders.length<2 || Math.random()>=0.14) return;
+    var target = null;
+    if(res.length<5) target = b;
+    else {
+      for(var i=0;i<S.buildings.length;i++){
+        var hb = S.buildings[i];
+        if(hb.done && hb.type==="house" && residents(hb).length<5){ target = hb; break; }
+      }
+    }
+    if(!target) return;
+    var baby = mkPerson(0, target.tx*TILE+20, target.ty*TILE+20);
+    baby.id = S.nextP++; baby.home = target.id;
+    S.people.push(baby);
+    setLog("В поселении родился ребёнок! 👶 Жителей: " + S.people.length, "good");
+  });
+  /* aging + deaths (iterate over a copy) */
+  S.people.slice().forEach(function(p){
+    p.age += 1/12;
+    var die = 0, why = "";
+    if(p.age>60){ var ch = (p.age-60)*0.006; if(Math.random()<ch){ die = 1; why = "старость"; } }
+    if(!die && p.hungry>=2 && Math.random()<0.22){ die = 1; why = "голод"; }
+    if(!die && p.cold>=2 && Math.random()<0.18){ die = 1; why = "холод и болезнь"; }
+    if(die) kill(p, why);
+  });
+}
+function construction(){
+  var un = S.buildings.filter(function(b){ return !b.done; });
+  if(!un.length) return;
+  var rate = (3 + laborers()*2.5) / un.length;
+  un.forEach(function(b){
+    b.prog += rate;
+    if(b.prog >= DEFS[b.type].cost){
+      b.done = true;
+      setLog("Построено: " + DEFS[b.type].name + " " + DEFS[b.type].icon, "good");
+      if(b.type==="house") houseMoveIns();
+      if(selected===b.id) renderPanel();
+    }
+  });
+}
+function regrow(){
+  if(!(S.month>=2 && S.month<=4)) return; /* spring only */
+  for(var i=0;i<S.terrain.length;i++){
+    var c = S.terrain[i];
+    if(c.k===1 && c.trees<3 && Math.random()<0.10) c.trees++;
+    else if(c.k===0){
+      var x = i%COLS, y = Math.floor(i/COLS), n = 0;
+      [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+        var nx=x+d[0], ny=y+d[1];
+        if(inB(nx,ny) && S.terrain[tid(nx,ny)].k===1) n++;
+      });
+      if(n>=2 && Math.random()<0.02){ c.k = 1; c.trees = 1; }
+    }
+  }
+}
+function monthTick(){
+  if(!S || S.over) return;
+  produce();
+  consume();
+  demography();
+  construction();
+  houseMoveIns();
+  regrow();
+  S.month++;
+  if(S.month>11){ S.month = 0; S.year++; }
+  if(S.month===8) setLog("Осень. Скоро зима — проверьте запасы еды и дров!", "warn");
+  if(S.month===11) setLog("Наступила зима. Дома топятся дровами, собиратели отдыхают.", "");
+  if(S.people.length<=0){
+    S.over = true;
+    showBanner("Поселение погибло", "Все жители умерли. Так заканчивались многие поселения изгнанников. Попробуйте ещё раз — и готовьтесь к зиме раньше.", "Начать заново", function(){ localStorage.removeItem("exiles_save_v1"); newGame(); });
+  } else if(S.people.length>=30 && !S.won){
+    S.won = true;
+    showBanner("🎉 Поселение выжило!", "30 жителей — поселение окрепло и пережило главное. Вы победили! Можно продолжать играть дальше.", "Играть дальше", function(){});
+  }
+  updateTop(); save();
+}
+
+/* ===== Rendering ===== */
+var cv = document.getElementById("game"), ctx = cv.getContext("2d");
+function bById(id){ return S.buildings.find(function(b){ return b.id===id; }) || null; }
+function canPlace(tx, ty){
+  if(tx<0 || ty<0 || tx+1>=COLS || ty+1>=ROWS) return false;
+  for(var x=tx;x<tx+2;x++) for(var y=ty;y<ty+2;y++){
+    if(S.terrain[tid(x,y)].k===2) return false;
+    if(bAt(x,y)) return false;
+  }
+  return true;
+}
+function drawPine(x, y, s, winter){
+  ctx.fillStyle = "#5a4030";
+  ctx.fillRect(x-2*s, y+6*s, 4*s, 6*s);
+  ctx.fillStyle = winter ? "#33604a" : "#2e5d33";
+  for(var i=0;i<3;i++){
+    var wdt = (16 - i*4)*s, yy = y + 6*s - i*7*s;
+    ctx.beginPath();
+    ctx.moveTo(x-wdt/2, yy); ctx.lineTo(x+wdt/2, yy); ctx.lineTo(x, yy-11*s); ctx.closePath(); ctx.fill();
+  }
+  if(winter){
+    ctx.fillStyle = "rgba(255,255,255,.85)";
+    ctx.beginPath(); ctx.moveTo(x-4*s, y-13*s); ctx.lineTo(x+4*s, y-13*s); ctx.lineTo(x, y-19*s); ctx.closePath(); ctx.fill();
+  }
+}
+function drawTerrain(){
+  var winter = isWinter(S.month);
+  for(var y=0;y<ROWS;y++) for(var x=0;x<COLS;x++){
+    var c = S.terrain[tid(x,y)], px = x*TILE, py = y*TILE;
+    if(c.k===2){
+      ctx.fillStyle = (x+y)%2 ? "#3d6f9e" : "#396a95";
+      ctx.fillRect(px, py, TILE, TILE);
+      ctx.strokeStyle = "rgba(255,255,255,.25)";
+      ctx.beginPath(); ctx.moveTo(px+6, py+TILE/2); ctx.lineTo(px+TILE-8, py+TILE/2); ctx.stroke();
+      if(y===7){ /* bridge planks */
+        ctx.fillStyle = "#8a6844";
+        ctx.fillRect(px, py+10, TILE, 20);
+        ctx.strokeStyle = "#6e5233";
+        for(var bxi=0;bxi<4;bxi++){ ctx.beginPath(); ctx.moveTo(px+bxi*10, py+10); ctx.lineTo(px+bxi*10, py+30); ctx.stroke(); }
+      }
+      continue;
+    }
+    ctx.fillStyle = winter ? ((x+y)%2 ? "#7d8f6d" : "#75855f") : ((x+y)%2 ? "#567b3a" : "#4f7336");
+    ctx.fillRect(px, py, TILE, TILE);
+    if(c.k===1){
+      var seed = (x*31 + y*17) % 3;
+      if(c.trees>=1) drawPine(px+13, py+18, 0.9, winter);
+      if(c.trees>=2) drawPine(px+28, py+24, 0.75, winter);
+      if(c.trees>=3) drawPine(px+20, py+30, 0.6, winter);
+      if(seed===0 && c.trees>=2) drawPine(px+31, py+12, 0.55, winter);
+    }
+  }
+}
+var BColors = { house:"#a5713f", forester:"#7a5a34", woodcutter:"#8a4f2c", gatherer:"#6d7a35", hunter:"#5d4a6e", storage:"#7d6a4a" };
+function drawBuildings(){
+  S.buildings.forEach(function(b){
+    var px = b.tx*TILE, py = b.ty*TILE, sz = TILE*2;
+    ctx.fillStyle = "rgba(0,0,0,.25)";
+    ctx.fillRect(px+4, py+6, sz, sz);
+    ctx.fillStyle = BColors[b.type] || "#888";
+    ctx.fillRect(px+5, py+16, sz-10, sz-16);
+    /* roof */
+    ctx.fillStyle = "#5d3a22";
+    ctx.beginPath(); ctx.moveTo(px+1, py+18); ctx.lineTo(px+sz/2, py+1); ctx.lineTo(px+sz-1, py+18); ctx.closePath(); ctx.fill();
+    if(isWinter(S.month)){
+      ctx.fillStyle = "rgba(255,255,255,.8)";
+      ctx.beginPath(); ctx.moveTo(px+sz/2-13, py+6); ctx.lineTo(px+sz/2, py+1); ctx.lineTo(px+sz/2+13, py+6); ctx.closePath(); ctx.fill();
+    }
+    ctx.font = "26px serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(DEFS[b.type].icon, px+sz/2, py+sz/2+10);
+    if(!b.done){
+      ctx.fillStyle = "rgba(30,20,10,.45)"; ctx.fillRect(px, py, sz, sz);
+      ctx.fillStyle = "#221606"; ctx.fillRect(px+8, py+sz-14, sz-16, 7);
+      ctx.fillStyle = "#ffc93e"; ctx.fillRect(px+9, py+sz-13, (sz-18)*Math.min(1, b.prog/DEFS[b.type].cost), 5);
+      ctx.font = "13px sans-serif"; ctx.fillStyle = "#fff";
+      ctx.fillText("🏗 стройка", px+sz/2, py+14);
+    } else if(DEFS[b.type].maxW>0){
+      ctx.font = "bold 13px sans-serif";
+      ctx.fillStyle = "rgba(20,12,5,.8)";
+      var label = "👷 " + b.workers + "/" + DEFS[b.type].maxW;
+      var wdt = ctx.measureText(label).width + 10;
+      ctx.fillRect(px+sz-wdt-3, py+3, wdt, 18);
+      ctx.fillStyle = "#ffe9b0"; ctx.textAlign = "center";
+      ctx.fillText(label, px+sz-wdt/2-3, py+12);
+    }
+    if(selected===b.id){
+      ctx.strokeStyle = "#ffc93e"; ctx.lineWidth = 3;
+      ctx.strokeRect(px+2, py+2, sz-4, sz-4);
+      ctx.lineWidth = 1;
+      var r = DEFS[b.type].radius;
+      if(r){
+        ctx.strokeStyle = "rgba(255,201,62,.5)";
+        ctx.beginPath(); ctx.arc(px+sz/2, py+sz/2, r*TILE, 0, Math.PI*2); ctx.stroke();
+      }
+    }
+  });
+}
+function drawPeople(dt){
+  var spd = S.speed===0 ? 0 : (S.speed===2 ? 1.7 : 1);
+  S.people.forEach(function(p){
+    if(dt>0 && spd>0){
+      var dx = p.tx - p.x, dy = p.ty - p.y, dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 4){
+        p.wait -= dt*1000;
+        if(p.wait<=0){
+          p.wait = 800 + Math.random()*2600;
+          var tgt = null, roll = Math.random();
+          var jb = p.job>0 ? bById(p.job) : null;
+          var hb = p.home>0 ? bById(p.home) : null;
+          if(jb && roll<0.55) tgt = { x: jb.tx*TILE + 40 + (Math.random()*30-15), y: jb.ty*TILE + 86 };
+          else if(hb && roll<0.85) tgt = { x: hb.tx*TILE + 40 + (Math.random()*36-18), y: hb.ty*TILE + 86 };
+          else tgt = { x: Math.max(10, Math.min(W-10, p.x + (Math.random()*160-80))), y: Math.max(10, Math.min(H-10, p.y + (Math.random()*160-80))) };
+          var tt = S.terrain[tid(Math.floor(tgt.x/TILE), Math.floor(tgt.y/TILE))];
+          if(tt && tt.k===2) tgt = { x: 10*TILE, y: 7*TILE };
+          p.tx = tgt.x; p.ty = tgt.y;
+        }
+      } else {
+        var v = 36*spd*dt;
+        p.x += dx/dist*Math.min(v, dist); p.y += dy/dist*Math.min(v, dist);
+      }
+    }
+    var kid = p.age<16, elder = p.age>=60;
+    var r = kid ? 4.5 : 6;
+    ctx.fillStyle = "rgba(0,0,0,.3)";
+    ctx.beginPath(); ctx.ellipse(p.x, p.y+r+2, r, 2.5, 0, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = elder ? "#9a9a9a" : (p.job>0 ? "#7a4a2c" : (kid ? "#c9862e" : "#4a6e8a"));
+    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = "#f0c8a0";
+    ctx.beginPath(); ctx.arc(p.x, p.y-r-2.5, r*0.62, 0, Math.PI*2); ctx.fill();
+    if(p.hungry>0){ ctx.font = "9px sans-serif"; ctx.textAlign = "center"; ctx.fillText("🍞", p.x, p.y-r-10); }
+    else if(p.cold>0){ ctx.font = "9px sans-serif"; ctx.textAlign = "center"; ctx.fillText("🥶", p.x, p.y-r-10); }
+  });
+}
+function drawSnow(dt){
+  if(!isWinter(S.month)) { snowflakes = []; return; }
+  ctx.fillStyle = "rgba(235,242,255,.16)"; ctx.fillRect(0,0,W,H);
+  if(snowflakes.length<70 && Math.random()<0.5) snowflakes.push({ x:Math.random()*W, y:-4, s:1+Math.random()*2, v:14+Math.random()*22 });
+  ctx.fillStyle = "rgba(255,255,255,.9)";
+  snowflakes.forEach(function(f){
+    f.y += f.v*dt; f.x += Math.sin(f.y*0.05)*0.4;
+    if(f.y>H+4){ f.y = -4; f.x = Math.random()*W; }
+    ctx.beginPath(); ctx.arc(f.x, f.y, f.s, 0, Math.PI*2); ctx.fill();
+  });
+}
+function drawGhost(){
+  if(!placing || !hoverTile) return;
+  var ok = canPlace(hoverTile.x, hoverTile.y) && S.logs >= DEFS[placing].cost;
+  ctx.fillStyle = ok ? "rgba(120,255,120,.35)" : "rgba(255,80,60,.35)";
+  ctx.fillRect(hoverTile.x*TILE, hoverTile.y*TILE, TILE*2, TILE*2);
+  ctx.strokeStyle = ok ? "#7dff7d" : "#ff5040"; ctx.lineWidth = 2;
+  ctx.strokeRect(hoverTile.x*TILE+1, hoverTile.y*TILE+1, TILE*2-2, TILE*2-2);
+  ctx.lineWidth = 1;
+  ctx.font = "30px serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText(DEFS[placing].icon, hoverTile.x*TILE + TILE, hoverTile.y*TILE + TILE);
+}
+function render(dt){
+  ctx.clearRect(0,0,W,H);
+  drawTerrain();
+  drawBuildings();
+  drawPeople(dt);
+  drawGhost();
+  drawSnow(dt);
+}
+
+/* ===== UI ===== */
+function $(id){ return document.getElementById(id); }
+function resyncJobs(){
+  var pool = adults();
+  pool.forEach(function(p){ p.job = -1; });
+  S.buildings.forEach(function(b){
+    if(!b.done) return;
+    var need = b.workers;
+    for(var i=0;i<pool.length && need>0;i++){
+      if(pool[i].job===-1){ pool[i].job = b.id; need--; }
+    }
+  });
+}
+function updateTop(){
+  $("res-logs").querySelector("span").textContent = Math.floor(S.logs);
+  $("res-food").querySelector("span").textContent = Math.floor(S.food);
+  $("res-fire").querySelector("span").textContent = Math.floor(S.fire);
+  $("res-pop").querySelector("span").textContent = S.people.length;
+  $("res-pop").querySelector("small").textContent = "/ домов: " + houseCap();
+  $("res-store").querySelector("span").textContent = storedTotal() + "/" + storageCap();
+  $("res-food").classList.toggle("bad", S.food < S.people.length);
+  $("res-fire").classList.toggle("bad", isWinter(S.month) && S.fire < 2);
+  $("res-pop").classList.toggle("bad", S.people.length > houseCap());
+  $("d-season").textContent = seasonOf(S.month) + (isWinter(S.month) ? " ❄" : "");
+  $("d-date").textContent = MONTHS_RU[S.month] + " · Год " + S.year;
+  document.querySelectorAll(".bbtn").forEach(function(el){
+    var t = el.getAttribute("data-t");
+    el.classList.toggle("poor", S.logs < DEFS[t].cost);
+    el.classList.toggle("sel", placing===t);
+  });
+}
+function buildBuildBar(){
+  var bar = $("buildbar");
+  bar.innerHTML = "";
+  ORDER.forEach(function(t){
+    var d = DEFS[t];
+    var el = document.createElement("div");
+    el.className = "bbtn"; el.setAttribute("data-t", t);
+    el.innerHTML = "<div class='ic'>" + d.icon + "</div><div class='nm'>" + d.name + "</div><div class='cost'>🪵 " + d.cost + "</div>";
+    el.addEventListener("click", function(){
+      placing = (placing===t) ? null : t;
+      selected = null;
+      renderPanel(); updateTop();
+    });
+    bar.appendChild(el);
+  });
+}
+function renderPanel(){
+  var p = $("panel");
+  if(placing){
+    var d = DEFS[placing];
+    p.innerHTML = "<div class='ttl'>" + d.icon + " " + d.name + " — 🪵 " + d.cost + "</div>" +
+      "<div class='sub'>" + d.desc + " Нажмите на карту, чтобы поставить (2×2). Лес на месте будет вырублен.</div>" +
+      "<div class='row'><button class='pbtn' id='p-cancel'>Отмена</button></div>";
+    p.className = "show";
+    $("p-cancel").addEventListener("click", function(){ placing = null; renderPanel(); updateTop(); });
+    return;
+  }
+  var b = selected ? bById(selected) : null;
+  if(!b){ p.className = ""; p.innerHTML = ""; return; }
+  var dd = DEFS[b.type];
+  var html = "<div class='ttl'>" + dd.icon + " " + dd.name + (b.done ? "" : " (строится)") + "</div>";
+  html += "<div class='sub'>" + dd.desc + "</div>";
+  if(b.type==="house" && b.done) html += "<div class='sub'>Жильцов: " + residents(b).length + " / 5</div>";
+  if(b.type==="storage" && b.done) html += "<div class='sub'>Склад: " + storedTotal() + " / " + storageCap() + "</div>";
+  html += "<div class='row'>";
+  if(dd.maxW>0 && b.done){
+    html += "<button class='pbtn' id='p-minus'>−</button><div class='wcount'>👷 " + b.workers + " / " + dd.maxW + "</div><button class='pbtn' id='p-plus'>+</button>";
+    html += "<span style='font-size:13px;opacity:.85'>Свободных рабочих: " + laborers() + "</span>";
+  }
+  html += "<button class='pbtn danger' id='p-demo'>Снести</button>";
+  html += "<button class='pbtn' id='p-close'>Закрыть</button></div>";
+  p.innerHTML = html;
+  p.className = "show";
+  if(dd.maxW>0 && b.done){
+    $("p-minus").addEventListener("click", function(){ if(b.workers>0){ b.workers--; resyncJobs(); renderPanel(); updateTop(); save(); } });
+    $("p-plus").addEventListener("click", function(){ if(b.workers<dd.maxW && laborers()>0){ b.workers++; resyncJobs(); renderPanel(); updateTop(); save(); } });
+  }
+  $("p-demo").addEventListener("click", function(){
+    S.buildings = S.buildings.filter(function(x){ return x.id!==b.id; });
+    S.people.forEach(function(pp){ if(pp.home===b.id) pp.home = -1; if(pp.job===b.id) pp.job = -1; });
+    S.logs += Math.floor(dd.cost/2);
+    selected = null; resyncJobs(); renderPanel(); updateTop(); save();
+    setLog("Снесено: " + dd.name + ". Вернулась половина брёвен.", "");
+  });
+  $("p-close").addEventListener("click", function(){ selected = null; renderPanel(); });
+}
+function showBanner(title, text, btnText, cb){
+  $("b-title").textContent = title;
+  $("b-text").textContent = text;
+  $("b-btn").textContent = btnText;
+  $("banner").className = "show";
+  $("b-btn").onclick = function(){ $("banner").className = ""; if(cb) cb(); };
+}
+$("banner").addEventListener("click", function(e){ if(e.target===$("banner") && S && !S.over) $("banner").className = ""; });
+function setSpeed(n){
+  S.speed = n;
+  [0,1,2].forEach(function(i){ $("spd"+i).classList.toggle("on", i===n); });
+}
+$("spd0").addEventListener("click", function(){ setSpeed(0); });
+$("spd1").addEventListener("click", function(){ setSpeed(1); });
+$("spd2").addEventListener("click", function(){ setSpeed(2); });
+$("btn-help").addEventListener("click", function(){ $("help").classList.toggle("show"); });
+$("btn-new").addEventListener("click", function(){
+  showBanner("Начать заново?", "Текущее поселение будет потеряно, и вы начнёте с новой группой изгнанников.", "Да, заново", function(){
+    try{ localStorage.removeItem("exiles_save_v1"); }catch(e){}
+    placing = null; selected = null; newGame(); resyncJobs(); renderPanel(); updateTop();
+  });
+});
+/* ===== Pointer input ===== */
+function evtTile(e){
+  var r = cv.getBoundingClientRect();
+  var x = Math.floor((e.clientX - r.left) * (W / r.width) / TILE);
+  var y = Math.floor((e.clientY - r.top) * (H / r.height) / TILE);
+  return { x:x, y:y };
+}
+cv.addEventListener("pointermove", function(e){ hoverTile = evtTile(e); });
+cv.addEventListener("pointerdown", function(e){
+  var t = evtTile(e); hoverTile = t;
+  if(placing){
+    if(canPlace(t.x, t.y) && S.logs >= DEFS[placing].cost){
+      S.logs -= DEFS[placing].cost;
+      for(var x=t.x;x<t.x+2;x++) for(var y=t.y;y<t.y+2;y++){ var c = S.terrain[tid(x,y)]; c.k = 0; c.trees = 0; }
+      var nb = addBuilding(placing, t.x, t.y, false);
+      setLog("Строится: " + DEFS[placing].name + ". Свободные рабочие строят.", "");
+      placing = null; selected = nb.id;
+      renderPanel(); updateTop(); save();
+    } else {
+      setLog("Здесь построить нельзя или не хватает брёвен.", "warn");
+    }
+    return;
+  }
+  var b = bAt(t.x, t.y);
+  selected = b ? b.id : null;
+  renderPanel();
+});
+/* ===== Main loop ===== */
+var lastTs = 0, monthAcc = 0, topAcc = 0;
+function loop(ts){
+  requestAnimationFrame(loop);
+  if(!S) return;
+  var dt = Math.min(0.05, (ts - lastTs)/1000 || 0);
+  lastTs = ts;
+  if(S.speed>0 && !S.over){
+    monthAcc += dt*1000*(S.speed===2 ? 2.2 : 1);
+    if(monthAcc >= MONTH_MS){ monthAcc -= MONTH_MS; monthTick(); if(selected) renderPanel(); }
+  }
+  topAcc += dt;
+  if(topAcc > 0.3){ topAcc = 0; updateTop(); }
+  render(dt);
+}
+/* ===== Boot ===== */
+if(!load()){ newGame(); }
+else { setLog("С возвращением! Поселение продолжает жить.", ""); houseMoveIns(); }
+buildBuildBar();
+resyncJobs();
+renderPanel();
+updateTop();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
