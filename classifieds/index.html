@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 4</title>
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 5</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -101,6 +101,9 @@
   @media (max-width:640px){ .cats{ grid-template-columns:repeat(3,1fr);} .grid{ grid-template-columns:repeat(2,1fr);} .logo{ font-size:22px;} .thumb{ height:120px; font-size:44px;} }
   .cancel-btn{ width:100%; background:#fff; color:var(--muted); border:1px solid var(--line); border-radius:12px; padding:13px; font-size:15px; font-weight:700; margin-top:10px; }
   a.phone-btn{ display:block; text-align:center; text-decoration:none; }
+  body.no-scroll{ position:fixed; left:0; right:0; width:100%; overflow:hidden; }
+  .overlay{ overscroll-behavior:contain; }
+  .modal{ overscroll-behavior:contain; }
 </style>
 </head>
 <body>
@@ -123,7 +126,7 @@
 </header>
 
 <div class="wrap">
-  <div class="demo-tag">🧪 <b>Демо, Версия 4.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="demo-tag">🧪 <b>Демо, Версия 5.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
 
   <div class="cats" id="cats"></div>
 
@@ -288,7 +291,7 @@ function openView(id){
       <div class="desc">${l.d}</div>
       <button class="phone-btn" id="phBtn" onclick="revealPhone(this,'${l.ph}')"><i class="fa-solid fa-phone"></i> ${I18N[lang].showPhone}</button>
     </div>`;
-  document.getElementById('ovView').classList.add('open');
+  document.getElementById('ovView').classList.add('open'); lockScroll();
 }
 function revealPhone(btn, ph){
   const a = document.createElement('a');
@@ -297,8 +300,11 @@ function revealPhone(btn, ph){
   a.innerHTML = '<i class="fa-solid fa-phone"></i> ' + ph;
   btn.replaceWith(a);
 }
-function openPost(){ document.getElementById('ovPost').classList.add('open'); }
-function closeAll(){ document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open')); }
+function openPost(){ document.getElementById('ovPost').classList.add('open'); lockScroll(); }
+let savedScrollY = 0;
+function lockScroll(){ savedScrollY = window.scrollY || 0; document.body.style.top = (-savedScrollY) + 'px'; document.body.classList.add('no-scroll'); }
+function unlockScroll(){ document.body.classList.remove('no-scroll'); document.body.style.top = ''; window.scrollTo(0, savedScrollY); }
+function closeAll(){ document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open')); unlockScroll(); }
 function goHome(){ activeCat=''; favOnly=false; document.getElementById('q').value=''; render(); window.scrollTo({top:0,behavior:'smooth'}); return false; }
 
 function submitPost(){
