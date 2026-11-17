@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 3</title>
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 4</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -100,6 +100,7 @@
   @media (max-width:900px){ .cats{ grid-template-columns:repeat(4,1fr);} .grid{ grid-template-columns:repeat(3,1fr);} }
   @media (max-width:640px){ .cats{ grid-template-columns:repeat(3,1fr);} .grid{ grid-template-columns:repeat(2,1fr);} .logo{ font-size:22px;} .thumb{ height:120px; font-size:44px;} }
   .cancel-btn{ width:100%; background:#fff; color:var(--muted); border:1px solid var(--line); border-radius:12px; padding:13px; font-size:15px; font-weight:700; margin-top:10px; }
+  a.phone-btn{ display:block; text-align:center; text-decoration:none; }
 </style>
 </head>
 <body>
@@ -122,7 +123,7 @@
 </header>
 
 <div class="wrap">
-  <div class="demo-tag">🧪 <b>Демо, Версия 3.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="demo-tag">🧪 <b>Демо, Версия 4.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
 
   <div class="cats" id="cats"></div>
 
@@ -285,9 +286,16 @@ function openView(id){
       <h3>${l.t}</h3>
       <div class="kv"><span><i class="fa-solid fa-folder-open"></i> ${catName(l.cat)}</span><span><i class="fa-solid fa-location-dot"></i> ${l.city}</span><span><i class="fa-regular fa-clock"></i> ${l.time} назад</span></div>
       <div class="desc">${l.d}</div>
-      <button class="phone-btn" id="phBtn" onclick="document.getElementById('phBtn').textContent='${l.ph}'"><i class="fa-solid fa-phone"></i> ${I18N[lang].showPhone}</button>
+      <button class="phone-btn" id="phBtn" onclick="revealPhone(this,'${l.ph}')"><i class="fa-solid fa-phone"></i> ${I18N[lang].showPhone}</button>
     </div>`;
   document.getElementById('ovView').classList.add('open');
+}
+function revealPhone(btn, ph){
+  const a = document.createElement('a');
+  a.className = 'phone-btn';
+  a.href = 'tel:' + ph.replace(/[^+\d]/g,'');
+  a.innerHTML = '<i class="fa-solid fa-phone"></i> ' + ph;
+  btn.replaceWith(a);
 }
 function openPost(){ document.getElementById('ovPost').classList.add('open'); }
 function closeAll(){ document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open')); }
