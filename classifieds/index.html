@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 5</title>
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 6</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -104,6 +104,81 @@
   body.no-scroll{ position:fixed; left:0; right:0; width:100%; overflow:hidden; }
   .overlay{ overscroll-behavior:contain; }
   .modal{ overscroll-behavior:contain; }
+
+  .theme-btn{ background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:12px; padding:10px 13px; cursor:pointer; font-size:15px; }
+  .hero{ background:linear-gradient(120deg,#0b3aa7,#10234a); color:#fff; border-radius:18px; padding:26px; display:flex; gap:20px; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; }
+  .hero h1{ margin:0 0 8px; font-size:26px; }
+  .hero p{ margin:0 0 14px; opacity:.85; max-width:520px; line-height:1.5; }
+  .hero-cta{ background:#f59e0b; color:#231600; border:0; padding:12px 18px; border-radius:12px; font-weight:800; font-size:15px; cursor:pointer; }
+  .hero-stats{ display:flex; gap:24px; }
+  .hero-stats div{ text-align:center; }
+  .hero-stats b{ display:block; font-size:24px; }
+  .hero-stats span{ font-size:12px; opacity:.8; }
+  .res-count{ color:var(--muted); font-size:13px; font-weight:700; }
+  .vtg{ display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .vtg button{ background:var(--card); border:0; padding:8px 12px; color:var(--muted); cursor:pointer; font-size:14px; }
+  .vtg button.on{ background:var(--brand); color:#fff; }
+  .price-inp{ width:94px; padding:9px 10px; border:1px solid var(--line); border-radius:10px; font-size:14px; background:var(--card); color:var(--ink); }
+  .chk{ display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; }
+  .grid.list{ grid-template-columns:1fr; }
+  .grid.list .card{ display:flex; }
+  .grid.list .thumb{ width:230px; padding-top:0; height:170px; flex:none; }
+  .grid.list .card-in{ flex:1; }
+  @media(max-width:640px){ .grid.list .thumb{ width:128px; height:118px; } }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  .card{ animation:fadeUp .35s ease; transition:box-shadow .2s ease; }
+  .card:hover{ box-shadow:0 14px 30px rgba(16,35,74,.15); }
+  .thumb img.ph{ transition:transform .35s ease; }
+  .card:hover .thumb img.ph{ transform:scale(1.05); }
+  .toast{ position:fixed; left:50%; bottom:88px; transform:translateX(-50%) translateY(20px); background:#10234a; color:#fff; padding:12px 20px; border-radius:999px; font-weight:700; font-size:14px; opacity:0; pointer-events:none; transition:.25s; z-index:200; box-shadow:0 10px 30px rgba(0,0,0,.25); max-width:92vw; text-align:center; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  @media(min-width:861px){ .toast{ bottom:30px; } }
+  .bnav{ display:none; }
+  @media(max-width:860px){
+    .bnav{ display:flex; position:fixed; left:0; right:0; bottom:0; background:var(--card); border-top:1px solid var(--line); z-index:90; padding:6px 4px calc(6px + env(safe-area-inset-bottom)); }
+    .bnav button{ flex:1; background:none; border:0; color:var(--muted); font-size:11px; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 0; cursor:pointer; }
+    .bnav button i{ font-size:19px; }
+    .bnav .bnav-post{ color:var(--brand); }
+    body{ padding-bottom:64px; }
+  }
+  .backtop{ display:none; }
+  @media(min-width:861px){ .backtop{ display:flex; position:fixed; right:22px; bottom:22px; width:46px; height:46px; border-radius:50%; border:1px solid var(--line); background:var(--card); color:var(--brand); font-size:17px; align-items:center; justify-content:center; cursor:pointer; opacity:0; pointer-events:none; transition:.25s; z-index:80; box-shadow:0 8px 20px rgba(16,35,74,.15); } .backtop.show{ opacity:1; pointer-events:auto; } }
+  .fcols{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:18px; }
+  @media(max-width:760px){ .fcols{ grid-template-columns:1fr 1fr; } }
+  .fcols b{ display:block; margin-bottom:8px; color:#fff; }
+  .fcols span,.fcols p{ color:#aebbd6; font-size:13px; line-height:1.75; margin:0; }
+  .fcols a{ color:#aebbd6; text-decoration:none; }
+  .fcols a:hover{ color:#fff; text-decoration:underline; }
+  .fbot{ margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,.15); color:#aebbd6; font-size:12px; line-height:1.6; }
+  .m-actions{ display:flex; gap:10px; margin-top:12px; }
+  .m-act{ flex:1; padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--ink); font-weight:800; font-size:14px; cursor:pointer; }
+  .m-act i{ color:var(--brand); margin-right:6px; }
+  .maplink{ display:inline-block; margin-top:10px; color:var(--brand); font-weight:700; font-size:14px; text-decoration:none; }
+  .sim-t{ font-weight:800; margin:20px 0 10px; }
+  .sim-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  @media(max-width:640px){ .sim-grid{ grid-template-columns:repeat(2,1fr); } }
+  .sim{ cursor:pointer; }
+  .sim .sthumb{ position:relative; padding-top:66%; border-radius:10px; overflow:hidden; background:linear-gradient(135deg,#dbe7ff,#f3f6fc); }
+  .sim .sthumb i.fic{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:26px; color:#9db8e8; }
+  .sim img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .sim .sp{ font-weight:800; color:var(--brand); font-size:14px; margin-top:6px; }
+  .sim .st{ font-size:12px; color:var(--muted); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .fprev{ width:100%; max-height:220px; object-fit:cover; border-radius:12px; margin-top:8px; }
+  .cnt{ text-align:right; font-size:12px; color:var(--muted); margin-top:4px; }
+  .addr-wrap{ position:relative; }
+  .sugg{ position:absolute; left:0; right:0; top:100%; background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 14px 34px rgba(16,35,74,.18); z-index:60; overflow:hidden; display:none; }
+  .sugg.open{ display:block; }
+  .sugg div{ padding:11px 14px; font-size:14px; cursor:pointer; border-top:1px solid var(--line); }
+  .sugg div:first-child{ border-top:0; }
+  .sugg div:hover{ background:var(--bg); }
+  .sugg div i{ color:var(--brand); margin-right:8px; }
+  [data-theme="dark"]{ --bg:#0d1322; --card:#16203a; --ink:#e9edf6; --muted:#9dabc4; --line:#27355a; }
+  [data-theme="dark"] .modal{ background:#16203a; }
+  [data-theme="dark"] .form input,[data-theme="dark"] .form select,[data-theme="dark"] .form textarea{ background:#0d1526; color:var(--ink); }
+  [data-theme="dark"] .cat{ background:#16203a; }
+  [data-theme="dark"] .chip2{ background:#0d1526; }
+  [data-theme="dark"] .x{ background:#22304f; color:#fff; }
+  [data-theme="dark"] .demo-tag{ background:#2a2110; border-color:#6b5518; color:#ffd97a; }
 </style>
 </head>
 <body>
@@ -117,6 +192,7 @@
     </div>
     <button class="fav-btn" onclick="toggleFavView()"><i class="fa-solid fa-heart"></i> <b id="favCount">0</b></button>
     <button class="post-btn" onclick="openPost()" data-i="post">+ Подать объявление</button>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Theme"><i class="fa-solid fa-moon"></i></button>
     <div class="lang">
       <button id="lang-hy" onclick="setLang('hy')">ՀԱՅ</button>
       <button id="lang-ru" class="on" onclick="setLang('ru')">РУ</button>
@@ -126,12 +202,25 @@
 </header>
 
 <div class="wrap">
-  <div class="demo-tag">🧪 <b>Демо, Версия 5.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="demo-tag">🧪 <b>Демо, Версия 6.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="hero">
+    <div>
+      <h1 data-i="heroT">Покупай и продавай в своём городе</h1>
+      <p data-i="heroP">Квартиры, авто, работа и услуги — объявления армянской общины Лос-Анджелеса.</p>
+      <button class="hero-cta" onclick="openPost()" data-i="heroCta">+ Подать объявление — бесплатно</button>
+    </div>
+    <div class="hero-stats">
+      <div><b id="stAdsN">16</b><span data-i="stAds">объявлений</span></div>
+      <div><b>12</b><span data-i="stCats">категорий</span></div>
+      <div><b>8</b><span data-i="stCities">городов</span></div>
+    </div>
+  </div>
 
   <div class="cats" id="cats"></div>
 
   <div class="toolbar">
     <h2 id="feedTitle">Свежие объявления</h2>
+    <span class="res-count" id="resCount"></span>
     <select id="city" onchange="render()">
       <option value="">Все города</option>
     </select>
@@ -140,6 +229,10 @@
       <option value="cheap">Сначала дешёвые</option>
       <option value="exp">Сначала дорогие</option>
     </select>
+    <input class="price-inp" id="pMin" type="number" min="0" placeholder="$ от" oninput="render()">
+    <input class="price-inp" id="pMax" type="number" min="0" placeholder="$ до" oninput="render()">
+    <label class="chk"><input type="checkbox" id="photoOnly" onchange="render()"> <span data-i="photoOnly">С фото</span></label>
+    <div class="vtg"><button id="vGrid" class="on" onclick="setView('grid')" aria-label="Grid"><i class="fa-solid fa-border-all"></i></button><button id="vList" onclick="setView('list')" aria-label="List"><i class="fa-solid fa-list"></i></button></div>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -147,10 +240,24 @@
 
 <footer>
   <div class="footer-in">
-    <div>© 2026 HayList — демо-версия. Сделано в Лос-Анджелесе.<br>Фото в объявлениях: Openverse / Flickr — лицензии CC BY, CC BY-SA, Public Domain.</div>
-    <div>Правила · Конфиденциальность · Связь: davit@sitvio.com</div>
+    <div class="fcols">
+      <div><b>HayList</b><p>Объявления армян Лос-Анджелеса: квартиры, авто, работа и услуги. Оператор — ARMI7 INC dba HayList, Glendale, CA.</p></div>
+      <div><b>Категории</b><span id="fCats"></span></div>
+      <div><b>Города</b><span>Glendale · Burbank · Hollywood · North Hollywood · Pasadena · Van Nuys · Montebello · Los Angeles</span></div>
+      <div><b>Правовое</b><span><a href="terms.html">Правила (Terms)</a><br><a href="privacy.html">Конфиденциальность (Privacy)</a><br><a href="prohibited.html">Запрещённые товары</a><br><a href="dmca.html">DMCA</a><br><br>Связь: davit@sitvio.com</span></div>
+    </div>
+    <div class="fbot">© 2026 HayList — демо-версия. Сделано в Лос-Анджелесе.<br>Фото в объявлениях: Openverse / Flickr — лицензии CC BY, CC BY-SA, Public Domain.</div>
   </div>
 </footer>
+
+<div class="toast" id="toast"></div>
+<button class="backtop" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Up"><i class="fa-solid fa-arrow-up"></i></button>
+<nav class="bnav">
+  <button onclick="goHome()"><i class="fa-solid fa-house"></i><span data-i="bHome">Главная</span></button>
+  <button onclick="toggleFavView()"><i class="fa-solid fa-heart"></i><span data-i="favs">Избранное</span></button>
+  <button class="bnav-post" onclick="openPost()"><i class="fa-solid fa-circle-plus"></i><span data-i="bPost">Подать</span></button>
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i><span data-i="bTop">Наверх</span></button>
+</nav>
 
 <!-- Listing modal -->
 <div class="overlay" id="ovView" onclick="if(event.target===this)closeAll()">
@@ -174,8 +281,17 @@
       <input id="f_price" type="number" min="0" placeholder="1000">
       <label data-i="fCity">Город</label>
       <select id="f_city"></select>
+      <label data-i="fAddr">Адрес (улица, дом)</label>
+      <div class="addr-wrap">
+        <input id="f_addr" type="text" placeholder="Начните вводить адрес..." autocomplete="off" oninput="addrSuggest(this.value)">
+        <div class="sugg" id="sugg"></div>
+      </div>
+      <label data-i="fPhoto">Фото (необязательно)</label>
+      <input type="file" id="f_file" accept="image/*" onchange="previewPhoto(this)">
+      <img id="f_preview" class="fprev" style="display:none" alt="">
       <label data-i="fDesc">Описание</label>
-      <textarea id="f_desc" maxlength="800" placeholder="Состояние, детали, условия..."></textarea>
+      <textarea id="f_desc" maxlength="800" placeholder="Состояние, детали, условия..." oninput="document.getElementById('dCnt').textContent=this.value.length"></textarea>
+      <div class="cnt"><span id="dCnt">0</span>/800</div>
       <label data-i="fPhone">Телефон</label>
       <input id="f_phone" type="tel" placeholder="+1 (___) ___-____">
       <button class="submit" onclick="submitPost()" data-i="fSubmit">Опубликовать</button>
@@ -222,9 +338,9 @@ const SEED = [
 ];
 
 const I18N = {
-  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать объявление', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', fCancel:'Отмена', all:'Все города', negotiable:'Договорная', showPhone:'Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.' },
-  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել հայտարարություն', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', fCancel:'Չեղարկել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։' },
-  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post an ad', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', fCancel:'Cancel', all:'All cities', negotiable:'Negotiable', showPhone:'Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.' }
+  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать объявление', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', fCancel:'Отмена', all:'Все города', negotiable:'Договорная', showPhone:'Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.', heroT:'Покупай и продавай в своём городе', heroP:'Квартиры, авто, работа и услуги — объявления армянской общины Лос-Анджелеса.', heroCta:'+ Подать объявление — бесплатно', stAds:'объявлений', stCats:'категорий', stCities:'городов', photoOnly:'С фото', fPhoto:'Фото (необязательно)', fAddr:'Адрес (улица, дом)', favWord:'В избранное', shareWord:'Поделиться', similar:'Похожие объявления', shareOk:'Ссылка скопирована', adsWord:'объявлений', bHome:'Главная', bPost:'Подать', bTop:'Наверх', mapOpen:'Открыть в картах' },
+  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել հայտարարություն', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', fCancel:'Չեղարկել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։', heroT:'Գնիր և վաճառիր քո քաղաքում', heroP:'Բնակարաններ, ավտո, աշխատանք և ծառայություններ՝ Լոս Անջելեսի հայ համայնքի հայտարարությունները։', heroCta:'+ Տեղադրել հայտարարություն — անվճար', stAds:'հայտարարություն', stCats:'բաժին', stCities:'քաղաք', photoOnly:'Լուսանկարով', fPhoto:'Լուսանկար (պարտադիր չէ)', fAddr:'Հասցե (փողոց, տուն)', favWord:'Ընտրվածներում', shareWord:'Կիսվել', similar:'Նման հայտարարություններ', shareOk:'Հղումը պատճենված է', adsWord:'հայտարարություն', bHome:'Գլխավոր', bPost:'Տեղադրել', bTop:'Վերև', mapOpen:'Բացել քարտեզում' },
+  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post an ad', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', fCancel:'Cancel', all:'All cities', negotiable:'Negotiable', showPhone:'Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.', heroT:'Buy and sell in your city', heroP:'Apartments, cars, jobs and services — classifieds of the Armenian community of Los Angeles.', heroCta:'+ Post an ad — free', stAds:'listings', stCats:'categories', stCities:'cities', photoOnly:'With photo', fPhoto:'Photo (optional)', fAddr:'Address (street, number)', favWord:'Save', shareWord:'Share', similar:'Similar listings', shareOk:'Link copied', adsWord:'listings', bHome:'Home', bPost:'Post', bTop:'Top', mapOpen:'Open in Maps' }
 };
 
 let lang = 'ru';
@@ -256,17 +372,26 @@ function render(){
   const city = document.getElementById('city').value;
   const sort = document.getElementById('sort').value;
   document.getElementById('feedTitle').textContent = favOnly ? I18N[lang].favs : (activeCat ? catName(activeCat) : I18N[lang].feed);
+  const pMin = parseFloat(document.getElementById('pMin').value);
+  const pMax = parseFloat(document.getElementById('pMax').value);
+  const phOnly = document.getElementById('photoOnly').checked;
   let out = listings.filter(l =>
     (!activeCat || l.cat===activeCat) &&
     (!city || l.city===city) &&
     (!favOnly || favs.has(l.id)) &&
+    (isNaN(pMin) || l.p>=pMin) &&
+    (isNaN(pMax) || (l.p>0 && l.p<=pMax)) &&
+    (!phOnly || l.img) &&
     (!q || l.t.toLowerCase().includes(q) || l.d.toLowerCase().includes(q))
   );
   if(sort==='cheap') out.sort((a,b)=>(a.p||1e12)-(b.p||1e12));
   if(sort==='exp') out.sort((a,b)=>b.p-a.p);
   if(sort==='new') out.sort((a,b)=>(b.vip-a.vip)||(b.id-a.id));
-  document.getElementById('grid').innerHTML = out.length ? out.map(l=>`
-    <div class="card" onclick="openView(${l.id})">
+  document.getElementById('stAdsN').textContent = listings.length;
+  document.getElementById('resCount').textContent = out.length + ' ' + I18N[lang].adsWord;
+  const gridEl = document.getElementById('grid'); gridEl.className = 'grid' + (viewMode==='list' ? ' list' : '');
+  gridEl.innerHTML = out.length ? out.map((l,idx)=>`
+    <div class="card" style="animation-delay:${Math.min(idx,12)*40}ms" onclick="openView(${l.id})">
       <div class="thumb" style="background:${GRADS[l.g%GRADS.length]}"><i class="fa-solid ${catFa(l.cat)} fic"></i>${l.img?`<img class="ph" src="${l.img}" alt="" loading="lazy" onerror="this.remove()">`:''}
         ${l.vip?'<span class="vip">VIP</span>':''}
         <button class="heart ${favs.has(l.id)?'on':''}" onclick="toggleFav(${l.id},event)">${favs.has(l.id)?'<i class="fa-solid fa-heart"></i>':'<i class="fa-regular fa-heart"></i>'}</button>
@@ -290,6 +415,12 @@ function openView(id){
       <div class="kv"><span><i class="fa-solid fa-folder-open"></i> ${catName(l.cat)}</span><span><i class="fa-solid fa-location-dot"></i> ${l.city}</span><span><i class="fa-regular fa-clock"></i> ${l.time} назад</span></div>
       <div class="desc">${l.d}</div>
       <button class="phone-btn" id="phBtn" onclick="revealPhone(this,'${l.ph}')"><i class="fa-solid fa-phone"></i> ${I18N[lang].showPhone}</button>
+      ${l.addr?`<a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.addr)}"><i class="fa-solid fa-map-location-dot"></i> ${l.addr} — ${I18N[lang].mapOpen}</a>`:''}
+      <div class="m-actions">
+        <button class="m-act" onclick="toggleFav(${l.id},event);openView(${l.id})"><i class="fa-${favs.has(l.id)?'solid':'regular'} fa-heart"></i>${I18N[lang].favWord}</button>
+        <button class="m-act" onclick="shareListing(${l.id})"><i class="fa-solid fa-share-nodes"></i>${I18N[lang].shareWord}</button>
+      </div>
+      ${similarHtml(l)}
     </div>`;
   document.getElementById('ovView').classList.add('open'); lockScroll();
 }
@@ -311,10 +442,10 @@ function submitPost(){
   const t = document.getElementById('f_title').value.trim();
   const d = document.getElementById('f_desc').value.trim();
   const ph = document.getElementById('f_phone').value.trim();
-  if(!t || !d || !ph){ alert(I18N[lang].fill); return; }
+  if(!t || !d || !ph){ toast(I18N[lang].fill); return; }
   const cat = document.getElementById('f_cat').value;
   const ck = CATS.find(x=>x.id===cat);
-  const item = { id: Date.now(), cat, t, d, ph,
+  const item = { id: Date.now(), cat, t, d, ph, img: window._photoData || '', addr: document.getElementById('f_addr').value.trim(),
     p: parseInt(document.getElementById('f_price').value||'0',10),
     per:'', city: document.getElementById('f_city').value,
     time:'только что', vip:0, ic: ck?ck.ic:'📦', g: Math.floor(Math.random()*GRADS.length) };
@@ -322,8 +453,62 @@ function submitPost(){
   localStorage.setItem('haylist_mine', JSON.stringify(mine));
   closeAll(); activeCat=''; favOnly=false; render();
   window.scrollTo({top:0,behavior:'smooth'});
-  setTimeout(()=>alert(I18N[lang].posted), 150);
+  ['f_title','f_desc','f_phone','f_price','f_addr'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('dCnt').textContent='0';
+  document.getElementById('f_file').value=''; document.getElementById('f_preview').style.display='none'; window._photoData='';
+  setTimeout(()=>toast(I18N[lang].posted), 150);
 }
+
+
+let viewMode = localStorage.getItem('haylist_view') || 'grid';
+function setView(m){ viewMode = m; localStorage.setItem('haylist_view', m);
+  document.getElementById('vGrid').classList.toggle('on', m==='grid');
+  document.getElementById('vList').classList.toggle('on', m==='list'); render(); }
+function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(window._toastT); window._toastT = setTimeout(()=>t.classList.remove('show'), 2600); }
+function shareListing(id){ const l = listings.find(x=>x.id===id); if(!l) return;
+  const data = { title: 'HayList', text: l.t + ' — ' + fmtP(l), url: location.href };
+  if(navigator.share){ navigator.share(data).catch(()=>{}); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(data.text + ' ' + data.url).then(()=>toast(I18N[lang].shareOk)); } }
+function toggleTheme(){ const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', cur); localStorage.setItem('haylist_theme', cur);
+  document.querySelector('#themeBtn i').className = cur==='dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'; }
+function previewPhoto(input){ const f = input.files && input.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = e => { window._photoData = e.target.result; const img = document.getElementById('f_preview'); img.src = e.target.result; img.style.display = 'block'; };
+  r.readAsDataURL(f); }
+function similarHtml(l){ const sim = listings.filter(x=>x.cat===l.cat && x.id!==l.id).slice(0,4); if(!sim.length) return '';
+  return `<div class="sim-t">${I18N[lang].similar}</div><div class="sim-grid">` + sim.map(x=>`
+    <div class="sim" onclick="openView(${x.id});document.querySelector('#ovView .modal').scrollTop=0">
+      <div class="sthumb"><i class="fa-solid ${catFa(x.cat)} fic"></i>${x.img?`<img src="${x.img}" alt="" loading="lazy" onerror="this.remove()">`:''}</div>
+      <div class="sp">${fmtP(x)}</div><div class="st">${x.t}</div>
+    </div>`).join('') + `</div>`; }
+function fillFCats(){ const el = document.getElementById('fCats'); if(el) el.innerHTML = CATS.map(c=>c.ru).join('<br>'); }
+
+let addrTimer = null;
+function addrSuggest(v){ const box = document.getElementById('sugg');
+  v = v.trim(); if(v.length < 3){ box.classList.remove('open'); box.innerHTML=''; return; }
+  clearTimeout(addrTimer);
+  addrTimer = setTimeout(async () => {
+    try{
+      const url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=us&viewbox=-118.95,34.35,-117.60,33.70&bounded=0&q=' + encodeURIComponent(v);
+      const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      const arr = await r.json();
+      if(!arr.length){ box.classList.remove('open'); box.innerHTML=''; return; }
+      box.innerHTML = arr.map((it,i)=>{ const a = it.address||{};
+        const street = ((a.road||'') + (a.house_number ? ' ' + a.house_number : '')).trim();
+        const city = a.city || a.town || a.village || a.suburb || '';
+        const label = (street ? street + ', ' : '') + city + (a.state ? ', ' + a.state : '') + (a.postcode ? ' ' + a.postcode : '');
+        return `<div onclick="pickAddr(${i}, this)" data-label="${label.replace(/"/g,'&quot;')}" data-city="${(city||'').replace(/"/g,'&quot;')}"><i class="fa-solid fa-location-dot"></i>${label || it.display_name}</div>`; }).join('');
+      box.classList.add('open');
+    }catch(e){ box.classList.remove('open'); }
+  }, 350); }
+function pickAddr(i, el){ document.getElementById('f_addr').value = el.getAttribute('data-label');
+  const c = el.getAttribute('data-city'); const sel = document.getElementById('f_city');
+  if(c){ for(let o of sel.options){ if(o.text.toLowerCase() === c.toLowerCase()){ sel.value = o.text; break; } } }
+  document.getElementById('sugg').classList.remove('open'); }
+document.addEventListener('click', e=>{ const b = document.getElementById('sugg');
+  if(b && !e.target.closest('.addr-wrap')) b.classList.remove('open'); });
 
 function setLang(l){
   lang = l;
@@ -339,6 +524,11 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAll(); });
 document.getElementById('city').innerHTML = '<option value="">Все города</option>' + CITIES.map(c=>`<option>${c}</option>`).join('');
 document.getElementById('f_city').innerHTML = CITIES.map(c=>`<option>${c}</option>`).join('');
 document.getElementById('f_cat').innerHTML = CATS.map(c=>`<option value="${c.id}">${c.ru}</option>`).join('');
+if(localStorage.getItem('haylist_theme') === 'dark'){ document.documentElement.setAttribute('data-theme','dark'); document.querySelector('#themeBtn i').className = 'fa-solid fa-sun'; }
+document.getElementById('vGrid').classList.toggle('on', viewMode==='grid');
+document.getElementById('vList').classList.toggle('on', viewMode==='list');
+window.addEventListener('scroll', ()=>{ document.getElementById('backTop').classList.toggle('show', window.scrollY > 600); });
+fillFCats();
 render();
 </script>
 </body>
