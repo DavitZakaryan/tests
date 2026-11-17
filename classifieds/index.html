@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 6</title>
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 7</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -71,7 +71,7 @@
   /* Modal */
   .overlay{ position:fixed; inset:0; background:rgba(10,18,38,.55); display:none; align-items:flex-end; justify-content:center; z-index:100; }
   .overlay.open{ display:flex; }
-  .modal{ position:relative; background:#fff; width:100%; max-width:640px; max-height:92vh; overflow-y:auto; border-radius:20px 20px 0 0; padding:0 0 26px; animation:up .22s ease; }
+  .modal{ position:relative; background:#fff; width:100%; max-width:640px; max-height:92vh; max-height:92dvh; overflow-y:auto; border-radius:20px 20px 0 0; padding:0 0 26px; animation:up .22s ease; }
   @keyframes up{ from{ transform:translateY(40px); opacity:.5;} to{ transform:none; opacity:1;} }
   .modal .thumb{ height:230px; font-size:92px; border-radius:0; }
   .modal-in{ padding:16px 20px 0; }
@@ -179,6 +179,9 @@
   [data-theme="dark"] .chip2{ background:#0d1526; }
   [data-theme="dark"] .x{ background:#22304f; color:#fff; }
   [data-theme="dark"] .demo-tag{ background:#2a2110; border-color:#6b5518; color:#ffd97a; }
+  .m-head{ position:sticky; top:0; z-index:6; display:flex; align-items:center; justify-content:space-between; gap:10px; background:inherit; padding:12px 16px; border-bottom:1px solid var(--line); }
+  .m-head .m-title{ font-weight:800; font-size:16px; }
+  .x2{ position:static; width:38px; height:38px; flex:none; border-radius:50%; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-size:16px; cursor:pointer; line-height:1; }
 </style>
 </head>
 <body>
@@ -202,7 +205,7 @@
 </header>
 
 <div class="wrap">
-  <div class="demo-tag">🧪 <b>Демо, Версия 6.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="demo-tag">🧪 <b>Демо, Версия 7.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
   <div class="hero">
     <div>
       <h1 data-i="heroT">Покупай и продавай в своём городе</h1>
@@ -262,7 +265,7 @@
 <!-- Listing modal -->
 <div class="overlay" id="ovView" onclick="if(event.target===this)closeAll()">
   <div class="modal modal-wrap">
-    <button class="x" onclick="closeAll()">✕</button>
+    <div class="m-head"><span class="m-title">HayList</span><button class="x2" onclick="closeAll()" aria-label="Close">✕</button></div>
     <div id="viewBody"></div>
   </div>
 </div>
@@ -270,9 +273,8 @@
 <!-- Post form modal -->
 <div class="overlay" id="ovPost" onclick="if(event.target===this)closeAll()">
   <div class="modal">
-    <button class="x" onclick="closeAll()" aria-label="Close">✕</button>
+    <div class="m-head"><span class="m-title" data-i="postTitle">Подать объявление — бесплатно</span><button class="x2" onclick="closeAll()" aria-label="Close">✕</button></div>
     <div class="form">
-      <h3 data-i="postTitle">Подать объявление — бесплатно</h3>
       <label data-i="fTitle">Заголовок</label>
       <input id="f_title" type="text" maxlength="90" placeholder="Например: Toyota Camry 2019">
       <label data-i="fCat">Категория</label>
@@ -422,7 +424,7 @@ function openView(id){
       </div>
       ${similarHtml(l)}
     </div>`;
-  document.getElementById('ovView').classList.add('open'); lockScroll();
+  document.getElementById('ovView').classList.add('open'); lockScroll(); document.querySelector('#ovView .modal').scrollTop = 0;
 }
 function revealPhone(btn, ph){
   const a = document.createElement('a');
@@ -431,7 +433,7 @@ function revealPhone(btn, ph){
   a.innerHTML = '<i class="fa-solid fa-phone"></i> ' + ph;
   btn.replaceWith(a);
 }
-function openPost(){ document.getElementById('ovPost').classList.add('open'); lockScroll(); }
+function openPost(){ document.getElementById('ovPost').classList.add('open'); lockScroll(); document.querySelector('#ovPost .modal').scrollTop = 0; }
 let savedScrollY = 0;
 function lockScroll(){ savedScrollY = window.scrollY || 0; document.body.style.top = (-savedScrollY) + 'px'; document.body.classList.add('no-scroll'); }
 function unlockScroll(){ document.body.classList.remove('no-scroll'); document.body.style.top = ''; window.scrollTo(0, savedScrollY); }
