@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 1</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root{
+    --blue:#0b5ed7; --blue-dark:#084298; --orange:#ff7a1a; --bg:#f4f6fb; --card:#fff;
+    --text:#1c2333; --muted:#6b7486; --line:#e3e8f2; --vip:#ffb400;
+  }
+  body{ font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans','Noto Sans Armenian',sans-serif; background:var(--bg); color:var(--text); }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  /* Header */
+  header{ background:linear-gradient(120deg,var(--blue-dark),var(--blue)); color:#fff; position:sticky; top:0; z-index:50; box-shadow:0 2px 12px rgba(8,66,152,.35); }
+  .header-in{ max-width:1180px; margin:0 auto; padding:12px 16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .logo{ font-size:26px; font-weight:800; letter-spacing:.3px; white-space:nowrap; }
+  .logo span{ color:var(--orange); }
+  .logo small{ display:block; font-size:11px; font-weight:500; opacity:.85; letter-spacing:0; }
+  .search{ flex:1; min-width:220px; display:flex; background:#fff; border-radius:12px; overflow:hidden; }
+  .search input{ flex:1; border:0; padding:12px 14px; font-size:15px; outline:none; color:var(--text); }
+  .search button{ border:0; background:var(--orange); color:#fff; padding:0 20px; font-size:15px; font-weight:700; }
+  .post-btn{ background:var(--orange); color:#fff; border:0; border-radius:12px; padding:12px 18px; font-size:15px; font-weight:700; white-space:nowrap; box-shadow:0 3px 10px rgba(255,122,26,.4); }
+  .post-btn:active{ transform:scale(.97); }
+  .fav-btn{ background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:12px; padding:11px 14px; font-size:15px; white-space:nowrap; }
+  .fav-btn b{ color:#ffd9a8; }
+  .lang{ display:flex; gap:4px; }
+  .lang button{ background:transparent; border:1px solid rgba(255,255,255,.4); color:#fff; border-radius:8px; padding:6px 9px; font-size:12px; font-weight:700; }
+  .lang button.on{ background:#fff; color:var(--blue-dark); }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:18px 16px 60px; }
+
+  /* Categories */
+  .cats{ display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-bottom:20px; }
+  .cat{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 8px 11px; text-align:center; transition:.15s; }
+  .cat:hover{ border-color:var(--blue); box-shadow:0 4px 14px rgba(11,94,215,.12); transform:translateY(-2px); }
+  .cat.on{ border-color:var(--blue); background:#eaf2fe; }
+  .cat .ic{ font-size:27px; display:block; margin-bottom:6px; }
+  .cat .nm{ font-size:13px; font-weight:600; line-height:1.25; display:block; }
+  .cat .ct{ font-size:11px; color:var(--muted); display:block; margin-top:3px; }
+
+  /* Toolbar */
+  .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+  .toolbar h2{ font-size:19px; margin-right:auto; }
+  .toolbar select{ padding:9px 10px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:14px; }
+
+  /* Listings */
+  .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:.15s; position:relative; display:flex; flex-direction:column; }
+  .card:hover{ box-shadow:0 8px 22px rgba(20,40,90,.13); transform:translateY(-2px); }
+  .thumb{ height:150px; display:flex; align-items:center; justify-content:center; font-size:56px; position:relative; }
+  .vip{ position:absolute; top:8px; left:8px; background:var(--vip); color:#5b3b00; font-size:11px; font-weight:800; padding:3px 8px; border-radius:20px; letter-spacing:.4px; }
+  .heart{ position:absolute; top:6px; right:6px; background:rgba(255,255,255,.92); border:0; width:34px; height:34px; border-radius:50%; font-size:17px; line-height:1; box-shadow:0 1px 5px rgba(0,0,0,.18); }
+  .heart.on{ color:#e0245e; }
+  .card-in{ padding:11px 12px 13px; display:flex; flex-direction:column; gap:5px; flex:1; }
+  .price{ font-size:18px; font-weight:800; color:var(--blue-dark); }
+  .price small{ font-size:12px; color:var(--muted); font-weight:600; }
+  .ttl{ font-size:14.5px; font-weight:600; line-height:1.35; }
+  .meta{ margin-top:auto; font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:6px; }
+  .empty{ grid-column:1/-1; text-align:center; color:var(--muted); padding:44px 10px; font-size:16px; }
+
+  /* Modal */
+  .overlay{ position:fixed; inset:0; background:rgba(10,18,38,.55); display:none; align-items:flex-end; justify-content:center; z-index:100; }
+  .overlay.open{ display:flex; }
+  .modal{ background:#fff; width:100%; max-width:640px; max-height:92vh; overflow-y:auto; border-radius:20px 20px 0 0; padding:0 0 26px; animation:up .22s ease; }
+  @keyframes up{ from{ transform:translateY(40px); opacity:.5;} to{ transform:none; opacity:1;} }
+  .modal .thumb{ height:230px; font-size:92px; border-radius:0; }
+  .modal-in{ padding:16px 20px 0; }
+  .modal .price{ font-size:24px; }
+  .modal h3{ font-size:20px; margin:6px 0 10px; line-height:1.3; }
+  .desc{ font-size:15px; line-height:1.55; color:#333c4f; white-space:pre-line; }
+  .kv{ display:flex; gap:8px; flex-wrap:wrap; margin:14px 0; }
+  .kv span{ background:var(--bg); border:1px solid var(--line); border-radius:20px; padding:6px 12px; font-size:13px; }
+  .phone-btn{ width:100%; background:#22a06b; color:#fff; border:0; border-radius:12px; padding:15px; font-size:17px; font-weight:800; margin-top:8px; }
+  .close-x{ position:absolute; }
+  .modal-wrap{ position:relative; }
+  .x{ position:absolute; top:10px; right:10px; z-index:2; background:rgba(255,255,255,.94); border:0; width:36px; height:36px; border-radius:50%; font-size:18px; box-shadow:0 1px 6px rgba(0,0,0,.25); }
+
+  /* Form */
+  .form{ padding:20px; }
+  .form h3{ font-size:20px; margin-bottom:14px; }
+  .form label{ display:block; font-size:13px; font-weight:700; margin:12px 0 5px; color:#39415a; }
+  .form input,.form select,.form textarea{ width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:10px; font-size:15px; font-family:inherit; background:#fff; }
+  .form textarea{ min-height:90px; resize:vertical; }
+  .submit{ width:100%; background:var(--orange); color:#fff; border:0; border-radius:12px; padding:14px; font-size:16px; font-weight:800; margin-top:18px; }
+
+  footer{ border-top:1px solid var(--line); background:#fff; }
+  .footer-in{ max-width:1180px; margin:0 auto; padding:22px 16px; color:var(--muted); font-size:13px; display:flex; gap:16px; flex-wrap:wrap; justify-content:space-between; }
+  .demo-tag{ background:#fff3d6; border:1px solid #ffd97a; color:#7a5200; border-radius:10px; padding:9px 13px; font-size:13px; margin-bottom:16px; }
+
+  @media (max-width:900px){ .cats{ grid-template-columns:repeat(4,1fr);} .grid{ grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .cats{ grid-template-columns:repeat(3,1fr);} .grid{ grid-template-columns:repeat(2,1fr);} .logo{ font-size:22px;} .thumb{ height:120px; font-size:44px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="logo" href="#" onclick="return goHome()">Hay<span>List</span><small data-i="tagline">Объявления армян Лос-Анджелеса</small></a>
+    <div class="search">
+      <input id="q" type="text" placeholder="Поиск: авто, квартира, работа..." oninput="render()">
+      <button onclick="render()" data-i="search">Найти</button>
+    </div>
+    <button class="fav-btn" onclick="toggleFavView()">♥ <b id="favCount">0</b></button>
+    <button class="post-btn" onclick="openPost()" data-i="post">+ Подать объявление</button>
+    <div class="lang">
+      <button id="lang-hy" onclick="setLang('hy')">ՀԱՅ</button>
+      <button id="lang-ru" class="on" onclick="setLang('ru')">РУ</button>
+      <button id="lang-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="demo-tag">🧪 <b>Демо, Версия 1.</b> Полностью свой код. Объявления — примеры; кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+
+  <div class="cats" id="cats"></div>
+
+  <div class="toolbar">
+    <h2 id="feedTitle">Свежие объявления</h2>
+    <select id="city" onchange="render()">
+      <option value="">Все города</option>
+    </select>
+    <select id="sort" onchange="render()">
+      <option value="new">Сначала новые</option>
+      <option value="cheap">Сначала дешёвые</option>
+      <option value="exp">Сначала дорогие</option>
+    </select>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<footer>
+  <div class="footer-in">
+    <div>© 2026 HayList — демо-версия. Сделано в Лос-Анджелесе.</div>
+    <div>Правила · Конфиденциальность · Связь: davit@sitvio.com</div>
+  </div>
+</footer>
+
+<!-- Listing modal -->
+<div class="overlay" id="ovView" onclick="if(event.target===this)closeAll()">
+  <div class="modal modal-wrap">
+    <button class="x" onclick="closeAll()">✕</button>
+    <div id="viewBody"></div>
+  </div>
+</div>
+
+<!-- Post form modal -->
+<div class="overlay" id="ovPost" onclick="if(event.target===this)closeAll()">
+  <div class="modal">
+    <div class="form">
+      <h3 data-i="postTitle">Подать объявление — бесплатно</h3>
+      <label data-i="fTitle">Заголовок</label>
+      <input id="f_title" type="text" maxlength="90" placeholder="Например: Toyota Camry 2019">
+      <label data-i="fCat">Категория</label>
+      <select id="f_cat"></select>
+      <label data-i="fPrice">Цена, $ (0 — договорная)</label>
+      <input id="f_price" type="number" min="0" placeholder="1000">
+      <label data-i="fCity">Город</label>
+      <select id="f_city"></select>
+      <label data-i="fDesc">Описание</label>
+      <textarea id="f_desc" maxlength="800" placeholder="Состояние, детали, условия..."></textarea>
+      <label data-i="fPhone">Телефон</label>
+      <input id="f_phone" type="tel" placeholder="+1 (___) ___-____">
+      <button class="submit" onclick="submitPost()" data-i="fSubmit">Опубликовать</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATS = [
+  {id:'realty',  ic:'🏠', ru:'Недвижимость',   hy:'Անշարժ գույք',        en:'Real Estate'},
+  {id:'auto',    ic:'🚗', ru:'Транспорт',      hy:'Տրանսպորտ',          en:'Vehicles'},
+  {id:'electro', ic:'📱', ru:'Электроника',    hy:'Էլեկտրոնիկա',        en:'Electronics'},
+  {id:'jobs',    ic:'💼', ru:'Работа',         hy:'Աշխատանք',           en:'Jobs'},
+  {id:'services',ic:'🔧', ru:'Услуги',         hy:'Ծառայություններ',     en:'Services'},
+  {id:'home',    ic:'🛋️', ru:'Дом и сад',      hy:'Տուն և այգի',         en:'Home & Garden'},
+  {id:'build',   ic:'🏗️', ru:'Ремонт и стройка', hy:'Վերանորոգում և շինարարություն', en:'Repair & Construction'},
+  {id:'pets',    ic:'🐶', ru:'Животные',       hy:'Կենդանիներ',         en:'Pets'},
+  {id:'fashion', ic:'👕', ru:'Мода и стиль',   hy:'Նորաձևություն և ոճ',  en:'Fashion & Style'},
+  {id:'kids',    ic:'🧸', ru:'Детский мир',    hy:'Մանկական աշխարհ',     en:'Kids'},
+  {id:'hobby',   ic:'🎸', ru:'Хобби и спорт',  hy:'Հոբբի և սպորտ',       en:'Hobby & Sport'},
+  {id:'biz',     ic:'🏢', ru:'Бизнес',         hy:'Բիզնես',              en:'Business'}
+];
+const CITIES = ['Glendale','Burbank','North Hollywood','Hollywood','Pasadena','Van Nuys','Montebello','Los Angeles'];
+const GRADS = ['linear-gradient(135deg,#dbeafe,#bfdbfe)','linear-gradient(135deg,#fef3c7,#fde68a)','linear-gradient(135deg,#dcfce7,#bbf7d0)','linear-gradient(135deg,#fce7f3,#fbcfe8)','linear-gradient(135deg,#e0e7ff,#c7d2fe)','linear-gradient(135deg,#ffedd5,#fed7aa)'];
+
+const SEED = [
+ {id:1, cat:'auto', t:'Toyota Camry 2019, 2.5, отличное состояние', p:16500, per:'', city:'Glendale', time:'12 мин', vip:1, ic:'🚗', g:0, ph:'+1 (818) 555-0134', d:'Один владелец, полная история обслуживания. Не битая, не крашеная. Торг у капота.'},
+ {id:2, cat:'realty', t:'2-комнатная квартира в центре Глендейла', p:2400, per:'/мес', city:'Glendale', time:'26 мин', vip:1, ic:'🏠', g:4, ph:'+1 (818) 555-0176', d:'Светлая квартира, 2 спальни, 2 санузла, парковка включена. Рядом школы и магазины. Свободна с 1 декабря.'},
+ {id:3, cat:'electro', t:'iPhone 15 Pro 256 GB, как новый', p:780, per:'', city:'Burbank', time:'41 мин', vip:0, ic:'📱', g:1, ph:'+1 (747) 555-0119', d:'Полный комплект, батарея 98%. Без царапин, всегда был в чехле.'},
+ {id:4, cat:'services', t:'Плитка (салик) — ванная и кухня, быстро и чисто', p:0, per:'', city:'North Hollywood', time:'1 час', vip:0, ic:'🛁', g:2, ph:'+1 (818) 555-0143', d:'Укладка плитки любой сложности: ванные, кухни, полы. Опыт 12 лет, свои инструменты. Выезд на замер — бесплатно.'},
+ {id:5, cat:'jobs', t:'Требуется помощник на стройку, оплата каждый день', p:180, per:'/день', city:'Van Nuys', time:'1 час', vip:0, ic:'👷', g:3, ph:'+1 (818) 555-0127', d:'Работа с понедельника по пятницу, старт в 7 утра. Опыт приветствуется, но не обязателен.'},
+ {id:6, cat:'home', t:'Диван угловой, кожа, почти новый', p:650, per:'', city:'Pasadena', time:'2 часа', vip:0, ic:'🛋️', g:5, ph:'+1 (626) 555-0161', d:'Покупали год назад за $1,800. Продаём из-за переезда. Самовывоз.'},
+ {id:7, cat:'auto', t:'BMW X5 2021 xDrive, полная комплектация', p:43900, per:'', city:'Hollywood', time:'2 часа', vip:1, ic:'🚙', g:0, ph:'+1 (323) 555-0152', d:'Пробег 38,000 миль. Панорама, кожа, все опции. Чистый титул.'},
+ {id:8, cat:'pets', t:'Щенки померанского шпица, привиты', p:1200, per:'', city:'Montebello', time:'3 часа', vip:0, ic:'🐶', g:1, ph:'+1 (323) 555-0118', d:'2 мальчика и 1 девочка, 9 недель. Ветеринарный паспорт, первая прививка сделана.'},
+ {id:9, cat:'build', t:'Ремонт квартир под ключ — бригада, договор', p:0, per:'', city:'Glendale', time:'3 часа', vip:0, ic:'🏗️', g:2, ph:'+1 (818) 555-0190', d:'Косметический и капитальный ремонт. Смета за 24 часа, гарантия на работы 2 года.'},
+ {id:10, cat:'fashion', t:'Свадебное платье, размер S, одевалось один раз', p:450, per:'', city:'Burbank', time:'4 часа', vip:0, ic:'👗', g:3, ph:'+1 (747) 555-0144', d:'После химчистки, как новое. Покупали за $1,500.'},
+ {id:11, cat:'hobby', t:'Гитара акустическая Yamaha FG800 + чехол', p:210, per:'', city:'Los Angeles', time:'5 часов', vip:0, ic:'🎸', g:4, ph:'+1 (213) 555-0173', d:'Отличный звук, новые струны. Чехол и тюнер в подарок.'},
+ {id:12, cat:'biz', t:'Продаётся готовый бизнес — автомойка в Глендейле', p:85000, per:'', city:'Glendale', time:'6 часов', vip:1, ic:'🏢', g:5, ph:'+1 (818) 555-0111', d:'Работает 5 лет, постоянные клиенты, всё оборудование включено. Детали по телефону.'},
+ {id:13, cat:'realty', t:'Дом в аренду, 3 спальни, большой двор', p:3900, per:'/мес', city:'North Hollywood', time:'7 часов', vip:0, ic:'🏡', g:2, ph:'+1 (818) 555-0169', d:'Тихий район, гараж на 2 машины. Можно с маленькой собакой.'},
+ {id:14, cat:'electro', t:'MacBook Pro 14" M3, 18/512, гарантия Apple', p:1550, per:'', city:'Glendale', time:'8 часов', vip:0, ic:'💻', g:0, ph:'+1 (818) 555-0137', d:'Куплен в марте, циклов батареи — 41. Полный комплект с чеком.'},
+ {id:15, cat:'services', t:'Переезды по LA — грузчики и трак, аккуратно', p:95, per:'/час', city:'Los Angeles', time:'9 часов', vip:0, ic:'🚚', g:1, ph:'+1 (213) 555-0125', d:'2 грузчика + трак. Упаковка и разборка мебели. Работаем без выходных.'},
+ {id:16, cat:'kids', t:'Коляска UPPAbaby Vista + автокресло', p:380, per:'', city:'Pasadena', time:'10 часов', vip:0, ic:'👶', g:3, ph:'+1 (626) 555-0158', d:'В отличном состоянии, после одного ребёнка. Всё постирано.'}
+];
+
+const I18N = {
+  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать объявление', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', all:'Все города', negotiable:'Договорная', showPhone:'📞 Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.' },
+  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել հայտարարություն', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'📞 Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։' },
+  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post an ad', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', all:'All cities', negotiable:'Negotiable', showPhone:'📞 Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.' }
+};
+
+let lang = 'ru';
+let activeCat = '';
+let favOnly = false;
+let favs = new Set(JSON.parse(localStorage.getItem('haylist_favs')||'[]'));
+let mine = JSON.parse(localStorage.getItem('haylist_mine')||'[]');
+let listings = [...mine, ...SEED];
+
+function catName(c){ const k = CATS.find(x=>x.id===c); return k ? k[lang] : c; }
+function fmtP(l){ return l.p>0 ? ('$' + l.p.toLocaleString('en-US')) : I18N[lang].negotiable; }
+
+function renderCats(){
+  const counts = {};
+  listings.forEach(l=>counts[l.cat]=(counts[l.cat]||0)+1);
+  document.getElementById('cats').innerHTML =
+    `<div class="cat ${activeCat===''?'on':''}" onclick="setCat('')"><span class="ic">🌐</span><span class="nm">${lang==='hy'?'Բոլորը':(lang==='en'?'All':'Все')}</span><span class="ct">${listings.length}</span></div>` +
+    CATS.map(c=>`<div class="cat ${activeCat===c.id?'on':''}" onclick="setCat('${c.id}')"><span class="ic">${c.ic}</span><span class="nm">${c[lang]}</span><span class="ct">${counts[c.id]||0}</span></div>`).join('');
+}
+function setCat(id){ activeCat=id; favOnly=false; render(); }
+function toggleFavView(){ favOnly=!favOnly; render(); }
+function toggleFav(id, ev){ ev.stopPropagation(); favs.has(id)?favs.delete(id):favs.add(id); localStorage.setItem('haylist_favs', JSON.stringify([...favs])); render(); }
+
+function render(){
+  renderCats();
+  document.getElementById('favCount').textContent = favs.size;
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const city = document.getElementById('city').value;
+  const sort = document.getElementById('sort').value;
+  document.getElementById('feedTitle').textContent = favOnly ? I18N[lang].favs : (activeCat ? catName(activeCat) : I18N[lang].feed);
+  let out = listings.filter(l =>
+    (!activeCat || l.cat===activeCat) &&
+    (!city || l.city===city) &&
+    (!favOnly || favs.has(l.id)) &&
+    (!q || l.t.toLowerCase().includes(q) || l.d.toLowerCase().includes(q))
+  );
+  if(sort==='cheap') out.sort((a,b)=>(a.p||1e12)-(b.p||1e12));
+  if(sort==='exp') out.sort((a,b)=>b.p-a.p);
+  if(sort==='new') out.sort((a,b)=>(b.vip-a.vip)||(b.id-a.id));
+  document.getElementById('grid').innerHTML = out.length ? out.map(l=>`
+    <div class="card" onclick="openView(${l.id})">
+      <div class="thumb" style="background:${GRADS[l.g%GRADS.length]}">${l.ic}
+        ${l.vip?'<span class="vip">VIP</span>':''}
+        <button class="heart ${favs.has(l.id)?'on':''}" onclick="toggleFav(${l.id},event)">${favs.has(l.id)?'♥':'♡'}</button>
+      </div>
+      <div class="card-in">
+        <div class="price">${fmtP(l)}${l.per?`<small> ${l.per}</small>`:''}</div>
+        <div class="ttl">${l.t}</div>
+        <div class="meta"><span>📍 ${l.city}</span><span>${l.time}</span></div>
+      </div>
+    </div>`).join('')
+  : `<div class="empty">${I18N[lang].empty}</div>`;
+}
+
+function openView(id){
+  const l = listings.find(x=>x.id===id); if(!l) return;
+  document.getElementById('viewBody').innerHTML = `
+    <div class="thumb" style="background:${GRADS[l.g%GRADS.length]}">${l.ic}${l.vip?'<span class="vip">VIP</span>':''}</div>
+    <div class="modal-in">
+      <div class="price">${fmtP(l)}${l.per?`<small> ${l.per}</small>`:''}</div>
+      <h3>${l.t}</h3>
+      <div class="kv"><span>📂 ${catName(l.cat)}</span><span>📍 ${l.city}</span><span>🕐 ${l.time} назад</span></div>
+      <div class="desc">${l.d}</div>
+      <button class="phone-btn" id="phBtn" onclick="document.getElementById('phBtn').textContent='${l.ph}'">${I18N[lang].showPhone}</button>
+    </div>`;
+  document.getElementById('ovView').classList.add('open');
+}
+function openPost(){ document.getElementById('ovPost').classList.add('open'); }
+function closeAll(){ document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open')); }
+function goHome(){ activeCat=''; favOnly=false; document.getElementById('q').value=''; render(); window.scrollTo({top:0,behavior:'smooth'}); return false; }
+
+function submitPost(){
+  const t = document.getElementById('f_title').value.trim();
+  const d = document.getElementById('f_desc').value.trim();
+  const ph = document.getElementById('f_phone').value.trim();
+  if(!t || !d || !ph){ alert(I18N[lang].fill); return; }
+  const cat = document.getElementById('f_cat').value;
+  const ck = CATS.find(x=>x.id===cat);
+  const item = { id: Date.now(), cat, t, d, ph,
+    p: parseInt(document.getElementById('f_price').value||'0',10),
+    per:'', city: document.getElementById('f_city').value,
+    time:'только что', vip:0, ic: ck?ck.ic:'📦', g: Math.floor(Math.random()*GRADS.length) };
+  mine.unshift(item); listings.unshift(item);
+  localStorage.setItem('haylist_mine', JSON.stringify(mine));
+  closeAll(); activeCat=''; favOnly=false; render();
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(()=>alert(I18N[lang].posted), 150);
+}
+
+function setLang(l){
+  lang = l;
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('lang-'+l).classList.add('on');
+  document.querySelectorAll('[data-i]').forEach(el=>{ const k=el.getAttribute('data-i'); if(I18N[l][k]) el.textContent = I18N[l][k]; });
+  document.getElementById('city').options[0].textContent = I18N[l].all;
+  render();
+}
+
+/* init selects */
+document.getElementById('city').innerHTML = '<option value="">Все города</option>' + CITIES.map(c=>`<option>${c}</option>`).join('');
+document.getElementById('f_city').innerHTML = CITIES.map(c=>`<option>${c}</option>`).join('');
+document.getElementById('f_cat').innerHTML = CATS.map(c=>`<option value="${c.id}">${c.ru}</option>`).join('');
+render();
+</script>
+</body>
+</html>
