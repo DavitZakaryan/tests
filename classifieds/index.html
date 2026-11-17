@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 2</title>
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 3</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -71,7 +71,7 @@
   /* Modal */
   .overlay{ position:fixed; inset:0; background:rgba(10,18,38,.55); display:none; align-items:flex-end; justify-content:center; z-index:100; }
   .overlay.open{ display:flex; }
-  .modal{ background:#fff; width:100%; max-width:640px; max-height:92vh; overflow-y:auto; border-radius:20px 20px 0 0; padding:0 0 26px; animation:up .22s ease; }
+  .modal{ position:relative; background:#fff; width:100%; max-width:640px; max-height:92vh; overflow-y:auto; border-radius:20px 20px 0 0; padding:0 0 26px; animation:up .22s ease; }
   @keyframes up{ from{ transform:translateY(40px); opacity:.5;} to{ transform:none; opacity:1;} }
   .modal .thumb{ height:230px; font-size:92px; border-radius:0; }
   .modal-in{ padding:16px 20px 0; }
@@ -99,6 +99,7 @@
 
   @media (max-width:900px){ .cats{ grid-template-columns:repeat(4,1fr);} .grid{ grid-template-columns:repeat(3,1fr);} }
   @media (max-width:640px){ .cats{ grid-template-columns:repeat(3,1fr);} .grid{ grid-template-columns:repeat(2,1fr);} .logo{ font-size:22px;} .thumb{ height:120px; font-size:44px;} }
+  .cancel-btn{ width:100%; background:#fff; color:var(--muted); border:1px solid var(--line); border-radius:12px; padding:13px; font-size:15px; font-weight:700; margin-top:10px; }
 </style>
 </head>
 <body>
@@ -121,7 +122,7 @@
 </header>
 
 <div class="wrap">
-  <div class="demo-tag">🧪 <b>Демо, Версия 2.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="demo-tag">🧪 <b>Демо, Версия 3.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
 
   <div class="cats" id="cats"></div>
 
@@ -158,6 +159,7 @@
 <!-- Post form modal -->
 <div class="overlay" id="ovPost" onclick="if(event.target===this)closeAll()">
   <div class="modal">
+    <button class="x" onclick="closeAll()" aria-label="Close">✕</button>
     <div class="form">
       <h3 data-i="postTitle">Подать объявление — бесплатно</h3>
       <label data-i="fTitle">Заголовок</label>
@@ -173,6 +175,7 @@
       <label data-i="fPhone">Телефон</label>
       <input id="f_phone" type="tel" placeholder="+1 (___) ___-____">
       <button class="submit" onclick="submitPost()" data-i="fSubmit">Опубликовать</button>
+      <button class="cancel-btn" onclick="closeAll()" data-i="fCancel">Отмена</button>
     </div>
   </div>
 </div>
@@ -215,9 +218,9 @@ const SEED = [
 ];
 
 const I18N = {
-  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать объявление', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', all:'Все города', negotiable:'Договорная', showPhone:'Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.' },
-  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել հայտարարություն', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։' },
-  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post an ad', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', all:'All cities', negotiable:'Negotiable', showPhone:'Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.' }
+  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать объявление', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', fCancel:'Отмена', all:'Все города', negotiable:'Договорная', showPhone:'Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.' },
+  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել հայտարարություն', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', fCancel:'Չեղարկել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։' },
+  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post an ad', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', fCancel:'Cancel', all:'All cities', negotiable:'Negotiable', showPhone:'Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.' }
 };
 
 let lang = 'ru';
@@ -317,6 +320,7 @@ function setLang(l){
   render();
 }
 
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAll(); });
 /* init selects */
 document.getElementById('city').innerHTML = '<option value="">Все города</option>' + CITIES.map(c=>`<option>${c}</option>`).join('');
 document.getElementById('f_city').innerHTML = CITIES.map(c=>`<option>${c}</option>`).join('');
