@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 8</title>
+<title>HayList — объявления армян Лос-Анджелеса | Демо, Версия 9</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -193,6 +193,20 @@
   [data-theme="dark"] .sim .sp{ color:#7db1ff; }
   [data-theme="dark"] .price-inp{ color:var(--text); }
   [data-theme="dark"] .sugg div{ color:var(--text); }
+  /* compact header (v9) */
+  html,body{ overflow-x:clip; }
+  .header-in{ padding:8px 12px; gap:8px; }
+  .logo{ font-size:22px; }
+  .logo small{ font-size:10px; }
+  .fav-btn{ padding:8px 10px; font-size:14px; }
+  .theme-btn{ padding:8px 10px; font-size:14px; }
+  .lang button{ padding:5px 7px; font-size:11px; }
+  .post-btn{ padding:10px 13px; font-size:14px; }
+  .search input{ min-width:0; }
+  @media (max-width:720px){
+    .logo small{ display:none; }
+    .search{ order:10; flex:1 1 100%; }
+  }
 </style>
 </head>
 <body>
@@ -205,7 +219,7 @@
       <button onclick="render()" data-i="search">Найти</button>
     </div>
     <button class="fav-btn" onclick="toggleFavView()"><i class="fa-solid fa-heart"></i> <b id="favCount">0</b></button>
-    <button class="post-btn" onclick="openPost()" data-i="post">+ Подать объявление</button>
+    <button class="post-btn" onclick="openPost()" data-i="post">+ Подать</button>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Theme"><i class="fa-solid fa-moon"></i></button>
     <div class="lang">
       <button id="lang-hy" onclick="setLang('hy')">ՀԱՅ</button>
@@ -216,7 +230,7 @@
 </header>
 
 <div class="wrap">
-  <div class="demo-tag">🧪 <b>Демо, Версия 8.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
+  <div class="demo-tag">🧪 <b>Демо, Версия 9.</b> Полностью свой код. Объявления — примеры с настоящими бесплатными фото (лицензии CC); кнопка «Подать объявление» работает — ваше объявление появится в ленте и сохранится в этом браузере.</div>
   <div class="hero">
     <div>
       <h1 data-i="heroT">Покупай и продавай в своём городе</h1>
@@ -351,9 +365,9 @@ const SEED = [
 ];
 
 const I18N = {
-  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать объявление', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', fCancel:'Отмена', all:'Все города', negotiable:'Договорная', showPhone:'Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.', heroT:'Покупай и продавай в своём городе', heroP:'Квартиры, авто, работа и услуги — объявления армянской общины Лос-Анджелеса.', heroCta:'+ Подать объявление — бесплатно', stAds:'объявлений', stCats:'категорий', stCities:'городов', photoOnly:'С фото', fPhoto:'Фото (необязательно)', fAddr:'Адрес (улица, дом)', favWord:'В избранное', shareWord:'Поделиться', similar:'Похожие объявления', shareOk:'Ссылка скопирована', adsWord:'объявлений', bHome:'Главная', bPost:'Подать', bTop:'Наверх', mapOpen:'Открыть в картах' },
-  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել հայտարարություն', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', fCancel:'Չեղարկել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։', heroT:'Գնիր և վաճառիր քո քաղաքում', heroP:'Բնակարաններ, ավտո, աշխատանք և ծառայություններ՝ Լոս Անջելեսի հայ համայնքի հայտարարությունները։', heroCta:'+ Տեղադրել հայտարարություն — անվճար', stAds:'հայտարարություն', stCats:'բաժին', stCities:'քաղաք', photoOnly:'Լուսանկարով', fPhoto:'Լուսանկար (պարտադիր չէ)', fAddr:'Հասցե (փողոց, տուն)', favWord:'Ընտրվածներում', shareWord:'Կիսվել', similar:'Նման հայտարարություններ', shareOk:'Հղումը պատճենված է', adsWord:'հայտարարություն', bHome:'Գլխավոր', bPost:'Տեղադրել', bTop:'Վերև', mapOpen:'Բացել քարտեզում' },
-  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post an ad', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', fCancel:'Cancel', all:'All cities', negotiable:'Negotiable', showPhone:'Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.', heroT:'Buy and sell in your city', heroP:'Apartments, cars, jobs and services — classifieds of the Armenian community of Los Angeles.', heroCta:'+ Post an ad — free', stAds:'listings', stCats:'categories', stCities:'cities', photoOnly:'With photo', fPhoto:'Photo (optional)', fAddr:'Address (street, number)', favWord:'Save', shareWord:'Share', similar:'Similar listings', shareOk:'Link copied', adsWord:'listings', bHome:'Home', bPost:'Post', bTop:'Top', mapOpen:'Open in Maps' }
+  ru:{ tagline:'Объявления армян Лос-Анджелеса', search:'Найти', post:'+ Подать', feed:'Свежие объявления', favs:'Избранное', postTitle:'Подать объявление — бесплатно', fTitle:'Заголовок', fCat:'Категория', fPrice:'Цена, $ (0 — договорная)', fCity:'Город', fDesc:'Описание', fPhone:'Телефон', fSubmit:'Опубликовать', fCancel:'Отмена', all:'Все города', negotiable:'Договорная', showPhone:'Показать телефон', empty:'Ничего не нашлось. Попробуйте другой запрос.', posted:'✅ Объявление опубликовано! Оно первое в ленте.', fill:'Заполните заголовок, описание и телефон.', heroT:'Покупай и продавай в своём городе', heroP:'Квартиры, авто, работа и услуги — объявления армянской общины Лос-Анджелеса.', heroCta:'+ Подать объявление — бесплатно', stAds:'объявлений', stCats:'категорий', stCities:'городов', photoOnly:'С фото', fPhoto:'Фото (необязательно)', fAddr:'Адрес (улица, дом)', favWord:'В избранное', shareWord:'Поделиться', similar:'Похожие объявления', shareOk:'Ссылка скопирована', adsWord:'объявлений', bHome:'Главная', bPost:'Подать', bTop:'Наверх', mapOpen:'Открыть в картах' },
+  hy:{ tagline:'Լոս Անջելեսի հայկական հայտարարություններ', search:'Որոնել', post:'+ Տեղադրել', feed:'Թարմ հայտարարություններ', favs:'Ընտրվածներ', postTitle:'Տեղադրել հայտարարություն — անվճար', fTitle:'Վերնագիր', fCat:'Բաժին', fPrice:'Գին, $ (0 — պայմանագրային)', fCity:'Քաղաք', fDesc:'Նկարագրություն', fPhone:'Հեռախոս', fSubmit:'Հրապարակել', fCancel:'Չեղարկել', all:'Բոլոր քաղաքները', negotiable:'Պայմանագրային', showPhone:'Ցույց տալ հեռախոսը', empty:'Ոչինչ չգտնվեց։ Փորձեք այլ հարցում։', posted:'✅ Հայտարարությունը հրապարակված է։', fill:'Լրացրեք վերնագիրը, նկարագրությունը և հեռախոսը։', heroT:'Գնիր և վաճառիր քո քաղաքում', heroP:'Բնակարաններ, ավտո, աշխատանք և ծառայություններ՝ Լոս Անջելեսի հայ համայնքի հայտարարությունները։', heroCta:'+ Տեղադրել հայտարարություն — անվճար', stAds:'հայտարարություն', stCats:'բաժին', stCities:'քաղաք', photoOnly:'Լուսանկարով', fPhoto:'Լուսանկար (պարտադիր չէ)', fAddr:'Հասցե (փողոց, տուն)', favWord:'Ընտրվածներում', shareWord:'Կիսվել', similar:'Նման հայտարարություններ', shareOk:'Հղումը պատճենված է', adsWord:'հայտարարություն', bHome:'Գլխավոր', bPost:'Տեղադրել', bTop:'Վերև', mapOpen:'Բացել քարտեզում' },
+  en:{ tagline:'Classifieds for Armenians in Los Angeles', search:'Search', post:'+ Post', feed:'Fresh listings', favs:'Favorites', postTitle:'Post an ad — free', fTitle:'Title', fCat:'Category', fPrice:'Price, $ (0 — negotiable)', fCity:'City', fDesc:'Description', fPhone:'Phone', fSubmit:'Publish', fCancel:'Cancel', all:'All cities', negotiable:'Negotiable', showPhone:'Show phone', empty:'Nothing found. Try another search.', posted:'✅ Your ad is published — first in the feed!', fill:'Please fill in the title, description and phone.', heroT:'Buy and sell in your city', heroP:'Apartments, cars, jobs and services — classifieds of the Armenian community of Los Angeles.', heroCta:'+ Post an ad — free', stAds:'listings', stCats:'categories', stCities:'cities', photoOnly:'With photo', fPhoto:'Photo (optional)', fAddr:'Address (street, number)', favWord:'Save', shareWord:'Share', similar:'Similar listings', shareOk:'Link copied', adsWord:'listings', bHome:'Home', bPost:'Post', bTop:'Top', mapOpen:'Open in Maps' }
 };
 
 let lang = 'ru';
